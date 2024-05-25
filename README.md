@@ -2,16 +2,18 @@
 
 ## 개발환경
 
-1. IDE: ...
-2. React
+1. IDE: Visual Studio Code
+2. 프로젝트 생성: Vite 사용
+3. React
 
 ## 화면 구성
 
 ...
 
-## 스타일 적용 방법
+## CSS 방식
 
 - CSS module
+  - 익숙한 방식
 - 색상 코드는 CSS 변수로 지정하여 사용
 
 ## 아이콘 사용
@@ -20,8 +22,10 @@
 
 ## Router 방식
 
-- CreateBrowserRouter
+- [CreateBrowserRouter](https://reactrouter.com/en/main/start/overview)
+  - 화면 구조 파악하기 쉬움
+  - 오류 수정 및 유지보수가 편리함
 
 ## 페이징 처리 방식
 
-- react-js-pagination 라이브러리 사용
+- [react-js-pagination](https://www.npmjs.com/package/react-js-pagination) 사용

@@ -1,0 +1,46 @@
+.navWrap{
+    width: 100vw;
+    height: 70px;
+    border-bottom: 1px solid #d0d0d0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.navCont{
+    width: 1320px;
+    height: 80px;
+    display: flex;
+    gap: 45px;
+    align-items: center;
+    
+}
+.navCont button{
+    border: none;
+    background: none;
+    cursor: pointer;
+    margin-top: 10px;
+    height: 62px;
+    transition: border-bottom 0.1s ease;
+    width: 70px;
+}
+.navCont button:hover{
+    color: #1E90FF;
+    border-bottom: 4px solid #1e90ff;
+}
+.searchBar{
+    flex: 1;
+}
+.searchBar input{
+    width: 400px;
+    height: 1px;
+    border-radius: 28px;
+    padding: 20px;
+    border: 1px solid #1e90ff;
+    outline: #1e5eff;
+}
+.searchBar input::placeholder{
+    color: #797979;
+}
+.searchBar input:focus::placeholder{
+    color: transparent;
+}
