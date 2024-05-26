@@ -10,7 +10,7 @@
     width: 1320px;
     height: 80px;
     display: flex;
-    gap: 45px;
+    gap: 30px;
     align-items: center;
     
 }
@@ -22,6 +22,7 @@
     height: 62px;
     transition: border-bottom 0.1s ease;
     width: 70px;
+    color: #797979;
 }
 .navCont button:hover{
     color: #1E90FF;
@@ -40,7 +41,34 @@
 }
 .searchBar input::placeholder{
     color: #797979;
+    flex: 1;
 }
 .searchBar input:focus::placeholder{
     color: transparent;
+}
+
+.subNavWrap{
+    width: 120px;
+    box-shadow: 4px 4px 2px rgba(0,0,0,0.2);
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    background-color: white;
+    position: absolute;
+    top: calc(100%+10px);
+    transform: translate(-20%)
+}
+.subNavWrap li{
+    width: 120px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.subNavWrap li:hover{
+    color: #1e5eff
 }
