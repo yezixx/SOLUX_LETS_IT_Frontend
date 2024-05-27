@@ -1,5 +1,13 @@
-const TeamMember = () => {
-  return <div>팀원 정보 블록</div>;
+import styles from "./MemberItem.module.css";
+
+const MemberItem = () => {
+  return (
+    <div className={styles.MemberItemWrap}>
+      <div className={styles.MemberItemCont}>
+        <button>팀원 이름</button>
+      </div>
+    </div>
+  );
 };
 
-export default TeamMember;
+export default MemberItem;
