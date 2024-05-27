@@ -1,0 +1,14 @@
+.TopLabelWrap {
+  padding: 5px;
+  border-bottom: 1px solid #d0d0d0;
+  /*width: 1320px;
+  height: 70px;
+  display: flex;
+  justify-content: left;
+  margin-top: 5vh;*/
+  /*border: 1px solid black;*/
+}
+
+.TopLabelCont {
+  font-size: 18pt;
+}
