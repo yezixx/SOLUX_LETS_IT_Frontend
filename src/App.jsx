@@ -1,12 +1,15 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import styles from "./App.module.css";
 import Header from "./Components/Header/Header";
-import Teamboard from "./Components/Teamboard/Teamboard";
+import { RouterInfo } from "./Components/RouterInfo";
+
+const RouterObject = createBrowserRouter(RouterInfo);
 
 function App() {
   return (
     <div className={styles.wrap}>
       <Header />
-      <Teamboard />
+      <RouterProvider router={RouterObject} />
     </div>
   );
 }
