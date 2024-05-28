@@ -1,22 +1,21 @@
-
 @font-face {
-    font-family: 'pretendardR';
-    src: url('./Fonts/Pretendard-Regular.woff');
+  font-family: "pretendardR";
+  src: url("./Fonts/Pretendard-Regular.woff");
 }
 
 @font-face {
-    font-family: 'pretendardM';
-    src: url('./Fonts/Pretendard-Medium.woff');
+  font-family: "pretendardM";
+  src: url("./Fonts/Pretendard-Medium.woff");
 }
 
 @font-face {
-    font-family: 'pretendardB';
-    src: url('./Fonts/Pretendard-SemiBold.woff');
+  font-family: "pretendardB";
+  src: url("./Fonts/Pretendard-SemiBold.woff");
 }
 
-body{
-    font-size: 0px;
-    letter-spacing: 1px;
-    line-height: 1.5;
-    font-family: 'pretendardM'
+body {
+  font-size: 0px;
+  letter-spacing: 1px;
+  line-height: 1.5;
+  font-family: "pretendardM";
 }
