@@ -1,58 +1,52 @@
 .NavWrap {
   margin: 50px;
   margin-bottom: 0;
-  /*width: 70vw;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;*/
-  /*border: 1px solid black;*/
 }
 
 .NavCont {
+  /*요소 정렬*/
   display: flex;
   align-items: end;
+  /*크기*/
   height: 60px;
-  /*width: 1320px;*/
   /*border: 1px solid red;*/
 }
 
 .NavContLeft {
+  /*크기*/
   width: 300px;
   height: 55px;
+  /*테두리*/
   border: 1px solid #d0d0d0;
   border-radius: 8px 8px 0 0;
+  /*폰트*/
   font-size: 16pt;
+  font-family: "pretendardB";
+  /*요소 정렬*/
   text-align: center;
   line-height: 55px;
-  /*display: inline-block;
-  padding: 0px;
-  background: none;
-  border: 1px solid #d0d0d0;
-  border-radius: 16px 16px 0 0;
-  font-family: "pretendardM";
-  position: relative;
-  left: 74px;
-  bottom: 17.5px;
-  justify-content: center;*/
   /*border: 1px solid blue;*/
 }
 
 .NavCont button {
+  /*크기*/
   width: 160px;
   height: 40px;
-  margin-left: 10px;
+  /*테두리*/
   border: 1px solid #d0d0d0;
   border-radius: 8px 8px 0 0;
+  /*마진*/
+  margin-left: 10px;
+  /*배경 색상*/
   background: none;
+  /*요소 위치*/
   position: relative;
   left: 388.1px;
+  /*그림자*/
   box-shadow: 4px 0 2px rgba(0, 0, 0, 0.2);
-  /*display: inline-block;
-  padding: 0px;
-  border: 1px solid #d0d0d0;
-  border-radius: 16px 16px 0 0;
-  cursor: pointer;*/
+  /*텍스트 색상*/
+  color: #1e90ff;
+  /*커서*/
+  cursor: pointer;
   /*border: 1px solid yellow;*/
 }
