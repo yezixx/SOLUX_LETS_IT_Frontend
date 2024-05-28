@@ -1,11 +1,11 @@
-import styles from "./TeamFrame.module.css";
+import styles from "./TeamLayout.module.css";
 import TopLabel from "./TopLabel/TopLabel";
 import TeamNav from "./Nav/TeamNav";
 import TeamContainer from "./Container/TeamContainer";
 
-const TeamFrame = () => {
+const TeamLayout = () => {
   return (
-    <div className={styles.TeamFrameWrap}>
+    <div className={styles.TeamLayoutWrap}>
       <TopLabel />
       <TeamNav />
       <TeamContainer />
@@ -13,4 +13,4 @@ const TeamFrame = () => {
   );
 };
 
-export default TeamFrame;
+export default TeamLayout;
