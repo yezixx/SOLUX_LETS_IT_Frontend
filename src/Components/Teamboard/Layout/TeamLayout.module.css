@@ -1,8 +1,9 @@
-.TeamLayoutWrap {
+.teamLayout_wrapper {
   /*마진, 요소 중앙으로*/
   margin: 30px auto;
   /*패딩*/
   padding: 20px;
   /*크기*/
   width: 1300px;
+  /*border: 1px solid black;*/
 }

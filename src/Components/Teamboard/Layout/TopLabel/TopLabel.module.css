@@ -1,10 +1,10 @@
-.TopLabelWrap {
+.topLabel_wrapper {
   /*밑줄*/
   padding: 5px;
   border-bottom: 1px solid #d0d0d0;
 }
 
-.TopLabelCont {
+.topLabel_container {
   /*폰트*/
   font-size: 18pt;
   font-family: "pretendardB";

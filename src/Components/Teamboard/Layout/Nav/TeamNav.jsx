@@ -1,12 +1,16 @@
 import styles from "./TeamNav.module.css";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const TeamNav = () => {
+  const location = useLocation();
+  const currentUrl = location.pathname;
+  console.log(currentUrl);
+
   return (
-    <div className={styles.NavWrap}>
-      <div className={styles.NavCont}>
-        <div className={styles.NavContLeft}>학원 청구 정산 서비스</div>
-        <Link to={"/ProjInfo"}>
+    <div className={styles.nav_wrapper}>
+      <div className={styles.nav_container}>
+        <div className={styles.nav_label}>학원 청구 정산 서비스</div>
+        <Link to={"/"}>
           <button>프로젝트 정보</button>
         </Link>
         <Link to={"/SetMember"}>

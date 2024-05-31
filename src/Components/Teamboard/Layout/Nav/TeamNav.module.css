@@ -1,9 +1,9 @@
-.NavWrap {
+.nav_wrapper {
   margin: 50px;
   margin-bottom: 0;
 }
 
-.NavCont {
+.nav_container {
   /*요소 정렬*/
   display: flex;
   align-items: end;
@@ -12,7 +12,7 @@
   /*border: 1px solid red;*/
 }
 
-.NavContLeft {
+.nav_label {
   /*크기*/
   width: 300px;
   height: 55px;
@@ -28,7 +28,7 @@
   /*border: 1px solid blue;*/
 }
 
-.NavCont button {
+.nav_container button {
   /*크기*/
   width: 160px;
   height: 40px;
@@ -49,4 +49,11 @@
   /*커서*/
   cursor: pointer;
   /*border: 1px solid yellow;*/
+}
+
+.CurrentPageBtn {
+  /*배경 색상*/
+  background: #1e90ff;
+  /*텍스트 색상*/
+  color: #ffffff;
 }
