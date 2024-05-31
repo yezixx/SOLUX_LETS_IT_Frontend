@@ -9,7 +9,7 @@ export const RouterInfo = [
     element: <Teamboard />,
     children: [
       {
-        path: "/ProjInfo",
+        index: true,
         element: <ProjInfo />,
         label: "Project Information",
       },
