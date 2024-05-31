@@ -20,7 +20,7 @@
   border: 1px solid #d0d0d0;
   border-radius: 8px 8px 0 0;
   /*폰트*/
-  font-size: 16pt;
+  font-size: 24px;
   font-family: "pretendardB";
   /*요소 정렬*/
   text-align: center;
@@ -28,7 +28,7 @@
   /*border: 1px solid blue;*/
 }
 
-.nav_container button {
+.nav_button {
   /*크기*/
   width: 160px;
   height: 40px;
@@ -48,10 +48,12 @@
   color: #1e90ff;
   /*커서*/
   cursor: pointer;
+  /*폰트*/
+  font-size: 16px;
   /*border: 1px solid yellow;*/
 }
 
-.CurrentPageBtn {
+.currentPage_btn {
   /*배경 색상*/
   background: #1e90ff;
   /*텍스트 색상*/
