@@ -28,6 +28,11 @@
   /*border: 1px solid blue;*/
 }
 
+.nav_buttons_container {
+  display: flex;
+  margin-left: auto;
+}
+
 .nav_button {
   /*크기*/
   width: 160px;
@@ -39,9 +44,6 @@
   margin-left: 10px;
   /*배경 색상*/
   background: none;
-  /*요소 위치*/
-  position: relative;
-  left: 388.1px;
   /*그림자*/
   box-shadow: 4px 0 2px rgba(0, 0, 0, 0.2);
   /*텍스트 색상*/
