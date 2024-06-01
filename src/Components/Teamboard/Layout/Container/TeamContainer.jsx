@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 const TeamContent = () => {
   return (
-    <div className={styles.teamContainer_wrapper}>
+    <div className={styles.team_container__wrapper}>
       <Outlet />
     </div>
   );

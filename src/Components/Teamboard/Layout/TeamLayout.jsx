@@ -5,7 +5,7 @@ import TeamContainer from "./Container/TeamContainer";
 
 const TeamLayout = () => {
   return (
-    <div className={styles.teamLayout_wrapper}>
+    <div className={styles.team_layout__wrapper}>
       <TopLabel />
       <TeamNav />
       <TeamContainer />

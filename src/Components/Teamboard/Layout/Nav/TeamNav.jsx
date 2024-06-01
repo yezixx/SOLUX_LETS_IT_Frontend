@@ -7,14 +7,14 @@ const TeamNav = () => {
   console.log(currentUrl);
 
   return (
-    <div className={styles.nav_wrapper}>
-      <div className={styles.nav_container}>
+    <div className={styles.nav__wrapper}>
+      <div className={styles.nav__container}>
         <div className={styles.nav_label}>학원 청구 정산 서비스</div>
-        <div className={styles.nav_buttons_container}>
+        <div className={styles.nav_buttons__container}>
           <Link to={"/"}>
             <button
               className={`${styles.nav_button} ${
-                currentUrl === "/" ? styles.currentPage_btn : ""
+                currentUrl === "/" ? styles.nav_button__current : ""
               }`}
             >
               프로젝트 정보
@@ -23,7 +23,7 @@ const TeamNav = () => {
           <Link to={"/SetMember"}>
             <button
               className={`${styles.nav_button} ${
-                currentUrl === "/SetMember" ? styles.currentPage_btn : ""
+                currentUrl === "/SetMember" ? styles.nav_button__current : ""
               }`}
             >
               팀원 설정
@@ -32,7 +32,7 @@ const TeamNav = () => {
           <Link to={"/ManageProj"}>
             <button
               className={`${styles.nav_button} ${
-                currentUrl === "/ManageProj" ? styles.currentPage_btn : ""
+                currentUrl === "/ManageProj" ? styles.nav_button__current : ""
               }`}
             >
               프로젝트 관리

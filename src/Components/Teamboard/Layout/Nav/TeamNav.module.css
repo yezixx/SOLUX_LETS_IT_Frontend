@@ -1,9 +1,9 @@
-.nav_wrapper {
+.nav__wrapper {
   margin: 50px;
   margin-bottom: 0;
 }
 
-.nav_container {
+.nav__container {
   /*요소 정렬*/
   display: flex;
   align-items: end;
@@ -28,7 +28,7 @@
   /*border: 1px solid blue;*/
 }
 
-.nav_buttons_container {
+.nav_buttons__container {
   display: flex;
   margin-left: auto;
 }
@@ -55,7 +55,7 @@
   /*border: 1px solid yellow;*/
 }
 
-.currentPage_btn {
+.nav_button__current {
   /*배경 색상*/
   background: #1e90ff;
   /*텍스트 색상*/
