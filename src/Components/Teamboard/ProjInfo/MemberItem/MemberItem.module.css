@@ -1,18 +1,46 @@
-.MemberItemWrap {
+.member_item__wrapper {
   /*border: 1px solid pink;*/
   padding: 5px;
 }
 
-.MemberItemCont {
-  align-items: center;
+.member_item__container {
+  /*border: 1px solid black;*/
 }
 
-.MemberItemCont button {
+.member_item__button {
+  /*테두리*/
   border: 1px solid #d0d0d0;
   border-radius: 8px;
+  /*배경 색*/
   background: none;
-  width: 140px;
+  /*크기*/
+  width: 145px;
   height: 65px;
-  margin: 5px;
+  /*마진*/
+  margin: 3px;
+  /*커서*/
   cursor: pointer;
+  /*요소 배치*/
+  display: flex;
+  align-items: center;
+  /*폰트*/
+  font-size: 16px;
+}
+
+.member_item__name {
+  /*border: 1px solid black;*/
+  /*크기*/
+  width: 60px;
+  /*배치*/
+  margin: auto;
+}
+
+.member_item__profile_pic {
+  /*테두리*/
+  border: 1px solid #d0d0d0;
+  /*크기*/
+  width: 50px;
+  height: 50px;
+  /*원형으로*/
+  border-radius: 25px;
 }

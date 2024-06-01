@@ -1,20 +1,19 @@
 import styles from "./TeamCalendar.module.css";
 import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
 import FullCalendar from "@fullcalendar/react";
 
 const TeamCalendar = () => {
   return (
-    <div className={styles.TeamCalendarWrap}>
+    <div className={styles.team_calendar__wrapper}>
       <div>
         <FullCalendar
-          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView={"dayGridMonth"}
-          headerToolbar={{
-            end: "today,prev,next",
-          }}
+          plugins={[dayGridPlugin]}
+          initialView="dayGridMonth"
           height={"600px"}
+          events={[
+            { title: "event 1", date: "2024-06-12" },
+            { title: "event 2", date: "2024-06-15" },
+          ]}
         />
       </div>
     </div>

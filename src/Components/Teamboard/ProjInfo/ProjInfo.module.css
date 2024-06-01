@@ -1,1 +1,72 @@
+.proj_info__wrapper {
+  /*border: 1px solid black;*/
+  /*마진*/
+  margin: 20px;
+  /*요소 배치*/
+  display: flex;
+}
 
+.calendar__wrapper {
+  /*border: 1px solid blue;*/
+}
+
+.right__wrapper {
+  /*border: 10px solid black;*/
+  /*크기*/
+  width: 350px;
+  /*요소 배치*/
+  display: flex;
+  flex-direction: column;
+}
+
+.member_list__wrapper {
+  /*border: 1px solid green;*/
+}
+
+.buttons__wrapper {
+  /*border: 1px solid orange;*/
+  /*전체 요소 아래로 배치*/
+  display: flex;
+  margin-top: auto;
+  /*내부 요소 아래로 배치*/
+  align-items: end;
+}
+
+.collab_tools_container {
+  /*border: 1px solid blue;*/
+  display: flex;
+}
+
+.right_bottom_buttons__container {
+  /*border: 1px solid mediumseagreen;*/
+  /*요소 오른쪽으로 배치*/
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+}
+
+.right_bottom_buttons__container button {
+  /*크기 설정*/
+  width: 120px;
+  height: 40px;
+  /*마진*/
+  margin-top: 10px;
+  /*커서*/
+  cursor: pointer;
+  /*폰트*/
+  font-size: 16px;
+}
+
+.portfolio__button {
+  /*배경 색*/
+  background: #cddef2;
+  /*폰트 색*/
+  color: #607fea;
+}
+
+.authmeeting__button {
+  /*배경 색*/
+  background: #1e90ff;
+  /*폰트 색*/
+  color: white;
+}

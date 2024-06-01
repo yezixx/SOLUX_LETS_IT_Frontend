@@ -1,0 +1,7 @@
+.member_list__wrapper {
+  /*border: 1px solid tomato;*/
+}
+
+.member_list__container {
+  display: flex;
+}

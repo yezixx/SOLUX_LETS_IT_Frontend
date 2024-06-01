@@ -1,5 +1,11 @@
+import styles from "./CollabTool.module.css";
+
 const CollabTool = () => {
-  return <div>협업 툴 링크 버튼</div>;
+  return (
+    <div className={styles.collab_tool__wrapper}>
+      <button className={styles.collab_tool__button}>협업 툴</button>
+    </div>
+  );
 };
 
 export default CollabTool;
