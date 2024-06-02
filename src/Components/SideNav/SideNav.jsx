@@ -5,7 +5,6 @@ import styles from './SideNav.module.css'
 //반드시 '배열'로 전달
 
 const SideNav = ({content})=>{
-    console.log(content)
     return(
         <div className={styles.sidenav}>
             <ul className={styles.sidenav__container}>
