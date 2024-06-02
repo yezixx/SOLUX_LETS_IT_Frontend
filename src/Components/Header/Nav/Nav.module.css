@@ -1,24 +1,23 @@
 .nav{
     width: 100vw;
     height: 70px;
-    border-bottom: 1px solid var(--line-color);
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: 1px solid var(--line-color)
 }
 .nav__container{
     width: 1320px;
     height: 60px;
     display: flex;
-    gap: 30px;
-    align-items: center;   
+    gap: 20px;
+    align-items: center;
 }
-.nav__contents{
-    transition: border-bottom 0.1s ease;
-}
-.nav__contents:hover{
-    border-bottom: 4px solid var(--main-color2);
-}
+
+
+
+
+
 .nav__contents:hover .nav__button{
     color: var(--main-color2);
 }
@@ -29,24 +28,42 @@
     color: var(--text-color2);
 }
 
-.nav__searchbar{
+.nav__searchBar_container{
+    display: flex;
+    align-items: center;
+    justify-content: left;
     flex: 1;
 }
-.nav__searchbar_input{
+.nav__searchBar{
     width: 400px;
-    height: 1px;
+    height: 3px;
     border-radius: 28px;
-    padding: 20px;
+    padding: 18px;
     border: 1px solid var(--main-color2);
     outline: var(--main-color2);
+    display: flex;
+    align-items: center;
+}
+.nav__searchbar_input{
+    border: none;
+    height: 30px;
+    flex: 1;
+}
+.nav__searchbar_input:focus{
+    outline: none;
 }
 .nav__searchbar_input::placeholder{
     color: var(--text-color2);
-    flex: 1;
 }
 .nav__searchbar_input:focus::placeholder{
     color: transparent;
 }
+.nav__searchIcon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 .nav__subnav{
     width: 120px;
@@ -55,7 +72,7 @@
     border-radius: 4px;
     background-color: white;
     position: absolute;
-    top: 70px;
+    top: 69px;
     transform: translate(-20%)
 }
 .nav__subnav_item{

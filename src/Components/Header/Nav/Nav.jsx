@@ -1,9 +1,12 @@
 import  { useState } from 'react';
 import styles from './Nav.module.css';
 import Logo from '../../../Image/Logo.svg?react';
+import SearchIcon from '../../../Image/Icons/SearchIcon';
+import BellIcon from '../../../Image/Icons/BellIcon';
 
 const Nav = () => {
-    const navCont = ['로그아웃', '마이페이지', '아이콘'];
+    // eslint-disable-next-line react/jsx-key
+    const navCont = ['로그아웃', '마이페이지', <BellIcon />];
 
     const [hoverState, setHoverState] = useState({
         '마이페이지': false,
@@ -31,11 +34,14 @@ const Nav = () => {
         <div className={styles.nav}>
             <div className={styles.nav__container}>
                 <Logo width="90px" height="50px" />
-                <div className={styles.nav__searchbar}>
+                <div className={styles.nav__searchBar_container}>
+                    <div className={styles.nav__searchBar}>
                     <input
                         className={styles.nav__searchbar_input}
-                        placeholder="프로젝트부터 포트폴리오까지!"
-                    />
+                        placeholder="프로젝트부터 포트폴리오까지!">                     
+                    </input>
+                    <button className={styles.nav__searchIcon}><SearchIcon /></button>
+                    </div>
                 </div>
                 {navCont.map((menu, id) => (
                     <div
