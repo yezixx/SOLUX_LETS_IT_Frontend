@@ -14,3 +14,8 @@
     src: url('./Fonts/Pretendard-SemiBold.woff');
 }
 
+button{
+    border: none;
+    background: none;
+    cursor: pointer;
+}
