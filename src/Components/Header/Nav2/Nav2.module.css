@@ -44,6 +44,7 @@
     background-color: white;
     position: absolute;
     top: 122px;
+    z-index: 1000;
 }
 .nav2__subnav_item{
     width: 120px;
@@ -58,5 +59,5 @@
     font-size: 14px;
 }
 .nav2__subnav_item:hover{
-    color: var(--main-color)
+    color: var(--main-color2);
 }
