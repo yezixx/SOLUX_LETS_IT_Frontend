@@ -1,5 +1,4 @@
 # SOLUX 웹시코기 LET'S IT 프로젝트 - 프론트엔드
-<h3>${\textsf{\color{red}🔔 BEM표기법 사용 시 classname 라이브러리 다운 필요}}$</h3>
 ## 개발환경
 
 1. IDE: Visual Studio Code
