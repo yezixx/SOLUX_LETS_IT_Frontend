@@ -1,4 +1,4 @@
-.navWrap{
+.nav{
     width: 100vw;
     height: 70px;
     border-bottom: 1px solid #d0d0d0;
@@ -6,32 +6,33 @@
     justify-content: center;
     align-items: center;
 }
-.navCont{
+.nav__container{
     width: 1320px;
-    height: 80px;
+    height: 60px;
     display: flex;
     gap: 30px;
-    align-items: center;
-    
+    align-items: center;   
 }
-.navCont button{
-    border: none;
-    background: none;
-    cursor: pointer;
-    margin-top: 10px;
-    height: 62px;
+.nav__contents{
     transition: border-bottom 0.1s ease;
+}
+.nav__contents:hover{
+    border-bottom: 4px solid #1e90ff;
+}
+.nav__contents:hover .nav__button{
+    color: #1E90FF;
+}
+.nav__button{
+    margin-top: 10px;
+    height: 57px;
     width: 70px;
     color: #797979;
 }
-.navCont button:hover{
-    color: #1E90FF;
-    border-bottom: 4px solid #1e90ff;
-}
-.searchBar{
+
+.nav__searchbar{
     flex: 1;
 }
-.searchBar input{
+.nav__searchbar_input{
     width: 400px;
     height: 1px;
     border-radius: 28px;
@@ -39,25 +40,25 @@
     border: 1px solid #1e90ff;
     outline: #1e5eff;
 }
-.searchBar input::placeholder{
+.nav__searchbar_input::placeholder{
     color: #797979;
     flex: 1;
 }
-.searchBar input:focus::placeholder{
+.nav__searchbar_input:focus::placeholder{
     color: transparent;
 }
 
-.subNavWrap{
+.nav__subnav{
     width: 120px;
     box-shadow: 4px 4px 2px rgba(0,0,0,0.2);
     border: 1px solid #e0e0e0;
     border-radius: 4px;
     background-color: white;
     position: absolute;
-    top: calc(100%+10px);
+    top: 70px;
     transform: translate(-20%)
 }
-.subNavWrap li{
+.nav__subnav_item{
     width: 120px;
     height: 30px;
     display: flex;
@@ -69,6 +70,6 @@
     cursor: pointer;
     font-size: 14px;
 }
-.subNavWrap li:hover{
-    color: #1e5eff
+.nav__subnav_item:hover{
+    color: #1e90ff;
 }

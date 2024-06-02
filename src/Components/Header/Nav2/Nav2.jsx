@@ -33,15 +33,18 @@ const Nav2 = () => {
     //mouseEnter, mouseLeave시 hover state 설정
 
     return (
-        <div className={styles.Nav2Wrap}>
-            <div className={styles.Nav2Cont}>
+        <div className={styles.nav2}>
+            <div className={styles.nav2__container}>
                 {navCont
                     .map((menu, id) => (
-                        <div key={id} onMouseEnter={() => handleMouseEnter(menu)} onMouseLeave={() => handleMouseLeave(menu)}>
-                            <button>{menu}</button>
+                        <div className={styles.nav2__contents} 
+                        key={id} onMouseEnter={() => handleMouseEnter(menu)} onMouseLeave={() => handleMouseLeave(menu)}>
+
+                            <button className={styles.nav2__button}>{menu}</button>
+
                             {hoverState[menu] && subNavCont[menu] && (
-                                <ul className={styles.subNavWrap}>
-                                    {subNavCont[menu].map((item, itemId) => <li key={itemId}>{item}</li>)}
+                                <ul className={styles.nav2__subnav}>
+                                    {subNavCont[menu].map((item, itemId) => <li className={styles.nav2__subnav_item} key={itemId}>{item}</li>)}
                                 </ul>
                             )}
                         </div>
