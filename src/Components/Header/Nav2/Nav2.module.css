@@ -1,7 +1,7 @@
 .nav2{
     width: 100vw;
     height: 50px;
-    border-bottom: 1px solid #d0d0d0;
+    border-bottom: 1px solid var(--line-color);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -19,10 +19,10 @@
     transition: border-bottom 0.1s ease;
 }
 .nav2__contents:hover{
-    border-bottom: 4px solid #1e90ff;
+    border-bottom: 4px solid var(--main-color2)
 }
 .nav2__contents:hover .nav2__button{
-    color: #1E90FF;
+    color: var(--main-color2)
 }
 
 
@@ -39,7 +39,7 @@
 .nav2__subnav{
     width: 120px;
     box-shadow: 4px 4px 2px rgba(0,0,0,0.2);
-    border: 1px solid #e0e0e0;
+    border: 1px solid var(--select-color);
     border-radius: 4px;
     background-color: white;
     position: absolute;
@@ -58,5 +58,5 @@
     font-size: 14px;
 }
 .nav2__subnav_item:hover{
-    color: #1e90ff
+    color: var(--main-color)
 }
