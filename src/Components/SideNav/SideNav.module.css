@@ -10,7 +10,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
 }
-.sidenav__container li{
+.sidenav__item{
     width: 130px;
     height: 40px;
     display: flex;
@@ -20,7 +20,8 @@
     text-align: center;
     z-index: 1;
     cursor: pointer;
+    font-family: 'pretendardM';
 }
-.sidenav__container li:hover{
+.sidenav__item:hover{
     color: var(--main-color2);
 }
