@@ -1,5 +1,12 @@
+import styles from "./SetMember.module.css";
+import Votekick from "./VoteKick/VoteKick";
+
 const SetMember = () => {
-  return <div>멤버 설정 페이지</div>;
+  return (
+    <div className={styles.set_member__wrapper}>
+      <Votekick />
+    </div>
+  );
 };
 
 export default SetMember;
