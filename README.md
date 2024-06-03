@@ -51,7 +51,7 @@ index.css에 변수명과 색상코드를 연결해두었습니다.
 4) 컴포넌트를 import 하듯이 원하는 위치에 import 한다
 5) width, height, className 등을 props로 지정해준다
    (참고 : Components > Header > Nav1)
-
+-> 제가 디자인할 때 딱히 아이콘을 많이 사용하진 않았어서, 위 방식대로 해도 큰 문제는 없을 것 같습니다
 
 <br><br><br>
 ## 그 외 ##
