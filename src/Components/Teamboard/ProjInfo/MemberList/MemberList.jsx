@@ -18,9 +18,9 @@ const MemberList = () => {
   }, []);
 
   return (
-    <div className={styles.member_list__wrapper}>
+    <div className={styles.memberList__wrapper}>
       {groupedMembers.map((group, index) => (
-        <div key={index} className={styles.member_list__container}>
+        <div key={index} className={styles.memberList__container}>
           {group.map((member) => (
             <MemberItem key={member.id} memberName={member.name} />
           ))}

@@ -2,11 +2,11 @@ import styles from "./MemberItem.module.css";
 
 const MemberItem = ({ memberName }) => {
   return (
-    <div className={styles.member_item__wrapper}>
-      <div className={styles.member_item__container}>
-        <button className={styles.member_item__button}>
-          <div className={styles.member_item__profile_pic}>사진</div>
-          <div className={styles.member_item__name}>{memberName}</div>
+    <div className={styles.memberItem}>
+      <div className={styles.memberItem__container}>
+        <button className={styles.memberItem__button}>
+          <div className={styles.memberItem__profilePic}>사진</div>
+          <div className={styles.memberItem__name}>{memberName}</div>
         </button>
       </div>
     </div>

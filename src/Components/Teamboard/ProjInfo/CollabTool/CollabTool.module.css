@@ -1,17 +1,18 @@
-.collab_tool__wrapper {
+.collabTool {
   /*border: 1px solid purple;*/
   margin: 5px;
 }
 
-.collab_tool__button {
+.collabTool__button {
   /*크기*/
   width: 60px;
   height: 60px;
   /*테두리*/
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--line-color);
   border-radius: 4px;
-  /*배경 색*/
-  background: none;
-  /*커서*/
-  cursor: pointer;
+}
+
+.collabTool__button:hover {
+  border: 2px solid var(--main-color2);
+  background-color: var(--sub-color);
 }

@@ -1,25 +1,21 @@
-.member_item__wrapper {
+.memberItem {
   /*border: 1px solid pink;*/
   padding: 5px;
 }
 
-.member_item__container {
+.memberItem__container {
   /*border: 1px solid black;*/
 }
 
-.member_item__button {
+.memberItem__button {
   /*테두리*/
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--line-color);
   border-radius: 8px;
-  /*배경 색*/
-  background: none;
   /*크기*/
   width: 145px;
   height: 65px;
   /*마진*/
   margin: 3px;
-  /*커서*/
-  cursor: pointer;
   /*요소 배치*/
   display: flex;
   align-items: center;
@@ -27,7 +23,7 @@
   font-size: 16px;
 }
 
-.member_item__name {
+.memberItem__name {
   /*border: 1px solid black;*/
   /*크기*/
   width: 60px;
@@ -35,12 +31,17 @@
   margin: auto;
 }
 
-.member_item__profile_pic {
+.memberItem__profilePic {
   /*테두리*/
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--line-color);
   /*크기*/
   width: 50px;
   height: 50px;
   /*원형으로*/
   border-radius: 25px;
+}
+
+.memberItem__button:hover {
+  border: 2px solid var(--main-color2);
+  background-color: var(--sub-color);
 }

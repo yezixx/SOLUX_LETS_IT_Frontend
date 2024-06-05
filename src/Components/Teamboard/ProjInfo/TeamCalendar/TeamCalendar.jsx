@@ -4,7 +4,7 @@ import FullCalendar from "@fullcalendar/react";
 
 const TeamCalendar = () => {
   return (
-    <div className={styles.team_calendar__wrapper}>
+    <div className={styles.calendar}>
       <div>
         <FullCalendar
           plugins={[dayGridPlugin]}
