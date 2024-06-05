@@ -1,4 +1,4 @@
-.nav__wrapper {
+.nav {
   margin: 50px;
   margin-bottom: 0;
 }
@@ -12,12 +12,12 @@
   /*border: 1px solid red;*/
 }
 
-.nav_label {
+.nav__label {
   /*크기*/
   width: 300px;
   height: 55px;
   /*테두리*/
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--line-color);
   border-radius: 8px 8px 0 0;
   /*폰트*/
   font-size: 24px;
@@ -28,17 +28,17 @@
   /*border: 1px solid blue;*/
 }
 
-.nav_buttons__container {
+.nav__buttonContainer {
   display: flex;
   margin-left: auto;
 }
 
-.nav_button {
+.nav__button {
   /*크기*/
   width: 160px;
   height: 40px;
   /*테두리*/
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--line-color);
   border-radius: 8px 8px 0 0;
   /*마진*/
   margin-left: 10px;
@@ -47,17 +47,15 @@
   /*그림자*/
   box-shadow: 4px 0 2px rgba(0, 0, 0, 0.2);
   /*텍스트 색상*/
-  color: #1e90ff;
-  /*커서*/
-  cursor: pointer;
+  color: var(--main-color2);
   /*폰트*/
   font-size: 16px;
   /*border: 1px solid yellow;*/
 }
 
-.nav_button__current {
+.nav__button--selected {
   /*배경 색상*/
-  background: #1e90ff;
+  background: var(--main-color2);
   /*텍스트 색상*/
   color: #ffffff;
 }

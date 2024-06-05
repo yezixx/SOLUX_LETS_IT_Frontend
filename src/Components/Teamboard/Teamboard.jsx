@@ -3,7 +3,7 @@ import TeamLayout from "./Layout/TeamLayout";
 
 const Teamboard = () => {
   return (
-    <div className={styles.teamboard_wrapper}>
+    <div className={styles.teamboard}>
       <TeamLayout />
     </div>
   );

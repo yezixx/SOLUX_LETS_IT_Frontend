@@ -1,12 +1,12 @@
 import styles from "./TeamContainer.module.css";
 import { Outlet } from "react-router-dom";
 
-const TeamContent = () => {
+const TeamContainer = () => {
   return (
-    <div className={styles.team_container__wrapper}>
+    <div className={styles.teamContainer}>
       <Outlet />
     </div>
   );
 };
 
-export default TeamContent;
+export default TeamContainer;
