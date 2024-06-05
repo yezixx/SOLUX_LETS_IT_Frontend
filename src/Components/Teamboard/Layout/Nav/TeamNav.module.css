@@ -59,3 +59,7 @@
   /*텍스트 색상*/
   color: #ffffff;
 }
+
+.nav__button:hover {
+  border: 2px solid var(--main-color2);
+}
