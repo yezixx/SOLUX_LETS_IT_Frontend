@@ -1,0 +1,8 @@
+.voteKick {
+  border: 1px solid blue;
+}
+
+.voteKick__label {
+  /*폰트*/
+  font-size: 24px;
+}
