@@ -1,5 +1,5 @@
 import styles from "./MemberList.module.css";
-import MemberItem from "../MemberItem/MemberItem";
+import MemberItem from "./MemberItem/MemberItem";
 
 const MemberList = () => {
   const members = [
