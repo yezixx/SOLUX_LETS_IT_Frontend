@@ -8,24 +8,13 @@ const MemberList = () => {
     { id: 3, name: "Tom BE" },
   ];
 
-  const groupedMembers = members.reduce((acc, member, index) => {
-    if (index % 2 === 0) {
-      acc.push([member]);
-    } else {
-      acc[acc.length - 1].push(member);
-    }
-    return acc;
-  }, []);
-
   return (
     <div className={styles.memberList__wrapper}>
-      {groupedMembers.map((group, index) => (
-        <div key={index} className={styles.memberList__container}>
-          {group.map((member) => (
-            <MemberItem key={member.id} memberName={member.name} />
-          ))}
-        </div>
-      ))}
+      <div className={styles.memberList__container}>
+        {members.map((member) => (
+          <MemberItem key={member.id} memberName={member.name} />
+        ))}
+      </div>
     </div>
   );
 };
