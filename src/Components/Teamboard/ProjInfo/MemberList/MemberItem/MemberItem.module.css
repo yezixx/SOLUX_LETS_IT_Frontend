@@ -45,3 +45,8 @@
   border: 2px solid var(--main-color2);
   background-color: var(--sub-color);
 }
+
+.memberItem__button:focus {
+  border: 2px solid var(--main-color2);
+  background-color: var(--sub-color);
+}
