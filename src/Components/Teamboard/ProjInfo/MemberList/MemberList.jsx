@@ -9,7 +9,7 @@ const MemberList = () => {
   ];
 
   return (
-    <div className={styles.memberList__wrapper}>
+    <div className={styles.memberList}>
       <div className={styles.memberList__container}>
         {members.map((member) => (
           <MemberItem key={member.id} memberName={member.name} />
