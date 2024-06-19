@@ -1,7 +1,7 @@
-import ManageProj from "./Teamboard/ManageProj/ManageProj";
-import ProjInfo from "./Teamboard/ProjInfo/ProjInfo";
-import SetMember from "./Teamboard/SetMember/SetMember";
-import Teamboard from "./Teamboard/Teamboard";
+import ManageProj from "./../Screen/Teamboard/ManageProj/ManageProj";
+import ProjInfo from "./../Screen/Teamboard/ProjInfo/ProjInfo";
+import SetMember from "./../Screen/Teamboard/SetMember/SetMember";
+import Teamboard from "./../Screen/Teamboard/Teamboard";
 
 export const RouterInfo = [
   {
