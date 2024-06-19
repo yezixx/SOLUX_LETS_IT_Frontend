@@ -1,3 +1,91 @@
-.kick_report__wrapper {
-  border: 1px solid red;
+.kickReport {
+  /*border: 1px solid red;*/
+}
+
+.kickReport__label {
+  /*border: 1px solid lightcoral;*/
+  /*폰트*/
+  font-size: 24px;
+  /*패딩*/
+  padding: 5px;
+  /*마진*/
+  margin-bottom: 5px;
+  /*배치*/
+  display: flex;
+  /*위치*/
+  position: relative;
+}
+
+.kickReport__toolTip {
+  /*위치*/
+  position: absolute;
+  bottom: 50px;
+  left: 105px;
+  line-height: 25px;
+}
+
+.kickReport__icon {
+  margin: 0 10px;
+}
+
+.kickReport__container {
+  /*border: 1px solid cyan;*/
+  /*요소 배치*/
+  display: flex;
+  flex-wrap: wrap; /*상위 컴포넌트 너비 초과할 경우 다음줄로 넘김*/
+}
+
+.kickReport__dropBoxButtonsWrap {
+  /*요소 배치*/
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /*마진*/
+  margin-top: 20px;
+}
+
+.kickReport__dropBox {
+  /*크기*/
+  width: 470px;
+  height: 50px;
+  /*테두리*/
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  /*텍스트*/
+  color: var(--text-color2);
+  font-size: 16px;
+  /*패딩*/
+  padding-left: 10px;
+}
+
+.kickReport__option {
+  /*텍스트*/
+  color: var(--text-color2);
+  font-size: 16px;
+}
+
+.kickReport__buttons {
+  /*요소 배치*/
+  display: flex;
+  gap: 10px;
+}
+
+.kickReport__kickButton {
+  /*크기*/
+  width: 120px;
+  height: 40px;
+  /*테두리*/
+  border-radius: 10px;
+  color: white;
+  background-color: var(--point);
+}
+
+.kickReport__reportButton {
+  /*크기*/
+  width: 70px;
+  height: 40px;
+  /*테두리*/
+  border: 1px solid var(--point);
+  border-radius: 10px;
+  color: var(--point);
 }
