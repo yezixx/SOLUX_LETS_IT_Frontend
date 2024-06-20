@@ -24,7 +24,7 @@
 .nav__button{
     margin-top: 10px;
     height: 57px;
-    width: 70px;
+    width: 80px;
     color: var(--text-color2);
 }
 
@@ -72,8 +72,7 @@
     border-radius: 4px;
     background-color: white;
     position: absolute;
-    top: 69px;
-    transform: translate(-20%)
+    transform: translateX(-20px)
 }
 .nav__subnav_item{
     width: 120px;
