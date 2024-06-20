@@ -1,5 +1,12 @@
+import styles from "./ManageProj.module.css";
+import AttendanceList from "./AttendanceList/AttendanceList";
+
 const ManageProj = () => {
-  return <div>프로젝트 관리 페이지</div>;
+  return (
+    <div className={styles.manageProj}>
+      <AttendanceList />
+    </div>
+  );
 };
 
 export default ManageProj;
