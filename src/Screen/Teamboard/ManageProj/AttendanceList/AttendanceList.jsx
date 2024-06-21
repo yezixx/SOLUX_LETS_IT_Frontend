@@ -8,9 +8,8 @@ const AttendanceList = () => {
     { id: 3, date: "2024-04-06", isCompleted: false },
   ];
   return (
-    <div>
-      회의 참석 인증
-      <div>
+    <div className={styles.attendanceList}>
+      <div className={styles.attendanceList__item}>
         {meetings.map((meeting) => (
           <AttendanceItem
             key={meeting.id}
