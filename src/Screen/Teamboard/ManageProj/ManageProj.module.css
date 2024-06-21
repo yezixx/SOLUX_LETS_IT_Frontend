@@ -13,5 +13,9 @@
 }
 
 .manageProj__container {
+  /*배치*/
+  display: flex;
+  gap: 30px;
+  /*마진*/
   margin-top: 20px;
 }
