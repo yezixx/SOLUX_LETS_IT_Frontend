@@ -38,7 +38,7 @@ const KickReport = () => {
           <QuestionMarkIcon width={"15px"} height={"15px"} />
         </div>
       </div>
-      <div className={styles.kickReport__container}>
+      <div className={styles.kickReport__item}>
         {members.map((member) => (
           <MemberItem key={member.id} memberName={member.name} />
         ))}

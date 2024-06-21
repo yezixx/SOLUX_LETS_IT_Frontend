@@ -28,11 +28,12 @@
   margin: 0 10px;
 }
 
-.kickReport__container {
+.kickReport__item {
   /*border: 1px solid cyan;*/
   /*요소 배치*/
   display: flex;
   flex-wrap: wrap; /*상위 컴포넌트 너비 초과할 경우 다음줄로 넘김*/
+  gap: 15px;
 }
 
 .kickReport__dropBoxButtonsWrap {
