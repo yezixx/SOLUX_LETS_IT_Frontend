@@ -1,6 +1,7 @@
 import styles from "./ManageProj.module.css";
 import AttendanceList from "./AttendanceList/AttendanceList";
 import AttendanceDetail from "./AttendanceDetail/AttendanceDetail";
+import { Link } from "react-router-dom";
 
 const ManageProj = () => {
   return (
@@ -11,7 +12,9 @@ const ManageProj = () => {
         <AttendanceDetail />
       </div>
       <div className={styles.manageProj__button}>
-        <button>프로젝트 정보 수정</button>
+        <Link to={"/UpdateProj"}>
+          <button>프로젝트 정보 수정</button>
+        </Link>
       </div>
     </div>
   );
