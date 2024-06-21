@@ -34,7 +34,7 @@ const TeamNav = () => {
           <Link to={"/ManageProj"}>
             <button
               className={`${styles.nav__button} ${
-                currentUrl === "/ManageProj"
+                currentUrl === "/ManageProj" || currentUrl === "/UpdateProj"
                   ? styles["nav__button--selected"]
                   : ""
               }`}
