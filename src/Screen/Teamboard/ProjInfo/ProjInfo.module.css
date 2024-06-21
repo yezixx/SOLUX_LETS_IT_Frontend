@@ -59,14 +59,14 @@
 
 .portfolioButton {
   /*배경 색*/
-  background: var(--sub-color);
+  background-color: var(--sub-color);
   /*폰트 색*/
   color: var(--sub-color2);
 }
 
 .authmeetingButton {
   /*배경 색*/
-  background: var(--main-color2);
+  background-color: var(--main-color2);
   /*폰트 색*/
   color: white;
 }
@@ -77,4 +77,6 @@
 
 .authmeetingButton:hover {
   border: 2px solid var(--main-color);
+  /*배경 색*/
+  background-color: var(--main-color);
 }
