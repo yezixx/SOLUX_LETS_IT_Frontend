@@ -1,9 +1,7 @@
 .teamLayout {
   /*마진, 요소 중앙으로*/
-  margin: 0 auto;
-  /*패딩*/
-  padding: 20px;
+  margin: 50px auto;
   /*크기*/
-  width: 1300px;
+  width: 1169px;
   /*border: 1px solid black;*/
 }
