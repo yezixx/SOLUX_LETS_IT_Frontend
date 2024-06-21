@@ -1,3 +1,4 @@
+import UpdateProj from "../Screen/Teamboard/UpdateProj/UpdateProj";
 import ManageProj from "./../Screen/Teamboard/ManageProj/ManageProj";
 import ProjInfo from "./../Screen/Teamboard/ProjInfo/ProjInfo";
 import SetMember from "./../Screen/Teamboard/SetMember/SetMember";
@@ -22,6 +23,11 @@ export const RouterInfo = [
         path: "/ManageProj",
         element: <ManageProj />,
         label: "Manage Project",
+      },
+      {
+        path: "/UpdateProj",
+        element: <UpdateProj />,
+        label: "Update Project",
       },
     ],
   },
