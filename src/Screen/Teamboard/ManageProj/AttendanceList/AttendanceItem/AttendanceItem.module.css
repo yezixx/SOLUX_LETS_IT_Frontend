@@ -46,7 +46,7 @@
 .attendanceItem__block--last {
   /*테두리*/
   border-radius: 0px 0px 8px 8px;
-  border-bottom: 1px;
+  border-bottom: 1px solid var(--line-color);
   /*배경 색*/
   background-color: white;
 }
