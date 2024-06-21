@@ -1,3 +1,17 @@
 .manageProj {
   border: 1px solid black;
+  /*패딩*/
+  padding: 30px;
+}
+
+.manageProj__label {
+  /*텍스트*/
+  font-size: 24px;
+  color: var(--text-color1);
+  /*마진*/
+  margin-top: 30px;
+}
+
+.manageProj__container {
+  margin-top: 20px;
 }
