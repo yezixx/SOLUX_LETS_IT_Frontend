@@ -1,7 +1,11 @@
 .manageProj {
-  border: 1px solid black;
+  /*border: 1px solid black;*/
   /*패딩*/
   padding: 30px;
+  /*배치*/
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
 .manageProj__label {
@@ -13,9 +17,25 @@
 }
 
 .manageProj__container {
+  /*border: 1px solid tomato;*/
   /*배치*/
   display: flex;
   gap: 30px;
-  /*마진*/
-  margin-top: 20px;
+}
+
+.manageProj__button {
+  /*border: 1px solid cyan;*/
+  /*오른쪽 끝으로*/
+  align-self: flex-end;
+}
+
+.manageProj__button button {
+  /*텍스트*/
+  font-size: 16px;
+  color: var(--text-color2);
+}
+
+.manageProj__button button:hover {
+  /*텍스트*/
+  color: var(--text-color1);
 }
