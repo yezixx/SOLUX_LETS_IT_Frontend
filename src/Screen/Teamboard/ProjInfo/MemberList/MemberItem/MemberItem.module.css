@@ -1,6 +1,5 @@
 .memberItem {
   /*border: 1px solid pink;*/
-  padding: 5px;
 }
 
 .memberItem__container {
@@ -14,8 +13,6 @@
   /*크기*/
   width: 145px;
   height: 65px;
-  /*마진*/
-  margin: 3px;
   /*요소 배치*/
   display: flex;
   align-items: center;
