@@ -1,5 +1,6 @@
 import styles from "./ManageProj.module.css";
 import AttendanceList from "./AttendanceList/AttendanceList";
+import AttendanceDetail from "./AttendanceDetail/AttendanceDetail";
 
 const ManageProj = () => {
   return (
@@ -7,6 +8,7 @@ const ManageProj = () => {
       <div className={styles.manageProj__label}>회의 참석 인증</div>
       <div className={styles.manageProj__container}>
         <AttendanceList />
+        <AttendanceDetail />
       </div>
     </div>
   );
