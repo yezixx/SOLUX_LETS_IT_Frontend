@@ -1,4 +1,4 @@
-import MemberItem from "../../ProjInfo/MemberList/MemberItem/MemberItem";
+import MemberItem from "../../../../Components/MemberItem/MemberItem";
 import styles from "./KickReport.module.css";
 import QuestionMarkIcon from "../../../../Image/Icons/QuestionMarkIcon";
 import ToolTip from "../../../../Components/ToolTip/ToolTip";
