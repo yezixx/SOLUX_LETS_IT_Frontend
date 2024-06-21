@@ -10,6 +10,9 @@ const ManageProj = () => {
         <AttendanceList />
         <AttendanceDetail />
       </div>
+      <div className={styles.manageProj__button}>
+        <button>프로젝트 정보 수정</button>
+      </div>
     </div>
   );
 };
