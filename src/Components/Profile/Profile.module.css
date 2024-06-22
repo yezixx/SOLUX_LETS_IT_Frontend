@@ -8,7 +8,6 @@
     flex-direction: column;
     align-items: flex-end;
     gap: 10px;
-    margin-bottom: 300px;
 }
 .myProfile__box{
     /*프로필 박스*/
