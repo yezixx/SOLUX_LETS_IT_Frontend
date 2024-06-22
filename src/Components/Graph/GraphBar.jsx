@@ -1,4 +1,4 @@
-
+import styles  from './GraphBar.module.css'
 
 const GraphBar=({
     /*graph bar의 기본값*/
@@ -13,8 +13,11 @@ const GraphBar=({
     borderBottomRightRadius='0px',
 
     value= 0, //외부에서 준 graph bar의 색칠될 값
-    showNumbers = true // graph bar의 값을 숫자로 보여줄 것인가?
+    showNumbers = true, // graph bar의 값을 숫자로 보여줄 것인가?
 
+    //graph bar숫자의 위치
+    top='20px',
+    right='-5px',
 
     })=>{
 
@@ -22,38 +25,38 @@ const GraphBar=({
 
     return(
         <div>
-            <div style={{
+            <div className={styles.GraphBar__border} style={{
                 width : width,
                 height : height,
-                backgroundColor: 'white',
                 border: border,
                 borderRadius: borderRadius,
             }}>
             {/*graph 테두리*/}
 
             {/*graph에서 색칠될 부분 */}
-                <div style={{
+                <div className={styles.GraphBar__colored} style={{
                     width : fillWidth+'px',
                     height : height,
                     borderRadius: borderRadius,
                     backgroundColor: bgc,
                     borderTopRightRadius: borderTopRightRadius,
                     borderBottomRightRadius: borderBottomRightRadius,
-                    position: 'relative'
                 }}>
+                    {/*graph 하단 number - showNumbers true일 경우 보임*/}
+                    <div className={styles.GraphBar__number}
+                        style={{
+                            top: top,
+                            right: right
+                        }}>
+                        {showNumbers ? 
+                        <div  style={{color: color}}>
+                        {value}
+                        </div> : null}
+                    </div>
+                    
                 </div>
-            {/*graph 하단 number - showNumbers true일 경우 보임*/}
-                <div>
-                    {showNumbers ? 
-                    <div style={{
-                        position: 'absolute',
-                        transform: `translateX(${fillWidth-10}px)`,
-                        color: color,
-                        marginTop: '5px',
-                        fontSize: '14px'
-                    }}>
-                        {value}</div> : null}
-                </div>
+
+
             </div>
         </div>
     )
