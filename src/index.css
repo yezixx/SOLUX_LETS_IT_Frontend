@@ -34,22 +34,4 @@ button {
   border: none;
   background: none;
   cursor: pointer;
-  /*폰트*/
-  font-family: "pretendardM";
-  letter-spacing: -8%;
-}
-input {
-  /*폰트*/
-  font-family: "pretendardM";
-  letter-spacing: -8%;
-}
-select {
-  /*폰트*/
-  font-family: "pretendardM";
-  letter-spacing: -8%;
-}
-option {
-  /*폰트*/
-  font-family: "pretendardM";
-  letter-spacing: -8%;
 }
