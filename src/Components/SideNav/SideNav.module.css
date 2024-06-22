@@ -1,8 +1,10 @@
 .sidenav{
     position: sticky;
+    top: 30px;
     width: 130px;
     height: 200px;
     margin-right: 70px;
+    z-index: 500px;
 }
 .sidenav__container{
     background-color: var(--sub-color);

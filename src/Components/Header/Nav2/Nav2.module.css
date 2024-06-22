@@ -6,13 +6,13 @@
     justify-content: center;
     align-items: center;
     display: flex;
-    flex-direction: column;
 }
 .nav2__container{
     width: 1320px;
     height: 40px;
     display: flex;
     align-items: center;
+    justify-content: left;
 }
 
 .nav2__contents{
@@ -43,7 +43,7 @@
     border-radius: 4px;
     background-color: white;
     position: absolute;
-    top: 122px;
+    transform: translateY(3.5px);
     z-index: 1000;
 }
 .nav2__subnav_item{

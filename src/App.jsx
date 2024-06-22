@@ -9,7 +9,9 @@ function App() {
   return (
     <div className={styles.wrap}>
       <Header />
-      <RouterProvider router={RouterObject} />
+      <div className={styles.main}>
+        <RouterProvider router={RouterObject} />
+      </div>
     </div>
   );
 }
