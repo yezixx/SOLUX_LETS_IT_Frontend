@@ -1,6 +1,6 @@
 import styles from "./App.module.css";
 import Header from "./Components/Header/Header";
-import MyProfile from "./Screen/MyPage/Profile/Profile";
+import MyProfile from "./Screen/MyPage/MyProfile";
 function App() {
   return (
   <div className={styles.wrap}>
