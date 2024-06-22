@@ -36,6 +36,8 @@
   height: 50px;
   /*원형으로*/
   border-radius: 25px;
+  /*마진*/
+  margin-left: 10px;
 }
 
 .memberItem__button:hover {
