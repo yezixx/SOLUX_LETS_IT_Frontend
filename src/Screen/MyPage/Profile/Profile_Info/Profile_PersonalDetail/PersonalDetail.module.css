@@ -1,0 +1,21 @@
+.myProfile__info__personalDetail{
+    /*이름, 나이, 바이오*/
+    display: flex;
+    gap: 10px;
+    align-items: end;
+    width: 250px;
+    margin-top: 15px;
+}
+.myProfile__info__name{
+    /*이름*/
+    font-family: 'PretendardB';
+    font-size: 30px;
+    height: 40px;
+    flex: 1;
+}
+.myProfile__info__age{
+    /*나이*/
+    font-family: 'PretendardM';
+    font-size: 14px;
+    color: var(--text-color2);
+}
