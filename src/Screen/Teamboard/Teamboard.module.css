@@ -4,13 +4,14 @@
   height: 100vh;
   /*폰트*/
   font-family: "pretendardM";
+  letter-spacing: -8%;
 }
 
 .teamboard__label {
   border-bottom: 1px solid var(--line-color);
   /*폰트*/
   font-size: 28px;
-  font-family: "pretendardB";
+  font-weight: 600;
   /*크기*/
   width: 1320px;
   height: 70px;

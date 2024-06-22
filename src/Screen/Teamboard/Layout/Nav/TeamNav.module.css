@@ -21,10 +21,12 @@
   border-radius: 8px 8px 0 0;
   /*폰트*/
   font-size: 24px;
-  font-family: "pretendardB";
+  font-weight: 600;
+  letter-spacing: -8%;
   /*요소 정렬*/
-  text-align: center;
-  line-height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   /*border: 1px solid blue;*/
 }
 
@@ -51,6 +53,7 @@
   color: var(--main-color2);
   /*폰트*/
   font-size: 16px;
+  letter-spacing: -8%;
   /*border: 1px solid yellow;*/
 }
 
