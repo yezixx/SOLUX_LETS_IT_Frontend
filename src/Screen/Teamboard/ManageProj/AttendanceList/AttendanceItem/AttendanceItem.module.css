@@ -23,7 +23,7 @@
 
 .attendanceItem__icon {
   /*마진*/
-  margin: 10px;
+  margin: 5px 15px 0px 15px;
 }
 
 .attendanceItem__text {
