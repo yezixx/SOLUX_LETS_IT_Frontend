@@ -13,8 +13,8 @@ const AttendanceItem = ({ id, date, isCompleted, length }) => {
       <div className={classNames}>
         <div className={styles.attendanceItem__icon}>
           <CheckIcon
-            width="20px"
-            height="20px"
+            width="16px"
+            height="16px"
             color={isCompleted ? "var(--main-color2)" : "var(--text-color2)"}
           />
         </div>
