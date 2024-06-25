@@ -1,9 +1,9 @@
-.voteKickMember {
+.voteItem {
   /*border: 1px solid pink;*/
   padding: 5px;
 }
 
-.voteKickMember_container {
+.voteItem__container {
   /*테두리*/
   border: 1px solid var(--line-color);
   border-radius: 8px;
@@ -19,7 +19,7 @@
   font-size: 16px;
 }
 
-.voteKickMember__profilePic {
+.voteItem__profilePic {
   /*테두리*/
   border: 1px solid var(--line-color);
   /*크기*/
@@ -31,7 +31,7 @@
   margin-left: 10px;
 }
 
-.voteKickMember__name {
+.voteItem__name {
   /*border: 1px solid black;*/
   /*크기*/
   width: 60px;
@@ -42,7 +42,7 @@
   font-size: 16px;
 }
 
-.voteKickMember__button {
+.voteItem__button {
   /*border: 1px solid cyan;*/
   /*폰트*/
   font-size: 24px;
@@ -52,13 +52,13 @@
   margin: auto;
 }
 
-.voteKickMember__button--o {
+.voteItem__button--o {
   /*폰트*/
   font-size: 24px;
   color: var(--main-color2);
 }
 
-.voteKickMember__button--x {
+.voteItem__button--x {
   /*폰트*/
   font-size: 24px;
   color: var(--line-color);

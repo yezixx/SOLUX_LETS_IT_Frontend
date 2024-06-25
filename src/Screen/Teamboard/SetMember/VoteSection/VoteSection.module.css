@@ -1,8 +1,8 @@
-.voteKick {
+.voteSection {
   /*border: 1px solid blue;*/
 }
 
-.voteKick__label {
+.voteSection__label {
   /*border: 1px solid lightcoral;*/
   /*폰트*/
   font-size: 24px;
@@ -13,7 +13,7 @@
   margin-bottom: 5px;
 }
 
-.voteKick__container {
+.voteSection__container {
   /*border: 1px solid cyan;*/
   /*요소 배치*/
   display: flex;

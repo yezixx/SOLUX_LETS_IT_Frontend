@@ -1,12 +1,12 @@
-import KickReport from "./KickReport/KickReport";
 import styles from "./SetMember.module.css";
-import Votekick from "./VoteKick/VoteKick";
+import VoteSection from "./VoteSection/VoteSection";
+import ReportSection from "./ReportSection/ReportSection";
 
 const SetMember = () => {
   return (
     <div className={styles.setMember}>
-      <Votekick />
-      <KickReport />
+      <VoteSection />
+      <ReportSection />
     </div>
   );
 };

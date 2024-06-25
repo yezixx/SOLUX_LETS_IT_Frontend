@@ -1,9 +1,9 @@
 import MemberItem from "../../../../Components/MemberItem/MemberItem";
-import styles from "./KickReport.module.css";
+import styles from "./ReportSection.module.css";
 import QuestionMarkIcon from "../../../../Image/Icons/QuestionMarkIcon";
 import ToolTip from "../../../../Components/ToolTip/ToolTip";
 
-const KickReport = () => {
+const ReportSection = () => {
   const members = [
     { id: 1, name: "유밍 BE" },
     { id: 2, name: "도라" },
@@ -28,26 +28,26 @@ const KickReport = () => {
   );
 
   return (
-    <div className={styles.kickReport}>
-      <div className={styles.kickReport__label}>
+    <div className={styles.reportSection}>
+      <div className={styles.reportSection__label}>
         <div>강퇴 및 신고</div>
-        <div className={styles.kickReport__toolTip}>
+        <div className={styles.reportSection__toolTip}>
           <ToolTip msg={msg} width={"300px"} height={"60px"} />
         </div>
-        <div className={styles.kickReport__icon}>
+        <div className={styles.reportSection__icon}>
           <QuestionMarkIcon width={"15px"} height={"15px"} />
         </div>
       </div>
-      <div className={styles.kickReport__item}>
+      <div className={styles.reportSection__item}>
         {members.map((member) => (
           <MemberItem key={member.id} memberName={member.name} />
         ))}
       </div>
-      <div className={styles.kickReport__dropBoxButtonsWrap}>
-        <select className={styles.kickReport__dropBox}>
+      <div className={styles.reportSection__dropBoxButtonsWrap}>
+        <select className={styles.reportSection__dropBox}>
           {OPTIONS.map((option) => (
             <option
-              className={styles.kickReport__option}
+              className={styles.reportSection__option}
               key={option.id}
               value={option.value}
             >
@@ -55,13 +55,15 @@ const KickReport = () => {
             </option>
           ))}
         </select>
-        <div className={styles.kickReport__buttons}>
-          <button className={styles.kickReport__kickButton}>강퇴 제안</button>
-          <button className={styles.kickReport__reportButton}>신고</button>
+        <div className={styles.reportSection__buttons}>
+          <button className={styles.reportSection__kickButton}>
+            강퇴 제안
+          </button>
+          <button className={styles.reportSection__reportButton}>신고</button>
         </div>
       </div>
     </div>
   );
 };
 
-export default KickReport;
+export default ReportSection;

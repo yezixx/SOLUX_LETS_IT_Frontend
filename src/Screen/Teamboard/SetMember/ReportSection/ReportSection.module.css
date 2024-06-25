@@ -1,8 +1,8 @@
-.kickReport {
+.reportSection {
   /*border: 1px solid red;*/
 }
 
-.kickReport__label {
+.reportSection__label {
   /*border: 1px solid lightcoral;*/
   /*폰트*/
   font-size: 24px;
@@ -17,7 +17,7 @@
   position: relative;
 }
 
-.kickReport__toolTip {
+.reportSection__toolTip {
   /*위치*/
   position: absolute;
   bottom: 50px;
@@ -25,11 +25,11 @@
   line-height: 25px;
 }
 
-.kickReport__icon {
+.reportSection__icon {
   margin: 0 10px;
 }
 
-.kickReport__item {
+.reportSection__item {
   /*border: 1px solid cyan;*/
   /*요소 배치*/
   display: flex;
@@ -37,7 +37,7 @@
   gap: 15px;
 }
 
-.kickReport__dropBoxButtonsWrap {
+.reportSection__dropBoxButtonsWrap {
   /*요소 배치*/
   display: flex;
   align-items: center;
@@ -46,7 +46,7 @@
   margin-top: 20px;
 }
 
-.kickReport__dropBox {
+.reportSection__dropBox {
   /*크기*/
   width: 470px;
   height: 50px;
@@ -60,19 +60,19 @@
   padding-left: 10px;
 }
 
-.kickReport__option {
+.reportSection__option {
   /*텍스트*/
   color: var(--text-color2);
   font-size: 16px;
 }
 
-.kickReport__buttons {
+.reportSection__buttons {
   /*요소 배치*/
   display: flex;
   gap: 10px;
 }
 
-.kickReport__kickButton {
+.reportSection__kickButton {
   /*크기*/
   width: 120px;
   height: 40px;
@@ -82,7 +82,7 @@
   background-color: var(--point);
 }
 
-.kickReport__reportButton {
+.reportSection__reportButton {
   /*크기*/
   width: 70px;
   height: 40px;
