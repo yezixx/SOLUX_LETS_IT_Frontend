@@ -16,9 +16,9 @@
   - 익숙한 방식
 - 색상 코드는 CSS 변수로 지정하여 사용
 
-## 아이콘 사용
-
-- [react-icons](https://react-icons.github.io/react-icons/icons/go/)
+## Icon 사용
+* 아이콘 라이브러리 링크 : https://heroicons.com/outline
+  <br>(선정이유 : react-icons 등 타 아이콘 라이브러리는 vite화 호환이 안되는 이슈 발생)
 
 ## Router 방식
 
