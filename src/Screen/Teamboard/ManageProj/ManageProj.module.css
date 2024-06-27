@@ -5,7 +5,7 @@
   /*배치*/
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
 }
 
 .manageProj__label {
@@ -27,7 +27,8 @@
 .manageProj__button {
   /*border: 1px solid cyan;*/
   /*오른쪽 끝으로*/
-  align-self: flex-end;
+  align-self: end;
+  margin-bottom: 100px;
 }
 
 .manageProj__button button {
