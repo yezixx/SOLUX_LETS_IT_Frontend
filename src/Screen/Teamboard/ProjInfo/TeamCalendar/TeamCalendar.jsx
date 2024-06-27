@@ -16,7 +16,6 @@ const TeamCalendar = () => {
         events={events}
         timeZone="local"
         locale="kr"
-        formatDate="en"
       />
     </div>
   );
