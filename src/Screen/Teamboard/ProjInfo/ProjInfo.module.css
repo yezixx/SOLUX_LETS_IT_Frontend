@@ -32,12 +32,13 @@
   align-items: end;
 }
 
-.rightContent__leftButton {
+.rightContent__toolButton {
   /*border: 1px solid blue;*/
   display: flex;
+  flex-wrap: wrap;
 }
 
-.rightContent__rightButton {
+.rightContent__rightButtons {
   /*border: 1px solid mediumseagreen;*/
   /*요소 오른쪽으로 배치*/
   display: flex;
@@ -45,7 +46,7 @@
   margin-left: auto;
 }
 
-.rightContent__rightButton button {
+.rightContent__rightButtons button {
   /*크기 설정*/
   width: 120px;
   height: 40px;
