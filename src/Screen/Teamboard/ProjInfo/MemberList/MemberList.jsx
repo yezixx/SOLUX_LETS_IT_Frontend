@@ -1,5 +1,6 @@
 import styles from "./MemberList.module.css";
 import MemberItem from "../../../../Components/MemberItem/MemberItem";
+import { Link } from "react-router-dom";
 
 const MemberList = () => {
   const members = [
@@ -12,7 +13,13 @@ const MemberList = () => {
     <div className={styles.memberList}>
       <div className={styles.memberList__item}>
         {members.map((member) => (
-          <MemberItem key={member.id} memberName={member.name} />
+          <Link
+            key={member.id}
+            to={"/member/profile"}
+            style={{ textDecoration: "none" }}
+          >
+            <MemberItem key={member.id} memberName={member.name} />
+          </Link>
         ))}
       </div>
     </div>
