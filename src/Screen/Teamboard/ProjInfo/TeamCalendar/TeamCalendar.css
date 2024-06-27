@@ -35,3 +35,9 @@
 .fc-day-sat a {
   color: var(--main-color2);
 }
+
+.fc-today-button,
+.fc-prev-button,
+.fc-next-button {
+  width: 60px;
+}
