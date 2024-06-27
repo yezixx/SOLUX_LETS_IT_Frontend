@@ -1,0 +1,13 @@
+.memberProfile {
+  position: "relative";
+  width: "fit-content";
+}
+
+.memberProfile__button {
+  position: "absolute";
+  top: "10px";
+  right: "10px";
+  color: var(--text-color2);
+  font-size: 24px;
+  z-index: 100;
+}
