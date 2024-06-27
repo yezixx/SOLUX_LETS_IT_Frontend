@@ -13,7 +13,7 @@
   margin-bottom: 5px;
 }
 
-.voteSection__container {
+.voteSection__item {
   /*border: 1px solid cyan;*/
   /*요소 배치*/
   display: flex;

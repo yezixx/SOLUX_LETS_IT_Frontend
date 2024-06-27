@@ -7,7 +7,7 @@ const VoteSection = () => {
   return (
     <div className={styles.voteSection}>
       <div className={styles.voteSection__label}>강퇴 투표</div>
-      <div className={styles.voteSection__container}>
+      <div className={styles.voteSection__item}>
         {voteKickmembers.map((member) => (
           <VoteItem key={member.id} memberName={member.name} />
         ))}
