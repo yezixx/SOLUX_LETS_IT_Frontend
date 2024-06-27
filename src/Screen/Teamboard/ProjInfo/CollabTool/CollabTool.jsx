@@ -1,9 +1,9 @@
 import styles from "./CollabTool.module.css";
 
-const CollabTool = () => {
+const CollabTool = ({ tool }) => {
   return (
     <div className={styles.collabTool}>
-      <button className={styles.collabTool__button}>협업 툴</button>
+      <button className={styles.collabTool__button}>{tool}</button>
     </div>
   );
 };
