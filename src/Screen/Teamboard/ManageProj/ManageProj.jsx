@@ -1,9 +1,14 @@
 import styles from "./ManageProj.module.css";
 import AttendanceList from "./AttendanceList/AttendanceList";
 import AttendanceDetail from "./AttendanceDetail/AttendanceDetail";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ManageProj = () => {
+  const nav = useNavigate();
+
+  const navigateToEdit = () => {
+    nav("/manage/edit");
+  };
   return (
     <div className={styles.manageProj}>
       <div className={styles.manageProj__label}>회의 참석 인증</div>
@@ -12,9 +17,7 @@ const ManageProj = () => {
         <AttendanceDetail />
       </div>
       <div className={styles.manageProj__button}>
-        <Link to={"/UpdateProj"}>
-          <button>프로젝트 정보 수정</button>
-        </Link>
+        <button onClick={navigateToEdit}>프로젝트 정보 수정</button>
       </div>
     </div>
   );

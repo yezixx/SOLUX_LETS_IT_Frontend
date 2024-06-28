@@ -2,7 +2,7 @@ import { useState } from "react";
 import CollabLink from "./CollabLink/CollabLink";
 import styles from "./UpdateProj.module.css";
 import MemberItem from "../../../Components/MemberItem/MemberItem";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const UpdateProj = () => {
   const collabLinks = [
@@ -31,6 +31,16 @@ const UpdateProj = () => {
 
   const onChangeProjectName = (e) => {
     setprojectName(e.target.value);
+  };
+
+  const nav = useNavigate();
+
+  const navigateToManage = () => {
+    nav("/manage");
+  };
+
+  const navigateToFeedback = () => {
+    nav("/feedback");
   };
 
   return (
@@ -62,12 +72,13 @@ const UpdateProj = () => {
             ))}
           </div>
           <div className={styles.updateProj__saveButton}>
-            <Link to={"/ManageProj"}>
-              <button>저장</button>
-            </Link>
+            <button onClick={navigateToManage}> 저장</button>
           </div>
         </div>
-        <button className={styles.updateProj__finishButton}>
+        <button
+          className={styles.updateProj__finishButton}
+          onClick={navigateToFeedback}
+        >
           프로젝트 종료
         </button>
       </div>
