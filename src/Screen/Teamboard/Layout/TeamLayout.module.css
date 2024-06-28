@@ -1,6 +1,28 @@
 .teamLayout {
   /*마진, 요소 중앙으로*/
   margin: 50px auto;
+  /*border: 1px solid black;*/
+}
+
+.teamLayout__label {
+  border-bottom: 1px solid var(--line-color);
+  /*폰트*/
+  font-size: 28px;
+  font-family: "pretendardB";
+  /*크기*/
+  width: 1320px;
+  height: 70px;
+  /*마진*/
+  margin: auto;
+  margin-top: 50px;
+  /*배치*/
+  display: flex;
+  align-items: center;
+}
+
+.teamLayout__container {
+  /*마진, 요소 중앙으로*/
+  margin: 50px auto;
   /*크기*/
   width: 1170px;
   /*border: 1px solid black;*/
