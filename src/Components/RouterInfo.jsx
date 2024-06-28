@@ -1,4 +1,6 @@
+import TeamLayout from "../Screen/Teamboard/Layout/TeamLayout";
 import MemberProfile from "../Screen/Teamboard/MemberProfile/MemberProfile";
+import TeamFeedback from "../Screen/Teamboard/TeamFeedback/TeamFeedback";
 import UpdateProj from "../Screen/Teamboard/UpdateProj/UpdateProj";
 import ManageProj from "./../Screen/Teamboard/ManageProj/ManageProj";
 import ProjInfo from "./../Screen/Teamboard/ProjInfo/ProjInfo";
@@ -11,29 +13,39 @@ export const RouterInfo = [
     element: <Teamboard />,
     children: [
       {
-        index: true,
-        element: <ProjInfo />,
-        label: "Project Information",
+        element: <TeamLayout />,
+        children: [
+          {
+            index: true,
+            element: <ProjInfo />,
+            label: "Project Information",
+          },
+          {
+            path: "member",
+            element: <SetMember />,
+            label: "Set Member",
+          },
+          {
+            path: "manage",
+            element: <ManageProj />,
+            label: "Manage Project",
+          },
+          {
+            path: "manage/edit",
+            element: <UpdateProj />,
+            label: "Update Project",
+          },
+          {
+            path: "member/profile",
+            element: <MemberProfile />,
+            label: "Member Profile",
+          },
+        ],
       },
       {
-        path: "/SetMember",
-        element: <SetMember />,
-        label: "Set Member",
-      },
-      {
-        path: "/ManageProj",
-        element: <ManageProj />,
-        label: "Manage Project",
-      },
-      {
-        path: "/UpdateProj",
-        element: <UpdateProj />,
-        label: "Update Project",
-      },
-      {
-        path: "/member/profile",
-        element: <MemberProfile />,
-        label: "Member Profile",
+        path: "feedback",
+        element: <TeamFeedback />,
+        label: "Team Feedback",
       },
     ],
   },
