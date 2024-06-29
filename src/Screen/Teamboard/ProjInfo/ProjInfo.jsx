@@ -2,13 +2,19 @@ import styles from "./ProjInfo.module.css";
 import CollabTool from "./CollabTool/CollabTool";
 import MemberList from "./MemberList/MemberList";
 import TeamCalendar from "./TeamCalendar/TeamCalendar";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ProjInfo = () => {
   const TOOLLIST = [
     { id: 0, tool: "노션" },
     { id: 1, tool: "깃허브" },
   ];
+
+  const nav = useNavigate();
+
+  const navigateToManage = () => {
+    nav("/manage");
+  };
 
   return (
     <div className={styles.projInfo}>
@@ -27,9 +33,12 @@ const ProjInfo = () => {
           </div>
           <div className={styles.rightContent__rightButtons}>
             <button className={styles.portfolioButton}>포트폴리오</button>
-            <Link to={"/ManageProj"}>
-              <button className={styles.authmeetingButton}>회의 인증</button>
-            </Link>
+            <button
+              className={styles.authmeetingButton}
+              onClick={navigateToManage}
+            >
+              회의 인증
+            </button>
           </div>
         </div>
       </div>
