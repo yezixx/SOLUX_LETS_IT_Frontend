@@ -1,10 +1,7 @@
-/*import { useNavigate } from "react-router-dom";*/
 import Profile from "../../../Components/Profile/Profile";
 import styles from "./MemberProfile.module.css";
 
 const MemberProfile = () => {
-  /*const navigate = useNavigate();*/
-
   //mock user data
   const user = {
     name: "김코더",
@@ -27,13 +24,7 @@ const MemberProfile = () => {
   };
   return (
     <div className={styles.memberProfile}>
-      {/*<button
-        onClick={() => navigate(-1)}
-        className={styles.memberProfile__button}
-      >
-        X
-      </button>*/}
-      <Profile user={user} />
+      <Profile user={user} type={"INTEAMBOARD"} />
     </div>
   );
 };
