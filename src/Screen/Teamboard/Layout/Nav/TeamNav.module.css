@@ -10,7 +10,7 @@
   height: 60px;
   /*border: 1px solid red;*/
 }
-
+/*좌측 프로젝트명*/
 .nav__label {
   /*크기*/
   width: 300px;
@@ -29,12 +29,12 @@
   justify-content: center;
   /*border: 1px solid blue;*/
 }
-
+/*우측 nav 버튼들*/
 .nav__buttonContainer {
   display: flex;
   margin-left: auto;
 }
-
+/*각각의 nav 버튼*/
 .nav__button {
   /*크기*/
   width: 160px;
@@ -57,7 +57,7 @@
   font-family: "pretendardB";
   /*border: 1px solid yellow;*/
 }
-
+/*현재 페이지인 경우*/
 .nav__button--selected {
   /*배경 색상*/
   background: var(--main-color2);

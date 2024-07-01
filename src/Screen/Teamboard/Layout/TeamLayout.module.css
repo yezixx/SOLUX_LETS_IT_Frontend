@@ -4,7 +4,7 @@
   margin: auto;
   /*border: 1px solid black;*/
 }
-
+/*상단 팀 게시판 텍스트*/
 .teamLayout__label {
   border-bottom: 1px solid var(--line-color);
   /*폰트*/
