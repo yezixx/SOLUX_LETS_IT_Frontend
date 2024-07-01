@@ -36,6 +36,8 @@
   /*border: 1px solid blue;*/
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
+  margin-left: 5px;
 }
 
 .rightContent__rightButtons {
