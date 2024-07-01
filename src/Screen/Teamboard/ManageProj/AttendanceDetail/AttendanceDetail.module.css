@@ -104,24 +104,9 @@
   gap: 15px;
 }
 
-.attendanceDetail__saveButton {
-  /*크기*/
-  width: 120px;
-  height: 40px;
-  /*테두리*/
-  border-radius: 8px;
-  /*배경색*/
-  background-color: var(--main-color2);
-  /*텍스트*/
-  font-size: 16px;
-  color: white;
+.attendanceDetail__button {
   /*배치*/
   align-self: end;
   /*마진*/
   margin-top: 75px;
-}
-
-.attendanceDetail__saveButton:hover {
-  /*배경색*/
-  background-color: var(--main-color);
 }
