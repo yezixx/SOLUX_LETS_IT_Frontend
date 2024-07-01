@@ -47,11 +47,7 @@ const TeamFeedback = () => {
           </div>
         </div>
         <div className={styles.teamFeedback__submitButton}>
-          <Button
-            text="제출하기"
-            borderRadius="10px"
-            fontFamily="preTendardM"
-          />
+          <Button text={"제출하기"} type={"RAD-10__FONT-M"} />
         </div>
       </div>
     </div>
