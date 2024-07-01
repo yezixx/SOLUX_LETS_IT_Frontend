@@ -4,6 +4,8 @@
 TYPENAME은 "배경색_크기" 형태로 통일해주세요.
 배경색이 흰색이고 테두리에만 색이 들어가는 경우
 "BOR_테두리색_크기" 형태로 적어주세요.
+radious, font 등만 달라지는 경우
+"RAD-8__FONT-M"과 같이 "__"로 이어서 작성해주세요
 */
 
 /*디폴트*/
@@ -20,6 +22,11 @@ TYPENAME은 "배경색_크기" 형태로 통일해주세요.
   display: "flex";
   justify-content: "center";
   align-items: "center";
+}
+/*radious 10px font pretenderM*/
+.button--RAD-10__FONT-M {
+  border-radius: 10px;
+  font-family: "pretendardM";
 }
 /*sub-color 120x40*/
 .button--SC_120x40 {
