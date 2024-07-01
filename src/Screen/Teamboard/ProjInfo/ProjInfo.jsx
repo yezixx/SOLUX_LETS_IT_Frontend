@@ -3,6 +3,7 @@ import CollabTool from "./CollabTool/CollabTool";
 import MemberList from "./MemberList/MemberList";
 import TeamCalendar from "./TeamCalendar/TeamCalendar";
 import { useNavigate } from "react-router-dom";
+import Button from "../../../Components/Button/Button";
 
 const ProjInfo = () => {
   const TOOLLIST = [
@@ -32,13 +33,12 @@ const ProjInfo = () => {
             ))}
           </div>
           <div className={styles.rightContent__rightButtons}>
-            <button className={styles.portfolioButton}>포트폴리오</button>
-            <button
-              className={styles.authmeetingButton}
+            <Button text={"포트폴리오"} type={"SC_120x40"} />
+            <Button
+              text={"회의 인증"}
+              type={"MC2_120x40"}
               onClick={navigateToManage}
-            >
-              회의 인증
-            </button>
+            />
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import Button from "../../../../Components/Button/Button";
 import MemberItem from "../../../../Components/MemberItem/MemberItem";
 import styles from "./AttendanceDetail.module.css";
 
@@ -35,7 +36,9 @@ const AttendanceDetail = () => {
             ))}
           </div>
         </div>
-        <button className={styles.attendanceDetail__saveButton}>저장</button>
+        <div className={styles.attendanceDetail__button}>
+          <Button text={"저장"} type={"MC2_120x40"} />
+        </div>
       </div>
     </div>
   );

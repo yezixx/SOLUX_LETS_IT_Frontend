@@ -3,6 +3,7 @@ import CollabLink from "./CollabLink/CollabLink";
 import styles from "./UpdateProj.module.css";
 import MemberItem from "../../../Components/MemberItem/MemberItem";
 import { useNavigate } from "react-router-dom";
+import Button from "../../../Components/Button/Button";
 
 const UpdateProj = () => {
   const collabLinks = [
@@ -72,7 +73,11 @@ const UpdateProj = () => {
             ))}
           </div>
           <div className={styles.updateProj__saveButton}>
-            <button onClick={navigateToManage}> 저장</button>
+            <Button
+              text={"저장"}
+              type={"MC2_120x40"}
+              onClick={navigateToManage}
+            />
           </div>
         </div>
         <button
