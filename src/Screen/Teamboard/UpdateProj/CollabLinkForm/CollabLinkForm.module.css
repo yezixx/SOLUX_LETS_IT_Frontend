@@ -1,0 +1,50 @@
+.collabLinkForm {
+  /*배치*/
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.collabLinkForm__label {
+  /*텍스트*/
+  font-size: 20px;
+  color: var(--text-color1);
+  letter-spacing: -6%;
+}
+
+.collabLinkForm__linkItem {
+  /*요소 배치*/
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.collabLinkForm__linkItem--SCROLL {
+  /* 스크롤 가능 */
+  max-height: 110px;
+  overflow-y: auto;
+}
+
+/* 스크롤바 스타일링 */
+.collabLinkForm__linkItem--SCROLL::-webkit-scrollbar {
+  width: 8px; /* 스크롤바 너비 */
+}
+
+.collabLinkForm__linkItem--SCROLL::-webkit-scrollbar-track {
+  background: var(--dimmed); /* 스크롤바 트랙 색상 */
+  border-radius: 10px; /* 스크롤바 트랙 둥글기 */
+}
+
+.collabLinkForm__linkItem--SCROLL::-webkit-scrollbar-thumb {
+  background: var(--line-color); /* 스크롤바 색상 */
+  border-radius: 10px; /* 스크롤바 둥글기 */
+}
+
+.collabLinkForm__linkItem--SCROLL::-webkit-scrollbar-thumb:hover {
+  background: var(--text-color2); /* 스크롤바 색상 (hover) */
+}
+
+.collabLinkForm__button {
+  /*배치*/
+  margin: 10px 0;
+  margin-left: 640px;
+}

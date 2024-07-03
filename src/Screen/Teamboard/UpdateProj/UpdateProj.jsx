@@ -1,26 +1,11 @@
-import CollabLink from "./CollabLink/CollabLink";
 import styles from "./UpdateProj.module.css";
 import MemberItem from "../../../Components/MemberItem/MemberItem";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
 import ProjNameForm from "./ProjNameForm/ProjNameForm";
+import CollabLinkForm from "./CollabLinkForm/CollabLinkForm";
 
 const UpdateProj = () => {
-  const collabLinks = [
-    {
-      id: 0,
-      link: "http://github.com",
-    },
-    {
-      id: 1,
-      link: "http://www.notion.org",
-    },
-    {
-      id: 2,
-      link: "https://www.atlassian.com/software/jira",
-    },
-  ];
-
   const members = [
     { id: 1, name: "유밍 BE" },
     { id: 2, name: "도라" },
@@ -44,13 +29,7 @@ const UpdateProj = () => {
         <ProjNameForm />
       </div>
       <div className={styles.updateProj__middle}>
-        <div className={styles.updateProj__innerLabel}>협업툴 링크</div>
-        <div className={styles.updateProj__linkItem}>
-          {collabLinks.map((link) => (
-            <CollabLink key={link.id} link={link.link} />
-          ))}
-        </div>
-        <button className={styles.updateProj__addButton}>+ 추가</button>
+        <CollabLinkForm type="SCROLL" />
       </div>
       <div className={styles.updateProj__bottom}>
         <div className={styles.updateProj__innerLabel}>팀장 위임</div>
