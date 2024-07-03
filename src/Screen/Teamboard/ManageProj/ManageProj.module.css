@@ -28,16 +28,6 @@
   /*border: 1px solid cyan;*/
   /*오른쪽 끝으로*/
   align-self: end;
-  margin-bottom: 100px;
-}
-
-.manageProj__button button {
-  /*텍스트*/
-  font-size: 16px;
-  color: var(--text-color2);
-}
-
-.manageProj__button button:hover {
-  /*텍스트*/
-  color: var(--text-color1);
+  margin-top: 10px;
+  margin-right: 30px;
 }

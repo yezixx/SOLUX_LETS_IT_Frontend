@@ -2,6 +2,7 @@ import styles from "./ManageProj.module.css";
 import AttendanceList from "./AttendanceList/AttendanceList";
 import AttendanceDetail from "./AttendanceDetail/AttendanceDetail";
 import { useNavigate } from "react-router-dom";
+import Button from "../../../Components/Button/Button";
 
 const ManageProj = () => {
   const nav = useNavigate();
@@ -17,7 +18,11 @@ const ManageProj = () => {
         <AttendanceDetail />
       </div>
       <div className={styles.manageProj__button}>
-        <button onClick={navigateToEdit}>프로젝트 정보 수정</button>
+        <Button
+          text="프로젝트 정보 수정"
+          type="NONE__TEXT-TC2"
+          onClick={navigateToEdit}
+        />
       </div>
     </div>
   );
