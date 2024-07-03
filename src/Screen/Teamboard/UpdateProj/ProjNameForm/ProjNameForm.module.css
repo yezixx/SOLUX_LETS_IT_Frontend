@@ -1,0 +1,28 @@
+.projNameForm {
+  /*배치*/
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.projNameForm__label {
+  /*텍스트*/
+  font-size: 20px;
+  color: var(--text-color1);
+  letter-spacing: -6%;
+}
+
+.projNameForm__input {
+  /*크기*/
+  width: 581px;
+  height: 40px;
+  /*텍스트*/
+  font-size: 16px;
+  color: var(--text-color2);
+  letter-spacing: -8%;
+  /*패딩*/
+  padding-left: 15px;
+  /*테두리*/
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+}

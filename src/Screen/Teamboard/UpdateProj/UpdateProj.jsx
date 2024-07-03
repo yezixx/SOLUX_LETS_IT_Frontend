@@ -1,9 +1,9 @@
-import { useState } from "react";
 import CollabLink from "./CollabLink/CollabLink";
 import styles from "./UpdateProj.module.css";
 import MemberItem from "../../../Components/MemberItem/MemberItem";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
+import ProjNameForm from "./ProjNameForm/ProjNameForm";
 
 const UpdateProj = () => {
   const collabLinks = [
@@ -27,13 +27,6 @@ const UpdateProj = () => {
     { id: 3, name: "Tom BE" },
   ];
 
-  const PROJECT_NAME = "노년층을 위한 구인구직 웹사이트";
-  const [projectName, setprojectName] = useState(PROJECT_NAME);
-
-  const onChangeProjectName = (e) => {
-    setprojectName(e.target.value);
-  };
-
   const nav = useNavigate();
 
   const navigateToManage = () => {
@@ -48,12 +41,7 @@ const UpdateProj = () => {
     <div className={styles.updateProj}>
       <div className={styles.updateProj__label}>프로젝트 정보 수정</div>
       <div className={styles.updateProj__top}>
-        <div className={styles.updateProj__innerLabel}>프로젝트명</div>
-        <input
-          type="text"
-          value={projectName}
-          onChange={onChangeProjectName}
-        ></input>
+        <ProjNameForm />
       </div>
       <div className={styles.updateProj__middle}>
         <div className={styles.updateProj__innerLabel}>협업툴 링크</div>
