@@ -15,6 +15,7 @@ const CollabLink = ({ link }) => {
         type="text"
         value={url}
         onChange={onChangeUrl}
+        placeholder="URL을 입력해주세요."
       ></input>
     </div>
   );

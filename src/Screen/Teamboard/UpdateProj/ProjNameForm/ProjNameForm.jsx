@@ -16,6 +16,7 @@ const ProjNameForm = () => {
         type="text"
         value={projectName}
         onChange={onChangeProjectName}
+        placeholder="프로젝트명을 입력해주세요."
       ></input>
     </div>
   );

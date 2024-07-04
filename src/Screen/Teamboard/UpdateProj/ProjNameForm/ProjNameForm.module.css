@@ -26,3 +26,9 @@
   border: 1px solid var(--line-color);
   border-radius: 8px;
 }
+
+/*프로젝트명 input 태그 클릭시*/
+.projNameForm__input:focus {
+  border: 2px solid var(--main-color2);
+  outline: none; /* 기본 outline 제거 */
+}

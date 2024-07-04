@@ -30,3 +30,9 @@
   font-size: 16px;
   color: var(--text-color2);
 }
+
+/*협업툴 링크 input 태그 클릭시*/
+.collabLink__input:focus {
+  border: 2px solid var(--main-color2);
+  outline: none; /* 기본 outline 제거 */
+}
