@@ -35,7 +35,8 @@
 .rightContent__toolButton {
   /*border: 1px solid blue;*/
   display: flex;
-  flex-wrap: wrap;
+  width: 150px;
+  flex-wrap: wrap-reverse;
   gap: 10px;
   margin-left: 5px;
 }
