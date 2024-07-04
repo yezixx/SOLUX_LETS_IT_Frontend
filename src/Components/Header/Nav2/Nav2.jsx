@@ -35,6 +35,7 @@ const Nav2 = () => {
     return (
         <div className={styles.nav2}>
             <div className={styles.nav2__container}>
+                <div className={styles.nav2__contentsWrap}>
                 {navCont
                     .map((menu, id) => (
                         <div className={styles.nav2__contents} 
@@ -49,6 +50,8 @@ const Nav2 = () => {
                             )}
                         </div>
                     ))}
+                    </div>
+                <button className={styles.nav2__writeBtn}>구인글 작성</button>
             </div>
         </div>
     );

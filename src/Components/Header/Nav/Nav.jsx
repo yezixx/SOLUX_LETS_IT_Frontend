@@ -43,6 +43,8 @@ const Nav = () => {
                     <button className={styles.nav__searchIcon}><SearchIcon /></button>
                     </div>
                 </div>
+                
+                <div className={styles.nav__contentsWrap}>
                 {navCont.map((menu, id) => (
                     <div
                         className={styles.nav__contents}
@@ -70,6 +72,7 @@ const Nav = () => {
 
                     </div>
                 ))}
+                </div>
             </div>
         </div>
     );

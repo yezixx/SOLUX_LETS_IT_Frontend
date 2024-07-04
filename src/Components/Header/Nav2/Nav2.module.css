@@ -12,19 +12,22 @@
     height: 40px;
     display: flex;
     align-items: center;
-    justify-content: left;
+    justify-content: space-between;
+}
+.nav2__contentsWrap{
+    display: flex;
 }
 
-.nav2__contents{
-    transition: border-bottom 0.1s ease;
+.nav2__writeBtn{
+    /*구인글 작성 버튼*/
+    width: 120px;
+    height: 35px;
+    background-color: var(--sub-color);
+    color: var(--main-color2);
+    font-family: 'PretendardB';
+    border-radius: 50px;
+    z-index: 0;
 }
-.nav2__contents:hover{
-    border-bottom: 4px solid var(--main-color2)
-}
-.nav2__contents:hover .nav2__button{
-    color: var(--main-color2)
-}
-
 
 .nav2__button{
     display: inline-block;
@@ -34,6 +37,11 @@
     height: 48px;
     position: relative;
     width: 120px;
+    transition: border-bottom 0.1s ease;
+}
+.nav2__contents:hover .nav2__button{
+    border-bottom: 4px solid var(--main-color2);
+    color: var(--main-color2)
 }
 
 .nav2__subnav{
@@ -43,7 +51,6 @@
     border-radius: 4px;
     background-color: white;
     position: absolute;
-    transform: translateY(3.5px);
     z-index: 1000;
 }
 .nav2__subnav_item{
