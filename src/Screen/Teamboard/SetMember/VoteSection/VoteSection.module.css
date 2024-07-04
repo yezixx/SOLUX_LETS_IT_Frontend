@@ -14,7 +14,7 @@
 }
 
 .voteSection__item {
-  /*border: 1px solid cyan;*/
+  height: fit-content;
   /*요소 배치*/
   display: flex;
   flex-wrap: wrap; /*상위 컴포넌트 너비 초과할 경우 다음줄로 넘김*/
