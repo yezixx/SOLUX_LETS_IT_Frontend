@@ -52,10 +52,10 @@
 
 .memberItem__button--ONLYBORDER:hover {
   border: 2px solid var(--main-color2);
-  background-color: white;
+  background-color: transparent;
 }
 
 .memberItem__button--ONLYBORDER:focus {
   border: 2px solid var(--main-color2);
-  background-color: white;
+  background-color: transparent;
 }
