@@ -30,7 +30,7 @@ const AttendanceDetail = () => {
         </div>
         <div className={styles.attendanceDetail__list}>
           <div className={styles.attendanceDetail__listLabel}>불참한 팀원</div>
-          <div className={styles.attendanceDetail__item}>
+          <div className={styles.attendanceDetail__members}>
             {members.map((member) => (
               <MemberItem key={member.id} memberName={member.name} />
             ))}
