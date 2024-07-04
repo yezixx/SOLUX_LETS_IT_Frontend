@@ -1,8 +1,4 @@
 .calendar {
-  margin: 10px;
-  width: 772px;
-  height: 621px;
-  /*border: 1px solid red;*/
 }
 
 :root {
@@ -24,6 +20,12 @@
   --fc-button-hover-border-color: var(--main-color);
   --fc-button-active-bg-color: var(--main-color);
   --fc-button-active-border-color: var(--main-color);
+}
+
+.fc {
+  width: 772px;
+  height: 621px;
+  margin: 20px;
 }
 
 /* 일요일 날짜: 빨간색 */
