@@ -46,6 +46,14 @@ radious, font 등만 달라지는 경우
   width: fit-content;
   height: fit-content;
   color: var(--text-color2);
-  background-color: white;
+  background-color: transparent;
+  font-family: "pretendardM";
+}
+/*none background-color, none border*/
+.button--NONE__TEXT-POINT {
+  width: fit-content;
+  height: fit-content;
+  color: var(--point);
+  background-color: transparent;
   font-family: "pretendardM";
 }
