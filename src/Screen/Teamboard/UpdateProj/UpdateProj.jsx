@@ -25,16 +25,16 @@ const UpdateProj = () => {
   return (
     <div className={styles.updateProj}>
       <div className={styles.updateProj__label}>프로젝트 정보 수정</div>
-      <div className={styles.updateProj__top}>
+      <div className={styles.updateProj__projName}>
         <ProjNameForm />
       </div>
-      <div className={styles.updateProj__middle}>
+      <div className={styles.updateProj__toolLink}>
         <CollabLinkForm type="SCROLL" />
       </div>
-      <div className={styles.updateProj__bottom}>
+      <div className={styles.updateProj__delegation}>
         <div className={styles.updateProj__innerLabel}>팀장 위임</div>
         <div className={styles.updateProj__bottomInner}>
-          <div className={styles.updateProj__item}>
+          <div className={styles.updateProj__members}>
             {members.map((member) => (
               <MemberItem key={member.id} memberName={member.name} />
             ))}
@@ -47,12 +47,17 @@ const UpdateProj = () => {
             />
           </div>
         </div>
-        <button
-          className={styles.updateProj__finishButton}
+      </div>
+      <div
+        className={`${styles.updateProj__finishButton} ${
+          members.length > 6 ? styles["updateProj__finishButton--MORE6"] : ""
+        }`}
+      >
+        <Button
+          text="프로젝트 종료"
+          type="NONE__TEXT-POINT"
           onClick={navigateToFeedback}
-        >
-          프로젝트 종료
-        </button>
+        />
       </div>
     </div>
   );
