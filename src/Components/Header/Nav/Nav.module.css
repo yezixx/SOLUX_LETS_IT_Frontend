@@ -4,7 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-bottom: 1px solid var(--line-color)
+    border-bottom: 1px solid var(--line-color);
 }
 .nav__container{
     width: 1320px;
@@ -13,7 +13,6 @@
     gap: 20px;
     align-items: center;
 }
-
 
 
 
@@ -67,6 +66,14 @@
     height: 30px;
 }
 
+<<<<<<< HEAD
+=======
+.nav__contentsWrap{
+    display: flex;
+    gap: 20px;
+}
+
+>>>>>>> 7e10a3052fbd98cdd7f2332e2042e9d46ff30220
 
 .nav__subnav{
     width: 120px;
@@ -75,7 +82,12 @@
     border-radius: 4px;
     background-color: white;
     position: absolute;
+<<<<<<< HEAD
     transform: translateX(-20px)
+=======
+    transform: translateX(-20px);
+    z-index: 1000;
+>>>>>>> 7e10a3052fbd98cdd7f2332e2042e9d46ff30220
 }
 .nav__subnav_item{
     width: 120px;

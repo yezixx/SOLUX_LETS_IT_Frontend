@@ -35,6 +35,10 @@ const Nav2 = () => {
     return (
         <div className={styles.nav2}>
             <div className={styles.nav2__container}>
+<<<<<<< HEAD
+=======
+                <div className={styles.nav2__contentsWrap}>
+>>>>>>> 7e10a3052fbd98cdd7f2332e2042e9d46ff30220
                 {navCont
                     .map((menu, id) => (
                         <div className={styles.nav2__contents} 
@@ -49,6 +53,11 @@ const Nav2 = () => {
                             )}
                         </div>
                     ))}
+<<<<<<< HEAD
+=======
+                    </div>
+                <button className={styles.nav2__writeBtn}>구인글 작성</button>
+>>>>>>> 7e10a3052fbd98cdd7f2332e2042e9d46ff30220
             </div>
         </div>
     );
