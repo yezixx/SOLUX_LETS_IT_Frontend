@@ -39,7 +39,7 @@ radious, font 등만 달라지는 경우
 .button--MC2_120x40 {
   width: 120px;
   background-color: var(--main-color2);
-  border-radius: 10px;
+  border-radius: 4px;
 }
 /*none background-color, none border*/
 .button--NONE__TEXT-TC2 {
