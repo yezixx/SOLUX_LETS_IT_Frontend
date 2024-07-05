@@ -60,12 +60,12 @@ radious, font 등만 달라지는 경우
 .button--SEC_120x40 {
   width: 120px;
   background-color: var(--select-color);
-  border-radius: 4px;
+  border-radius: 8px;
   color: var(--text-color2);
 }
 .button--SEC_150x40 {
   width: 150px;
   background-color: var(--select-color);
-  border-radius: 4px;
+  border-radius: 8px;
   color: var(--text-color2);
 }
