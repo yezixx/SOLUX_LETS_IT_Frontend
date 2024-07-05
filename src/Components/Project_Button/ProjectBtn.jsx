@@ -11,9 +11,6 @@ const ProjectBtn = ({
     buttonShow = true,
     button1Text = 'add text',
     button2Text = 'add text',
-    border =  'none',
-    bgc = 'none',
-    color='#fff'
 })=>{
     return(
         <div className={styles.PortfolioBtn__box}>
@@ -33,12 +30,7 @@ const ProjectBtn = ({
             {buttonShow? (
                 <div className={styles.PortfolioBtn__button}>
                 <Button text={button1Text}/>
-                <Button 
-                color={color}
-                bgc={bgc}
-                width='120px'
-                border={border}
-                text={button2Text}/>
+                <Button text={button2Text} type='SEC_120x40'/>
                 </div>
             ): null
                 
