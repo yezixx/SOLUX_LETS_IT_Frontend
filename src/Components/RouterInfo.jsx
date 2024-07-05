@@ -6,6 +6,7 @@ import ManageProj from "./../Screen/Teamboard/ManageProj/ManageProj";
 import ProjInfo from "./../Screen/Teamboard/ProjInfo/ProjInfo";
 import SetMember from "./../Screen/Teamboard/SetMember/SetMember";
 import Teamboard from "./../Screen/Teamboard/Teamboard";
+import CreateBoard from "./../Screen/Teamboard/CreateBoard/CreateBoard";
 
 export const RouterInfo = [
   {
@@ -48,5 +49,10 @@ export const RouterInfo = [
         label: "Team Feedback",
       },
     ],
+  },
+  {
+    path: "myproj/apply/createboard",
+    element: <CreateBoard />,
+    label: "Create Board",
   },
 ];
