@@ -1,4 +1,6 @@
 .calendar {
+  display: flex;
+  position: relative;
 }
 
 :root {
@@ -42,4 +44,10 @@
 .fc-prev-button,
 .fc-next-button {
   width: 60px;
+}
+
+.fc-event {
+  height: 20px;
+  display: flex;
+  align-items: center;
 }
