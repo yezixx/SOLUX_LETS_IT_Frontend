@@ -1,12 +1,12 @@
-import TeamLayout from "../Screen/Teamboard/Layout/TeamLayout";
-import MemberProfile from "../Screen/Teamboard/MemberProfile/MemberProfile";
-import TeamFeedback from "../Screen/Teamboard/TeamFeedback/TeamFeedback";
-import UpdateProj from "../Screen/Teamboard/UpdateProj/UpdateProj";
-import ManageProj from "./../Screen/Teamboard/ManageProj/ManageProj";
-import ProjInfo from "./../Screen/Teamboard/ProjInfo/ProjInfo";
-import SetMember from "./../Screen/Teamboard/SetMember/SetMember";
-import Teamboard from "./../Screen/Teamboard/Teamboard";
-import CreateBoard from "./../Screen/Teamboard/CreateBoard/CreateBoard";
+import TeamLayout from "./Teamboard/Layout/TeamLayout";
+import MemberProfile from "./Teamboard/MemberProfile/MemberProfile";
+import TeamFeedback from "./Teamboard/TeamFeedback/TeamFeedback";
+import UpdateProj from "./Teamboard/UpdateProj/UpdateProj";
+import ManageProj from "./Teamboard/ManageProj/ManageProj";
+import ProjInfo from "./Teamboard/ProjInfo/ProjInfo";
+import SetMember from "./Teamboard/SetMember/SetMember";
+import Teamboard from "./Teamboard/Teamboard";
+import CreateBoard from "./Teamboard/CreateBoard/CreateBoard";
 
 export const RouterInfo = [
   {
