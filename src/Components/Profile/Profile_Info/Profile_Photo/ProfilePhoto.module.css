@@ -10,3 +10,8 @@
     align-items: center;
     justify-content: center;
 }
+/*지원서 버전*/
+.myProfile__photo--applicant{
+    width: 80px;
+    height: 80px;
+}

@@ -41,6 +41,12 @@ radious, font 등만 달라지는 경우
   background-color: var(--main-color2);
   border-radius: 10px;
 }
+/*main-color2 70x40*/
+.button--MC2_70x40 {
+  width: 70px;
+  background-color: var(--main-color2);
+  border-radius: 8px;
+}
 /*none background-color, none border*/
 .button--NONE__TEXT-TC2 {
   width: fit-content;
@@ -57,15 +63,33 @@ radious, font 등만 달라지는 경우
   background-color: transparent;
   font-family: "pretendardM";
 }
+/*none background-color, none border*/
+.button--NONE__TEXT-MC2
+{
+  width: fit-content;
+  height: fit-content;
+  color: var(--main-color2);
+  background-color: transparent;
+  font-family: "pretendardM";
+}
+/*select-color 120x40*/
 .button--SEC_120x40 {
   width: 120px;
   background-color: var(--select-color);
   border-radius: 8px;
   color: var(--text-color2);
 }
+/*select-color 150x40*/
 .button--SEC_150x40 {
   width: 150px;
   background-color: var(--select-color);
   border-radius: 8px;
   color: var(--text-color2);
+}
+/*select-color 70x40*/
+.button--SEC_70x40{
+  width: 70px;
+  background-color: var(--select-color);
+  background-repeat: 8px;
+  color: var(--text-color2)
 }
