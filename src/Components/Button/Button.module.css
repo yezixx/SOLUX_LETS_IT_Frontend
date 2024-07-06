@@ -63,16 +63,15 @@ radious, font 등만 달라지는 경우
   background-color: transparent;
   font-family: "pretendardM";
 }
-/*none background-color, none border*/
-.button--NONE__TEXT-MC2
-{
+/*none background-color, none border, font-size 12*/
+.button--NONE__TEXT-MC2-12 {
   width: fit-content;
   height: fit-content;
   color: var(--main-color2);
   background-color: transparent;
   font-family: "pretendardM";
+  font-size: 12px;
 }
-/*select-color 120x40*/
 .button--SEC_120x40 {
   width: 120px;
   background-color: var(--select-color);
