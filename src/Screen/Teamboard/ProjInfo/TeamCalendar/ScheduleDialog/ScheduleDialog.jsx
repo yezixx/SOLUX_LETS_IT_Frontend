@@ -6,6 +6,7 @@ const ScheduleDialog = ({ closeDialog }) => {
   return (
     <div className={styles.scheuleDialog}>
       <div className={styles.scheuleDialog__container}>
+        {/* 상단 */}
         <div className={styles.scheuleDialog__header}>
           <div className={styles.scheuleDialog__label}>일정 추가</div>
           <div className={styles.scheuleDialog__xButton}>
@@ -16,6 +17,7 @@ const ScheduleDialog = ({ closeDialog }) => {
             />
           </div>
         </div>
+        {/* 일정 이름 */}
         <div className={styles.scheuleDialog__section}>
           <div className={styles.scheuleDialog__innerLabel}>일정 이름</div>
           <div>
@@ -26,6 +28,7 @@ const ScheduleDialog = ({ closeDialog }) => {
             ></input>
           </div>
         </div>
+        {/* 일정 날짜 선택 */}
         <div className={styles.scheuleDialog__section}>
           <div className={styles.scheuleDialog__innerLabel}>날짜</div>
           <div>
