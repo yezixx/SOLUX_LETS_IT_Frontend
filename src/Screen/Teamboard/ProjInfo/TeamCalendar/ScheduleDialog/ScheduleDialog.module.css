@@ -1,9 +1,12 @@
 .scheuleDialog {
+  /*크기*/
   width: 349px;
   height: 238px;
+  /*테두리*/
   border: 1px solid var(--line-color);
   border-radius: 8px;
   background-color: white;
+  /*요소 배치*/
   z-index: 100;
   position: absolute;
   top: 270px;
@@ -12,10 +15,11 @@
 
 .scheuleDialog__container {
   padding: 10px;
+  /*요소 배치*/
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 9px;
+  gap: 7px;
 }
 
 .scheuleDialog__header {
@@ -28,21 +32,26 @@
 }
 
 .scheuleDialog__section {
+  /*요소배치*/
   display: flex;
   align-items: center;
+  gap: 5px;
+  /* 폰트 */
   font-size: 12px;
   color: var(--text-color2);
+  /* 패딩 */
   padding-left: 15px;
 }
 
 .scheuleDialog__label {
+  /* 폰트 */
   color: var(--text-color);
   font-size: 14px;
   font-family: "pretendardB";
 }
 
 .scheuleDialog__innerLabel {
-  width: 60px;
+  width: 50px;
   color: var(--text-color2);
 }
 
@@ -66,7 +75,7 @@
 
 .scheuleDialog__input--date {
   /*크기*/
-  width: 100px;
+  width: 96px;
 }
 
 .scheuleDialog__textarea {
@@ -99,6 +108,7 @@
 }
 
 .scheuleDialog__button {
+  /* 오른쪽 끝으로, 각 버튼 사이 gap, 오른쪽 마진 */
   align-self: flex-end;
   gap: 20px;
   margin-right: 10px;
