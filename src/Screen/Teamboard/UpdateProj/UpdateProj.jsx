@@ -2,8 +2,8 @@ import styles from "./UpdateProj.module.css";
 import MemberItem from "../../../Components/MemberItem/MemberItem";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
-import ProjNameForm from "./ProjNameForm/ProjNameForm";
-import CollabLinkForm from "./CollabLinkForm/CollabLinkForm";
+import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
+import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
 
 const UpdateProj = () => {
   const members = [

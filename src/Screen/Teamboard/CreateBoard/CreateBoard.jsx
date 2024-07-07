@@ -2,8 +2,8 @@ import Button from "../../../Components/Button/Button";
 import MemberItem from "../../../Components/MemberItem/MemberItem";
 import RouteName from "../../../Components/RouteName/RouteName";
 import SideNav from "../../../Components/SideNav/SideNav";
-import CollabLinkForm from "../UpdateProj/CollabLinkForm/CollabLinkForm";
-import ProjNameForm from "../UpdateProj/ProjNameForm/ProjNameForm";
+import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
+import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
 import styles from "./CreateBoard.module.css";
 
 const route = ["내 프로젝트", "구인중인 프로젝트"];
