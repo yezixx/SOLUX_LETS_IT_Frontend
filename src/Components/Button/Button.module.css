@@ -151,3 +151,10 @@ radious, font 등만 달라지는 경우
     background-color: var(--line-color);
   }
 }
+/*#741eff 150x40 - ai 포트폴리오 버튼*/
+.button--741EFF_150x40{
+  background-color: #741eff;
+  &:hover{
+    background-color: #6119D6;
+  }
+}
