@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./CollabLink.module.css";
+import ToolIcon from "../ToolIcon/ToolIcon";
 
 const CollabLink = ({ link }) => {
   const [url, setUrl] = useState(link);
@@ -9,7 +10,7 @@ const CollabLink = ({ link }) => {
   };
   return (
     <div className={styles.collabLink}>
-      <div className={styles.collabLink__icon}>아이콘</div>
+      <ToolIcon alt="아이콘" type="NONE" />
       <input
         className={styles.collabLink__input}
         type="text"

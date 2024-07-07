@@ -1,5 +1,5 @@
-import Button from "../../../../Components/Button/Button";
-import CollabLink from "./CollabLink/CollabLink";
+import Button from "../Button/Button";
+import CollabLink from "../CollabLink/CollabLink";
 import styles from "./CollabLinkForm.module.css";
 
 const CollabLinkForm = ({ type }) => {
