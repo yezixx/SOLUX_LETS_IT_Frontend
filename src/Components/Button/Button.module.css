@@ -49,6 +49,9 @@ radious, font 등만 달라지는 경우
   background-color: transparent;
   font-family: "pretendardM";
 }
+.button--NONE__TEXT-TC2:hover {
+  color: var(--text-color);
+}
 /*none background-color, none border*/
 .button--NONE__TEXT-POINT {
   width: fit-content;
