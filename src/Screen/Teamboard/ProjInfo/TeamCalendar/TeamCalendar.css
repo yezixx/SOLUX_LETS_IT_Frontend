@@ -1,0 +1,53 @@
+.calendar {
+  display: flex;
+  position: relative;
+}
+
+:root {
+  --fc-border-color: var(--line-color);
+
+  --fc-daygrid-event-dot-width: 5px;
+
+  --fc-neutral-text-color: var(--text-color1);
+
+  --fc-today-bg-color: var(--dimmed);
+
+  --fc-event-bg-color: var(--sub-color);
+  --fc-event-border-color: var(--sub-color);
+
+  --fc-button-text-color: white;
+  --fc-button-bg-color: var(--main-color2);
+  --fc-button-border-color: var(--main-color2);
+  --fc-button-hover-bg-color: var(--main-color);
+  --fc-button-hover-border-color: var(--main-color);
+  --fc-button-active-bg-color: var(--main-color);
+  --fc-button-active-border-color: var(--main-color);
+}
+
+.fc {
+  width: 772px;
+  height: 621px;
+  margin: 20px;
+}
+
+/* 일요일 날짜: 빨간색 */
+.fc-day-sun a {
+  color: var(--point);
+}
+
+/* 토요일 날짜: 파란색 */
+.fc-day-sat a {
+  color: var(--main-color2);
+}
+
+.fc-today-button,
+.fc-prev-button,
+.fc-next-button {
+  width: 60px;
+}
+
+.fc-event {
+  height: 20px;
+  display: flex;
+  align-items: center;
+}

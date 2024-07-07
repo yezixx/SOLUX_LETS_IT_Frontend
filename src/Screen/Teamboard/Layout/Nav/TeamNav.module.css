@@ -1,0 +1,71 @@
+.nav {
+  margin-bottom: 0;
+}
+
+.nav__container {
+  /*요소 정렬*/
+  display: flex;
+  align-items: end;
+  /*크기*/
+  height: 60px;
+  /*border: 1px solid red;*/
+}
+/*좌측 프로젝트명*/
+.nav__label {
+  /*크기*/
+  width: 300px;
+  height: 55px;
+  /*테두리*/
+  border: 1px solid var(--line-color);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  /*폰트*/
+  font-size: 24px;
+  font-family: "pretendardB";
+  letter-spacing: -8%;
+  /*요소 정렬*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /*border: 1px solid blue;*/
+}
+/*우측 nav 버튼들*/
+.nav__buttonContainer {
+  display: flex;
+  margin-left: auto;
+}
+/*각각의 nav 버튼*/
+.nav__button {
+  /*크기*/
+  width: 160px;
+  height: 40px;
+  /*테두리*/
+  border: 1px solid var(--line-color);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  /*마진*/
+  margin-left: 10px;
+  /*배경 색상*/
+  background: none;
+  /*그림자*/
+  box-shadow: 4px 0 2px rgba(0, 0, 0, 0.2);
+  /*텍스트 색상*/
+  color: var(--main-color2);
+  /*폰트*/
+  font-size: 16px;
+  letter-spacing: -8%;
+  font-family: "pretendardB";
+  /*border: 1px solid yellow;*/
+}
+/*현재 페이지인 경우*/
+.nav__button--selected {
+  /*배경 색상*/
+  background: var(--main-color2);
+  /*텍스트 색상*/
+  color: #ffffff;
+}
+
+.nav__button:hover {
+  border: 2px solid var(--main-color2);
+  border-bottom: none;
+}

@@ -1,0 +1,21 @@
+.voteSection {
+  /*border: 1px solid blue;*/
+}
+
+.voteSection__label {
+  /*border: 1px solid lightcoral;*/
+  /*폰트*/
+  font-size: 24px;
+  font-family: "pretendardB";
+  /*패딩*/
+  padding: 5px;
+  /*마진*/
+  margin-bottom: 5px;
+}
+
+.voteSection__item {
+  height: fit-content;
+  /*요소 배치*/
+  display: flex;
+  flex-wrap: wrap; /*상위 컴포넌트 너비 초과할 경우 다음줄로 넘김*/
+}
