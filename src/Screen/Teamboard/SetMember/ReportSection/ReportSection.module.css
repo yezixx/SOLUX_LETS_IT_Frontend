@@ -60,6 +60,11 @@
   padding-left: 10px;
 }
 
+.reportSection__dropBox:focus {
+  border: 2px solid var(--main-color2);
+  outline: none; /* 기본 outline 제거 */
+}
+
 .reportSection__option {
   /*텍스트*/
   color: var(--text-color2);
