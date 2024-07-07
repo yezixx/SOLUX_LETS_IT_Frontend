@@ -23,7 +23,7 @@ radious, font 등만 달라지는 경우
   justify-content: "center";
   align-items: "center";
 
-  &:hover{
+  &:hover {
     background-color: var(--main2-hover-color);
   }
 }
@@ -38,7 +38,7 @@ radious, font 등만 달라지는 경우
   background-color: var(--sub-color);
   border-radius: 10px;
   color: var(--sub-color2);
-  &:hover{
+  &:hover {
     background-color: var(--sub1-hover-color);
   }
 }
@@ -47,7 +47,8 @@ radious, font 등만 달라지는 경우
   width: 120px;
   background-color: var(--main-color2);
   border-radius: 10px;
-  &:hover{
+  border-radius: 10px;
+  &:hover {
     background-color: var(--main2-hover-color);
   }
 }
@@ -56,7 +57,7 @@ radious, font 등만 달라지는 경우
   width: 70px;
   background-color: var(--main-color2);
   border-radius: 8px;
-  &:hover{
+  &:hover {
     background-color: var(--main2-hover-color);
   }
 }
@@ -67,12 +68,10 @@ radious, font 등만 달라지는 경우
   color: var(--text-color2);
   background-color: transparent;
   font-family: "pretendardM";
-  &:hover{
-    background : none;
+  &:hover {
+    background-color: transparent;
+    color: var(--text-color);
   }
-}
-.button--NONE__TEXT-TC2:hover {
-  color: var(--text-color);
 }
 /*none background-color, none border*/
 .button--NONE__TEXT-POINT {
@@ -81,8 +80,8 @@ radious, font 등만 달라지는 경우
   color: var(--point);
   background-color: transparent;
   font-family: "pretendardM";
-  &:hover{
-    background : none;
+  &:hover {
+    background-color: transparent;
   }
 }
 /*none background-color, none border, font-size 12*/
@@ -93,8 +92,8 @@ radious, font 등만 달라지는 경우
   background-color: transparent;
   font-family: "pretendardM";
   font-size: 12px;
-  &:hover{
-    background : none;
+  &:hover {
+    background-color: transparent;
   }
 }
 
@@ -106,8 +105,21 @@ radious, font 등만 달라지는 경우
   background-color: transparent;
   font-family: "pretendardM";
   font-size: 16px;
-  &:hover{
-    background : none;
+  &:hover {
+    background-color: transparent;
+  }
+}
+/*none background-color, none border, font-size 12*/
+.button--NONE__TEXT-MC2-12 {
+  width: fit-content;
+  height: fit-content;
+  color: var(--main-color2);
+  background-color: transparent;
+  font-family: "pretendardM";
+  font-size: 12px;
+  &:hover {
+    background-color: transparent;
+    color: var(--main2-hover-color);
   }
 }
 .button--SEC_120x40 {
@@ -115,7 +127,7 @@ radious, font 등만 달라지는 경우
   background-color: var(--select-color);
   border-radius: 8px;
   color: var(--text-color2);
-  &:hover{
+  &:hover {
     background-color: var(--line-color);
   }
 }
@@ -125,17 +137,17 @@ radious, font 등만 달라지는 경우
   background-color: var(--select-color);
   border-radius: 8px;
   color: var(--text-color2);
-  &:hover{
+  &:hover {
     background-color: var(--line-color);
   }
 }
 /*select-color 70x40*/
-.button--SEC_70x40{
+.button--SEC_70x40 {
   width: 70px;
   background-color: var(--select-color);
   background-repeat: 8px;
   color: var(--text-color2);
-  &:hover{
+  &:hover {
     background-color: var(--line-color);
   }
 }
