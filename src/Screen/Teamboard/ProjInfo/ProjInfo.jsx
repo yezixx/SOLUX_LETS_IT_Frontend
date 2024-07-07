@@ -1,9 +1,9 @@
 import styles from "./ProjInfo.module.css";
-import CollabTool from "./CollabTool/CollabTool";
 import MemberList from "./MemberList/MemberList";
 import TeamCalendar from "./TeamCalendar/TeamCalendar";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
+import ToolIcon from "../../../Components/ToolIcon/ToolIcon";
 
 const ProjInfo = () => {
   const TOOLLIST = [
@@ -30,7 +30,7 @@ const ProjInfo = () => {
           <div className={styles.rightContent__buttonContainer}>
             <div className={styles.rightContent__toolButton}>
               {TOOLLIST.map((tool) => (
-                <CollabTool key={tool.id} tool={tool.tool} />
+                <ToolIcon key={tool.id} alt={tool.tool} type="60x60" />
               ))}
             </div>
             <div className={styles.rightContent__rightButtons}>
