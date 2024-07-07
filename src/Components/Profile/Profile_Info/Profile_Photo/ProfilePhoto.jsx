@@ -1,8 +1,8 @@
 import styles from './ProfilePhoto.module.css'
 
-const ProfilePhoto = ()=>{
+const ProfilePhoto = ({type})=>{
     return(
-        <div className={styles.myProfile__photo}>프로필 사진</div>
+        <div className={`${styles.myProfile__photo} ${styles[`myProfile__photo--${type}`]}`}>프로필 사진</div>
     )
 }
 
