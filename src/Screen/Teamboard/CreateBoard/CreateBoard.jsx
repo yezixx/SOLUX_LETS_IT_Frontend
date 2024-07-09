@@ -6,12 +6,8 @@ import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
 import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
 import styles from "./CreateBoard.module.css";
 
-const route = ["내 프로젝트", "구인중인 프로젝트"];
-const sidenavCont = [
-  "구인중인 프로젝트",
-  "진행중인 프로젝트",
-  "스크랩한 프로젝트",
-];
+const route = ["내 프로젝트", "구인/신청 프로젝트"];
+const sidenavCont = ["구인/신청 프로젝트", "참여 프로젝트", "스크랩"];
 const CreateBoard = () => {
   const members = [
     { id: 1, name: "유밍 BE" },
