@@ -85,19 +85,6 @@ radious, font 등만 달라지는 경우
   }
 }
 /*none background-color, none border, font-size 12*/
-.button--NONE__TEXT-MC2-12 {
-  width: fit-content;
-  height: fit-content;
-  color: var(--main-color2);
-  background-color: transparent;
-  font-family: "pretendardM";
-  font-size: 12px;
-  &:hover {
-    background-color: transparent;
-  }
-}
-
-/*none background-color, none border, font-size 12*/
 .button--NONE__TEXT-MC2-16 {
   width: fit-content;
   height: fit-content;
@@ -152,9 +139,53 @@ radious, font 등만 달라지는 경우
   }
 }
 /*#741eff 150x40 - ai 포트폴리오 버튼*/
-.button--741EFF_150x40{
+.button--741EFF_150x40 {
   background-color: #741eff;
-  &:hover{
-    background-color: #6119D6;
+  &:hover {
+    background-color: #6119d6;
+  }
+}
+/*Point color 120x40*/
+.button--POINT_120x40 {
+  /*크기*/
+  width: 120px;
+  height: 40px;
+  /*테두리*/
+  border-radius: 10px;
+  color: white;
+  background-color: var(--point);
+  &:hover {
+    background-color: var(--point);
+  }
+}
+/* None background-color, border color point, 70x40*/
+.button--BOR_POINT_70x40 {
+  /*크기*/
+  width: 70px;
+  height: 40px;
+  /*테두리*/
+  border: 1px solid var(--point);
+  border-radius: 10px;
+  color: var(--point);
+  background-color: transparent;
+  &:hover {
+    background-color: transparent;
+  }
+}
+/* select color, 80x30*/
+.button--SEC_80x30 {
+  /*크기*/
+  width: 80px;
+  height: 30px;
+  /*테두리*/
+  border-radius: 4px;
+  /*배경색*/
+  background-color: var(--select-color);
+  /*텍스트*/
+  font-size: 14px;
+  color: var(--text-color2);
+  &:hover {
+    background-color: var(--select-color);
+    border: 1px solid var(--text-color1);
   }
 }
