@@ -1,0 +1,34 @@
+/*페이지네이션 컨테이너 */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+/*페이지네이션 각 항목*/
+.pagination-item {
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+/*숫자,이전,다음 버튼*/
+.pagination-link {
+    color: var(--text-color2);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+}
+.pagination-link:hover {
+    background-color: var(--select-color);
+}
+.pagination-active .pagination-link {
+    background-color: var(--main-color2);
+    color: #fff;
+}
+
+.pagination-disabled .pagination-link {
+    color: #ccc;
+    pointer-events: none;
+    cursor: default;
+}

@@ -1,0 +1,47 @@
+.ApplyProfile__wrap{
+    display: flex;
+}
+.ApplyProfile__contWrap{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 50px;
+}
+.ApplyProfile__buttonWrap{
+    display: flex;
+    gap: 10px;
+}
+
+
+/*선호스택, 희망분야, 전달사항*/
+.ApplyProfile__applyDetail{
+    display: grid;
+    gap: 20px;
+}
+.ApplyProfile__applyDetail_title{
+    font-size: 24px;
+    font-family: 'pretendardB';
+    margin-bottom: 5px;
+}
+.ApplyProfile__stackField{
+    display: flex;
+    gap: 50px;
+}
+/*선호스택, 희망 분야*/
+.ApplyProfile__detail_1{
+    width: 310px;
+    height: 40px;
+    border: 1px solid var(--line-color);
+    border: 1px solid var(--line-color);
+    border-radius: 4px;
+}
+/*전달 사항*/
+.ApplyProfile__detail_2{
+    width: 1070px;
+    height: 300px;
+    border: 1px solid var(--line-color);
+    padding: 20px;
+    border: 1px solid var(--line-color);
+    border-radius: 4px;
+}

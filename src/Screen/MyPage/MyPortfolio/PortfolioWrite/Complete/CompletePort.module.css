@@ -1,0 +1,34 @@
+/*side 네비게이터 + 컨텐츠*/
+.CompletePort__wrap{
+    display: flex;
+    width: 1320px;
+}
+
+/*프로젝트명*/
+.CompletePort__title{
+    font-size: 28px;
+    font-family: 'pretendardB';
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    width: 100%;
+}
+.CompletePort__contentWrap{
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    right: 0;
+}
+.CompletePort__content{
+    width: 1000px;
+    height: 500px;
+    border-radius: 4px;
+    border: 1px solid var(--line-color);
+    padding: 45px 90px;
+    margin: 15px 0;
+}
+.CompletePort__warning{
+    color: var(--text-color2);
+    font-size: 16px;
+}
