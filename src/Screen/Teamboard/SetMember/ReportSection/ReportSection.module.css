@@ -76,23 +76,3 @@
   display: flex;
   gap: 10px;
 }
-
-.reportSection__kickButton {
-  /*크기*/
-  width: 120px;
-  height: 40px;
-  /*테두리*/
-  border-radius: 10px;
-  color: white;
-  background-color: var(--point);
-}
-
-.reportSection__reportButton {
-  /*크기*/
-  width: 70px;
-  height: 40px;
-  /*테두리*/
-  border: 1px solid var(--point);
-  border-radius: 10px;
-  color: var(--point);
-}

@@ -2,6 +2,7 @@ import MemberItem from "../../../../Components/MemberItem/MemberItem";
 import styles from "./ReportSection.module.css";
 import QuestionMarkIcon from "../../../../Image/Icons/QuestionMarkIcon";
 import ToolTip from "../../../../Components/ToolTip/ToolTip";
+import Button from "../../../../Components/Button/Button";
 
 const ReportSection = () => {
   const members = [
@@ -56,10 +57,8 @@ const ReportSection = () => {
           ))}
         </select>
         <div className={styles.reportSection__buttons}>
-          <button className={styles.reportSection__kickButton}>
-            강퇴 제안
-          </button>
-          <button className={styles.reportSection__reportButton}>신고</button>
+          <Button text="강퇴 제안" type="POINT_120x40" />
+          <Button text="신고" type="BOR_POINT_70x40" />
         </div>
       </div>
     </div>

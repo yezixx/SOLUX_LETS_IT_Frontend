@@ -24,9 +24,7 @@ const AttendanceDetail = () => {
               참여인원 3 | 불참인원 1
             </div>
           </div>
-          <button className={styles.attendanceDetail__fileButton}>
-            첨부파일
-          </button>
+          <Button text="첨부파일" type="SEC_80x30" />
         </div>
         <div className={styles.attendanceDetail__list}>
           <div className={styles.attendanceDetail__listLabel}>불참한 팀원</div>
