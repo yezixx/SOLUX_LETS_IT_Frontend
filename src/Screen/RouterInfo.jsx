@@ -7,6 +7,7 @@ import ProjInfo from "./Teamboard/ProjInfo/ProjInfo";
 import SetMember from "./Teamboard/SetMember/SetMember";
 import Teamboard from "./Teamboard/Teamboard";
 import CreateBoard from "./Teamboard/CreateBoard/CreateBoard";
+import CreateProfile from "./CreateProfile/CreateProfile";
 
 export const RouterInfo = [
   {
@@ -54,5 +55,10 @@ export const RouterInfo = [
     path: "myproj/apply/createboard",
     element: <CreateBoard />,
     label: "Create Board",
+  },
+  {
+    path: "new/profile",
+    element: <CreateProfile />,
+    label: "Create Profile",
   },
 ];

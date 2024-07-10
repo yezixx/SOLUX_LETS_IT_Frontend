@@ -1,0 +1,14 @@
+.createProfile {
+  display: flex;
+  flex-direction: column;
+  width: 1350px;
+  margin: 0 auto;
+}
+
+.createProfile__stepBar {
+  margin: 50px auto;
+}
+
+.createProfile__profileForm {
+  padding: 50px;
+}
