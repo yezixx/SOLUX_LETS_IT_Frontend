@@ -44,6 +44,8 @@
   gap: 10px;
   /*패딩*/
   padding-top: 20px;
+  /* 높이 */
+  height: 200px;
 }
 
 .updateProj__bottomInner {
@@ -68,11 +70,5 @@
 .updateProj__finishButton {
   /*마진 및 배치*/
   align-self: flex-end;
-  margin-top: 50px;
-}
-
-.updateProj__finishButton--MORE6 {
-  /*마진 및 배치*/
-  align-self: flex-end;
-  margin-top: 10px;
+  margin-top: 25px;
 }
