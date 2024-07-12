@@ -1,5 +1,4 @@
 import styles from "./MainHome.module.css";
-import Header from "../../Components/Header/Header";
 
 import MainTitle from "../../Components/MainTitle/MainTitle";
 import MainManageButton from "../../Components/MainManegeButton/MainManageButton";
@@ -9,7 +8,6 @@ import PopularProject from "../../Components/PopularProject/PopularProject";
 function MainHome() {
   return (
     <div className={styles.wrap}>
-      <Header />
       <MainTitle />
       <MainManageButton />
       <RecommendProject />
