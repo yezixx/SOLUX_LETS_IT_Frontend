@@ -1,6 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import styles from "./App.module.css";
-import Header from "./Components/Header/Header";
 import { RouterInfo } from "./Screen/RouterInfo";
 
 const RouterObject = createBrowserRouter(RouterInfo);
@@ -8,10 +7,7 @@ const RouterObject = createBrowserRouter(RouterInfo);
 function App() {
   return (
     <div className={styles.wrap}>
-      <Header />
-      <div className={styles.main}>
-        <RouterProvider router={RouterObject} />
-      </div>
+      <RouterProvider router={RouterObject} />
     </div>
   );
 }
