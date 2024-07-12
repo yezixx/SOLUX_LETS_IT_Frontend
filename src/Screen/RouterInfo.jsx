@@ -22,6 +22,8 @@ import PortfolioWrite from "./MyPage/MyPortfolio/PortfolioWrite/PortfolioWrite";
 import CompletePort from "./MyPage/MyPortfolio/PortfolioWrite/Complete/CompletePort";
 import PortfolioBoard from "./MyPage/MyPortfolio/PortfolioBoard/PortfolioBoard";
 import MainLayout from "../MainLayout";
+import ProjPost_detail from "./ProjPost_detail/ProjPost_detail";
+import ProjectHire from "./ProjectHire/ProjectHire";
 
 export const RouterInfo = [
   {
@@ -55,10 +57,22 @@ export const RouterInfo = [
         element: <Proj_fit />,
         label: "맞춤 찾기",
       },
+      // 구인글 작성하기
+      {
+        path: "projects/post",
+        element: <ProjectHire />,
+        label: "구인글 작성하기",
+      },
+      // 구인글 보기, 추후  /:id 추가 필요
+      {
+        path: "projects/detail",
+        element: <ProjPost_detail />,
+        label: "구인글 보기",
+      },
 
       //내 프로젝트
       {
-        path: "myproj/applyhireproject",
+        path: "myproj/hiring-and-applied",
         element: <ApplyHireProj />,
         label: "구인/신청 프로젝트",
       },
@@ -117,7 +131,7 @@ export const RouterInfo = [
               {
                 path: "member",
                 element: <SetMember />,
-                label: "팀원 설정r",
+                label: "팀원 설정",
               },
               {
                 path: "manage",
