@@ -52,17 +52,18 @@ const TeamCalendar = () => {
     setIsOpenDialog(false);
   };
 
+  const onEventClick = (e) => {
+    console.log(e.event);
+    openInfo();
+    setSelectedEvent(e.event);
+  };
+
   const openInfo = () => {
     setIsOpenInfo(true);
   };
 
   const closeInfo = () => {
     setIsOpenInfo(false);
-  };
-
-  const onEventClick = (e) => {
-    openInfo();
-    setSelectedEvent(e.event);
   };
 
   const onCreateEvent = (title, startDate, endDate, description) => {
@@ -80,6 +81,7 @@ const TeamCalendar = () => {
         description: description,
       },
     ]);
+    closeDialog();
   };
 
   const onDeleteEvent = (targetId) => {
