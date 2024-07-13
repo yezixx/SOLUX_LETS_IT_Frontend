@@ -24,6 +24,7 @@ const BookmarkIcon = ({ width = "30px", height = "30px" }) => {
       className="size-6"
       width={width}
       height={height}
+      cursor={"pointer"}
       onClick={onClickBookmark}
     >
       <path
