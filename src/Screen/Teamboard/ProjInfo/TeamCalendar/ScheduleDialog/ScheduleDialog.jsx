@@ -12,7 +12,7 @@ const ScheduleDialog = ({ selectedDate, onCreateEvent, closeDialog }) => {
   const titleRef = useRef();
   const descriptionRef = useRef();
 
-  const onCreate = () => {
+  const onClickAdd = () => {
     if (titleRef.current.value === "") {
       titleRef.current.focus();
       return;
@@ -24,7 +24,6 @@ const ScheduleDialog = ({ selectedDate, onCreateEvent, closeDialog }) => {
     }
 
     onCreateEvent(title, startDate, endDate, description);
-    closeDialog();
   };
 
   const onChangeTitle = (e) => {
@@ -45,6 +44,10 @@ const ScheduleDialog = ({ selectedDate, onCreateEvent, closeDialog }) => {
       return;
     }
     setEndDate(e.target.value);
+  };
+
+  const onChangeDescription = (e) => {
+    setDescription(e.target.value);
   };
 
   return (
@@ -104,15 +107,12 @@ const ScheduleDialog = ({ selectedDate, onCreateEvent, closeDialog }) => {
               className={styles.scheuleDialog__textarea}
               placeholder="일정 설명을 입력해주세요."
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={onChangeDescription}
             ></textarea>
           </div>
         </div>
-        <div
-          className={`${styles.scheuleDialog__section} ${styles["scheuleDialog__button"]}`}
-        >
-          <Button text="추가" type="NONE__TEXT-MC2-12" onClick={onCreate} />
-          <Button text="닫기" type="NONE__TEXT-MC2-12" onClick={closeDialog} />
+        <div className={styles.scheuleDialog__button}>
+          <Button text="추가" type="NONE__TEXT-MC2-12" onClick={onClickAdd} />
         </div>
       </div>
     </div>
