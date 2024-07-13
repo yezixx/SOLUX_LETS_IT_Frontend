@@ -45,7 +45,7 @@
 
 .ScheduleContent__label {
   /* 폰트 */
-  color: var(--text-color);
+  color: var(--text-color1);
   font-size: 14px;
   font-family: "pretendardB";
 }
@@ -58,7 +58,7 @@
 .ScheduleContent__info,
 .ScheduleContent__description {
   /* 폰트 */
-  color: var(--text-color);
+  color: var(--text-color1);
   font-size: 14px;
 }
 
