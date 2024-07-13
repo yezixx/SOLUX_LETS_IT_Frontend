@@ -3,6 +3,7 @@ import styles from "./ProjPost_detail.module.css";
 import PostInfo from "./PostInfo/PostInfo";
 import Button from "../../Components/Button/Button";
 import BookmarkIcon from "../../Image/Icons/BookmarkIcon";
+import CommentItem from "./CommentItem/CommentItem";
 
 const mock_post = {
   // 구인글 정보
@@ -59,6 +60,15 @@ const mock_post = {
     `,
 };
 
+const mock_comments = [
+  {
+    writer: "CODER.",
+    date: "2024-04-06, 15:30",
+    description:
+      "정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?",
+  },
+];
+
 const ProjPost_detail = () => {
   const isWriter = true;
   return (
@@ -79,6 +89,16 @@ const ProjPost_detail = () => {
           </div>
         </div>
       </main>
+      <div className={styles.ProjPost_detail__commentsWarp}>
+        <div className={styles.ProjPost_detail__commentsContainer}>
+          <div className={styles.ProjPost_detail__label}>
+            댓글 <span>{mock_comments.length}</span>
+          </div>
+          {mock_comments.map((comment, index) => (
+            <CommentItem key={index} {...comment} />
+          ))}
+        </div>
+      </div>
       <footer>
         <div className={styles.ProjPost_detail__scrap}>
           <BookmarkIcon width="30px" height="30px" />
