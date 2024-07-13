@@ -1,11 +1,11 @@
 import RouteName from "../../Components/RouteName/RouteName";
-import CalendarIcon from "../../Image/Icons/CalendarIcon";
-import UserIcon from "../../Image/Icons/UserIcon";
 import styles from "./ProjPost_detail.module.css";
-import PlusCircleIcon from "../../Image/Icons/PlusCircleIcon";
+import PostInfo from "./PostInfo/PostInfo";
+import Button from "../../Components/Button/Button";
 import BookmarkIcon from "../../Image/Icons/BookmarkIcon";
 
 const mock_post = {
+  // 구인글 정보
   postInfo: {
     title: "웹 사이드 프로젝트 팀원 모집",
     writer: "홍길동",
@@ -19,6 +19,7 @@ const mock_post = {
     hits: 160,
     scrap: 15,
   },
+  // 프로젝트 정보
   projInfo: {
     expectedPeriod: {
       startDate: "2024-04-10",
@@ -29,56 +30,62 @@ const mock_post = {
     area: "서울 강남구",
     level: "중급",
   },
+  // 필요 스택
   needSkill: ["React", "JavaScript"],
-  detail: "프로젝트 설명",
+  // 협의 가능 여부
+  isNegotiable: true,
+  // 구인글 본문
+  description: `    [프로젝트 주제]
+    안녕하세요. 저희는 현재 한국에 거주하거나 방문한 또는 방문할 외국인을 위해 다양한 정보를 제공할 수 있는 커뮤니티 사이트를 만들고 있습니다. 
+    현재 150명 정도 있는 디스코드 채널에서 외국인들에게 필요한 정보들을 수집 및 정리하고 있으며 이러한 정보들을 외국인 친화적인 방법으로 제공하려고 합니다.
+    현재 MVP기능은 단순 게시판 기능으로 생각하고 있으며 운영하면서 다양한 기능들을 추가해보려고 합니다. 
+    현재 생각해 둔 기능을 다음과 같습니다.
+    맛집 및 관광지 지도
+    언어교환 첨삭 기능
+    물품 공구 기능
+    
+    [ 팀 구성 ]
+    현재는 주니어 백엔드 개발자 2명으로 이루어져 있으며, 프론트 개발까지 같이 하다보니 힘이 들어 프론트엔드 개발자님을 모시고 있습니다.
+    
+    [ 저희는 이렇게 협업하고 있어요 ]
+    슬랙을 통해 업무 내용을 주고 받고 있습니다.
+    Jira를 통해 일주일 단위로 작업을 공유하고 스프린트 하고 있습니다.
+    Figma를 통해 간단한 와이어프레임을 그리고 있습니다. 
+    최대한 이상적인 협업을 하기위해 노력하고 있으나 적은 경험으로 부족할 수 있습니다만, 부정적인 피드백에도 항상 열려있습니다 :)
+    
+    [ 기술 스택 ]
+    - 프론트 : Nuxt.js로 되어 있으나 Next.js로 다시 구성하셔도 괜찮습니다.
+    - 백엔드 : Java, Spring
+    `,
 };
 
 const ProjPost_detail = () => {
+  const isWriter = true;
   return (
     <div className={styles.ProjPost_detail}>
-      <div className={styles.ProjPost_detail__route}>
-        <RouteName route={["프로젝트 찾기", "구인글 상세 보기"]} />
-      </div>
-      <div>
-        <div className={styles.ProjPost_detail__header}>
-          <div className={styles.ProjPost_detail__info}>
-            <div className={styles.ProjPost_detail__top}>
-              <div className={styles.ProjPost_detail__title}>
-                {mock_post.postInfo.title}
-              </div>
-              <div className={styles.ProjPost_detail__scrap}>
-                <BookmarkIcon />
-              </div>
+      <main>
+        <div className={styles.ProjPost_detail__route}>
+          <RouteName route={["프로젝트 찾기", "구인글 상세 보기"]} />
+        </div>
+        <div>
+          <div className={styles.ProjPost_detail__header}>
+            <PostInfo post={mock_post} />
+          </div>
+          <div className={styles.ProjPost_detail__content}>
+            <div className={styles.ProjPost_detail__label}>상세 내용</div>
+            <div className={styles.ProjPost_detail__description}>
+              {mock_post.description}
             </div>
-            <div className={styles.ProjPost_detail__postInfo}>
-              <div>
-                <CalendarIcon />{" "}
-                <div className={styles.ProjPost_detail__label}>모집기간</div>
-                {mock_post.postInfo.hireDate.startDate} ~
-                {mock_post.postInfo.hireDate.endDate}
-              </div>
-              <div>
-                <UserIcon />{" "}
-                <div className={styles.ProjPost_detail__label}>모집인원</div>
-                {mock_post.postInfo.hireTO === 0
-                  ? "미정"
-                  : mock_post.postInfo.hireTO + "명"}
-              </div>
-              <div>
-                <PlusCircleIcon />{" "}
-                <div className={styles.ProjPost_detail__label}>우대사항</div>
-                <div className={styles.ProjPost_detail__preferred}>
-                  {mock_post.postInfo.preferred.map((text, index) => (
-                    <div key={index}>{text}</div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            <div className={styles.ProjPost_detail__projInfo}></div>
-            <div className={styles.ProjPost_detail__skillInfo}></div>
           </div>
         </div>
-      </div>
+      </main>
+      <footer>
+        <div className={styles.ProjPost_detail__scrap}>
+          <BookmarkIcon width="30px" height="30px" />
+        </div>
+        <Button text="신청" type="MC2_180x40" />
+        {isWriter && <Button text="수정" type="SEC_120x40" />}
+      </footer>
     </div>
   );
 };
