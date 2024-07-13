@@ -1,0 +1,63 @@
+.ProjPost_detail {
+  width: 1320px;
+  margin: 0 auto;
+}
+
+.ProjPost_detail__route {
+  border-bottom: 1px solid var(--line-color);
+}
+
+.ProjPost_detail__info {
+  border: 1px solid var(--line-color);
+  padding: 20px 40px;
+}
+
+.ProjPost_detail__top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ProjPost_detail__postInfo {
+  border: 1px solid var(--line-color);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.ProjPost_detail__postInfo > div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ProjPost_detail__postInfo > div > .ProjPost_detail__label {
+  width: 80px;
+  /* 폰트 */
+  color: var(--text-color2);
+  font-size: 18px;
+  font-family: "pretendardB";
+}
+
+.ProjPost_detail__preferred {
+  width: 210px;
+  word-wrap: break-word;
+}
+
+.ProjPost_detail__title {
+  /* 크기 */
+  width: fit-content;
+  height: 45px;
+  /* 배경 */
+  background-color: var(--sub-color);
+  border-radius: 8px;
+  /* 폰트 */
+  font-size: 24px;
+  font-family: "pretendardB";
+  /* 내부 여백 */
+  padding: 0 10px;
+  /* 텍스트 배치 */
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
