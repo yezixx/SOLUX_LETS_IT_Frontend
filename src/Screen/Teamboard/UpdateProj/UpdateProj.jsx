@@ -39,20 +39,12 @@ const UpdateProj = () => {
               <MemberItem key={member.id} memberName={member.name} />
             ))}
           </div>
-          <div className={styles.updateProj__saveButton}>
-            <Button
-              text={"저장"}
-              type={"MC2_120x40"}
-              onClick={navigateToManage}
-            />
-          </div>
         </div>
       </div>
-      <div
-        className={`${styles.updateProj__finishButton} ${
-          members.length > 6 ? styles["updateProj__finishButton--MORE6"] : ""
-        }`}
-      >
+      <div className={styles.updateProj__saveButton}>
+        <Button text={"저장"} type={"MC2_120x40"} onClick={navigateToManage} />
+      </div>
+      <div className={styles.updateProj__finishButton}>
         <Button
           text="프로젝트 종료"
           type="NONE__TEXT-POINT"
