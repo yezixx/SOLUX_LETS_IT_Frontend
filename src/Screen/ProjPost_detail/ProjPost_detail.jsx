@@ -4,6 +4,7 @@ import PostInfo from "./PostInfo/PostInfo";
 import Button from "../../Components/Button/Button";
 import BookmarkIcon from "../../Image/Icons/BookmarkIcon";
 import CommentItem from "./CommentItem/CommentItem";
+import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
 
 const mock_post = {
   // 구인글 정보
@@ -62,6 +63,7 @@ const mock_post = {
 
 const mock_comments = [
   {
+    id: 0,
     writer: "CODER.",
     date: "2024-04-06, 15:30",
     description:
@@ -94,9 +96,18 @@ const ProjPost_detail = () => {
           <div className={styles.ProjPost_detail__label}>
             댓글 <span>{mock_comments.length}</span>
           </div>
-          {mock_comments.map((comment, index) => (
-            <CommentItem key={index} {...comment} />
-          ))}
+          <div className={styles.ProjPost_detail__commentsContent}>
+            <div className={styles.ProjPost_detail__commentList}>
+              {mock_comments.map((comment, index) => (
+                <CommentItem key={index} {...comment} />
+              ))}
+            </div>
+            <div className={styles.ProjPost_detail__commentInput}>
+              <UserCircleIcon color="var(--main-color2)" />
+              <input type="text" placeholder="자유롭게 질문을 남겨주세요" />
+              <Button text="등록" type="MC2_120x40" />
+            </div>
+          </div>
         </div>
       </div>
       <footer>
