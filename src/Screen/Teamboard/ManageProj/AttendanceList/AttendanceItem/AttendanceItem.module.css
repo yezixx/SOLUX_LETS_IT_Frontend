@@ -1,0 +1,58 @@
+.attendanceItem {
+}
+
+.attendanceItem__block {
+  /*배치*/
+  display: flex;
+  align-items: center;
+  /*테두리*/
+  border: 1px solid var(--line-color);
+  border-bottom: 0px;
+  /*크기*/
+  width: 290px;
+  height: 60px;
+  /*배경 색*/
+  background-color: var(--dimmed);
+}
+
+.attendanceItem__block div {
+  /*텍스트*/
+  font-size: 16px;
+  color: var(--text-color2);
+}
+
+.attendanceItem__icon {
+  /*마진*/
+  margin: 5px 15px 0px 15px;
+}
+
+.attendanceItem__text {
+  /*마진*/
+  margin-left: 5px;
+}
+
+.attendanceItem__date {
+  /*마진*/
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.attendanceItem__block--first {
+  /*테두리*/
+  border-radius: 8px 8px 0px 0px;
+  border-bottom: 0px;
+}
+
+.attendanceItem__block--last {
+  /*테두리*/
+  border-radius: 0px 0px 8px 8px;
+  border-bottom: 1px solid var(--line-color);
+  /*배경 색*/
+  background-color: white;
+}
+
+.attendanceItem__block--last div {
+  /*텍스트*/
+  font-size: 16px;
+  color: var(--text-color1);
+}

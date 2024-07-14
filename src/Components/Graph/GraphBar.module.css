@@ -1,0 +1,11 @@
+.GraphBar__border{
+    background-color: 'white';
+}
+
+.GraphBar__colored{
+    position: relative; 
+}
+.GraphBar__number{
+    position: absolute;
+    font-size: 14px;
+}

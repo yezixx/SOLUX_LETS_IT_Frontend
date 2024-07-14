@@ -1,0 +1,74 @@
+.voteItem {
+  /*border: 1px solid pink;*/
+  padding: 5px;
+}
+
+.voteItem__container {
+  /*테두리*/
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  /*크기*/
+  width: 210px;
+  height: 65px;
+  /*마진*/
+  margin: 3px;
+  /*요소 배치*/
+  display: flex;
+  align-items: center;
+  /*폰트*/
+  font-size: 16px;
+}
+
+.voteItem__profilePic {
+  /*테두리*/
+  border: 1px solid var(--line-color);
+  /*크기*/
+  width: 50px;
+  height: 50px;
+  /*원형으로*/
+  border-radius: 25px;
+  /*마진*/
+  margin-left: 10px;
+}
+
+.voteItem__name {
+  /*border: 1px solid black;*/
+  /*크기*/
+  width: 60px;
+  /*마진 - 배치*/
+  margin: auto 0px;
+  margin-left: 15px;
+  /*폰트*/
+  font-size: 16px;
+}
+
+.voteItem__button {
+  /*border: 1px solid cyan;*/
+  /*폰트*/
+  font-size: 24px;
+  /*배치*/
+  display: flex;
+  gap: 10px;
+  margin: auto;
+  width: 25%;
+}
+
+.voteItem__button--o {
+  /*폰트*/
+  font-size: 24px;
+  color: var(--main-color2);
+}
+
+.voteItem__button--o:hover {
+  color: var(--main-color);
+}
+
+.voteItem__button--x {
+  /*폰트*/
+  font-size: 24px;
+  color: var(--line-color);
+}
+
+.voteItem__button--x:hover {
+  color: var(--text-color2);
+}
