@@ -1,0 +1,12 @@
+.Scrap__wrap{
+    display: flex;
+}
+
+.Scrap__title{
+    font-family: 'pretendardB';
+    font-size: 26px;
+    height: 50px;
+    width: 1115px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--line-color)
+}

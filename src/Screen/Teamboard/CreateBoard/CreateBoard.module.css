@@ -1,0 +1,57 @@
+.createBoard {
+  width: fit-content;
+  margin: 50px auto;
+}
+
+.createBoard__wrap {
+  display: flex;
+}
+.createBoard__contWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 100px;
+  height: 100vh;
+}
+.createBoard__title {
+  font-family: "pretendardB";
+  font-size: 26px;
+  height: 50px;
+  width: 1115px;
+  margin-bottom: 40px;
+  border-bottom: 1px solid var(--line-color);
+}
+.createBoard__cont {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  width: 1115px;
+}
+.createBoard__memberItem {
+  width: 1115px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  border-bottom: 1px solid var(--line-color);
+  padding: 20px 0px 40px 0px;
+}
+.createBoard__innerLabel {
+  font-size: 20px;
+  color: var(--text-color1);
+  margin-right: 10px;
+}
+.createBoard__projName {
+  width: 1115px;
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  border-bottom: 1px solid var(--line-color);
+  padding: 50px 0px;
+}
+.createBoard__linkForm {
+  border-bottom: 1px solid var(--line-color);
+  padding: 40px 0px;
+}
+.createBoard__button {
+  align-self: flex-end;
+  margin-top: 20px;
+}
