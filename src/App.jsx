@@ -1,15 +1,7 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import styles from "./App.module.css";
-import { RouterInfo } from "./Screen/RouterInfo";
-
-const RouterObject = createBrowserRouter(RouterInfo);
+import "./App.css";
 
 function App() {
-  return (
-    <div className={styles.wrap}>
-      <RouterProvider router={RouterObject} />
-    </div>
-  );
+  return <>App</>;
 }
 
 export default App;
