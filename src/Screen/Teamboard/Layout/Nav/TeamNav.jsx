@@ -9,13 +9,13 @@ const TeamNav = () => {
   const nav = useNavigate();
 
   const navigateToTeamboard = () => {
-    nav("/");
+    nav("/teamboard");
   };
   const navigateToMember = () => {
-    nav("/member");
+    nav("/teamboard/member");
   };
   const navigateToManage = () => {
-    nav("/manage");
+    nav("/teamboard/manage");
   };
 
   return (
@@ -25,7 +25,7 @@ const TeamNav = () => {
         <div className={styles.nav__buttonContainer}>
           <button
             className={`${styles.nav__button} ${
-              currentUrl === "/" ? styles["nav__button--selected"] : ""
+              currentUrl === "/teamboard" ? styles["nav__button--selected"] : ""
             }`}
             onClick={navigateToTeamboard}
           >
@@ -33,7 +33,9 @@ const TeamNav = () => {
           </button>
           <button
             className={`${styles.nav__button} ${
-              currentUrl === "/member" ? styles["nav__button--selected"] : ""
+              currentUrl === "/teamboard/member"
+                ? styles["nav__button--selected"]
+                : ""
             }`}
             onClick={navigateToMember}
           >
@@ -41,7 +43,8 @@ const TeamNav = () => {
           </button>
           <button
             className={`${styles.nav__button} ${
-              currentUrl === "/manage" || currentUrl === "/manage/edit"
+              currentUrl === "/teamboard/manage" ||
+              currentUrl === "/teamboard/manage/edit"
                 ? styles["nav__button--selected"]
                 : ""
             }`}

@@ -15,11 +15,11 @@ const UpdateProj = () => {
   const nav = useNavigate();
 
   const navigateToManage = () => {
-    nav("/manage");
+    nav("/teamboard/manage");
   };
 
   const navigateToFeedback = () => {
-    nav("/feedback");
+    nav("/teamboard/feedback");
   };
 
   return (

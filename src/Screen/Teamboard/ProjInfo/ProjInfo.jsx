@@ -14,7 +14,7 @@ const ProjInfo = () => {
   const nav = useNavigate();
 
   const navigateToManage = () => {
-    nav("/manage");
+    nav("/teamboard/manage");
   };
 
   return (
