@@ -17,6 +17,10 @@ const ProjInfo = () => {
     nav("/teamboard/manage");
   };
 
+  const navigateToPortfolio = () => {
+    nav("/mypage/portfolio");
+  };
+
   return (
     <div className={styles.projInfo__wrapper}>
       <div className={styles.projInfo__container}>
@@ -34,7 +38,11 @@ const ProjInfo = () => {
               ))}
             </div>
             <div className={styles.rightContent__rightButtons}>
-              <Button text={"포트폴리오"} type={"SC_120x40"} />
+              <Button
+                text={"포트폴리오"}
+                type={"SC_120x40"}
+                onClick={navigateToPortfolio}
+              />
               <Button
                 text={"회의 인증"}
                 type={"MC2_120x40"}
