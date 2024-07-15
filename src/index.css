@@ -1,16 +1,16 @@
 @font-face {
   font-family: "pretendardR";
-  src: url("./Fonts/Pretendard-Regular.woff");
+  src: url("./assets/Fonts/Pretendard-Regular.woff");
 }
 
 @font-face {
   font-family: "pretendardM";
-  src: url("./Fonts/Pretendard-Medium.woff");
+  src: url("./assets/Fonts/Pretendard-Medium.woff");
 }
 
 @font-face {
   font-family: "pretendardB";
-  src: url("./Fonts/Pretendard-SemiBold.woff");
+  src: url("./assets/Fonts/Pretendard-SemiBold.woff");
 }
 :root {
   --main-color: #1e5eff;
