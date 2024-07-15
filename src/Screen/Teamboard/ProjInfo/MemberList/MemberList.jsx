@@ -15,7 +15,7 @@ const MemberList = () => {
         {members.map((member) => (
           <Link
             key={member.id}
-            to={"/member/profile"}
+            to={"/teamboard/member/profile"}
             style={{ textDecoration: "none" }}
           >
             <MemberItem key={member.id} memberName={member.name} />
