@@ -8,7 +8,7 @@ const ManageProj = () => {
   const nav = useNavigate();
 
   const navigateToEdit = () => {
-    nav("/manage/edit");
+    nav("/teamboard/manage/edit");
   };
   return (
     <div className={styles.manageProj}>
