@@ -24,6 +24,9 @@ import PortfolioBoard from "./MyPage/MyPortfolio/PortfolioBoard/PortfolioBoard";
 import MainLayout from "../MainLayout";
 import ProjPost_detail from "./ProjPost_detail/ProjPost_detail";
 import ProjectHire from "./ProjectHire/ProjectHire";
+import MyPageLayout from "./MyPage/MyPageLayout";
+import MyProjectLayout from "./MyProject/MyProjectLayout";
+import Apply from "./Apply/Apply";
 
 export const RouterInfo = [
   {
@@ -72,46 +75,60 @@ export const RouterInfo = [
 
       //내 프로젝트
       {
-        path: "myproj/hiring-and-applied",
-        element: <ApplyHireProj />,
+        path: "myproj",
+        element: <MyProjectLayout />,
         label: "구인/신청 프로젝트",
-      },
-      {
-        path: "myproj/attendproj",
-        element: <AttendProj />,
-        label: "참여 프로젝트",
-      },
-      {
-        path: "myproj/scrap",
-        element: <Scrap />,
-        label: "스크랩 프로젝트",
+        children: [
+          {
+            path: "hiring-and-applied",
+            element: <ApplyHireProj />,
+            label: "구인/신청 프로젝트",
+          },
+          {
+            path: "attendproj",
+            element: <AttendProj />,
+            label: "참여 프로젝트",
+          },
+          {
+            path: "scrap",
+            element: <Scrap />,
+            label: "스크랩 프로젝트",
+          },
+        ],
       },
 
       //마이페이지
       {
-        path: "mypage/profile",
-        element: <MyProfile />,
+        path: "mypage",
+        element: <MyPageLayout />,
         label: "프로필 관리",
-      },
-      {
-        path: "mypage/portfolio",
-        element: <MyPortfolio />,
-        label: "포트폴리오 관리",
-      },
-      {
-        path: "mypage/portfolio/post",
-        element: <PortfolioWrite />,
-        label: "포트폴리오 작성창",
-      },
-      {
-        path: "mypage/portfolio/post/summaryAI",
-        element: <CompletePort />,
-        label: "AI 생성 - 완성된 포트폴리오",
-      },
-      {
-        path: "mypage/portfolio/board",
-        element: <PortfolioBoard />,
-        label: "포트폴리오 게시판",
+        children: [
+          {
+            path: "profile",
+            element: <MyProfile />,
+            label: "포트폴리오 관리",
+          },
+          {
+            path: "portfolio",
+            element: <MyPortfolio />,
+            label: "포트폴리오 관리",
+          },
+          {
+            path: "portfolio/post",
+            element: <PortfolioWrite />,
+            label: "포트폴리오 작성창",
+          },
+          {
+            path: "portfolio/post/summaryAI",
+            element: <CompletePort />,
+            label: "AI 생성 - 완성된 포트폴리오",
+          },
+          {
+            path: "portfolio/board",
+            element: <PortfolioBoard />,
+            label: "포트폴리오 게시판",
+          },
+        ],
       },
 
       //팀 게시판
@@ -166,6 +183,12 @@ export const RouterInfo = [
         path: "profile/new",
         element: <CreateProfile />,
         label: "최초 1회 프로필 생성",
+      },
+      //프로젝트 신청창
+      {
+        path: "apply",
+        element: <Apply />,
+        label: "프로젝트 신청창",
       },
     ],
   },
