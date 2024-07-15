@@ -1,5 +1,5 @@
 import styles from "./Nav.module.css";
-import Logo from "../../../Image/Logo.svg?react";
+import Logo from "../../../assets/Logo.svg?react";
 import SearchIcon from "../../../Image/Icons/SearchIcon";
 import BellIcon from "../../../Image/Icons/BellIcon";
 import { Link, useNavigate } from "react-router-dom";

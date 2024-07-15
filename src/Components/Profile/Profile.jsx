@@ -1,6 +1,6 @@
 import styles from "./Profile.module.css";
 import ProfileLink from "./Profile_Info/ProfileLink/ProfileLink.jsx";
-import TierIcon from "../../Image/Tier/tier_B.svg?react";
+import TierIcon from "../../assets/Tier/tier_B.svg?react";
 import ProfilePhoto from "./Profile_Info/Profile_Photo/ProfilePhoto.jsx";
 import PersonalDetail from "./Profile_Info/Profile_PersonalDetail/PersonalDetail.jsx";
 import ProfileTier from "./Profile_Tier/ProfileTier.jsx";
