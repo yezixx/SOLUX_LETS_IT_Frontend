@@ -20,54 +20,33 @@ const PortfolioWrite = () => {
 
         <label htmlFor="role">
           담당역할
-          <FormInput placeholder="백엔드" />
+          <FormInput width="60%" placeholder="백엔드" />
         </label>
 
         <label htmlFor="stack">
           사용스택
-          <FormInput placeholder="Spring" />
+          <FormInput width="60%" placeholder="Spring" />
           <SearchIcon bgc="var(--text-color2)" />
         </label>
 
         <div className={styles.portfolioWrite__form__tasks}>
           <label htmlFor="tasks">이번 주 한 일</label>
-          <FormInput
-            textarea={true}
-            type="textarea"
-            width="100%"
-            placeholder=" "
-            height="90px"
-          />
+          <FormInput textarea={true} type="textarea" height="90px" />
         </div>
 
         <div>
           <label htmlFor="difficult">발생한 문제 / 어려움</label>
-          <FormInput
-            textarea={true}
-            placeholder="50%"
-            width="100%"
-            height="200px"
-          />
+          <FormInput textarea={true} height="200px" />
         </div>
 
         <div>
           <label htmlFor="result">해결 방법</label>
-          <FormInput
-            textarea={true}
-            placeholder=""
-            width="100%"
-            height="200px"
-          />
+          <FormInput textarea={true} height="200px" />
         </div>
 
         <div className={styles.portfolioWrite__form__thoughts}>
           <label htmlFor="thoughts">새로 알게된 점 / 깨달은 점</label>
-          <FormInput
-            textarea={true}
-            placeholder=""
-            width="100%"
-            height="195px"
-          />
+          <FormInput textarea={true} width="100%" height="195px" />
         </div>
 
         {/*폼 제출 버튼*/}
