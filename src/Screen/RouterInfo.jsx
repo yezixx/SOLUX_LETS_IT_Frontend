@@ -44,12 +44,12 @@ export const RouterInfo = [
       {
         path: "/login",
         element: <APILogIn />,
-        label: "로그인 창",
+        index: true,
       },
       {
         path: "/login/oauth2/callback/kakao",
         element: <Redirect />,
-        label: "로그인 중 보여줄 창",
+        index: true,
       },
       //프로젝트 찾기
       {
