@@ -29,6 +29,16 @@ const CreateBoard = () => {
   const [links, setLinks] = useState(mock_collabLinks);
 
   const onClickCreate = () => {
+    if (title === "") {
+      alert("프로젝트명을 입력해주세요.");
+      return;
+    }
+    if (links[0].link === "" || links[1].link === "") {
+      alert(
+        '협업툴 링크를 입력해주세요.\n이후 "프로젝트 관리 > 프로젝트 정보 수정"에서 변경가능합니다.'
+      );
+      return;
+    }
     if (confirm("팀게시판을 생성하시겠습니까?")) nav("/teamboard");
   };
 

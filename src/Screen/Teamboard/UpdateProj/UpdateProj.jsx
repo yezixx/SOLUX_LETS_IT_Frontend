@@ -33,12 +33,23 @@ const UpdateProj = () => {
 
   const nav = useNavigate();
 
-  const navigateToManage = () => {
-    nav("/teamboard/manage");
+  const onClickSave = () => {
+    if (teamData.title === "") {
+      alert("프로젝트명을 입력해주세요.");
+      return;
+    }
+    if (
+      teamData.collabLink[0].link === "" ||
+      teamData.collabLink[1].link === ""
+    ) {
+      alert("협업툴 링크를 입력해주세요.");
+      return;
+    }
     onChangeLeader(selectedMember);
+    nav("/teamboard/manage");
   };
 
-  const navigateToFeedback = () => {
+  const onClickFinish = () => {
     if (
       confirm(
         '프로젝트를 종료하시겠습니까?\n종료된 프로젝트의 팀게시판은 수정할 수 없으며,\n"종료된 프로젝트는 내 프로젝트 > 참여 프로젝트 > 완료한 프로젝트"에서 확인이 가능합니다.'
@@ -109,13 +120,13 @@ const UpdateProj = () => {
         </div>
       </div>
       <div className={styles.updateProj__saveButton}>
-        <Button text={"저장"} type={"MC2_120x40"} onClick={navigateToManage} />
+        <Button text={"저장"} type={"MC2_120x40"} onClick={onClickSave} />
       </div>
       <div className={styles.updateProj__finishButton}>
         <Button
           text="프로젝트 종료"
           type="NONE__TEXT-POINT"
-          onClick={navigateToFeedback}
+          onClick={onClickFinish}
         />
       </div>
     </div>
