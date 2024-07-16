@@ -24,8 +24,6 @@ const PortfolioWrite = () => {
   }; */
   //   submitFormData(formData);
   // };
-  const {} = usePortPost();
-  console.log(portfolioData);
   return (
     <div className={styles.portfolioWrite__contentWrap}>
       {/*프로젝트명 + 포트폴리오 작성 폼 */}
