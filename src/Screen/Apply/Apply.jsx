@@ -1,9 +1,8 @@
-import { useNavigate } from "react-router-dom";
 import Button from "../../Components/Button/Button";
 import RouteName from "../../Components/RouteName/RouteName";
 import styles from "./Apply.module.css";
 import BriefProfile from "./BriefProfile/BriefProfile";
-import { useState } from "react";
+import useApplyPost from "./useApplyPost";
 
 //mock data
 const user = {
@@ -13,30 +12,7 @@ const user = {
 };
 
 const Apply = () => {
-  //제출 전 alert
-  const navigate = useNavigate();
-  const navigateTo = () => {
-    navigate("/myproj/hiring-and-applied");
-  };
-  const warning = () => {
-    if (
-      window.confirm(
-        '프로젝트를 신청할 경우, 구인글 작성자에게 "실명, 이메일, 프로필"이 제공됩니다. 계속하시겠습니까?'
-      )
-    ) {
-      alert("제출되었습니다");
-      navigateTo();
-    } else {
-      alert("취소되었습니다");
-    }
-  };
-  //input data 수집
-  const [applyData, setApplyData] = useState({
-    stack: "",
-    field: "",
-    message: "",
-    contact: "",
-  });
+  const { warning, onChange } = useApplyPost();
   return (
     <div>
       <RouteName route={["프로젝트 신청"]} />
@@ -60,12 +36,19 @@ const Apply = () => {
           {/*선호 스택 */}
           <div className={styles.apply__container}>
             <div className={styles.apply__title}>선호 스택</div>
-            <input className={styles.apply__input} placeholder="리액트"></input>
+            <input
+              name="role"
+              onChange={onChange}
+              className={styles.apply__input}
+              placeholder="리액트"
+            ></input>
           </div>
           {/*희망 분야 */}
           <div className={styles.apply__container}>
             <div className={styles.apply__title}>희망 분야</div>
             <input
+              name="field"
+              onChange={onChange}
               className={styles.apply__input}
               placeholder="프론트엔드"
             ></input>
@@ -74,6 +57,8 @@ const Apply = () => {
           <div className={styles.apply__container}>
             <div className={styles.apply__title}>전달 메세지</div>
             <textarea
+              onChange={onChange}
+              name="stack"
               placeholder="사용할 수 있는 기술 스택, 자기 소개 등"
               className={`${styles.apply__input} ${
                 styles[`apply__input--textarea`]
@@ -84,6 +69,8 @@ const Apply = () => {
           <div className={styles.apply__container}>
             <div className={styles.apply__title}>연락 수단</div>
             <input
+              onChange={onChange}
+              name="contact"
               className={styles.apply__input}
               placeholder="1234@gmail.com"
             ></input>
