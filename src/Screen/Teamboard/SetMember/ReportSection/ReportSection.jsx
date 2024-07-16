@@ -5,6 +5,7 @@ import ToolTip from "../../../../Components/ToolTip/ToolTip";
 import Button from "../../../../Components/Button/Button";
 import { useContext, useRef, useState } from "react";
 import { MemberStateContext } from "../../Teamboard";
+import { KickDispatchContext } from "../SetMember";
 
 const OPTIONS = [
   { id: 0, value: "사유1" },
@@ -21,8 +22,10 @@ const msg = (
     <li>신고 : 프로그램은 그대로 진행 및 페널티</li>
   </ul>
 );
-const ReportSection = ({ onVote, onReport }) => {
+const ReportSection = ({ onReport }) => {
   const members = useContext(MemberStateContext);
+  const onVote = useContext(KickDispatchContext);
+
   const [visible, setVisible] = useState(false);
   const [selectedMember, setSelectedMember] = useState();
   const [selectedOption, setSelectedOption] = useState();
