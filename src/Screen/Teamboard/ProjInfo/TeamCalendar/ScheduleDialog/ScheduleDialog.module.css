@@ -110,6 +110,5 @@
 .scheuleDialog__button {
   /* 오른쪽 끝으로, 각 버튼 사이 gap, 오른쪽 마진 */
   align-self: flex-end;
-  gap: 20px;
   margin-right: 10px;
 }
