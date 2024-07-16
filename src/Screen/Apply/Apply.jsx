@@ -81,7 +81,7 @@ const Apply = () => {
             ></input>
           </div>
           <div className={styles.button__container}>
-            <Button text="신청하기" onClick={warning} />
+            <Button text="신청하기" onClick={warning} type="submit" />
           </div>
         </form>
       </div>

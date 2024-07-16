@@ -1,68 +1,69 @@
 /*side navigator + 컨텐츠*/
-.portfolioWrite__wrap{
-    display: flex;
+.portfolioWrite__wrap {
+  display: flex;
 }
 /*프로젝트 명 (최상단에 위치한 제목)*/
-.portfolioWrite__title{
-    font-size: 28px;
-    font-family: 'pretendardB';
-    margin: 20px 0;
+.portfolioWrite__title {
+  font-size: 28px;
+  font-family: "pretendardB";
+  margin: 20px 0;
 }
 
 /*form 전체*/
-.portfolioWrite__form{
-    max-width: 1117px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(360px,1fr));
-    grid-template-rows: auto;
-    gap: 30px;
-    position: relative;
+.portfolioWrite__form {
+  max-width: 1117px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  grid-template-rows: auto;
+  gap: 30px;
+  position: relative;
 }
 
 /*제목 입력란*/
-.portfolioWrite__form__title{
-    border: none;
-    border-bottom: 1px solid var(--line-color);
-    grid-column: span 2;
-    height: 62px;
-    font-size: 24px;
-    font-family: 'pretendardB'
+.portfolioWrite__form__title {
+  border: none;
+  border-bottom: 1px solid var(--line-color);
+  grid-column: span 2;
+  height: 62px;
+  font-size: 24px;
+  font-family: "pretendardB";
 }
 /*담당역할 입력란*/
-.portfolioWrite__form__role{
-    width: 370px;
-    height: 40px;
-    border: 1px solid var(--line-color);
+.portfolioWrite__form__role {
+  width: 370px;
+  height: 40px;
+  border: 1px solid var(--line-color);
 }
 /*이번 주 한 일 입력란*/
-.portfolioWrite__form__tasks{
-    grid-column: span 2;
+.portfolioWrite__form__tasks {
+  grid-column: span 2;
 }
-.portfolioWrite__form__thoughts{
-    grid-column: span 2;
+.portfolioWrite__form__thoughts {
+  grid-column: span 2;
 }
 /*label : 각 input 위에 위치한 소제목*/
-.portfolioWrite__form label{
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
-    align-items: center;
+.portfolioWrite__form label {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 /*폼 제출 버튼*/
-.portfolioWrite__form__btnWrap{
-    display: flex;
-    gap: 10px;
-    position: absolute;
-    right: 0;
-    bottom: -60px;
+.portfolioWrite__form__btnWrap {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  right: 0;
+  bottom: -60px;
 }
 
 /*input, textarea 클릭할 경우 border 나타나지 않도록 함*/
-.portfolioWrite__form input,textarea:focus{
-    outline: none;
+.portfolioWrite__form input,
+textarea:focus {
+  outline: none;
 }
 /*input, textarea 클릭할 경우 placeholder text 숨겨짐*/
-.portfolioWrite__form input:focus::placeholder{
-    color: transparent;
+.portfolioWrite__form input:focus::placeholder {
+  color: transparent;
 }

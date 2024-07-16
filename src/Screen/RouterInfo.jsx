@@ -27,6 +27,7 @@ import ProjectHire from "./ProjectHire/ProjectHire";
 import MyPageLayout from "./MyPage/MyPageLayout";
 import MyProjectLayout from "./MyProject/MyProjectLayout";
 import Apply from "./Apply/Apply";
+import APILogIn from "../Screen/LogIn/APILogIn";
 
 export const RouterInfo = [
   {
@@ -38,7 +39,12 @@ export const RouterInfo = [
         element: <MainHome />,
         index: true,
       },
-
+      //로그인
+      {
+        path: "/login",
+        element: <APILogIn />,
+        index: true,
+      },
       //프로젝트 찾기
       {
         path: "projects/home",
