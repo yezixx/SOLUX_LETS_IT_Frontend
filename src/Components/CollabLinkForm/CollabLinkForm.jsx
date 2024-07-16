@@ -2,18 +2,7 @@
 import CollabLink from "../CollabLink/CollabLink";
 import styles from "./CollabLinkForm.module.css";
 
-const CollabLinkForm = ({ type }) => {
-  const collabLinks = [
-    {
-      id: 0,
-      link: "http://github.com",
-    },
-    {
-      id: 1,
-      link: "http://www.notion.org",
-    },
-  ];
-
+const CollabLinkForm = ({ type, links, onChange }) => {
   return (
     <div className={styles.collabLinkForm}>
       <div className={styles.collabLinkForm__label}>협업툴 링크</div>
@@ -22,8 +11,13 @@ const CollabLinkForm = ({ type }) => {
           styles[`collabLinkForm__linkItem--${type}`]
         }`}
       >
-        {collabLinks.map((link) => (
-          <CollabLink key={link.id} link={link.link} />
+        {links.map((link, index) => (
+          <CollabLink
+            key={index}
+            id={link.id}
+            value={link.link}
+            onChange={onChange}
+          />
         ))}
       </div>
       {/*<div className={styles.collabLinkForm__button}>
