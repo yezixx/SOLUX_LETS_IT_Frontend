@@ -3,9 +3,7 @@
   height: 80px;
   display: flex;
   z-index: 500;
-  position: sticky;
   margin: 10px 0;
-  top: 0;
   background-color: white;
 }
 .routename__item {
