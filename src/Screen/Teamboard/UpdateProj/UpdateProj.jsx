@@ -4,49 +4,33 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
 import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
 import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
-import { useState } from "react";
-
-const mock_teamData = {
-  title: "학원 청구 정산 서비스",
-  collabLink: [
-    {
-      id: 1,
-      link: "https://www.notion.so/ko-kr",
-    },
-    {
-      id: 2,
-      link: "https://github.com/",
-    },
-  ],
-  leader: "yuming",
-};
-
-const mock_members = [
-  { id: 1, userId: "yuming", name: "유밍 BE" },
-  { id: 2, userId: "dora", name: "도라" },
-  { id: 3, userId: "tom", name: "Tom BE" },
-];
+import { useContext, useState } from "react";
+import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 
 const UpdateProj = () => {
-  const [teamData, setTeamData] = useState(mock_teamData);
+  const { onUpdateTeamData } = useContext(TeamDispatchContext);
+  const teamData = useContext(TeamStateContext);
+
+  const [title, setTitle] = useState(teamData.title);
+  const [links, setLinks] = useState(teamData.collabLink);
   const [selectedMember, setSelectedMember] = useState(teamData.leader);
 
   const nav = useNavigate();
 
   const onClickSave = () => {
-    if (teamData.title === "") {
+    if (title === "") {
       alert("프로젝트명을 입력해주세요.");
       return;
     }
-    if (
-      teamData.collabLink[0].link === "" ||
-      teamData.collabLink[1].link === ""
-    ) {
+    if (links[0].link === "" || links[1].link === "") {
       alert("협업툴 링크를 입력해주세요.");
       return;
     }
-    onChangeLeader(selectedMember);
-    nav("/teamboard/manage");
+    if (confirm("수정된 정보를 저장하시겠습니까?")) {
+      onUpdateTeamData(title, links, selectedMember);
+
+      nav("/teamboard/manage");
+    }
   };
 
   const onClickFinish = () => {
@@ -60,46 +44,31 @@ const UpdateProj = () => {
   };
 
   const onChangeTitle = (input) => {
-    setTeamData({
-      ...teamData,
-      title: input,
-    });
+    setTitle(input);
   };
 
-  const onChangeLink = (id, link) => {
-    setTeamData({
-      ...teamData,
-      collabLink: teamData.collabLink.map((item) =>
-        String(item.id) === String(id) ? { ...item, link: link } : item
-      ),
-    });
-  };
-
-  const onChangeLeader = (userId) => {
-    setTeamData({
-      ...teamData,
-      leader: userId,
-    });
+  const onChangeLink = (id, input) => {
+    setLinks(
+      links.map((item) =>
+        String(item.id) === String(id) ? { ...item, link: input } : item
+      )
+    );
   };
 
   return (
     <div className={styles.updateProj}>
       <div className={styles.updateProj__label}>프로젝트 정보 수정</div>
       <div className={styles.updateProj__projName}>
-        <ProjNameForm title={teamData.title} onChange={onChangeTitle} />
+        <ProjNameForm title={title} onChange={onChangeTitle} />
       </div>
       <div className={styles.updateProj__toolLink}>
-        <CollabLinkForm
-          links={teamData.collabLink}
-          onChange={onChangeLink}
-          type="SCROLL"
-        />
+        <CollabLinkForm links={links} onChange={onChangeLink} type="SCROLL" />
       </div>
       <div className={styles.updateProj__delegation}>
         <div className={styles.updateProj__innerLabel}>팀장 위임</div>
         <div className={styles.updateProj__bottomInner}>
           <div className={styles.updateProj__members}>
-            {mock_members.map((member) =>
+            {teamData.members.map((member) =>
               String(member.userId) === String(selectedMember) ? (
                 <div
                   key={member.id}
