@@ -51,11 +51,15 @@ const SetMember = () => {
       },
     ]);
   };
-  console.log(voteKickmembers);
+
+  const onReport = (memberId, reason) => {
+    alert(`${memberId}님을 신고하였습니다.\n사유: ${reason}`);
+  };
+
   return (
     <div className={styles.setMember}>
       <VoteSection voteKickmembers={voteKickmembers} />
-      <ReportSection members={members} onVote={onVote} />
+      <ReportSection members={members} onVote={onVote} onReport={onReport} />
     </div>
   );
 };

@@ -20,7 +20,7 @@ const msg = (
     <li>신고 : 프로그램은 그대로 진행 및 페널티</li>
   </ul>
 );
-const ReportSection = ({ members, onVote }) => {
+const ReportSection = ({ members, onVote, onReport }) => {
   const [visible, setVisible] = useState(false);
   const [selectedMember, setSelectedMember] = useState();
   const [selectedOption, setSelectedOption] = useState();
@@ -28,16 +28,43 @@ const ReportSection = ({ members, onVote }) => {
   const selectRef = useRef();
 
   const onClickKick = () => {
+    // 선택한 팀원이 없을 경우
     if (!selectedMember) {
       alert("팀원을 선택해주세요.");
       return;
     }
+    // 선택한 이유가 없을 경우
     if (!selectedOption) {
       selectRef.current.focus();
       return;
     }
+    if (
+      confirm("강퇴 제안은 취소할 수 없습니다.\n계속해서 진행하시겠습니까?")
+    ) {
+      onVote(selectedMember, selectedOption);
+      // 선택 초기화
+      setSelectedMember(null);
+      selectRef.current.value = "null";
+    }
+  };
 
-    onVote(selectedMember, selectedOption);
+  const onClickReport = () => {
+    // 선택한 팀원이 없을 경우
+    if (!selectedMember) {
+      alert("팀원을 선택해주세요.");
+      return;
+    }
+    // 선택한 이유가 없을 경우
+    if (!selectedOption) {
+      selectRef.current.focus();
+      return;
+    }
+    if (confirm("신고를 완료하시겠습니까?")) {
+      onReport(selectedMember, selectedOption);
+      // 선택 초기화
+      setSelectedMember(null);
+      selectRef.current.value = "null";
+    }
   };
 
   const onChangeOption = (e) => {
@@ -76,15 +103,15 @@ const ReportSection = ({ members, onVote }) => {
           className={styles.reportSection__dropBox}
           onChange={onChangeOption}
           ref={selectRef}
+          defaultValue="null"
         >
           <option
-            value=""
+            value="null"
             disabled
-            selected
             hidden
             className={styles.reportSection__option}
           >
-            강퇴 사유를 선택해주세요.
+            강퇴 및 신고 사유를 선택해주세요.
           </option>
           {OPTIONS.map((option) => (
             <option
@@ -98,7 +125,7 @@ const ReportSection = ({ members, onVote }) => {
         </select>
         <div className={styles.reportSection__buttons}>
           <Button text="강퇴 제안" type="POINT_120x40" onClick={onClickKick} />
-          <Button text="신고" type="BOR_POINT_70x40" />
+          <Button text="신고" type="BOR_POINT_70x40" onClick={onClickReport} />
         </div>
       </div>
     </div>
