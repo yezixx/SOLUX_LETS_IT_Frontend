@@ -28,6 +28,7 @@ import MyPageLayout from "./MyPage/MyPageLayout";
 import MyProjectLayout from "./MyProject/MyProjectLayout";
 import Apply from "./Apply/Apply";
 import APILogIn from "../Screen/LogIn/APILogIn";
+import Redirect from "./LogIn/Redirect";
 
 export const RouterInfo = [
   {
@@ -43,7 +44,12 @@ export const RouterInfo = [
       {
         path: "/login",
         element: <APILogIn />,
-        index: true,
+        label: "로그인 창",
+      },
+      {
+        path: "/login/oauth2/callback/kakao",
+        element: <Redirect />,
+        label: "로그인 중 보여줄 창",
       },
       //프로젝트 찾기
       {
