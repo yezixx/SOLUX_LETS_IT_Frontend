@@ -1,26 +1,11 @@
-import { useState } from "react";
 import Button from "../../../../Components/Button/Button";
 import SearchIcon from "../../../../Image/Icons/SearchIcon";
 import FormInput from "./FormInput";
 import styles from "./PortfolioWrite.module.css";
+import usePortPost from "./usePortPost";
 
 const PortfolioWrite = () => {
-  const [portfolioData, setPortfolioData] = useState({
-    title: "",
-    role: "",
-    stack: "",
-    tasks: "",
-    difficulties: "",
-    solutions: "",
-    learnings: "",
-  });
-  const onChange = (e) => {
-    const { name, value } = e.target;
-    setPortfolioData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const { portfolioData, onChange } = usePortPost();
   //백엔드 전송 함수
   // const handleSubmit = (e) => {  //이 함수는 form에 onsubmit으로 붙임
   //   e.preventDefault();
@@ -39,8 +24,6 @@ const PortfolioWrite = () => {
   }; */
   //   submitFormData(formData);
   // };
-
-  console.log(portfolioData);
   return (
     <div className={styles.portfolioWrite__contentWrap}>
       {/*프로젝트명 + 포트폴리오 작성 폼 */}
