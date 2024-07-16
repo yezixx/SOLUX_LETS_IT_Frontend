@@ -2,7 +2,7 @@ import apiClient from "./apiClient";
 
 // 지원자 목록 조회 - 내 프로젝트 > 구인/신청 프로젝트 화면 - 구인중
 export const getAppicantList = (postId) => {
-  return apiClient.get(`/apply/${postId}/list`);
+  return apiClient.get(`/apply/list`);
 };
 
 // 지원서 등록 - 프로젝트 지원서에서 제출 클릭 시
