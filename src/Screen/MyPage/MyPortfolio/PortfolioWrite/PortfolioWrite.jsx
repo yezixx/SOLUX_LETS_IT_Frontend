@@ -34,7 +34,7 @@ const PortfolioWrite = () => {
           <FormInput
             textarea={true}
             type="textarea"
-            width="1117px"
+            width="100%"
             placeholder=" "
             height="90px"
           />
@@ -44,8 +44,8 @@ const PortfolioWrite = () => {
           <label htmlFor="difficult">발생한 문제 / 어려움</label>
           <FormInput
             textarea={true}
-            placeholder=" "
-            width="544px"
+            placeholder="50%"
+            width="100%"
             height="200px"
           />
         </div>
@@ -55,7 +55,7 @@ const PortfolioWrite = () => {
           <FormInput
             textarea={true}
             placeholder=""
-            width="544px"
+            width="100%"
             height="200px"
           />
         </div>
@@ -65,14 +65,13 @@ const PortfolioWrite = () => {
           <FormInput
             textarea={true}
             placeholder=""
-            width="1117px"
+            width="100%"
             height="195px"
           />
         </div>
 
         {/*폼 제출 버튼*/}
         <div className={styles.portfolioWrite__form__btnWrap}>
-          <Button text="삭제" type="SEC_120x40" />
           <Button text="저장" type="MC2_120x40" />
         </div>
       </form>
