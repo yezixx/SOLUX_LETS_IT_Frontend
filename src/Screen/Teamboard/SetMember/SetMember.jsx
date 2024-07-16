@@ -23,6 +23,10 @@ const kickReducer = (state, action) => {
   switch (action.type) {
     case "CREATE":
       return [...state, action.data];
+    case ("AGREE", "DISAGREE"):
+      return state.map((item) =>
+        String(item.userId) === String(action.data.userId) ? action.data : item
+      );
     default:
       return state;
   }
@@ -65,6 +69,36 @@ const SetMember = () => {
     });
   };
 
+  const onAgree = (targetUserId) => {
+    const targetData = voteKickmembers.find(
+      (member) => String(member.userId) === String(targetUserId)
+    );
+    dispatch({
+      type: "AGREE",
+      data: {
+        agree: targetData.agree++,
+        voteCount: targetData.voteCount++,
+        ...targetData,
+      },
+    });
+  };
+
+  const onDisagree = (targetUserId) => {
+    const targetData = voteKickmembers.find(
+      (member) => String(member.userId) === String(targetUserId)
+    );
+    dispatch({
+      type: "DISAGREE",
+      data: {
+        agree: targetData.disagree++,
+        voteCount: targetData.voteCount++,
+        ...targetData,
+      },
+    });
+  };
+
+  console.log(voteKickmembers);
+
   const onReport = (memberId, reason) => {
     alert(`${memberId}님을 신고하였습니다.\n사유: ${reason}`);
   };
@@ -72,7 +106,7 @@ const SetMember = () => {
   return (
     <div className={styles.setMember}>
       <KickStateContext.Provider value={voteKickmembers}>
-        <KickDispatchContext.Provider value={onVote}>
+        <KickDispatchContext.Provider value={{ onVote, onAgree, onDisagree }}>
           <VoteSection />
           <ReportSection onReport={onReport} />
         </KickDispatchContext.Provider>

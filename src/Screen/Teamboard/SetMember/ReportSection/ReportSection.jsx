@@ -24,7 +24,7 @@ const msg = (
 );
 const ReportSection = ({ onReport }) => {
   const members = useContext(MemberStateContext);
-  const onVote = useContext(KickDispatchContext);
+  const { onVote } = useContext(KickDispatchContext);
 
   const [visible, setVisible] = useState(false);
   const [selectedMember, setSelectedMember] = useState();
