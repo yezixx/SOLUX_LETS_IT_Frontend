@@ -3,6 +3,7 @@ import Button from "../../Components/Button/Button";
 import RouteName from "../../Components/RouteName/RouteName";
 import styles from "./Apply.module.css";
 import BriefProfile from "./BriefProfile/BriefProfile";
+import { useState } from "react";
 
 //mock data
 const user = {
@@ -29,6 +30,13 @@ const Apply = () => {
       alert("취소되었습니다");
     }
   };
+  //input data 수집
+  const [applyData, setApplyData] = useState({
+    stack: "",
+    field: "",
+    message: "",
+    contact: "",
+  });
   return (
     <div>
       <RouteName route={["프로젝트 신청"]} />
