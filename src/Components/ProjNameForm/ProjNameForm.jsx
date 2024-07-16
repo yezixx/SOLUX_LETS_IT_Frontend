@@ -2,8 +2,7 @@ import { useState } from "react";
 import styles from "./ProjNameForm.module.css";
 
 const ProjNameForm = () => {
-  const PROJECT_NAME = "노년층을 위한 구인구직 웹사이트";
-  const [projectName, setprojectName] = useState(PROJECT_NAME);
+  const [projectName, setprojectName] = useState();
 
   const onChangeProjectName = (e) => {
     setprojectName(e.target.value);

@@ -3,13 +3,15 @@ import styles from "./CollabLink.module.css";
 import ToolIcon from "../ToolIcon/ToolIcon";
 import SelectIcon from "../SelectIcon/SelectIcon";
 
-const CollabLink = ({ link, type }) => {
-  const [url, setUrl] = useState(link);
+const CollabLink = ({ id, init, type, onChangeUrlForm }) => {
+  const [url, setUrl] = useState(init);
   const [visible, setVisible] = useState(false);
 
-  const onChangeUrl = (e) => {
+  const onChangeInput = (e) => {
     setUrl(e.target.value);
+    onChangeUrlForm(id, e.target.value);
   };
+
   return (
     <div className={styles.collabLink}>
       {visible === true ? (
@@ -30,7 +32,7 @@ const CollabLink = ({ link, type }) => {
         }`}
         type="text"
         value={url}
-        onChange={onChangeUrl}
+        onChange={onChangeInput}
         placeholder="URL을 입력해주세요."
       ></input>
     </div>
