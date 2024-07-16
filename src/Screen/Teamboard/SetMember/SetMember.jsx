@@ -1,7 +1,8 @@
 import styles from "./SetMember.module.css";
 import VoteSection from "./VoteSection/VoteSection";
 import ReportSection from "./ReportSection/ReportSection";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { MemberStateContext } from "../Teamboard";
 
 const mock_voteKickmembers = [
   {
@@ -15,13 +16,9 @@ const mock_voteKickmembers = [
   },
 ];
 
-const members = [
-  { id: 1, userId: "yuming", name: "유밍 BE" },
-  { id: 2, userId: "dora", name: "도라" },
-  { id: 3, userId: "tom", name: "Tom BE" },
-];
-
 const SetMember = () => {
+  const members = useContext(MemberStateContext);
+
   const [voteKickmembers, setVotemembers] = useState(mock_voteKickmembers);
 
   const kickIdRef = useRef(2);
@@ -59,7 +56,7 @@ const SetMember = () => {
   return (
     <div className={styles.setMember}>
       <VoteSection voteKickmembers={voteKickmembers} />
-      <ReportSection members={members} onVote={onVote} onReport={onReport} />
+      <ReportSection onVote={onVote} onReport={onReport} />
     </div>
   );
 };

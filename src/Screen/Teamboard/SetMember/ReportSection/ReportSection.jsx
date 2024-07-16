@@ -3,7 +3,8 @@ import styles from "./ReportSection.module.css";
 import QuestionMarkIcon from "../../../../Image/Icons/QuestionMarkIcon";
 import ToolTip from "../../../../Components/ToolTip/ToolTip";
 import Button from "../../../../Components/Button/Button";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
+import { MemberStateContext } from "../../Teamboard";
 
 const OPTIONS = [
   { id: 0, value: "사유1" },
@@ -20,7 +21,8 @@ const msg = (
     <li>신고 : 프로그램은 그대로 진행 및 페널티</li>
   </ul>
 );
-const ReportSection = ({ members, onVote, onReport }) => {
+const ReportSection = ({ onVote, onReport }) => {
+  const members = useContext(MemberStateContext);
   const [visible, setVisible] = useState(false);
   const [selectedMember, setSelectedMember] = useState();
   const [selectedOption, setSelectedOption] = useState();
@@ -44,6 +46,7 @@ const ReportSection = ({ members, onVote, onReport }) => {
       onVote(selectedMember, selectedOption);
       // 선택 초기화
       setSelectedMember(null);
+      setSelectedOption(null);
       selectRef.current.value = "null";
     }
   };
@@ -63,6 +66,7 @@ const ReportSection = ({ members, onVote, onReport }) => {
       onReport(selectedMember, selectedOption);
       // 선택 초기화
       setSelectedMember(null);
+      setSelectedOption(null);
       selectRef.current.value = "null";
     }
   };
