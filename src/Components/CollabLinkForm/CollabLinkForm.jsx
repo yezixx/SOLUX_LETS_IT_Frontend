@@ -2,7 +2,7 @@
 import CollabLink from "../CollabLink/CollabLink";
 import styles from "./CollabLinkForm.module.css";
 
-const CollabLinkForm = ({ type, links, onChangeUrlForm }) => {
+const CollabLinkForm = ({ type, links, onChange }) => {
   return (
     <div className={styles.collabLinkForm}>
       <div className={styles.collabLinkForm__label}>협업툴 링크</div>
@@ -15,8 +15,8 @@ const CollabLinkForm = ({ type, links, onChangeUrlForm }) => {
           <CollabLink
             key={index}
             id={link.id}
-            init={link.link}
-            onChangeUrlForm={onChangeUrlForm}
+            value={link.link}
+            onChange={onChange}
           />
         ))}
       </div>

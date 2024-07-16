@@ -25,10 +25,15 @@ const mock_collabLinks = [
 const CreateBoard = () => {
   const nav = useNavigate();
   const members = mock_members;
+  const [title, setTitle] = useState("");
   const [links, setLinks] = useState(mock_collabLinks);
 
   const onClickCreate = () => {
     if (confirm("팀게시판을 생성하시겠습니까?")) nav("/teamboard");
+  };
+
+  const onChangeTitleForm = (input) => {
+    setTitle(input);
   };
 
   const onChangeUrlForm = (id, url) => {
@@ -56,11 +61,11 @@ const CreateBoard = () => {
           </div>
           {/*프로젝트명 */}
           <div className={styles.createBoard__projName}>
-            <ProjNameForm />
+            <ProjNameForm title={title} onChange={onChangeTitleForm} />
           </div>
           {/*협업툴 링크 */}
           <div className={styles.createBoard__linkForm}>
-            <CollabLinkForm links={links} onChangeUrlForm={onChangeUrlForm} />
+            <CollabLinkForm links={links} onChange={onChangeUrlForm} />
           </div>
           {/*생성 버튼 */}
           <div className={styles.createBoard__button}>
