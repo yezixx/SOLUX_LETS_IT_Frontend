@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 const TeamNav = () => {
   const location = useLocation();
   const currentUrl = location.pathname;
-  console.log(currentUrl);
 
   const nav = useNavigate();
 

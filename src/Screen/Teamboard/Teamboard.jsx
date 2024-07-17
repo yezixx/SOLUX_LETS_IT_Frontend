@@ -66,6 +66,7 @@ const Teamboard = () => {
         members: member,
       },
     });
+    console.log(teamData);
   };
 
   const onUpdateTeamData = (title, links, selectedMember) => {
@@ -79,7 +80,6 @@ const Teamboard = () => {
       },
     });
   };
-  console.log(teamData);
 
   return (
     <div className={styles.teamboard}>
