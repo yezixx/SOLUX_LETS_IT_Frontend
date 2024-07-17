@@ -10,22 +10,20 @@ import News from "../../Components/News/News";
 
 function MainHome() {
   return (
-  <div className={styles.wrap}>
-    
-    <MainTitle />
-    <MainManageButton/>
-    <RecommendProject />
-    <PopularProject />
-    <div className={styles.contestnews}>
-      <Contest/>
-      <News/>
-
+    <div className={styles.wrap}>
+      <MainTitle />
+      <MainManageButton />
+      <RecommendProject />
+      <PopularProject />
+      <div className={styles.contestnews}>
+        <Contest />
+        <News />
+      </div>
+      <div className={styles.main}>
+        {/*<MyProfile />*/} {/*라우팅 시 outlet이 들어갈 부분*/}
+      </div>
     </div>
-    <div className={styles.main}> 
-    {/*<MyProfile />*/} {/*라우팅 시 outlet이 들어갈 부분*/}
-    </div>
-  </div>
-  )
+  );
 }
 
 export default MainHome;

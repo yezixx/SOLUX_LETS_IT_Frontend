@@ -19,8 +19,8 @@ const PostInfo = ({ post }) => {
           <div className={styles.PostInfo__postInfo}>
             <div>
               <CalendarIcon />
-              <div className={styles.PostInfo__subLabel}>모집마감</div>
-              {post.postInfo.hireDate.endDate}
+              <div className={styles.PostInfo__subLabel}>모집기간</div>
+              {`${post.postInfo.hireDate.startDate} ~ ${post.postInfo.hireDate.endDate}`}
             </div>
             <div>
               <UserIcon />

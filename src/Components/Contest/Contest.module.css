@@ -1,6 +1,10 @@
-.text{
-    margin-top: 3vw;
-    margin-left: 3vw;
-    font-family: 'pretendardM';
+.contest {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
-  
+
+.text {
+  font-family: "pretendardB";
+  font-size: 26px;
+}
