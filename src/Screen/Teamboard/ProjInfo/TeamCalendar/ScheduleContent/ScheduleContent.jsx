@@ -1,10 +1,15 @@
+import { useContext } from "react";
 import Button from "../../../../../Components/Button/Button";
 import XIcon from "../../../../../Image/Icons/XIcon";
 import styles from "./ScheduleContent.module.css";
+import { TeamDispatchContext } from "../../../Teamboard";
 
-const ScheduleContent = ({ event, closeInfo, onDeleteEvent }) => {
+const ScheduleContent = ({ event, closeInfo }) => {
+  const { onDeleteEvent } = useContext(TeamDispatchContext);
+
   const onClickDelete = () => {
     onDeleteEvent(event.id);
+    closeInfo();
   };
 
   return (
@@ -30,7 +35,7 @@ const ScheduleContent = ({ event, closeInfo, onDeleteEvent }) => {
         <div className={styles.ScheduleContent__section}>
           <div className={styles.ScheduleContent__innerLabel}>날짜</div>
           <div className={styles.ScheduleContent__info}>{event.startStr}</div>
-          {event.endStr ? (
+          {event.end ? (
             <>
               <div>~</div>
               <div className={styles.ScheduleContent__info}>

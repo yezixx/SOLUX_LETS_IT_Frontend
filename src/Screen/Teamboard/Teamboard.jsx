@@ -23,6 +23,29 @@ const mock_teamData = {
     { id: 2, userId: "dora", name: "도라" },
     { id: 3, userId: "tom", name: "Tom BE" },
   ],
+  events: [
+    {
+      id: 0,
+      title: "event 1",
+      start: "2024-07-01",
+      end: "2024-07-01",
+      description: "test",
+    },
+    {
+      id: 1,
+      title: "event 2",
+      start: "2024-07-03",
+      end: "2024-07-03",
+      description: "test",
+    },
+    {
+      id: 2,
+      title: "event 3",
+      start: "2024-07-01",
+      end: "2024-07-03",
+      description: "test",
+    },
+  ],
   voteKickmembers: [
     {
       id: 1,
@@ -64,6 +87,18 @@ function teamReducer(state, action) {
           (item) => String(item.userId) !== String(action.data)
         ),
       };
+    case "CREATE_EVENT":
+      return {
+        ...state,
+        events: [...state.events, action.data],
+      };
+    case "DELETE_EVENT":
+      return {
+        ...state,
+        events: state.events.filter(
+          (item) => String(item.id) !== String(action.data)
+        ),
+      };
     case "CREATE_VOTE":
       return {
         ...state,
@@ -99,6 +134,7 @@ const Teamboard = () => {
   const [teamData, teamDispatch] = useReducer(teamReducer, mock_teamData);
   const kickIdRef = useRef(2);
   const meetingRef = useRef(3);
+  const eventRef = useRef(3);
 
   const onDeleteMember = (userId) => {
     teamDispatch({
@@ -145,6 +181,33 @@ const Teamboard = () => {
         disagree: 0,
       },
     });
+  };
+
+  const onCreateEvent = (title, startDate, endDate, description) => {
+    if (startDate !== endDate) {
+      const newDate = new Date(endDate);
+      newDate.setDate(newDate.getDate() + 1);
+      endDate = newDate.toISOString().split("T")[0];
+    }
+    teamDispatch({
+      type: "CREATE_EVENT",
+      data: {
+        id: eventRef.current++,
+        title: title,
+        start: startDate,
+        end: endDate,
+        description: description,
+      },
+    });
+  };
+
+  const onDeleteEvent = (targetId) => {
+    if (confirm("일정을 삭제하시겠습니까?")) {
+      teamDispatch({
+        type: "DELETE_EVENT",
+        data: targetId,
+      });
+    }
   };
 
   const onAgree = (targetUserId) => {
@@ -211,6 +274,8 @@ const Teamboard = () => {
           value={{
             onUpdateTeamData,
             onDeleteMember,
+            onCreateEvent,
+            onDeleteEvent,
             onVote,
             onAgree,
             onDisagree,
