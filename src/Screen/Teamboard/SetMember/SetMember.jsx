@@ -2,7 +2,7 @@ import styles from "./SetMember.module.css";
 import VoteSection from "./VoteSection/VoteSection";
 import ReportSection from "./ReportSection/ReportSection";
 import { createContext, useContext, useReducer, useRef } from "react";
-import { MemberStateContext } from "../Teamboard";
+import { MemberDispatchContext, MemberStateContext } from "../Teamboard";
 
 const mock_voteKickmembers = [
   {
@@ -27,6 +27,10 @@ const kickReducer = (state, action) => {
       return state.map((item) =>
         String(item.userId) === String(action.data.userId) ? action.data : item
       );
+    case "DELETE":
+      return state.filter(
+        (item) => String(item.userId) !== String(action.data)
+      );
     default:
       return state;
   }
@@ -34,6 +38,7 @@ const kickReducer = (state, action) => {
 
 const SetMember = () => {
   const members = useContext(MemberStateContext);
+  const { onDelete } = useContext(MemberDispatchContext);
 
   const [voteKickmembers, dispatch] = useReducer(
     kickReducer,
@@ -81,6 +86,14 @@ const SetMember = () => {
         ...targetData,
       },
     });
+
+    if (Number(targetData.agree) === Number(members.length - 1)) {
+      dispatch({
+        type: "DELETE",
+        data: targetData.userId,
+      });
+      onDelete(targetData.userId);
+    }
   };
 
   const onDisagree = (targetUserId) => {
@@ -96,8 +109,6 @@ const SetMember = () => {
       },
     });
   };
-
-  console.log(voteKickmembers);
 
   const onReport = (memberId, reason) => {
     alert(`${memberId}님을 신고하였습니다.\n사유: ${reason}`);
