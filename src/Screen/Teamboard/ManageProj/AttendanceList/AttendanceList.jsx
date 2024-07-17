@@ -1,12 +1,11 @@
 import styles from "./AttendanceList.module.css";
 import AttendanceItem from "./AttendanceItem/AttendanceItem";
+import { useContext } from "react";
+import { TeamStateContext } from "../../Teamboard";
 
 const AttendanceList = () => {
-  const meetings = [
-    { id: 1, date: "2024-04-01", isCompleted: true },
-    { id: 2, date: "2024-04-06", isCompleted: true },
-    { id: 3, date: "2024-04-06", isCompleted: false },
-  ];
+  const teamData = useContext(TeamStateContext);
+  const meetings = teamData.meetingLog;
   return (
     <div className={styles.attendanceList}>
       <div className={styles.attendanceList__item}>
@@ -15,10 +14,14 @@ const AttendanceList = () => {
             key={meeting.id}
             id={meeting.id}
             date={meeting.date}
-            isCompleted={meeting.isCompleted}
-            length={meetings.length}
           />
         ))}
+        <AttendanceItem
+          key={meetings.length + 1}
+          id={meetings.length + 1}
+          date={new Date().toISOString().split("T")[0]}
+          iscurrent={true}
+        />
       </div>
     </div>
   );

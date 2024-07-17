@@ -34,6 +34,20 @@ const mock_teamData = {
       disagree: 0,
     },
   ],
+  meetingLog: [
+    {
+      id: 1,
+      date: "2024-04-10",
+      nonParticipants: ["tom"],
+      proofImages: "first_week.png",
+    },
+    {
+      id: 2,
+      date: "2024-04-14",
+      nonParticipants: [],
+      proofImages: "second_week.png",
+    },
+  ],
 };
 
 export const TeamStateContext = createContext();
