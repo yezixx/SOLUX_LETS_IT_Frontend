@@ -35,11 +35,42 @@
   gap: 10px;
 }
 
+.attendanceDetail__file > input[type="file"] {
+  display: none;
+}
+
+.attendanceDetail__file > label {
+  /*크기*/
+  width: 80px;
+  height: 30px;
+  /*테두리*/
+  border-radius: 4px;
+  /*배경색*/
+  background-color: var(--select-color);
+  /*텍스트*/
+  font-size: 14px;
+  color: var(--text-color2);
+  /*내부 배치*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover {
+    background-color: var(--line-color);
+  }
+}
+
 .attendanceDetail__fileLabel {
   /*배치*/
   display: flex;
   flex-direction: column;
   gap: 5px;
+}
+
+.attendanceDetail__fileLabel > input {
+  width: 260px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .attendanceDetail__fileName {
