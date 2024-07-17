@@ -81,20 +81,29 @@ const getToolList = (type) => {
       ];
 };
 
-const CollabLink = ({ id, value, type, onChange }) => {
+const CollabLink = ({ id, value, type, init, onChange, onClick }) => {
   const [visible, setVisible] = useState(false);
 
   const toolList = getToolList(type);
+  const [selectedIcon, setSelectedIcon] = useState(
+    init ? init : toolList[0].tool
+  );
 
   const onChangeInput = (e) => {
     onChange(id, e.target.value);
+  };
+
+  const onChangeIcon = (tool) => {
+    setSelectedIcon(tool);
+    onClick(id, tool);
+    setVisible(false);
   };
 
   return (
     <div className={styles.collabLink}>
       {visible === true ? (
         <div className={styles.collabLink__selectIcon}>
-          <SelectIcon list={toolList} />
+          <SelectIcon list={toolList} onChange={onChangeIcon} />
         </div>
       ) : null}
       <div
@@ -102,7 +111,11 @@ const CollabLink = ({ id, value, type, onChange }) => {
           setVisible(!visible);
         }}
       >
-        <ToolIcon alt="아이콘" type={type === "SHORT" ? "" : "NONE"} />
+        <ToolIcon
+          title={selectedIcon}
+          alt={selectedIcon}
+          type={type === "SHORT" ? "" : "NONE"}
+        />
       </div>
       <input
         className={`${styles.collabLink__input} ${

@@ -47,6 +47,14 @@ const UpdateProj = () => {
     setTitle(input);
   };
 
+  const onClickeIcon = (id, input) => {
+    setLinks(
+      links.map((item) =>
+        String(item.id) === String(id) ? { ...item, tool: input } : item
+      )
+    );
+  };
+
   const onChangeLink = (id, input) => {
     setLinks(
       links.map((item) =>
@@ -62,7 +70,12 @@ const UpdateProj = () => {
         <ProjNameForm title={title} onChange={onChangeTitle} />
       </div>
       <div className={styles.updateProj__toolLink}>
-        <CollabLinkForm links={links} onChange={onChangeLink} type="SCROLL" />
+        <CollabLinkForm
+          links={links}
+          onChange={onChangeLink}
+          onClick={onClickeIcon}
+          type="SCROLL"
+        />
       </div>
       <div className={styles.updateProj__delegation}>
         <div className={styles.updateProj__innerLabel}>팀장 위임</div>

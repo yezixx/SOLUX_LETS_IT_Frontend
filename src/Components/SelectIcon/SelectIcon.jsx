@@ -1,7 +1,7 @@
 import ToolIcon from "../ToolIcon/ToolIcon";
 import styles from "./SelectIcon.module.css";
 
-const SelectIcon = ({ children, list }) => {
+const SelectIcon = ({ children, list, onChange }) => {
   const msg = (
     <div
       style={{
@@ -18,6 +18,9 @@ const SelectIcon = ({ children, list }) => {
           src={item.image}
           alt={item.altMsg}
           title={item.altMsg}
+          onClick={() => {
+            onChange(item.tool);
+          }}
         />
       ))}
     </div>

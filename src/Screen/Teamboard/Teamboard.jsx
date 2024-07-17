@@ -8,10 +8,12 @@ const mock_teamData = {
   collabLink: [
     {
       id: 1,
+      tool: "notion",
       link: "https://www.notion.so/ko-kr",
     },
     {
       id: 2,
+      tool: "github",
       link: "https://github.com/",
     },
   ],
