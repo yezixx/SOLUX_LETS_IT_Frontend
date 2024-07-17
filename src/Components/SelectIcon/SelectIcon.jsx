@@ -1,7 +1,7 @@
 import ToolIcon from "../ToolIcon/ToolIcon";
 import styles from "./SelectIcon.module.css";
 
-const SelectIcon = ({ children }) => {
+const SelectIcon = ({ children, list }) => {
   const msg = (
     <div
       style={{
@@ -11,13 +11,15 @@ const SelectIcon = ({ children }) => {
         justifyContent: "center",
       }}
     >
-      <ToolIcon type="SHADOW" />
-      <ToolIcon type="SHADOW" />
-      <ToolIcon type="SHADOW" />
-      <ToolIcon type="SHADOW" />
-      <ToolIcon type="SHADOW" />
-      <ToolIcon type="SHADOW" />
-      <ToolIcon type="SHADOW" />
+      {list.map((item, index) => (
+        <ToolIcon
+          key={index}
+          type="SHADOW"
+          src={item.image}
+          alt={item.altMsg}
+          title={item.altMsg}
+        />
+      ))}
     </div>
   );
 

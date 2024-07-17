@@ -3,8 +3,88 @@ import styles from "./CollabLink.module.css";
 import ToolIcon from "../ToolIcon/ToolIcon";
 import SelectIcon from "../SelectIcon/SelectIcon";
 
+const getToolList = (type) => {
+  return type === "SHORT"
+    ? [
+        {
+          tool: "gmail",
+          logo: "",
+          altMsg: "gmail",
+        },
+        {
+          tool: "github",
+          image: "",
+          altMsg: "github",
+        },
+        {
+          tool: "notion",
+          image: "",
+          altMsg: "notion",
+        },
+        {
+          tool: "linkedIn",
+          image: "",
+          altMsg: "linkedIn",
+        },
+        {
+          tool: "stack overflow",
+          image: "",
+          altMsg: "stack overflow",
+        },
+        {
+          tool: "blog",
+          image: "",
+          altMsg: "blog",
+        },
+        {
+          tool: "others",
+          image: "",
+          altMsg: "others",
+        },
+      ]
+    : [
+        {
+          tool: "github",
+          image: "",
+          altMsg: "github",
+        },
+        {
+          tool: "notion",
+          image: "",
+          altMsg: "notion",
+        },
+        {
+          tool: "jira",
+          logo: "",
+          altMsg: "jira",
+        },
+        {
+          tool: "figma",
+          image: "",
+          altMsg: "figma",
+        },
+        {
+          tool: "slack",
+          image: "",
+          altMsg: "slack",
+        },
+        {
+          tool: "discord",
+          image: "",
+          altMsg: "discord",
+        },
+        {
+          tool: "others",
+          image: "",
+          altMsg: "others",
+        },
+      ];
+};
+
 const CollabLink = ({ id, value, type, onChange }) => {
   const [visible, setVisible] = useState(false);
+
+  const toolList = getToolList(type);
 
   const onChangeInput = (e) => {
     onChange(id, e.target.value);
@@ -14,7 +94,7 @@ const CollabLink = ({ id, value, type, onChange }) => {
     <div className={styles.collabLink}>
       {visible === true ? (
         <div className={styles.collabLink__selectIcon}>
-          <SelectIcon />
+          <SelectIcon list={toolList} />
         </div>
       ) : null}
       <div
