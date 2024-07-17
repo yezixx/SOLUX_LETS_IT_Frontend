@@ -12,7 +12,6 @@ const mock_post = {
     title: "웹 사이드 프로젝트 팀원 모집",
     writer: "홍길동",
     hireDate: {
-      startDate: "2024-04-06",
       endDate: "2024-04-09",
     },
     hireTO: 0,
