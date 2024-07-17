@@ -85,6 +85,11 @@ function teamReducer(state, action) {
           (item) => String(item.userId) !== String(action.data)
         ),
       };
+    case "SAVE_MEETING":
+      return {
+        ...state,
+        meetingLog: [...state.meetingLog, action.data],
+      };
     default:
       return state;
   }
@@ -93,6 +98,7 @@ function teamReducer(state, action) {
 const Teamboard = () => {
   const [teamData, teamDispatch] = useReducer(teamReducer, mock_teamData);
   const kickIdRef = useRef(2);
+  const meetingRef = useRef(3);
 
   const onDeleteMember = (userId) => {
     teamDispatch({
@@ -188,6 +194,16 @@ const Teamboard = () => {
     });
   };
 
+  const onSaveMeeting = (meetingData) => {
+    teamDispatch({
+      type: "SAVE_MEETING",
+      data: {
+        id: meetingRef.current++,
+        ...meetingData,
+      },
+    });
+  };
+
   return (
     <div className={styles.teamboard}>
       <TeamStateContext.Provider value={teamData}>
@@ -198,6 +214,7 @@ const Teamboard = () => {
             onVote,
             onAgree,
             onDisagree,
+            onSaveMeeting,
           }}
         >
           <Outlet />
