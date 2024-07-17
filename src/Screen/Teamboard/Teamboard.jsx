@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useRef } from "react";
 import styles from "./Teamboard.module.css";
 import { Outlet } from "react-router-dom";
 
@@ -48,6 +48,27 @@ function teamReducer(state, action) {
           (item) => String(item.userId) !== String(action.data)
         ),
       };
+    case "CREATE_VOTE":
+      return {
+        ...state,
+        voteKickmembers: [...state.voteKickmembers, action.data],
+      };
+    case ("AGREE", "DISAGREE"):
+      return {
+        ...state,
+        voteKickmembers: state.voteKickmembers.map((item) =>
+          String(item.userId) === String(action.data.userId)
+            ? action.data
+            : item
+        ),
+      };
+    case "DELETE_VOTE":
+      return {
+        ...state,
+        voteKickmembers: state.voteKickmembers.filter(
+          (item) => String(item.userId) !== String(action.data)
+        ),
+      };
     default:
       return state;
   }
@@ -55,6 +76,7 @@ function teamReducer(state, action) {
 
 const Teamboard = () => {
   const [teamData, teamDispatch] = useReducer(teamReducer, mock_teamData);
+  const kickIdRef = useRef(2);
 
   const onDeleteMember = (userId) => {
     teamDispatch({
@@ -76,11 +98,91 @@ const Teamboard = () => {
     });
   };
 
+  const onVote = (memberId, reason) => {
+    if (
+      teamData.voteKickmembers.find(
+        (member) => String(member.userId) === String(memberId)
+      )
+    ) {
+      alert("이미 투표 중인 팀원입니다.");
+
+      return;
+    }
+
+    teamDispatch({
+      type: "CREATE_VOTE",
+      data: {
+        id: kickIdRef.current++,
+        userId: memberId,
+        name: teamData.members.find(
+          (member) => String(member.userId) === String(memberId)
+        ).name,
+        reason: reason,
+        voteCount: 0,
+        agree: 0,
+        disagree: 0,
+      },
+    });
+  };
+
+  const onAgree = (targetUserId) => {
+    const targetData = teamData.voteKickmembers.find(
+      (member) => String(member.userId) === String(targetUserId)
+    );
+    teamDispatch({
+      type: "AGREE",
+      data: {
+        agree: targetData.agree++,
+        voteCount: targetData.voteCount++,
+        ...targetData,
+      },
+    });
+
+    if (Number(targetData.agree) === Number(teamData.members.length - 1)) {
+      onDeleteVote(targetUserId);
+      onDeleteMember(targetUserId);
+    }
+  };
+
+  const onDisagree = (targetUserId) => {
+    const targetData = teamData.voteKickmembers.find(
+      (member) => String(member.userId) === String(targetUserId)
+    );
+    teamDispatch({
+      type: "DISAGREE",
+      data: {
+        agree: targetData.disagree++,
+        voteCount: targetData.voteCount++,
+        ...targetData,
+      },
+    });
+
+    if (
+      Number(targetData.voteCount) === Number(teamData.members.length - 1) &&
+      Number(targetData.agree) < Number(teamData.members.length - 1)
+    ) {
+      onDeleteVote(targetUserId);
+    }
+  };
+
+  const onDeleteVote = (targetUserId) => {
+    teamDispatch({
+      type: "DELETE_VOTE",
+      data: targetUserId,
+    });
+  };
+
   return (
     <div className={styles.teamboard}>
       <TeamStateContext.Provider value={teamData}>
         <TeamDispatchContext.Provider
-          value={{ onUpdateTeamData, onDeleteMember }}
+          value={{
+            onUpdateTeamData,
+            onDeleteMember,
+            onVote,
+            onAgree,
+            onDisagree,
+          }}
         >
           <Outlet />
         </TeamDispatchContext.Provider>

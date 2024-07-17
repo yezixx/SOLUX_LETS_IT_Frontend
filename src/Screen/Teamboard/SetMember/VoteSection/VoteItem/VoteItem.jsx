@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import styles from "./VoteItem.module.css";
-import { KickDispatchContext } from "../../SetMember";
+import { TeamDispatchContext } from "../../../Teamboard";
 
 const VoteItem = ({ userName, userId }) => {
-  const { onAgree, onDisagree } = useContext(KickDispatchContext);
+  const { onAgree, onDisagree } = useContext(TeamDispatchContext);
 
   const onClickAgree = () => {
     onAgree(userId);

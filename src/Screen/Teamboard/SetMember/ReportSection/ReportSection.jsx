@@ -4,8 +4,7 @@ import QuestionMarkIcon from "../../../../Image/Icons/QuestionMarkIcon";
 import ToolTip from "../../../../Components/ToolTip/ToolTip";
 import Button from "../../../../Components/Button/Button";
 import { useContext, useRef, useState } from "react";
-import { TeamStateContext } from "../../Teamboard";
-import { KickDispatchContext } from "../SetMember";
+import { TeamDispatchContext, TeamStateContext } from "../../Teamboard";
 
 const OPTIONS = [
   { id: 0, value: "사유1" },
@@ -18,14 +17,14 @@ const OPTIONS = [
 
 const msg = (
   <ul style={{ listStyleType: "disc", paddingLeft: "40px" }}>
-    <li>강퇴 : 프로그램 강제 퇴장 및 페널티</li>
-    <li>신고 : 프로그램은 그대로 진행 및 페널티</li>
+    <li>강퇴 : 프로젝트 강제 퇴장 및 페널티</li>
+    <li>신고 : 프로젝트는 그대로 진행 및 페널티</li>
   </ul>
 );
 const ReportSection = ({ onReport }) => {
   const teamData = useContext(TeamStateContext);
   const members = teamData.members;
-  const { onVote } = useContext(KickDispatchContext);
+  const { onVote } = useContext(TeamDispatchContext);
 
   const [visible, setVisible] = useState(false);
   const [selectedMember, setSelectedMember] = useState();
