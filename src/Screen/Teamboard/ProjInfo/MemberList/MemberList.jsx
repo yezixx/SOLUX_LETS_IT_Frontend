@@ -1,13 +1,12 @@
 import styles from "./MemberList.module.css";
 import MemberItem from "../../../../Components/MemberItem/MemberItem";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { TeamStateContext } from "../../Teamboard";
 
 const MemberList = () => {
-  const members = [
-    { id: 1, name: "유밍 BE" },
-    { id: 2, name: "도라" },
-    { id: 3, name: "Tom BE" },
-  ];
+  const teamData = useContext(TeamStateContext);
+  const members = teamData.members;
 
   return (
     <div className={styles.memberList}>

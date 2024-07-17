@@ -21,30 +21,33 @@ const mock_teamData = {
     { id: 2, userId: "dora", name: "도라" },
     { id: 3, userId: "tom", name: "Tom BE" },
   ],
+  voteKickmembers: [
+    {
+      id: 1,
+      userId: "tom",
+      name: "Tom BE",
+      reason: "사유2",
+      voteCount: 0,
+      agree: 0,
+      disagree: 0,
+    },
+  ],
 };
 
 export const TeamStateContext = createContext();
 export const TeamDispatchContext = createContext();
-export const MemberStateContext = createContext();
-export const MemberDispatchContext = createContext();
-
-function reducer(state, action) {
-  switch (action.type) {
-    case "DELETE":
-      return state.filter(
-        (item) => String(item.userId) !== String(action.userId)
-      );
-    default:
-      return state;
-  }
-}
 
 function teamReducer(state, action) {
   switch (action.type) {
     case "UPDATE":
       return action.data;
-    case "UPDATE_MEMBER":
-      return action.data;
+    case "DELETE_MEMBER":
+      return {
+        ...state,
+        members: state.members.filter(
+          (item) => String(item.userId) !== String(action.data)
+        ),
+      };
     default:
       return state;
   }
@@ -52,22 +55,14 @@ function teamReducer(state, action) {
 
 const Teamboard = () => {
   const [teamData, teamDispatch] = useReducer(teamReducer, mock_teamData);
-  const [member, dispatch] = useReducer(reducer, teamData.members);
 
-  const onDelete = (userId) => {
-    dispatch({
-      type: "DELETE",
-      userId: userId,
-    });
+  const onDeleteMember = (userId) => {
     teamDispatch({
-      type: "UPDATE_MEMBER",
-      data: {
-        ...teamData,
-        members: member,
-      },
+      type: "DELETE_MEMBER",
+      data: userId,
     });
-    console.log(teamData);
   };
+  console.log(teamData);
 
   const onUpdateTeamData = (title, links, selectedMember) => {
     teamDispatch({
@@ -84,12 +79,10 @@ const Teamboard = () => {
   return (
     <div className={styles.teamboard}>
       <TeamStateContext.Provider value={teamData}>
-        <TeamDispatchContext.Provider value={{ onUpdateTeamData }}>
-          <MemberStateContext.Provider value={member}>
-            <MemberDispatchContext.Provider value={{ onDelete }}>
-              <Outlet />
-            </MemberDispatchContext.Provider>
-          </MemberStateContext.Provider>
+        <TeamDispatchContext.Provider
+          value={{ onUpdateTeamData, onDeleteMember }}
+        >
+          <Outlet />
         </TeamDispatchContext.Provider>
       </TeamStateContext.Provider>
     </div>

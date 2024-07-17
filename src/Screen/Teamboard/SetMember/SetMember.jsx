@@ -2,7 +2,7 @@ import styles from "./SetMember.module.css";
 import VoteSection from "./VoteSection/VoteSection";
 import ReportSection from "./ReportSection/ReportSection";
 import { createContext, useContext, useReducer, useRef } from "react";
-import { MemberDispatchContext, MemberStateContext } from "../Teamboard";
+import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 
 const mock_voteKickmembers = [
   {
@@ -37,8 +37,9 @@ const kickReducer = (state, action) => {
 };
 
 const SetMember = () => {
-  const members = useContext(MemberStateContext);
-  const { onDelete } = useContext(MemberDispatchContext);
+  const teamData = useContext(TeamStateContext);
+  const { onDeleteMember } = useContext(TeamDispatchContext);
+  const members = teamData.members;
 
   const [voteKickmembers, dispatch] = useReducer(
     kickReducer,
@@ -92,7 +93,7 @@ const SetMember = () => {
         type: "DELETE",
         data: targetData.userId,
       });
-      onDelete(targetData.userId);
+      onDeleteMember(targetData.userId);
     }
   };
 

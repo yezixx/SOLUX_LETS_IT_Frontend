@@ -4,7 +4,7 @@ import QuestionMarkIcon from "../../../../Image/Icons/QuestionMarkIcon";
 import ToolTip from "../../../../Components/ToolTip/ToolTip";
 import Button from "../../../../Components/Button/Button";
 import { useContext, useRef, useState } from "react";
-import { MemberStateContext } from "../../Teamboard";
+import { TeamStateContext } from "../../Teamboard";
 import { KickDispatchContext } from "../SetMember";
 
 const OPTIONS = [
@@ -23,7 +23,8 @@ const msg = (
   </ul>
 );
 const ReportSection = ({ onReport }) => {
-  const members = useContext(MemberStateContext);
+  const teamData = useContext(TeamStateContext);
+  const members = teamData.members;
   const { onVote } = useContext(KickDispatchContext);
 
   const [visible, setVisible] = useState(false);

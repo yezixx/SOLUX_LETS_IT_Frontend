@@ -1,13 +1,12 @@
+import { useContext } from "react";
 import Button from "../../../../Components/Button/Button";
 import MemberItem from "../../../../Components/MemberItem/MemberItem";
+import { TeamStateContext } from "../../Teamboard";
 import styles from "./AttendanceDetail.module.css";
 
 const AttendanceDetail = () => {
-  const members = [
-    { id: 1, name: "유밍 BE" },
-    { id: 2, name: "도라" },
-    { id: 3, name: "Tom BE" },
-  ];
+  const teamData = useContext(TeamStateContext);
+  const members = teamData.members;
 
   return (
     <div className={styles.attendanceDetail}>
