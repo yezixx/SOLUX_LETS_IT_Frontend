@@ -4,12 +4,13 @@ import TeamCalendar from "./TeamCalendar/TeamCalendar";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
 import ToolIcon from "../../../Components/ToolIcon/ToolIcon";
+import { useContext } from "react";
+import { TeamStateContext } from "../Teamboard";
 
 const ProjInfo = () => {
-  const TOOLLIST = [
-    { id: 0, tool: "노션", url: "https://www.notion.so/ko-kr" },
-    { id: 1, tool: "깃허브", url: "https://github.com/" },
-  ];
+  const teamData = useContext(TeamStateContext);
+
+  const TOOLLIST = teamData.collabLink;
 
   const nav = useNavigate();
 
@@ -42,7 +43,7 @@ const ProjInfo = () => {
                   key={tool.id}
                   alt={tool.tool}
                   type="60x60"
-                  onClick={() => onClickToolIcon(tool.url)}
+                  onClick={() => onClickToolIcon(tool.link)}
                 />
               ))}
             </div>
