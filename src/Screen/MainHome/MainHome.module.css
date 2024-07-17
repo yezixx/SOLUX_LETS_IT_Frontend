@@ -1,21 +1,18 @@
-.wrap{
-    margin-top: 500px;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.wrap {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.main{
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-}   
+.main {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
 
-.contestnews{
-    display: flex;
-    margin-left: 10vw;
-    gap: 1vw;
-    
+.contestnews {
+  display: flex;
+  margin-left: 10vw;
+  gap: 1vw;
 }
