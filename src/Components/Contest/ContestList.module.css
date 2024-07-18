@@ -1,42 +1,28 @@
 /* ProjectList.module.css */
-
 .contestList {
-    
-    align-items: center;
-    display: flex;
-    gap: 50px;
-    
-    padding: 3vw;
-    
-    
-    
-    
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
 
-  
-  
-  .contestItem {
-    background-color: white;
-    align-content: center;
-   
-  
-    width: 200px;
-    
-  }
-  .newsImage {
-    width: 200px;
-    height: 270px;
-    margin-right: 20px;
-  }
-  
-  .contestTitle {
-    font-weight: bold;
-  }
-  
-  .contestPeriod,
-  .contestLocation,
-  .contestPrice{
-    color: gray;
-    font-size: 13px;
-  }
-  
+.contestItem {
+  align-content: center;
+  width: 200px;
+}
+.newsImage {
+  width: 200px;
+  height: 270px;
+  margin-right: 20px;
+}
+
+.contestTitle {
+  font-weight: bold;
+}
+
+.contestPeriod,
+.contestLocation,
+.contestPrice {
+  color: gray;
+  font-size: 13px;
+}

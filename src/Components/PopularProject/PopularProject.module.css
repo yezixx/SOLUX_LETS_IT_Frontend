@@ -1,9 +1,14 @@
-.text{
-    margin-top: 3vw;
-    margin-left: 13vw;
-    font-family: 'pretendardM';
+.text {
+  font-family: "pretendardB";
+  font-size: 26px;
+  margin-bottom: 20px;
 }
-
-.bgcolor{
-    background-color: var(--select-color);
+.popularproj {
+  width: calc(100vw - 20px);
+  height: 360px;
+  background-color: var(--select-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
 }

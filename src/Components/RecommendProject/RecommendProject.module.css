@@ -1,7 +1,12 @@
-
-.text{
-    margin-top: 3vw;
-    margin-left: 13vw;
-    font-family: 'pretendardM';
+.recommendproj {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  height: 360px;
+  padding: 50px;
 }
-  
+.text {
+  font-family: "pretendardB";
+  font-size: 26px;
+}
