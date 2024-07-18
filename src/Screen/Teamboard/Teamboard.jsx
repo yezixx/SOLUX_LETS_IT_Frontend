@@ -71,6 +71,41 @@ const mock_teamData = {
       proofImages: "second_week.png",
     },
   ],
+  feedback: [
+    {
+      id: 1,
+      feedbackTargetId: "yuming",
+      isComplete: false,
+      value: {
+        frequency: 0,
+        participate: 0,
+        kindness: 0,
+        promise: 0,
+      },
+    },
+    {
+      id: 2,
+      feedbackTargetId: "dora",
+      isComplete: false,
+      value: {
+        frequency: 0,
+        participate: 0,
+        kindness: 0,
+        promise: 0,
+      },
+    },
+    {
+      id: 3,
+      feedbackTargetId: "tom",
+      isComplete: false,
+      value: {
+        frequency: 0,
+        participate: 0,
+        kindness: 0,
+        promise: 0,
+      },
+    },
+  ],
 };
 
 export const TeamStateContext = createContext();
@@ -124,6 +159,19 @@ function teamReducer(state, action) {
       return {
         ...state,
         meetingLog: [...state.meetingLog, action.data],
+      };
+    case "SUBMIT_FEEDBACK":
+      return {
+        ...state,
+        feedback: state.feedback.map((item) =>
+          String(item.feedbackTargetId) === action.data.id
+            ? {
+                ...item,
+                isComplete: true,
+                value: action.data.value,
+              }
+            : item
+        ),
       };
     default:
       return state;
@@ -267,6 +315,16 @@ const Teamboard = () => {
     });
   };
 
+  const onSubmitFeedback = (targetId, value) => {
+    teamDispatch({
+      type: "SUBMIT_FEEDBACK",
+      data: {
+        id: targetId,
+        value: value,
+      },
+    });
+  };
+
   return (
     <div className={styles.teamboard}>
       <TeamStateContext.Provider value={teamData}>
@@ -280,6 +338,7 @@ const Teamboard = () => {
             onAgree,
             onDisagree,
             onSaveMeeting,
+            onSubmitFeedback,
           }}
         >
           <Outlet />

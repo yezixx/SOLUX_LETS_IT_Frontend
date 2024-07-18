@@ -50,11 +50,6 @@
   background-color: transparent;
 }
 
-.memberItem__button--ONLYBORDER:focus {
-  border: 2px solid var(--main-color2);
-  background-color: transparent;
-}
-
 .memberItem__button--SELECTED {
   border: 2px solid var(--main-color2);
   background-color: var(--sub-color);
@@ -62,4 +57,17 @@
     border: 2px solid var(--main-color2);
     background-color: var(--sub-color);
   }
+}
+
+.memberItem__button--ONLYBORDER_SELECTED {
+  border: 2px solid var(--main-color2);
+  background-color: transparent;
+  &:hover {
+    border: 2px solid var(--main-color2);
+    background-color: transparent;
+  }
+}
+.memberItem__button--COMPLETED {
+  border: 1px solid var(--line-color);
+  background-color: var(--dimmed);
 }
