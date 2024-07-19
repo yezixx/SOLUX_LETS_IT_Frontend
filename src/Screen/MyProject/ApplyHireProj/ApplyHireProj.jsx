@@ -4,6 +4,7 @@ import ApplicantBtn from "./ApplicantBtn/ApplicantBtn";
 import styles from "./ApplyHireProj.module.css";
 import MemberView from "./MemberView/MemberView";
 import { getMyProjects } from "../../../service/projectService";
+import { useAtomValue } from "jotai";
 
 const ApplyHireProj = () => {
   //클릭하면 팀원을 보여주도록 state 설정
