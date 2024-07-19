@@ -202,7 +202,7 @@ export const RouterInfo = [
       {
         // path: "apply",
         //백엔드 연결용 동적 주소
-        path: "apply/:postId/:userId",
+        path: "apply/:postId",
         element: <Apply />,
         label: "프로젝트 신청창",
       },

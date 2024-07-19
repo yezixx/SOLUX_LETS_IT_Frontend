@@ -15,18 +15,6 @@
   font-size: 13px;
 }
 
-.tech {
-  background-color: var(--select-color);
-  border-radius: 20px;
-  padding: 5px 10px;
-  margin-bottom: 15px;
-  white-space: nowrap; /* 텍스트가 한 줄에 표시되도록 */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
 .projectItem {
   background-color: white;
   align-content: center;
@@ -46,6 +34,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: 20px;
 }
 .projectTitle text {
   font-family: "pretendardB";
