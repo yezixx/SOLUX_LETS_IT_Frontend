@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ProjectList.module.css";
+import Tech from "../SearchProject/Stack";
 
 function ProjectList({ projects }) {
   return (
@@ -10,9 +11,9 @@ function ProjectList({ projects }) {
             <div className={styles.stack}>
               {project.stack &&
                 project.stack.map((tech, idx) => (
-                  <div key={idx} className={styles.tech}>
+                  <Tech key={idx} tech={tech}>
                     {tech}
-                  </div>
+                  </Tech>
                 ))}
             </div>
             {/*프로젝트 세부사항 */}
