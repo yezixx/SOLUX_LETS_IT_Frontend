@@ -34,20 +34,6 @@ const mock_teamData = {
       disagree: 0,
     },
   ],
-  meetingLog: [
-    {
-      id: 1,
-      date: "2024-04-10",
-      nonParticipants: ["tom"],
-      proofImages: "first_week.png",
-    },
-    {
-      id: 2,
-      date: "2024-04-14",
-      nonParticipants: [],
-      proofImages: "second_week.png",
-    },
-  ],
 };
 
 const mock_scheduleData = [
@@ -71,6 +57,21 @@ const mock_scheduleData = [
     start: "2024-07-01",
     end: "2024-07-03",
     description: "test",
+  },
+];
+
+const mock_meetingData = [
+  {
+    id: 1,
+    date: "2024-04-10",
+    nonParticipants: ["tom"],
+    proofImages: "first_week.png",
+  },
+  {
+    id: 2,
+    date: "2024-04-14",
+    nonParticipants: [],
+    proofImages: "second_week.png",
   },
 ];
 
@@ -133,11 +134,7 @@ function teamReducer(state, action) {
           (item) => String(item.userId) !== String(action.data)
         ),
       };
-    case "SAVE_MEETING":
-      return {
-        ...state,
-        meetingLog: [...state.meetingLog, action.data],
-      };
+
     default:
       return state;
   }
@@ -149,6 +146,17 @@ function scheduleReducer(state, action) {
       return [...state, action.data];
     case "DELETE_EVENT":
       return state.filter((item) => String(item.id) !== String(action.data));
+    default:
+      return state;
+  }
+}
+
+function meetingReducer(state, action) {
+  switch (action.type) {
+    case "SAVE_MEETING":
+      return [...state, action.data];
+    default:
+      return state;
   }
 }
 
@@ -156,6 +164,8 @@ function feedbackReducer(state, action) {
   switch (action.type) {
     case "SUBMIT_FEEDBACK":
       return [...state, action.data];
+    default:
+      return state;
   }
 }
 
@@ -166,11 +176,14 @@ const Teamboard = () => {
     scheduleReducer,
     mock_scheduleData
   );
+  const [meetingData, meetingDispatch] = useReducer(
+    meetingReducer,
+    mock_meetingData
+  );
+
   const kickIdRef = useRef(2);
   const meetingRef = useRef(3);
   const eventRef = useRef(3);
-
-  console.log(feedbackData);
 
   const onDeleteMember = (userId) => {
     teamDispatch({
@@ -293,7 +306,7 @@ const Teamboard = () => {
   };
 
   const onSaveMeeting = (meetingData) => {
-    teamDispatch({
+    meetingDispatch({
       type: "SAVE_MEETING",
       data: {
         id: meetingRef.current++,
@@ -315,7 +328,7 @@ const Teamboard = () => {
   return (
     <div className={styles.teamboard}>
       <TeamStateContext.Provider
-        value={{ teamData, feedbackData, scheduleData }}
+        value={{ teamData, feedbackData, scheduleData, meetingData }}
       >
         <TeamDispatchContext.Provider
           value={{

@@ -7,7 +7,7 @@ import styles from "./AttendanceDetail.module.css";
 const AttendanceDetail = () => {
   const { teamData } = useContext(TeamStateContext);
   const members = teamData.members;
-  const meetings = teamData.meetingLog;
+  const { meetingData } = useContext(TeamStateContext);
   const { onSaveMeeting } = useContext(TeamDispatchContext);
   const [selectedMember, setSelectedMember] = useState();
   const [proofImage, setProofImage] = useState();
@@ -53,7 +53,7 @@ const AttendanceDetail = () => {
     <div className={styles.attendanceDetail}>
       <div className={styles.attendanceDetail__container}>
         <div className={styles.attendanceDetail__label}>
-          <span>{meetings.length + 1} 번째</span> 회의 인증
+          <span>{meetingData.length + 1} 번째</span> 회의 인증
         </div>
         <div className={styles.attendanceDetail__file}>
           <div className={styles.attendanceDetail__fileLabel}>

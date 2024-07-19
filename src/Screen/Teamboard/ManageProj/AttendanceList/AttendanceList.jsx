@@ -4,12 +4,11 @@ import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 
 const AttendanceList = () => {
-  const { teamData } = useContext(TeamStateContext);
-  const meetings = teamData.meetingLog;
+  const { meetingData } = useContext(TeamStateContext);
   return (
     <div className={styles.attendanceList}>
       <div className={styles.attendanceList__item}>
-        {meetings.map((meeting) => (
+        {meetingData.map((meeting) => (
           <AttendanceItem
             key={meeting.id}
             id={meeting.id}
@@ -17,8 +16,8 @@ const AttendanceList = () => {
           />
         ))}
         <AttendanceItem
-          key={meetings.length + 1}
-          id={meetings.length + 1}
+          key={meetingData.length + 1}
+          id={meetingData.length + 1}
           date={new Date().toISOString().split("T")[0]}
           iscurrent={true}
         />
