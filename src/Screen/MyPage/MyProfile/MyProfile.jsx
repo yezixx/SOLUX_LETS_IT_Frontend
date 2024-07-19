@@ -27,7 +27,7 @@ const MyProfile = () => {
   return (
     <div className={styles.myProfile__contWrap}>
       {/*프로필 */}
-      <Profile user={user} tooltipShow={true} />
+      <Profile user={user} />
       {/*수정 버튼 */}
       <Button text="수정" />
     </div>

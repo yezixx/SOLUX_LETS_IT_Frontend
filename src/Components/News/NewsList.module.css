@@ -1,20 +1,40 @@
 /* ProjectList.module.css */
 
 .newsList {
-  display: flex;
-  gap: 50px;
-}
-.newsImage {
-  width: 200px;
-  height: 270px;
-}
-
-.newsItem {
-  align-content: center;
-  width: 200px;
-}
-
-.newscontent {
-  color: gray;
-  font-size: 13px;
-}
+    
+    align-items: center;
+    display: flex;
+    gap: 50px;
+    
+    padding: 3vw;
+    
+    
+    
+    
+  }
+  .newsImage {
+    width: 200px;
+    height: 270px;
+    margin-right: 20px;
+  }
+  
+  
+  
+  .newsItem {
+    background-color: white;
+    align-content: center;
+    
+   
+    width: 200px;
+    
+  }
+  
+  .newsTitle {
+    font-weight: bold;
+  }
+  
+  .newscontent{
+    color: gray;
+    font-size: 13px;
+  }
+  

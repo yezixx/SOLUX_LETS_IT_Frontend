@@ -1,7 +1,6 @@
-.text {
-  font-family: "pretendardB";
-  font-size: 26px;
+.text{
+    margin-top: 3vw;
+    margin-left: 3vw;
+    font-family: 'pretendardM';
 }
-.news {
-  background-color: #000;
-}
+  

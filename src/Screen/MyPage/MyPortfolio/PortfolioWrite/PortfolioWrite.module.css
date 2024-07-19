@@ -11,12 +11,9 @@
 
 /*form 전체*/
 .portfolioWrite__form {
-  max-width: 100%;
+  max-width: 1117px;
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(360px, 1fr)
-  ); /* auto-fill 대신 auto-fit 사용 */
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
   grid-template-rows: auto;
   gap: 30px;
   position: relative;

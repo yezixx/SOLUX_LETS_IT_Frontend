@@ -1,12 +1,7 @@
-.recommendproj {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 20px;
-  height: 360px;
-  padding: 50px;
+
+.text{
+    margin-top: 3vw;
+    margin-left: 13vw;
+    font-family: 'pretendardM';
 }
-.text {
-  font-family: "pretendardB";
-  font-size: 26px;
-}
+  

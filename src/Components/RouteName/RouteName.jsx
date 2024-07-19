@@ -2,6 +2,7 @@ import ArrowIcon from "../../Image/Icons/ArrowIcon";
 import styles from "./RouteName.module.css";
 
 const RouteName = ({ route }) => {
+  console.log(route);
   return (
     <div className={styles.routename}>
       {route.map((item, index) => (

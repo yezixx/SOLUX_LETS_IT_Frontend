@@ -9,6 +9,7 @@ const MyPageLayout = () => {
   const sidenavCont = ["구인/신청 프로젝트", "참여 프로젝트", "스크랩"];
   //현재 위치 주소 반환
   const location = useLocation();
+  console.log(location);
   const path = location.pathname;
   //루트 네임 - js 파일 분리
   let { name } = getMyProjectRoute(path);

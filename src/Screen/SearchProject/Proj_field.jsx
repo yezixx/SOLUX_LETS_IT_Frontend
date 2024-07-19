@@ -2,6 +2,8 @@ import RouteName from "../../Components/RouteName/RouteName";
 import SideNav from "../../Components/SideNav/SideNav";
 import styles from "./Proj_area.module.css";
 import Field from "../../Components/SearchProject/Field";
+import SearchProjectNav from "../../Components/SearchProject/SearchProjectNav.jsx"
+
 
 const sidenavCont = [
   "전체 프로젝트",
@@ -29,6 +31,7 @@ const Proj_field = () => {
           </div>
           <div className={styles.mainContent}>
             <Field />
+            <SearchProjectNav/>
           </div>
         </div>
       </div>

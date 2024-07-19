@@ -38,9 +38,7 @@ const Nav = () => {
 
         {/*상단 네비게이터 */}
         <ul className={styles.nav__contentsWrap}>
-          <Link to="login">
-            <li>로그인</li>
-          </Link>
+          <li>로그아웃</li>
           <Link to="mypage/profile">
             <li onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
               마이페이지
