@@ -1,24 +1,19 @@
-import React, { act, useState } from "react";
 import styles from "./ProjectList.module.css";
 import Button from "../Button/Button.jsx";
 import { Link } from "react-router-dom";
 import Tech from "./Stack.jsx";
 import Paging from "../Paging/Paging.jsx";
+import useProjListPaging from "./useProjListPaging.js";
 
 function ProjectList({ projects }) {
-  //현재 페이지
-  const [activePage, setActivePage] = useState(1);
+  //프로젝트 리스트 페이지 커스텀 훅
+  const {
+    activePage,
+    itemsCountPerPage,
+    pageRangeDisplayed,
+    handlePageChange,
+  } = useProjListPaging();
 
-  //한 페이지 당 보여줄 아이템 개수
-  const itemsCountPerPage = 5;
-
-  //페이지네이션 한 번에 몇 번까지 보여줄 건지
-  const pageRangeDisplayed = 5;
-
-  //페이지 변경 핸들링 함수
-  const handlePageChange = (pageNumber) => {
-    setActivePage(pageNumber);
-  };
   //실제 렌더링할 데이터 (data를 슬라이스 함 0-9 / 10-19..)
   const renderData = projects.slice(
     (activePage - 1) * itemsCountPerPage,
