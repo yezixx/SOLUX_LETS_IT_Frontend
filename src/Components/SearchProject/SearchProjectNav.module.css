@@ -68,10 +68,7 @@
 
 .onoff__container {
     display: flex;
-    height: 30px;
-   
 }
-
 
 .onoff__contents {
     border: 1px solid gray;
@@ -82,7 +79,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 50px;
 }
 
 .onoff__contents:hover {
@@ -125,5 +121,3 @@
     border-radius: 4px;
     width: 150px;
 }
-
-

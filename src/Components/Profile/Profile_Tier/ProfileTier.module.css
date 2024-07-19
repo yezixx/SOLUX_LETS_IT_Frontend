@@ -1,15 +1,34 @@
-.myProfile__title{
-    font-size: 30px;
-    font-family: 'pretendardB';
+.myProfile__title {
+  font-size: 30px;
+  font-family: "pretendardB";
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  position: relative;
 }
 
-.myProfile__title span{
-    /*매너 '티어' : 색깔 다른 부분*/
-    color: var(--main-color2);
+.myProfile__title span {
+  /*매너 '티어' : 색깔 다른 부분*/
+  color: var(--main-color2);
+  display: flex;
+  gap: 20px;
 }
 
-.myProfile__tier{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+.myProfile__tier {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.myProfile__tierWrap {
+  display: flex;
+  flex-direction: column;
+}
+.myProfile__tooltip {
+  position: absolute;
+  top: -150px;
+  left: 6.3%;
+  z-index: 2000;
+}
+.questionmark {
+  cursor: pointer;
 }

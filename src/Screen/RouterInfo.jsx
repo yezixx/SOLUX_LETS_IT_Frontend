@@ -28,6 +28,7 @@ import MyPageLayout from "./MyPage/MyPageLayout";
 import MyProjectLayout from "./MyProject/MyProjectLayout";
 import Apply from "./Apply/Apply";
 import APILogIn from "../Screen/LogIn/APILogIn";
+import Redirect from "./LogIn/Redirect";
 
 export const RouterInfo = [
   {
@@ -43,6 +44,11 @@ export const RouterInfo = [
       {
         path: "/login",
         element: <APILogIn />,
+        index: true,
+      },
+      {
+        path: "/login/oauth2/callback/kakao",
+        element: <Redirect />,
         index: true,
       },
       //프로젝트 찾기
@@ -86,7 +92,9 @@ export const RouterInfo = [
         label: "구인/신청 프로젝트",
         children: [
           {
-            path: "hiring-and-applied",
+            // path: "hiring-and-applied",
+            //백엔드 연결용 동적 주소
+            path: "hiring-and-applied/:userId",
             element: <ApplyHireProj />,
             label: "구인/신청 프로젝트",
           },
@@ -192,7 +200,9 @@ export const RouterInfo = [
       },
       //프로젝트 신청창
       {
-        path: "apply",
+        // path: "apply",
+        //백엔드 연결용 동적 주소
+        path: "apply/:postId/:userId",
         element: <Apply />,
         label: "프로젝트 신청창",
       },

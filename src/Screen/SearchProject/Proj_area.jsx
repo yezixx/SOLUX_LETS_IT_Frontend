@@ -2,7 +2,6 @@ import RouteName from "../../Components/RouteName/RouteName";
 import SideNav from "../../Components/SideNav/SideNav";
 import styles from "./Proj_area.module.css";
 import Area from "../../Components/SearchProject/Area";
-import SearchProjectNav from "../../Components/SearchProject/SearchProjectNav.jsx"
 
 const sidenavCont = [
   "전체 프로젝트",
@@ -30,7 +29,6 @@ const Proj_area = () => {
           </div>
           <div className={styles.mainContent}>
             <Area />
-            <SearchProjectNav/>
           </div>
         </div>
       </div>

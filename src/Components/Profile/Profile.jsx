@@ -7,7 +7,7 @@ import ProfileTier from "./Profile_Tier/ProfileTier.jsx";
 import ProfileIntroduce from "./Profile_Introduce/ProfileIntroduce.jsx";
 import ProfileSkills from "./Profile_Skills/ProfileSkills.jsx";
 
-const Profile = ({ user, type }) => {
+const Profile = ({ user, type, tooltipShow = false }) => {
   return (
     <div
       className={`${styles.myProfile__wrap} ${
@@ -48,7 +48,7 @@ const Profile = ({ user, type }) => {
 
         <div className={styles.myProfile__right}>
           {/*매너티어, 소개글, skills */}
-          <ProfileTier tierScore={user.tierScore} />
+          <ProfileTier tierScore={user.tierScore} tooltipShow={tooltipShow} />
           <ProfileIntroduce introduce={user.introduce} />
           <ProfileSkills skills={user.skills} />
         </div>

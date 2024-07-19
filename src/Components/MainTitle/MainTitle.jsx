@@ -10,9 +10,7 @@ const MainTitle = () => {
     <div className={styles.nav}>
       <div className={styles.nav__container}>
         <div className={styles.h2}>토이 프로젝트부터 공모전까지!</div>
-        <div className={styles.nav__container}>
-          <Logo width="340px" height="130px" />
-        </div>
+        <Logo width="340px" height="130px" />
         <div className={styles.nav__searchBar_container}>
           <div className={styles.nav__searchBar}>
             <input

@@ -3,10 +3,9 @@
     padding: 20px;
     border-radius: 10px;
     font-family: 'pretendardM';
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     margin-top: 50px;
-    margin-bottom: 100px;
 }
 
 .title {
@@ -24,7 +23,6 @@
 
 .stateButton {
     height: 50px; /* 고정된 높이 */
-    width: 143px;
     background-color: white;
     border: 1px solid gray;
     color: gray;
@@ -50,15 +48,9 @@
 
 .subAreaContainer {
     margin-top: 20px;
-    
 }
 
 .subAreaContainer h2 {
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 10px;
-}
-
-.subAreaContainer div {
-    font-size: 15px;
-    
 }
