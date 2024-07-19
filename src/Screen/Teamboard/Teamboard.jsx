@@ -71,45 +71,12 @@ const mock_teamData = {
       proofImages: "second_week.png",
     },
   ],
-  feedback: [
-    {
-      id: 1,
-      feedbackTargetId: "yuming",
-      isComplete: false,
-      value: {
-        frequency: 0,
-        participate: 0,
-        kindness: 0,
-        promise: 0,
-      },
-    },
-    {
-      id: 2,
-      feedbackTargetId: "dora",
-      isComplete: false,
-      value: {
-        frequency: 0,
-        participate: 0,
-        kindness: 0,
-        promise: 0,
-      },
-    },
-    {
-      id: 3,
-      feedbackTargetId: "tom",
-      isComplete: false,
-      value: {
-        frequency: 0,
-        participate: 0,
-        kindness: 0,
-        promise: 0,
-      },
-    },
-  ],
 };
 
 export const TeamStateContext = createContext();
 export const TeamDispatchContext = createContext();
+export const FeedbackStateContext = createContext();
+export const FeedbackDispatchContext = createContext();
 
 function teamReducer(state, action) {
   switch (action.type) {
@@ -160,29 +127,26 @@ function teamReducer(state, action) {
         ...state,
         meetingLog: [...state.meetingLog, action.data],
       };
-    case "SUBMIT_FEEDBACK":
-      return {
-        ...state,
-        feedback: state.feedback.map((item) =>
-          String(item.feedbackTargetId) === action.data.id
-            ? {
-                ...item,
-                isComplete: true,
-                value: action.data.value,
-              }
-            : item
-        ),
-      };
     default:
       return state;
   }
 }
 
+function feedbackReducer(state, action) {
+  switch (action.type) {
+    case "SUBMIT_FEEDBACK":
+      return [...state, action.data];
+  }
+}
+
 const Teamboard = () => {
   const [teamData, teamDispatch] = useReducer(teamReducer, mock_teamData);
+  const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
   const kickIdRef = useRef(2);
   const meetingRef = useRef(3);
   const eventRef = useRef(3);
+
+  console.log(feedbackData);
 
   const onDeleteMember = (userId) => {
     teamDispatch({
@@ -190,7 +154,6 @@ const Teamboard = () => {
       data: userId,
     });
   };
-  console.log(teamData);
 
   const onUpdateTeamData = (title, links, selectedMember) => {
     teamDispatch({
@@ -316,11 +279,11 @@ const Teamboard = () => {
   };
 
   const onSubmitFeedback = (targetId, value) => {
-    teamDispatch({
+    feedbackDispatch({
       type: "SUBMIT_FEEDBACK",
       data: {
         id: targetId,
-        value: value,
+        ...value,
       },
     });
   };
@@ -338,10 +301,13 @@ const Teamboard = () => {
             onAgree,
             onDisagree,
             onSaveMeeting,
-            onSubmitFeedback,
           }}
         >
-          <Outlet />
+          <FeedbackStateContext.Provider value={feedbackData}>
+            <FeedbackDispatchContext.Provider value={onSubmitFeedback}>
+              <Outlet />
+            </FeedbackDispatchContext.Provider>
+          </FeedbackStateContext.Provider>
         </TeamDispatchContext.Provider>
       </TeamStateContext.Provider>
     </div>

@@ -9,6 +9,7 @@ const MemberItem = ({ memberName, type, onClick }) => {
             styles[`memberItem__button--${type}`]
           }`}
           onClick={onClick}
+          disabled={type === "COMPLETED"}
         >
           <div className={styles.memberItem__profilePic}>사진</div>
           <div className={styles.memberItem__name}>{memberName}</div>

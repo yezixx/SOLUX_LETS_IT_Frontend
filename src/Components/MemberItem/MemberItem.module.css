@@ -70,4 +70,8 @@
 .memberItem__button--COMPLETED {
   border: 1px solid var(--line-color);
   background-color: var(--dimmed);
+  &:hover {
+    border: 1px solid var(--line-color);
+    background-color: var(--dimmed);
+  }
 }
