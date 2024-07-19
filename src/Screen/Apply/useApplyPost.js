@@ -21,9 +21,9 @@ const useApplyPost = () => {
   };
   //input data 수집
   const [applyData, setApplyData] = useState({
-    stack: "",
-    field: "",
-    message: "",
+    preferStack: "",
+    desiredField: "",
+    applyContent: "",
     contact: "",
   });
   const onChange = (e) => {
@@ -33,7 +33,11 @@ const useApplyPost = () => {
       [name]: value,
     }));
   };
-  return { navigateTo, warning, applyData, onChange };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    warning();
+  };
+  return { navigateTo, handleSubmit, applyData, onChange };
 };
 
 export default useApplyPost;

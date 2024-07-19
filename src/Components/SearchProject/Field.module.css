@@ -1,6 +1,6 @@
 .title{
     font-family: 'pretendardM';
-    font-size: 30px;
+    font-size: 20px;
     font-weight: bold;
      margin-bottom: 20px;
 }
@@ -11,11 +11,13 @@
     border-radius: 10px;
     font-family: 'pretendardM';
     font-size: 30px;
-    font-weight: bold;
+    
     margin-top: 50px;
+    margin-bottom: 100px;
     display: flex;
     gap: 50px;
     justify-content: center; /* 가로 방향으로 가운데 정렬 */
+    height: 250px;
    
 }
 
@@ -38,6 +40,8 @@
     align-items: center;
     justify-content: left;
     flex: 1;
+    gap: 30px;
+
 }
 .nav__searchBar{
     width: 400px;
@@ -47,12 +51,14 @@
     
     display: flex;
     align-items: center;
-    background-color: white;
+    background-color:white;
 }
 .nav__searchbar_input{
-    border: none;
+    
     height: 30px;
     flex: 1;
+    width: 350px;
+    font-size: 20px;
 }
 .nav__searchbar_input:focus{
     outline: none;
