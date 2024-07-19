@@ -93,6 +93,7 @@ const TeamFeedback = () => {
   const onClickSubimt = () => {
     if (!isValidate()) return;
 
+    if (!confirm("평가를 제출하시겠습니까?")) return;
     onSubmitFeedback(selectedMember, feedback);
 
     setSelectedMember(null);
