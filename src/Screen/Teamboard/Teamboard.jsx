@@ -83,6 +83,18 @@ function teamReducer(state, action) {
     case "UPDATE":
       return action.data;
     case "DELETE_MEMBER":
+      if (action.data === state.leader) {
+        return {
+          ...state,
+          members: state.members.filter(
+            (item) => String(item.userId) !== String(action.data)
+          ),
+          leader: state.members.filter(
+            (item) => String(item.userId) !== String(action.data)
+          )[0].userId,
+        };
+      }
+
       return {
         ...state,
         members: state.members.filter(
