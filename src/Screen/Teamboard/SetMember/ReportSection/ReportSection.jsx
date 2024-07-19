@@ -7,12 +7,12 @@ import { useContext, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../../Teamboard";
 
 const OPTIONS = [
-  { id: 0, value: "사유1" },
-  { id: 1, value: "사유2" },
-  { id: 2, value: "사유3" },
-  { id: 3, value: "사유4" },
-  { id: 4, value: "사유5" },
-  { id: 5, value: "사유6" },
+  { id: 0, value: "잦은 지각 및 결석" },
+  { id: 1, value: "연락 두절" },
+  { id: 2, value: "비협조적인 태도" },
+  { id: 3, value: "지속적으로 마김일을 지키지 못함" },
+  { id: 4, value: "사적인 만남 및 연락 시도" },
+  { id: 5, value: "부적절한 행동 및 태도, 욕설" },
 ];
 
 const msg = (
