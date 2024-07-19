@@ -23,29 +23,6 @@ const mock_teamData = {
     { id: 2, userId: "dora", name: "도라" },
     { id: 3, userId: "tom", name: "Tom BE" },
   ],
-  events: [
-    {
-      id: 0,
-      title: "event 1",
-      start: "2024-07-01",
-      end: "2024-07-01",
-      description: "test",
-    },
-    {
-      id: 1,
-      title: "event 2",
-      start: "2024-07-03",
-      end: "2024-07-03",
-      description: "test",
-    },
-    {
-      id: 2,
-      title: "event 3",
-      start: "2024-07-01",
-      end: "2024-07-03",
-      description: "test",
-    },
-  ],
   voteKickmembers: [
     {
       id: 1,
@@ -72,6 +49,30 @@ const mock_teamData = {
     },
   ],
 };
+
+const mock_scheduleData = [
+  {
+    id: 0,
+    title: "event 1",
+    start: "2024-07-01",
+    end: "2024-07-01",
+    description: "test",
+  },
+  {
+    id: 1,
+    title: "event 2",
+    start: "2024-07-03",
+    end: "2024-07-03",
+    description: "test",
+  },
+  {
+    id: 2,
+    title: "event 3",
+    start: "2024-07-01",
+    end: "2024-07-03",
+    description: "test",
+  },
+];
 
 export const TeamStateContext = createContext();
 export const TeamDispatchContext = createContext();
@@ -142,6 +143,15 @@ function teamReducer(state, action) {
   }
 }
 
+function scheduleReducer(state, action) {
+  switch (action.type) {
+    case "CREATE_EVENT":
+      return [...state, action.data];
+    case "DELETE_EVENT":
+      return state.filter((item) => String(item.id) !== String(action.data));
+  }
+}
+
 function feedbackReducer(state, action) {
   switch (action.type) {
     case "SUBMIT_FEEDBACK":
@@ -152,6 +162,10 @@ function feedbackReducer(state, action) {
 const Teamboard = () => {
   const [teamData, teamDispatch] = useReducer(teamReducer, mock_teamData);
   const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
+  const [scheduleData, scheduleDispatch] = useReducer(
+    scheduleReducer,
+    mock_scheduleData
+  );
   const kickIdRef = useRef(2);
   const meetingRef = useRef(3);
   const eventRef = useRef(3);
@@ -210,7 +224,7 @@ const Teamboard = () => {
       newDate.setDate(newDate.getDate() + 1);
       endDate = newDate.toISOString().split("T")[0];
     }
-    teamDispatch({
+    scheduleDispatch({
       type: "CREATE_EVENT",
       data: {
         id: eventRef.current++,
@@ -224,7 +238,7 @@ const Teamboard = () => {
 
   const onDeleteEvent = (targetId) => {
     if (confirm("일정을 삭제하시겠습니까?")) {
-      teamDispatch({
+      scheduleDispatch({
         type: "DELETE_EVENT",
         data: targetId,
       });
@@ -300,7 +314,9 @@ const Teamboard = () => {
 
   return (
     <div className={styles.teamboard}>
-      <TeamStateContext.Provider value={{ teamData, feedbackData }}>
+      <TeamStateContext.Provider
+        value={{ teamData, feedbackData, scheduleData }}
+      >
         <TeamDispatchContext.Provider
           value={{
             onUpdateTeamData,

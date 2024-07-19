@@ -8,9 +8,7 @@ import ScheduleContent from "./ScheduleContent/ScheduleContent";
 import { TeamStateContext } from "../../Teamboard";
 
 const TeamCalendar = () => {
-  const { teamData } = useContext(TeamStateContext);
-  const events = teamData.events;
-  console.log(events);
+  const { scheduleData } = useContext(TeamStateContext);
 
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [isOpenInfo, setIsOpenInfo] = useState(false);
@@ -59,7 +57,7 @@ const TeamCalendar = () => {
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        events={events}
+        events={scheduleData}
         timeZone="local"
         locale="kr"
         selectable="true"
