@@ -1,9 +1,17 @@
+import { useAtomValue } from "jotai";
 import styles from "./TeamNav.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import { userIdAtom } from "../../../../atoms/atoms";
+import { useContext } from "react";
+import { TeamStateContext } from "../../Teamboard";
 
 const TeamNav = () => {
   const location = useLocation();
   const currentUrl = location.pathname;
+
+  const teamData = useContext(TeamStateContext);
+
+  const loginUserId = useAtomValue(userIdAtom);
 
   const nav = useNavigate();
 
@@ -14,6 +22,10 @@ const TeamNav = () => {
     nav("/teamboard/member");
   };
   const navigateToManage = () => {
+    if (loginUserId !== teamData.leader) {
+      alert("프로젝트 관리 화면은 팀장만 접근 가능합니다.");
+      return;
+    }
     nav("/teamboard/manage");
   };
 

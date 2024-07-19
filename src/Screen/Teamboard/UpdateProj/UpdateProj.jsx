@@ -29,7 +29,7 @@ const UpdateProj = () => {
     if (confirm("수정된 정보를 저장하시겠습니까?")) {
       onUpdateTeamData(title, links, selectedMember);
 
-      nav("/teamboard/manage");
+      nav("/teamboard");
     }
   };
 
