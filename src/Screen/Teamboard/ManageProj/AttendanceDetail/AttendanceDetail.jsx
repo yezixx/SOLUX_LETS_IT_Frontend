@@ -5,7 +5,7 @@ import { TeamDispatchContext, TeamStateContext } from "../../Teamboard";
 import styles from "./AttendanceDetail.module.css";
 
 const AttendanceDetail = () => {
-  const teamData = useContext(TeamStateContext);
+  const { teamData } = useContext(TeamStateContext);
   const members = teamData.members;
   const meetings = teamData.meetingLog;
   const { onSaveMeeting } = useContext(TeamDispatchContext);

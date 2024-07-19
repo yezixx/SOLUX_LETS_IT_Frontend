@@ -4,11 +4,7 @@ import MemberItem from "../../../Components/MemberItem/MemberItem";
 import CheckCircleIcon from "../../../Image/Icons/CheckCircleIcon";
 import FeedbackFormItem from "./FeedbackFormItem/FeedbackFormItem";
 import styles from "./TeamFeedback.module.css";
-import {
-  FeedbackDispatchContext,
-  FeedbackStateContext,
-  TeamStateContext,
-} from "../Teamboard";
+import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../atoms/atoms";
 import { useNavigate } from "react-router-dom";
@@ -27,11 +23,11 @@ const isCompletedMember = (targetId, data) => {
 };
 
 const TeamFeedback = () => {
-  const teamData = useContext(TeamStateContext);
+  const { teamData } = useContext(TeamStateContext);
   const members = teamData.members;
 
-  const feedbackData = useContext(FeedbackStateContext);
-  const onSubmitFeedback = useContext(FeedbackDispatchContext);
+  const { feedbackData } = useContext(TeamStateContext);
+  const { onSubmitFeedback } = useContext(TeamDispatchContext);
 
   const [selectedMember, setSelectedMember] = useState();
   const [feedback, setFeedback] = useState();

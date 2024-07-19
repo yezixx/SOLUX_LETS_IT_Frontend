@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 
 const AttendanceList = () => {
-  const teamData = useContext(TeamStateContext);
+  const { teamData } = useContext(TeamStateContext);
   const meetings = teamData.meetingLog;
   return (
     <div className={styles.attendanceList}>

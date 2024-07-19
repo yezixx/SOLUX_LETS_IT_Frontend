@@ -9,7 +9,7 @@ import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 
 const UpdateProj = () => {
   const { onUpdateTeamData } = useContext(TeamDispatchContext);
-  const teamData = useContext(TeamStateContext);
+  const { teamData } = useContext(TeamStateContext);
 
   const [title, setTitle] = useState(teamData.title);
   const [links, setLinks] = useState(teamData.collabLink);

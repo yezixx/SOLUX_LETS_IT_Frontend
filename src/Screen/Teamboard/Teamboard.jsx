@@ -75,8 +75,6 @@ const mock_teamData = {
 
 export const TeamStateContext = createContext();
 export const TeamDispatchContext = createContext();
-export const FeedbackStateContext = createContext();
-export const FeedbackDispatchContext = createContext();
 
 function teamReducer(state, action) {
   switch (action.type) {
@@ -302,7 +300,7 @@ const Teamboard = () => {
 
   return (
     <div className={styles.teamboard}>
-      <TeamStateContext.Provider value={teamData}>
+      <TeamStateContext.Provider value={{ teamData, feedbackData }}>
         <TeamDispatchContext.Provider
           value={{
             onUpdateTeamData,
@@ -313,13 +311,10 @@ const Teamboard = () => {
             onAgree,
             onDisagree,
             onSaveMeeting,
+            onSubmitFeedback,
           }}
         >
-          <FeedbackStateContext.Provider value={feedbackData}>
-            <FeedbackDispatchContext.Provider value={onSubmitFeedback}>
-              <Outlet />
-            </FeedbackDispatchContext.Provider>
-          </FeedbackStateContext.Provider>
+          <Outlet />
         </TeamDispatchContext.Provider>
       </TeamStateContext.Provider>
     </div>

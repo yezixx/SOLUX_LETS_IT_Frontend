@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 
 const VoteSection = () => {
-  const teamData = useContext(TeamStateContext);
+  const { teamData } = useContext(TeamStateContext);
   const voteKickmembers = teamData.voteKickmembers;
   console.log(voteKickmembers);
 

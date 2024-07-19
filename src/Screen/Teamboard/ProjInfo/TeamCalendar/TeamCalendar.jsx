@@ -8,7 +8,7 @@ import ScheduleContent from "./ScheduleContent/ScheduleContent";
 import { TeamStateContext } from "../../Teamboard";
 
 const TeamCalendar = () => {
-  const teamData = useContext(TeamStateContext);
+  const { teamData } = useContext(TeamStateContext);
   const events = teamData.events;
   console.log(events);
 

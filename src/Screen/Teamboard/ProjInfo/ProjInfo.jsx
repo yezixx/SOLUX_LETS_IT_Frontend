@@ -6,15 +6,22 @@ import Button from "../../../Components/Button/Button";
 import ToolIcon from "../../../Components/ToolIcon/ToolIcon";
 import { useContext } from "react";
 import { TeamStateContext } from "../Teamboard";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../../atoms/atoms";
 
 const ProjInfo = () => {
-  const teamData = useContext(TeamStateContext);
+  const { teamData } = useContext(TeamStateContext);
+  const loginUserId = useAtomValue(userIdAtom);
 
   const TOOLLIST = teamData.collabLink;
 
   const nav = useNavigate();
 
   const navigateToManage = () => {
+    if (loginUserId !== teamData.leader) {
+      alert("팀장만 접근가능합니다.");
+      return;
+    }
     nav("/teamboard/manage");
   };
 

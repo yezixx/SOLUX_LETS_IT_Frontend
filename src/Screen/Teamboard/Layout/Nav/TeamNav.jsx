@@ -9,7 +9,7 @@ const TeamNav = () => {
   const location = useLocation();
   const currentUrl = location.pathname;
 
-  const teamData = useContext(TeamStateContext);
+  const { teamData } = useContext(TeamStateContext);
 
   const loginUserId = useAtomValue(userIdAtom);
 

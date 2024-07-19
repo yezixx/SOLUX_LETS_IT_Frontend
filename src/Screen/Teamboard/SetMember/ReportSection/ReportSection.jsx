@@ -22,7 +22,7 @@ const msg = (
   </ul>
 );
 const ReportSection = ({ onReport }) => {
-  const teamData = useContext(TeamStateContext);
+  const { teamData } = useContext(TeamStateContext);
   const members = teamData.members;
   const { onVote } = useContext(TeamDispatchContext);
 

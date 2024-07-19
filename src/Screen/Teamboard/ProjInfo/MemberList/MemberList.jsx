@@ -5,7 +5,7 @@ import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 
 const MemberList = () => {
-  const teamData = useContext(TeamStateContext);
+  const { teamData } = useContext(TeamStateContext);
   const members = teamData.members;
 
   return (
