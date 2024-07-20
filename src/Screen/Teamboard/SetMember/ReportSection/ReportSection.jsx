@@ -5,6 +5,8 @@ import ToolTip from "../../../../Components/ToolTip/ToolTip";
 import Button from "../../../../Components/Button/Button";
 import { useContext, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../../Teamboard";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../../../atoms/atoms";
 
 const OPTIONS = [
   { id: 0, value: "잦은 지각 및 결석" },
@@ -29,6 +31,8 @@ const ReportSection = ({ onReport }) => {
   const [visible, setVisible] = useState(false);
   const [selectedMember, setSelectedMember] = useState();
   const [selectedOption, setSelectedOption] = useState();
+
+  const loginUserId = useAtomValue(userIdAtom);
 
   const selectRef = useRef();
 
@@ -74,6 +78,15 @@ const ReportSection = ({ onReport }) => {
     }
   };
 
+  const onClickMemberItem = (userId) => {
+    if (userId === loginUserId) {
+      alert("본인은 신고할 수 없습니다.");
+      setSelectedMember(null);
+      return;
+    }
+    setSelectedMember(userId);
+  };
+
   const onChangeOption = (e) => {
     setSelectedOption(e.target.value);
   };
@@ -100,7 +113,7 @@ const ReportSection = ({ onReport }) => {
           <MemberItem
             key={member.id}
             memberName={member.name}
-            onClick={() => setSelectedMember(member.userId)}
+            onClick={() => onClickMemberItem(member.userId)}
             type={`${selectedMember === member.userId ? "SELECTED" : ""}`}
           />
         ))}
