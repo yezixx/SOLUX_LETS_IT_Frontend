@@ -23,17 +23,6 @@ const mock_teamData = {
     { id: 2, userId: "dora", name: "도라" },
     { id: 3, userId: "tom", name: "Tom BE" },
   ],
-  voteKickmembers: [
-    {
-      id: 1,
-      userId: "tom",
-      name: "Tom BE",
-      reason: "사유2",
-      voteCount: 0,
-      agree: 0,
-      disagree: 0,
-    },
-  ],
 };
 
 const mock_scheduleData = [
@@ -75,6 +64,18 @@ const mock_meetingData = [
   },
 ];
 
+const mock_kickData = [
+  {
+    id: 1,
+    userId: "tom",
+    name: "Tom BE",
+    reason: "사유2",
+    voteCount: 0,
+    agree: 0,
+    disagree: 0,
+  },
+];
+
 export const TeamStateContext = createContext();
 export const TeamDispatchContext = createContext();
 
@@ -101,40 +102,6 @@ function teamReducer(state, action) {
           (item) => String(item.userId) !== String(action.data)
         ),
       };
-    case "CREATE_EVENT":
-      return {
-        ...state,
-        events: [...state.events, action.data],
-      };
-    case "DELETE_EVENT":
-      return {
-        ...state,
-        events: state.events.filter(
-          (item) => String(item.id) !== String(action.data)
-        ),
-      };
-    case "CREATE_VOTE":
-      return {
-        ...state,
-        voteKickmembers: [...state.voteKickmembers, action.data],
-      };
-    case ("AGREE", "DISAGREE"):
-      return {
-        ...state,
-        voteKickmembers: state.voteKickmembers.map((item) =>
-          String(item.userId) === String(action.data.userId)
-            ? action.data
-            : item
-        ),
-      };
-    case "DELETE_VOTE":
-      return {
-        ...state,
-        voteKickmembers: state.voteKickmembers.filter(
-          (item) => String(item.userId) !== String(action.data)
-        ),
-      };
-
     default:
       return state;
   }
@@ -146,6 +113,24 @@ function scheduleReducer(state, action) {
       return [...state, action.data];
     case "DELETE_EVENT":
       return state.filter((item) => String(item.id) !== String(action.data));
+    default:
+      return state;
+  }
+}
+
+function kickReducer(state, action) {
+  switch (action.type) {
+    case "CREATE_VOTE":
+      return [...state, action.data];
+    case "AGREE":
+    case "DISAGREE":
+      return state.map((item) =>
+        String(item.userId) === String(action.data.userId) ? action.data : item
+      );
+    case "DELETE_VOTE":
+      return state.filter(
+        (item) => String(item.userId) !== String(action.data)
+      );
     default:
       return state;
   }
@@ -176,6 +161,7 @@ const Teamboard = () => {
     scheduleReducer,
     mock_scheduleData
   );
+  const [kickData, kickDispatch] = useReducer(kickReducer, mock_kickData);
   const [meetingData, meetingDispatch] = useReducer(
     meetingReducer,
     mock_meetingData
@@ -200,33 +186,6 @@ const Teamboard = () => {
         title: title,
         collabLink: links,
         leader: selectedMember,
-      },
-    });
-  };
-
-  const onVote = (memberId, reason) => {
-    if (
-      teamData.voteKickmembers.find(
-        (member) => String(member.userId) === String(memberId)
-      )
-    ) {
-      alert("이미 투표 중인 팀원입니다.");
-
-      return;
-    }
-
-    teamDispatch({
-      type: "CREATE_VOTE",
-      data: {
-        id: kickIdRef.current++,
-        userId: memberId,
-        name: teamData.members.find(
-          (member) => String(member.userId) === String(memberId)
-        ).name,
-        reason: reason,
-        voteCount: 0,
-        agree: 0,
-        disagree: 0,
       },
     });
   };
@@ -258,35 +217,60 @@ const Teamboard = () => {
     }
   };
 
+  const onVote = (memberId, reason) => {
+    if (kickData.find((member) => String(member.userId) === String(memberId))) {
+      alert("이미 투표 중인 팀원입니다.");
+
+      return;
+    }
+
+    kickDispatch({
+      type: "CREATE_VOTE",
+      data: {
+        id: kickIdRef.current++,
+        userId: memberId,
+        name: teamData.members.find(
+          (member) => String(member.userId) === String(memberId)
+        ).name,
+        reason: reason,
+        voteCount: 0,
+        agree: 0,
+        disagree: 0,
+      },
+    });
+  };
+
+  console.log(kickData);
   const onAgree = (targetUserId) => {
-    const targetData = teamData.voteKickmembers.find(
+    const targetData = kickData.find(
       (member) => String(member.userId) === String(targetUserId)
     );
-    teamDispatch({
+
+    kickDispatch({
       type: "AGREE",
       data: {
-        agree: targetData.agree++,
-        voteCount: targetData.voteCount++,
         ...targetData,
+        agree: targetData.agree + 1,
+        voteCount: targetData.voteCount + 1,
       },
     });
 
-    if (Number(targetData.agree) === Number(teamData.members.length - 1)) {
+    if (Number(targetData.agree + 1) === Number(teamData.members.length - 1)) {
       onDeleteVote(targetUserId);
       onDeleteMember(targetUserId);
     }
   };
 
   const onDisagree = (targetUserId) => {
-    const targetData = teamData.voteKickmembers.find(
+    const targetData = kickData.find(
       (member) => String(member.userId) === String(targetUserId)
     );
-    teamDispatch({
+    kickDispatch({
       type: "DISAGREE",
       data: {
-        agree: targetData.disagree++,
-        voteCount: targetData.voteCount++,
         ...targetData,
+        disagree: targetData.disagree + 1,
+        voteCount: targetData.voteCount + 1,
       },
     });
 
@@ -299,7 +283,7 @@ const Teamboard = () => {
   };
 
   const onDeleteVote = (targetUserId) => {
-    teamDispatch({
+    kickDispatch({
       type: "DELETE_VOTE",
       data: targetUserId,
     });
@@ -328,7 +312,7 @@ const Teamboard = () => {
   return (
     <div className={styles.teamboard}>
       <TeamStateContext.Provider
-        value={{ teamData, feedbackData, scheduleData, meetingData }}
+        value={{ teamData, feedbackData, scheduleData, meetingData, kickData }}
       >
         <TeamDispatchContext.Provider
           value={{
