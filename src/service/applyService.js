@@ -29,15 +29,15 @@ export const submitApply = async (postId, userId, applyData) => {
 export const getApply = async (applyId) => {
   try {
     const response = await apiClient.get(`/apply/${applyId}`);
+    console.log(response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching apply:", error);
     throw error;
   }
 };
-//일단 여기까지
 
-// 나의 지원서 취소
+// 나의 지원서 취소 (ui 없음, 추후 구현)
 export const deleteApply = async (applyId) => {
   try {
     const response = await apiClient.delete(`/apply/${applyId}/delete`);
@@ -49,11 +49,38 @@ export const deleteApply = async (applyId) => {
 };
 
 // 지원서 승인
-export const approveApply = (postId, applyId) => {
-  return apiClient.put(`/apply/${postId}/list/${applyId}/approval`);
+export const approveApply = async (postId, applyId) => {
+  try {
+    const response = await apiClient.get(
+      `/apply/${postId}/list/${applyId}/approval`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting apply:", error);
+    throw error;
+  }
 };
 
 // 지원서 거절
-export const rejectApply = (postId, applyId) => {
-  return apiClient.put(`/apply/${postId}/list/${applyId}/reject`);
+export const rejectApply = async (postId, applyId) => {
+  try {
+    const response = await apiClient.get(
+      `/apply/${postId}/list/${applyId}/reject`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting apply:", error);
+    throw error;
+  }
+};
+
+// 현재 승인된 지원자 목록 리스트업
+export const approveApplicants = async (postId) => {
+  try {
+    const response = await apiClient.get(`/apply/${postId}/approvedlist`);
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting apply:", error);
+    throw error;
+  }
 };

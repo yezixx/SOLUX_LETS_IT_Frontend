@@ -1,42 +1,56 @@
-import React from "react";
 import styles from "./ProjectList.module.css";
 import Button from "../Button/Button.jsx";
 import { Link } from "react-router-dom";
 import Tech from "./Stack.jsx";
+import Paging from "../Paging/Paging.jsx";
+import useProjListPaging from "./useProjListPaging.js";
 
 function ProjectList({ projects }) {
+  //프로젝트 리스트 페이지 커스텀 훅
+  const {
+    activePage,
+    itemsCountPerPage,
+    pageRangeDisplayed,
+    handlePageChange,
+  } = useProjListPaging();
+
+  //실제 렌더링할 데이터 (data를 슬라이스 함 0-9 / 10-19..)
+  const renderData = projects.slice(
+    (activePage - 1) * itemsCountPerPage,
+    activePage * itemsCountPerPage
+  );
   //프로젝트 리스트 db에서 postId 갖고올 것
   return (
     <div className={styles.projectList}>
-      {projects.map((project, index) => (
+      {renderData.map((project, index) => (
         <div className={styles.projectItem} key={index}>
           {/*제목 + 정보 + 상세내용 + 버튼 */}
 
           {/*프로젝트 제목 */}
           <div className={styles.projectTitle}>
-            <text>{project.title}</text>
+            <div>{project.title}</div>
           </div>
           {/*프로젝트 정보 : 기간, 지역, 방식, 난이도 */}
           <div className={styles.projectInfo}>
             <div>
-              <text className={styles.projectPeriod}>
+              <div className={styles.projectPeriod}>
                 기간 | {project.period}
-              </text>
+              </div>
             </div>
             <div>
-              <text className={styles.projectLocation}>
+              <div className={styles.projectLocation}>
                 지역 | {project.location}
-              </text>
+              </div>
             </div>
             <div>
-              <text className={styles.projectLocation}>
+              <div className={styles.projectLocation}>
                 방식 | {project.onoff}
-              </text>
+              </div>
             </div>
             <div>
-              <text className={styles.projectDifficulty}>
+              <div className={styles.projectDifficulty}>
                 난이도 | {project.difficulty}
-              </text>
+              </div>
             </div>
           </div>
           {/*프로젝트 스택 + 세부사항 */}
@@ -50,7 +64,7 @@ function ProjectList({ projects }) {
                 ))}
             </div>
             <div>
-              <text className={styles.projectDetail}>{project.content}</text>
+              <div className={styles.projectDetail}>{project.content}</div>
             </div>
           </div>
 
@@ -60,6 +74,13 @@ function ProjectList({ projects }) {
           </Link>
         </div>
       ))}
+      <Paging
+        activePage={activePage}
+        totalItemsCount={projects.length}
+        itemsCountPerPage={itemsCountPerPage}
+        pageRangeDisplayed={pageRangeDisplayed}
+        handlePageChange={handlePageChange}
+      />
     </div>
   );
 }

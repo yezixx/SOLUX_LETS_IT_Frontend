@@ -29,6 +29,7 @@ import MyProjectLayout from "./MyProject/MyProjectLayout";
 import Apply from "./Apply/Apply";
 import APILogIn from "../Screen/LogIn/APILogIn";
 import Redirect from "./LogIn/Redirect";
+import ApplyProfile from "./MyProject/ApplyHireProj/ApplyProfile/ApplyProfile";
 
 export const RouterInfo = [
   {
@@ -94,8 +95,15 @@ export const RouterInfo = [
           {
             // path: "hiring-and-applied",
             //백엔드 연결용 동적 주소
-            path: "hiring-and-applied/:userId",
+            path: "hiring-and-applied",
             element: <ApplyHireProj />,
+            label: "구인/신청 프로젝트",
+          },
+          {
+            //백엔드 연결용 동적 주소소
+            path: "applyprofile/:applyId",
+            // path: "applyprofile",
+            element: <ApplyProfile />,
             label: "구인/신청 프로젝트",
           },
           {
