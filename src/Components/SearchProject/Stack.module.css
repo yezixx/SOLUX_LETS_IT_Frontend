@@ -1,7 +1,7 @@
 .tech {
-  min-width: 70px;
+  min-width: 60px;
   max-width: 120px;
-  height: 25px;
+  height: 20px;
   background-color: var(--select-color);
   border-radius: 20px;
   white-space: nowrap; /* 텍스트가 한 줄에 표시되도록 */
