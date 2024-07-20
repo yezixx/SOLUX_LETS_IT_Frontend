@@ -2,7 +2,7 @@ import Button from "../../../../Components/Button/Button";
 import Profile from "../../../../Components/Profile/Profile";
 import styles from "./ApplyProfile.module.css";
 import { useParams } from "react-router-dom";
-import applyProfileView from "./applyProfileView";
+import useProfileView from "./useProfileView";
 //mockdata
 const mockuser = {
   manner_tier: "B",
@@ -17,10 +17,10 @@ const mockuser = {
 const ApplyProfile = () => {
   //applyId는 지원자 리스트 매핑 시 갖고 옴, 동적 url 할당
   const applyId = useParams();
-  const { applicantView, profileView } = applyProfileView(applyId);
+  const { applicantView, profileView } = useProfileView(applyId);
   return (
     <div className={styles.ApplyProfile__contWrap}>
-      {/* <Profile user={profileView[0]} /> */}
+      {/* <Profile user={profileView} /> */}
       <Profile user={mockuser} />
 
       <div className={styles.ApplyProfile__applyDetail}>

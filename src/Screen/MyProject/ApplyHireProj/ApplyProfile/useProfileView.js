@@ -3,7 +3,7 @@ import { getApply } from "../../../../service/applyService";
 import { getProfile } from "../../../../service/profileService";
 
 //프로필 + 지원서 db 가져오는 훅
-const applyProfileView = (applyId) => {
+const useProfileView = (applyId) => {
   //db받아올 state설정 (해당 페이지에서만 이용, 전역x)
   const [applicantView, setApplicantView] = useState(null);
   const [profileView, setProfileView] = useState(null);
@@ -31,4 +31,4 @@ const applyProfileView = (applyId) => {
   }, [applicantView]);
   return { applicantView, profileView };
 };
-export default applyProfileView;
+export default useProfileView;

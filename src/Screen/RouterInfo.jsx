@@ -101,8 +101,8 @@ export const RouterInfo = [
           },
           {
             //백엔드 연결용 동적 주소소
-            // path: "applyprofile/:applyId",
-            path: "applyprofile",
+            path: "applyprofile/:applyId",
+            // path: "applyprofile",
             element: <ApplyProfile />,
             label: "구인/신청 프로젝트",
           },
