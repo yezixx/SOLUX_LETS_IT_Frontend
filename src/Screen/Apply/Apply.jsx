@@ -17,7 +17,7 @@ const user = {
 };
 const Apply = () => {
   //'신청하기' 버튼 눌렀을 때 postId 할당 될 것
-  const postId = useParams();
+  const { postId } = useParams();
   const setApplicant = useSetAtom(applicant);
   //applyData - onChange를 통해 input으로 받은 값을 모아둔 객체
   const { applyData, handleSubmit, onChange } = useApplyPost();
