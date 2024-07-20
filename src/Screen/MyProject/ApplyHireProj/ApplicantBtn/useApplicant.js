@@ -29,17 +29,15 @@ const useApplicant = (postId) => {
       if (isApprove) {
         /*수락 시 */
         alert("승인되었습니다.");
-        const update = { confirm: "true" };
-        approveApply(postId, applyId, update)
+        approveApply(postId, applyId)
           .then((res) => console.log(res))
-          .catch((error) => console.log(error));
+          .catch((error) => console.log(error.response));
       } else {
         /*거절 시 */
         alert("거절되었습니다.");
-        const update = { reject: "true" };
-        rejectApply(postId, applyId, update)
+        rejectApply(postId, applyId)
           .then((res) => console.log(res))
-          .catch((error) => console.log(error));
+          .catch((error) => console.log(error.response));
       }
   };
   return { applicantList, applicantConfirm };

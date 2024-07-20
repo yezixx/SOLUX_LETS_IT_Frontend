@@ -49,11 +49,10 @@ export const deleteApply = async (applyId) => {
 };
 
 // 지원서 승인
-export const approveApply = async (postId, applyId, patchData) => {
+export const approveApply = async (postId, applyId) => {
   try {
-    const response = await apiClient.put(
-      `/apply/${postId}/list/${applyId}/approval`,
-      patchData
+    const response = await apiClient.get(
+      `/apply/${postId}/list/${applyId}/approval`
     );
     return response.data;
   } catch (error) {
@@ -63,11 +62,10 @@ export const approveApply = async (postId, applyId, patchData) => {
 };
 
 // 지원서 거절
-export const rejectApply = async (postId, applyId, patchData) => {
+export const rejectApply = async (postId, applyId) => {
   try {
-    const response = await apiClient.put(
-      `/apply/${postId}/list/${applyId}/reject`,
-      patchData
+    const response = await apiClient.get(
+      `/apply/${postId}/list/${applyId}/reject`
     );
     return response.data;
   } catch (error) {
