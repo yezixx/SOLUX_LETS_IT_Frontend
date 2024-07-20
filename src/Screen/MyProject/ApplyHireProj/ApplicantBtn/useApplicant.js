@@ -29,13 +29,15 @@ const useApplicant = (postId) => {
       if (isApprove) {
         /*수락 시 */
         alert("승인되었습니다.");
-        approveApply(postId, applyId)
+        const update = { confirm: "true" };
+        approveApply(postId, applyId, update)
           .then((res) => console.log(res))
           .catch((error) => console.log(error));
       } else {
         /*거절 시 */
         alert("거절되었습니다.");
-        rejectApply(postId, applyId)
+        const update = { reject: "true" };
+        rejectApply(postId, applyId, update)
           .then((res) => console.log(res))
           .catch((error) => console.log(error));
       }
