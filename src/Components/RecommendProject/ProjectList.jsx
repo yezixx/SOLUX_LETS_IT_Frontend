@@ -1,7 +1,8 @@
 import React from "react";
 import styles from "./ProjectList.module.css";
 import Stack from "../SearchProject/Stack";
-
+/*db 배열자체를 projects로 보내줄 것 */
+/*객체의 key 값을 백엔드와 맞출 필요 있음 */
 function ProjectList({ projects }) {
   return (
     <div className={styles.projectList}>
@@ -9,8 +10,8 @@ function ProjectList({ projects }) {
         <div className={styles.projectItem} key={index}>
           <div className={styles.projectCont}>
             <div className={styles.stack}>
-              {project.stack &&
-                project.stack.map((tech, idx) => (
+              {project.requiredStack &&
+                project.requiredStack.map((tech, idx) => (
                   <Stack key={idx} tech={tech}>
                     {tech}
                   </Stack>
@@ -19,28 +20,27 @@ function ProjectList({ projects }) {
             {/*프로젝트 세부사항 */}
             <div className={styles.projectlist__content}>
               <div className={styles.projectTitle}>
-                <text>{project.title}</text>
+                <div>{project.prtTitle}</div>
               </div>
               <div>
-                <text className={styles.projectPeriod}>
+                <div className={styles.projectPeriod}>
                   기간 | {project.period}
-                </text>
+                </div>
               </div>
               <div>
-                <text className={styles.projectLocation}>
-                  지역 | {project.location}
-                </text>
+                <div className={styles.projectLocation}>
+                  지역 | {project.regionId}
+                </div>
               </div>
               <div>
-                <text className={styles.projectLocation}>
-                  {" "}
+                <div className={styles.projectLocation}>
                   방식 | {project.onoff}
-                </text>
+                </div>
               </div>
               <div>
-                <text className={styles.projectDifficulty}>
+                <div className={styles.projectDifficulty}>
                   난이도 | {project.difficulty}
-                </text>
+                </div>
               </div>
             </div>
           </div>

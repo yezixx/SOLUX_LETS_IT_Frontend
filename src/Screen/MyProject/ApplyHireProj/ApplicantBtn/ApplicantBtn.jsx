@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Button from "../../../../Components/Button/Button";
 import ProfilePhoto from "../../../../Components/Profile/Profile_Info/Profile_Photo/ProfilePhoto";
 import styles from "./ApplicantBtn.module.css";
@@ -19,7 +20,7 @@ const ApplicantBtn = ({ postId }) => {
             {/* 이름 + 지원서 보기 버튼 */}
             <div className={styles.Applicant__ApplicationBtn}>
               {applyUser.nickname} <span>|</span>
-              <Link to={`myprofile/applyprofile/${applyUser.applyId}`}>
+              <Link to={`/myproj/applyprofile/${applyUser.applyId}`}>
                 <Button text="지원서 보기" type="NONE__TEXT-MC2-16" />
               </Link>
             </div>
