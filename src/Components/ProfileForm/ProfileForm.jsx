@@ -1,23 +1,214 @@
 import Button from "../Button/Button";
-import SearchIcon from "../../Image/Icons/SearchIcon";
+//import SearchIcon from "../../Image/Icons/SearchIcon";
 import styles from "./ProfileForm.module.css";
 import SkillRange from "../SkillRange/SkillRange";
 import CollabLink from "../CollabLink/CollabLink";
+import { useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import defaultProfilePic from "../../assets/user.svg";
 
-const ProfileForm = () => {
+/*const sampleData = {
+  name: "홍길동",
+  bio: "시각화로 소통하는 프론트엔드 개발자",
+  age: "20대 초반",
+  sns: [
+    {
+      type: "email",
+      link: "111111@gamil.com",
+    },
+    {
+      type: "github",
+      link: "https:https://github.com",
+    },
+  ],
+  profile_picture: "https://avatars.githubusercontent.com/u/77464076?v=4",
+  manner_tire:"B",
+  introduce: "안녕하세요. 홍길동입니다.",
+  skills: [
+    {
+      name: "React",
+      level: 50,
+    },
+    {
+      name: "JavaScript",
+      level: 80,
+    },
+    {
+      name: "SpringBoot",
+      level: 10,
+    },
+  ],
+};*/
+
+const ProfileForm = ({ init }) => {
+  const [profilePic, setProfilePic] = useState(
+    init ? init.profile_picture : defaultProfilePic
+  );
+  const [name, setName] = useState(init ? init.name : "");
+  const [bio, setBio] = useState(init ? init.bio : "");
+  const [introduce, setIntroduce] = useState(init ? init.introduce : "");
+  const [links, setLinks] = useState(
+    init
+      ? init.links1
+      : [
+          {
+            id: 1,
+            type: "email",
+            link: "",
+          },
+          {
+            id: 2,
+            type: "github",
+            link: "",
+          },
+        ]
+  );
+  const [skills, setSkills] = useState(
+    init
+      ? init.skills
+      : [
+          {
+            id: 1,
+            skillName: "",
+            fluency: 50,
+          },
+          {
+            id: 2,
+            skillName: "",
+            fluency: 50,
+          },
+          {
+            id: 3,
+            skillName: "",
+            fluency: 50,
+          },
+          {
+            id: 4,
+            skillName: "",
+            fluency: 50,
+          },
+        ]
+  );
+
+  const nameRef = useRef();
+  const bioRef = useRef();
+  const introduceRef = useRef();
+  const selectPicRef = useRef();
+
+  const nav = useNavigate();
+
+  const onClickProfilePic = () => {
+    setProfilePic(
+      /*imgRef.current.files*/ URL.createObjectURL(
+        selectPicRef.current.files[0]
+      )
+    );
+  };
+
+  const onClickSave = () => {
+    if (nameRef.current.value === "") {
+      nameRef.current.focus();
+      return;
+    }
+    if (bioRef.current.value === "") {
+      bioRef.current.focus();
+      return;
+    }
+    if (introduceRef.current.value === "") {
+      introduceRef.current.focus();
+      return;
+    }
+    if (links[0].link === "" || links[1].link === "") {
+      alert("SNS 링크를 입력해주세요.");
+      return;
+    }
+    if (
+      skills[0].skillName === "" ||
+      skills[1].skillName === "" ||
+      skills[2].skillName === "" ||
+      skills[3].skillName === ""
+    ) {
+      alert("기술 스택을 입력해주세요.");
+      return;
+    }
+
+    if (confirm("프로필 작성을 완료하시겠습니까?")) {
+      nav("/");
+    }
+  };
+
+  const onChangeName = (e) => {
+    setName(e.target.value);
+  };
+
+  const onChangeBio = (e) => {
+    if (e.target.value.length > 20) return;
+    setBio(e.target.value);
+  };
+
+  const onChangeIntroduce = (e) => {
+    if (e.target.value.length > 500) return;
+    setIntroduce(e.target.value);
+  };
+
+  const onChangeIcon = (id, input) => {
+    setLinks(
+      links.map((item) =>
+        String(item.id) === String(id) ? { ...item, type: input.tool } : item
+      )
+    );
+  };
+
+  const onChangeLink = (id, input) => {
+    setLinks(
+      links.map((item) =>
+        String(item.id) === String(id) ? { ...item, link: input } : item
+      )
+    );
+  };
+
+  const onChangeSkill = (id, type, input) => {
+    if (type === "name") {
+      setSkills(
+        skills.map((item) =>
+          String(item.id) === String(id) ? { ...item, skillName: input } : item
+        )
+      );
+    } else if (type === "fluency") {
+      setSkills(
+        skills.map((item) =>
+          String(item.id) === String(id) ? { ...item, fluency: input } : item
+        )
+      );
+    }
+  };
+
   return (
     <div className={styles.profileForm}>
       <div className={styles.profileForm__infoSection}>
         <div className={styles.profileForm__picture}>
-          <img src="" alt="프로필 사진" />
-          <Button text="변경하기" type="444444_150x40" />
+          <img src={profilePic} alt="프로필 사진" />
+          <input
+            type="file"
+            id="input_img"
+            ref={selectPicRef}
+            accept="image/*"
+            onChange={onClickProfilePic}
+          />
+          <label htmlFor="input_img">변경하기</label>
         </div>
         <div className={styles.profileForm__info}>
           <div className={styles.profileForm__label}>기본 정보</div>
           <div className={styles.profileForm__form}>
             <div className={styles.profileForm__name}>
               <div className={styles.profileForm__formLabel}>이름</div>
-              <input type="text" placeholder="ex) 홍길동" />
+              <input
+                type="text"
+                ref={nameRef}
+                placeholder="ex) 홍길동"
+                value={name}
+                onChange={onChangeName}
+              />
             </div>
             <div className={styles.profileForm__bio}>
               <div className={styles.profileForm__formLabel}>
@@ -25,7 +216,10 @@ const ProfileForm = () => {
               </div>
               <input
                 type="text"
+                ref={bioRef}
                 placeholder="ex) 시각화로 소통하는 프론트엔트 개발자"
+                value={bio}
+                onChange={onChangeBio}
               />
             </div>
             <div className={styles.profileForm__age}>
@@ -35,14 +229,16 @@ const ProfileForm = () => {
             <div className={styles.profileForm__sns}>
               <div className={styles.profileForm__formLabel}>SNS</div>
               <div className={styles.profileForm__link}>
-                <div>
-                  <CollabLink type="SHORT" />
-                  <Button text="입력" type="NONE__TEXT-MC2-16" />
-                </div>
-                <div>
-                  <CollabLink type="SHORT" />
-                  <Button text="삭제" type="NONE__TEXT-TC2" />
-                </div>
+                {links.map((link) => (
+                  <CollabLink
+                    key={link.id}
+                    id={link.id}
+                    type="SHORT"
+                    init={link.type}
+                    onClick={onChangeIcon}
+                    onChange={onChangeLink}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -50,36 +246,45 @@ const ProfileForm = () => {
       </div>
       <div className={styles.profileForm__introSection}>
         <div className={styles.profileForm__label}>INTRODUCE</div>
-        <textarea placeholder="간단한 소개글을 입력해 주세요." />
+        <textarea
+          placeholder="간단한 소개글을 입력해 주세요."
+          ref={introduceRef}
+          value={introduce}
+          onChange={onChangeIntroduce}
+        />
       </div>
       <div className={styles.profileForm__skillSection}>
         <div className={styles.profileForm__skillsTop}>
           <div className={styles.profileForm__label}>SKILLS</div>
-          <div className={styles.profileForm__searchBar}>
+          {/*<div className={styles.profileForm__searchBar}>
             <input type="text" placeholder="ex) JavaScript" />
             <button>
               <SearchIcon width="25px" height="25px" />
             </button>
+          </div>*/}
+          <div
+            className={`${styles.profileForm__innerLabel} ${styles["profileForm__innerLabel--POINT"]}`}
+          >
+            사용가능한 4개의 기술 스택을 입력해주세요.
           </div>
-        </div>
-        <div
-          className={`${styles.profileForm__innerLabel} ${styles["profileForm__innerLabel--POINT"]}`}
-        >
-          4개까지 추가할 수 있습니다.
         </div>
         <div className={styles.profileForm__innerLabel}>
           <span>기술 스택</span>
           <span>숙련도</span>
         </div>
         <div className={styles.profileForm__skillRange}>
-          <SkillRange skillName="React" />
-          <SkillRange skillName="JavaScript" />
-          <SkillRange skillName="SpringBoot" />
-          <SkillRange />
+          {skills.map((skill) => (
+            <SkillRange
+              key={skill.id}
+              id={skill.id}
+              skillName={skill.skillName}
+              onChange={onChangeSkill}
+            />
+          ))}
         </div>
       </div>
       <div className={styles.profileForm__save}>
-        <Button text="저장" type="RAD-10__FONT-M" />
+        <Button text="저장" type="RAD-10__FONT-M" onClick={onClickSave} />
       </div>
     </div>
   );

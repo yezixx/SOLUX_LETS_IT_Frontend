@@ -19,12 +19,35 @@
 .profileForm__picture > img {
   width: 300px;
   height: 300px;
+  object-fit: contain;
+  object-fit: cover;
   border: 1px solid var(--line-color);
   border-radius: 50%;
 }
 
-.profileForm__picture > button {
+.profileForm__picture > input {
+  display: none;
+}
+
+.profileForm__picture > label {
   position: absolute;
+
+  width: 150px;
+  height: 40px;
+
+  color: white;
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+  background-color: rgba(68, 68, 68, 0.63);
+
+  &:hover {
+    background-color: rgba(68, 68, 68, 0.8);
+  }
 }
 
 .profileForm__label {
@@ -121,6 +144,9 @@
   /*텍스트*/
   font-size: 16px;
   color: var(--text-color);
+  /*내부 텍스트 배치*/
+  display: flex;
+  align-items: center;
 }
 
 .profileForm__sns {
@@ -144,27 +170,27 @@
 .profileForm__link > div {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
+/*
 
-/* 스크롤바 스타일링 */
 .profileForm__link::-webkit-scrollbar {
-  width: 8px; /* 스크롤바 너비 */
+  width: 8px; 
 }
 
 .profileForm__link::-webkit-scrollbar-track {
-  background: var(--dimmed); /* 스크롤바 트랙 색상 */
-  border-radius: 10px; /* 스크롤바 트랙 둥글기 */
+  background: var(--dimmed); 
+  border-radius: 10px;
 }
 
 .profileForm__link::-webkit-scrollbar-thumb {
-  background: var(--line-color); /* 스크롤바 색상 */
-  border-radius: 10px; /* 스크롤바 둥글기 */
+  background: var(--line-color);
+  border-radius: 10px;
 }
 
 .profileForm__link::-webkit-scrollbar-thumb:hover {
-  background: var(--text-color2); /* 스크롤바 색상 (hover) */
-}
+  background: var(--text-color2); 
+}*/
 
 .profileForm__introSection {
   display: flex;
@@ -195,7 +221,8 @@
 
 .profileForm__skillsTop {
   display: flex;
-  gap: 20px;
+  align-items: center;
+  gap: 50px;
 }
 
 .profileForm__searchBar {
@@ -236,8 +263,6 @@
 
 .profileForm__innerLabel--POINT {
   color: var(--point);
-  margin-left: 100px;
-  margin-top: 5px;
 }
 
 .profileForm__innerLabel > span {
