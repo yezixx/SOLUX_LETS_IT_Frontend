@@ -1,6 +1,8 @@
 import { createContext, useReducer, useRef } from "react";
 import styles from "./Teamboard.module.css";
 import { Outlet } from "react-router-dom";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../atoms/atoms";
 
 const mock_teamData = {
   teamId: 1,
@@ -70,7 +72,7 @@ const mock_kickData = [
     userId: "tom",
     name: "Tom BE",
     reason: "사유2",
-    voteCount: 0,
+    voteCount: [],
     agree: 0,
     disagree: 0,
   },
@@ -167,6 +169,8 @@ const Teamboard = () => {
     mock_meetingData
   );
 
+  const loginUserId = useAtomValue(userIdAtom);
+
   const kickIdRef = useRef(2);
   const meetingRef = useRef(3);
   const eventRef = useRef(3);
@@ -241,17 +245,27 @@ const Teamboard = () => {
   };
 
   console.log(kickData);
-  const onAgree = (targetUserId) => {
-    const targetData = kickData.find(
+
+  const getTargetMember = (targetUserId) => {
+    return kickData.find(
       (member) => String(member.userId) === String(targetUserId)
     );
+  };
+
+  const onAgree = (targetUserId) => {
+    const targetData = getTargetMember(targetUserId);
+
+    if (targetData.voteCount.includes(loginUserId)) {
+      alert("투표는 1인당 1회만 가능합니다.");
+      return;
+    }
 
     kickDispatch({
       type: "AGREE",
       data: {
         ...targetData,
         agree: targetData.agree + 1,
-        voteCount: targetData.voteCount + 1,
+        voteCount: [...targetData.voteCount, loginUserId],
       },
     });
 
@@ -262,20 +276,25 @@ const Teamboard = () => {
   };
 
   const onDisagree = (targetUserId) => {
-    const targetData = kickData.find(
-      (member) => String(member.userId) === String(targetUserId)
-    );
+    const targetData = getTargetMember(targetUserId);
+
+    if (targetData.voteCount.includes(loginUserId)) {
+      alert("투표는 1인당 1회만 가능합니다.");
+      return;
+    }
+
     kickDispatch({
       type: "DISAGREE",
       data: {
         ...targetData,
         disagree: targetData.disagree + 1,
-        voteCount: targetData.voteCount + 1,
+        voteCount: [...targetData.voteCount, loginUserId],
       },
     });
 
     if (
-      Number(targetData.voteCount) === Number(teamData.members.length - 1) &&
+      Number(targetData.voteCount.length) ===
+        Number(teamData.members.length - 1) &&
       Number(targetData.agree) < Number(teamData.members.length - 1)
     ) {
       onDeleteVote(targetUserId);
