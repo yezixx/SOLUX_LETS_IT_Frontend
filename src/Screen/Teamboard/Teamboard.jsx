@@ -237,7 +237,7 @@ const Teamboard = () => {
           (member) => String(member.userId) === String(memberId)
         ).name,
         reason: reason,
-        voteCount: 0,
+        voteCount: [],
         agree: 0,
         disagree: 0,
       },
