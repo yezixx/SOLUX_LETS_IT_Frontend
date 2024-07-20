@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { TeamStateContext } from "../Teamboard";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../atoms/atoms";
+import { getLogoImage } from "../../../util/getLogoImage";
 
 const ProjInfo = () => {
   const { teamData } = useContext(TeamStateContext);
@@ -32,7 +33,7 @@ const ProjInfo = () => {
   const onClickToolIcon = (url) => {
     window.open(url);
   };
-
+  console.log(TOOLLIST);
   return (
     <div className={styles.projInfo__wrapper}>
       <div className={styles.projInfo__container}>
@@ -49,6 +50,7 @@ const ProjInfo = () => {
                 <ToolIcon
                   key={tool.id}
                   alt={tool.tool}
+                  src={getLogoImage(tool.tool)}
                   type="60x60"
                   onClick={() => onClickToolIcon(tool.link)}
                 />

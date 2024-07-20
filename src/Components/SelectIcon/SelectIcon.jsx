@@ -19,7 +19,7 @@ const SelectIcon = ({ children, list, onChange }) => {
           alt={item.altMsg}
           title={item.altMsg}
           onClick={() => {
-            onChange(item.tool);
+            onChange(item);
           }}
         />
       ))}

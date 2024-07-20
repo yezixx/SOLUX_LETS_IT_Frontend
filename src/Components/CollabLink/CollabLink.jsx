@@ -3,80 +3,68 @@ import styles from "./CollabLink.module.css";
 import ToolIcon from "../ToolIcon/ToolIcon";
 import SelectIcon from "../SelectIcon/SelectIcon";
 
+import { getLogoImage } from "../../util/getLogoImage";
+
 const getToolList = (type) => {
   return type === "SHORT"
     ? [
         {
-          tool: "gmail",
-          logo: "",
-          altMsg: "gmail",
+          tool: "email",
+          image: getLogoImage("email"),
         },
         {
           tool: "github",
-          image: "",
-          altMsg: "github",
-        },
-        {
-          tool: "notion",
-          image: "",
-          altMsg: "notion",
+          image: getLogoImage("github"),
         },
         {
           tool: "linkedIn",
-          image: "",
-          altMsg: "linkedIn",
+          image: getLogoImage("linkedin"),
         },
         {
-          tool: "stack overflow",
-          image: "",
-          altMsg: "stack overflow",
+          tool: "velog",
+          image: getLogoImage("velog"),
         },
         {
-          tool: "blog",
-          image: "",
-          altMsg: "blog",
+          tool: "naverblog",
+          image: getLogoImage("naverblog"),
+        },
+        {
+          tool: "tistory",
+          image: getLogoImage("tistory"),
         },
         {
           tool: "others",
-          image: "",
-          altMsg: "others",
+          image: getLogoImage("others"),
         },
       ]
     : [
         {
           tool: "github",
-          image: "",
-          altMsg: "github",
+          image: getLogoImage("github"),
         },
         {
           tool: "notion",
-          image: "",
-          altMsg: "notion",
+          image: getLogoImage("notion"),
         },
         {
           tool: "jira",
-          logo: "",
-          altMsg: "jira",
+          image: getLogoImage("jira"),
         },
         {
           tool: "figma",
-          image: "",
-          altMsg: "figma",
+          image: getLogoImage("figma"),
         },
         {
           tool: "slack",
-          image: "",
-          altMsg: "slack",
+          image: getLogoImage("slack"),
         },
         {
           tool: "discord",
-          image: "",
-          altMsg: "discord",
+          image: getLogoImage("discord"),
         },
         {
           tool: "others",
-          image: "",
-          altMsg: "others",
+          image: getLogoImage("others"),
         },
       ];
 };
@@ -86,9 +74,14 @@ const CollabLink = ({ id, value, type, init, onChange, onClick }) => {
 
   const toolList = getToolList(type);
   const [selectedIcon, setSelectedIcon] = useState(
-    init ? init : toolList[0].tool
+    init
+      ? {
+          tool: { init },
+          image: getLogoImage(init),
+          altMsg: { init },
+        }
+      : toolList[0].tool
   );
-
   const onChangeInput = (e) => {
     onChange(id, e.target.value);
   };
@@ -112,8 +105,8 @@ const CollabLink = ({ id, value, type, init, onChange, onClick }) => {
         }}
       >
         <ToolIcon
-          title={selectedIcon}
-          alt={selectedIcon}
+          title={selectedIcon.tool}
+          src={selectedIcon.image}
           type={type === "SHORT" ? "" : "NONE"}
         />
       </div>

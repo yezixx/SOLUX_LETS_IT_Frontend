@@ -48,9 +48,10 @@ const UpdateProj = () => {
   };
 
   const onClickeIcon = (id, input) => {
+    console.log(input);
     setLinks(
       links.map((item) =>
-        String(item.id) === String(id) ? { ...item, tool: input } : item
+        String(item.id) === String(id) ? { ...item, tool: input.tool } : item
       )
     );
   };
@@ -62,6 +63,7 @@ const UpdateProj = () => {
       )
     );
   };
+  console.log(links);
 
   return (
     <div className={styles.updateProj}>
