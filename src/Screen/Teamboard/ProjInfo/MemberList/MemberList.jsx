@@ -1,6 +1,6 @@
 import styles from "./MemberList.module.css";
 import MemberItem from "../../../../Components/MemberItem/MemberItem";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 
@@ -8,17 +8,23 @@ const MemberList = () => {
   const { teamData } = useContext(TeamStateContext);
   const members = teamData.members;
 
+  const nav = useNavigate();
+
+  const onClickMemberItem = (userId) => {
+    nav(`/teamboard/member/profile/${userId}`);
+  };
+
   return (
     <div className={styles.memberList}>
       <div className={styles.memberList__item}>
         {members.map((member) => (
-          <Link
+          <MemberItem
             key={member.id}
-            to={"/teamboard/member/profile"}
-            style={{ textDecoration: "none" }}
-          >
-            <MemberItem key={member.id} memberName={member.name} />
-          </Link>
+            memberName={member.name}
+            onClick={() => {
+              onClickMemberItem(member.userId);
+            }}
+          />
         ))}
       </div>
     </div>
