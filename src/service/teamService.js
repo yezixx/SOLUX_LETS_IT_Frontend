@@ -5,14 +5,27 @@ import apiClient from "./apiClient";
 */
 
 // 팀게시판 생성
-export const createTeam = (postId, teamData) => {
-  return apiClient.post(`/team/${postId}/create`, teamData);
+export const createTeam = async (postId, teamData) => {
+  try {
+    const response = await apiClient.post(`/team/${postId}/create`, teamData);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching create team");
+    throw error;
+  }
 };
 
 // 팀게시파 메인 - 팀게시판 프로젝트 정보 화면
-export const getTeam = (teamId) => {
-  return apiClient.get(`/team/${teamId}/main`);
+export const getTeam = async (teamId) => {
+  try {
+    const response = await apiClient.get(`/team/${teamId}/main`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching get team", error);
+    throw error;
+  }
 };
+// 일단 생성 및 조회까지
 
 // 팀게시판 강퇴 제안
 export const proposeKick = (teamId) => {
