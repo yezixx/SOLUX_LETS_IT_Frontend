@@ -1,0 +1,10 @@
+.contest {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.text {
+  font-family: "pretendardB";
+  font-size: 26px;
+}

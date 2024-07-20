@@ -1,0 +1,81 @@
+.title {
+  font-family: "pretendardB";
+  font-size: 20px;
+}
+
+.container {
+  background-color: var(--dimmed); /* 전체 배경 색상 */
+  border-radius: 10px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+}
+.searchContainer__field {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.searchContainer__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.nav__searchBar_container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 30px;
+}
+.nav__searchBar {
+  width: 400px;
+  height: 3px;
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+.nav__searchbar_input {
+  height: 30px;
+  flex: 1;
+  width: 350px;
+  font-size: 20px;
+}
+.nav__searchbar_input:focus {
+  outline: none;
+}
+.nav__searchbar_input::placeholder {
+  color: var(--text-color2);
+}
+.nav__searchbar_input:focus::placeholder {
+  color: transparent;
+}
+.nav__searchIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+}
+
+.searchbtn {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+}
+/*회색 타원 배치*/
+.listWrap {
+  width: 300px;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}

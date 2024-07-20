@@ -1,0 +1,49 @@
+/* ProjectList.module.css */
+
+.projectList {
+  align-items: center;
+  display: flex;
+  gap: 15px;
+  border-radius: 15px;
+}
+
+.stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* 각 tech 요소 사이의 간격을 조정 */
+  font-family: "pretendardM";
+  font-size: 13px;
+}
+
+.projectItem {
+  background-color: white;
+  align-content: center;
+  border-radius: 10px;
+  border: 1px solid var(--select-color);
+  width: 300px;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+.projectCont {
+  width: 250px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.projectTitle text {
+  font-family: "pretendardB";
+}
+
+.projectPeriod,
+.projectLocation,
+.projectOnoff,
+.projectDifficulty {
+  color: gray;
+  font-size: 13px;
+}

@@ -1,0 +1,52 @@
+.collabLink {
+  /*요소 배치*/
+  display: flex;
+  gap: 15px;
+  align-items: center;
+
+  position: relative;
+}
+
+.collabLink__selectIcon {
+  position: absolute;
+  z-index: 10;
+  top: 55px;
+  left: -15px;
+}
+
+.collabLink__icon {
+  /*테두리*/
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  /*크기*/
+  width: 40px;
+  height: 40px;
+  /*요소 배치*/
+  display: flex;
+  align-items: center;
+}
+
+.collabLink__input {
+  /*크기*/
+  width: 618px;
+  height: 40px;
+  /*테두리*/
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  /*패딩*/
+  padding-left: 10px;
+  /*텍스트*/
+  font-size: 16px;
+  color: var(--text-color2);
+}
+
+/*협업툴 링크 input 태그 클릭시*/
+.collabLink__input:focus {
+  border: 2px solid var(--main-color2);
+  outline: none; /* 기본 outline 제거 */
+}
+
+.collabLink__input--SHORT {
+  /*크기*/
+  width: 377px;
+}

@@ -1,0 +1,10 @@
+.myProject {
+  width: 1320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.myProject__sideNav {
+  height: 100vh;
+  display: flex;
+}

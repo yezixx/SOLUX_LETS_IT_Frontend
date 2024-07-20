@@ -1,0 +1,20 @@
+.wrap {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.main {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.contestnews {
+  width: 1320px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 70px;
+}

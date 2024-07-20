@@ -1,0 +1,209 @@
+/*
+현재 작성된 스타일 외의 스타일링이 필요한 경우
+.button--TYPENAME 으로 새로 작성해주세요.
+TYPENAME은 "배경색_크기" 형태로 통일해주세요.
+배경색이 흰색이고 테두리에만 색이 들어가는 경우
+"BOR_테두리색_크기" 형태로 적어주세요.
+radious, font 등만 달라지는 경우
+"RAD-8__FONT-M"과 같이 "__"로 이어서 작성해주세요
+*/
+
+/*디폴트*/
+.button {
+  width: 150px;
+  height: 40px;
+  background-color: var(--main-color2);
+  border-radius: 4px;
+  color: white;
+  font-family: "pretendardB";
+  font-size: 16px;
+
+  text-align: "center";
+  display: "flex";
+  justify-content: "center";
+  align-items: "center";
+
+  &:hover {
+    background-color: var(--main2-hover-color);
+  }
+}
+/*radious 10px font pretenderM*/
+.button--RAD-10__FONT-M {
+  border-radius: 10px;
+  font-family: "pretendardM";
+}
+/*sub-color 120x40*/
+.button--SC_120x40 {
+  width: 120px;
+  background-color: var(--sub-color);
+  border-radius: 10px;
+  color: var(--sub-color2);
+  &:hover {
+    background-color: var(--sub1-hover-color);
+  }
+}
+/*main-color2 120x40*/
+.button--MC2_120x40 {
+  width: 120px;
+  background-color: var(--main-color2);
+  border-radius: 10px;
+  border-radius: 10px;
+  &:hover {
+    background-color: var(--main2-hover-color);
+  }
+}
+/*main-color2 70x40*/
+.button--MC2_70x40 {
+  width: 70px;
+  background-color: var(--main-color2);
+  border-radius: 8px;
+  &:hover {
+    background-color: var(--main2-hover-color);
+  }
+}
+/*none background-color, none border*/
+.button--NONE__TEXT-TC2 {
+  width: fit-content;
+  height: fit-content;
+  color: var(--text-color2);
+  background-color: transparent;
+  font-family: "pretendardM";
+  &:hover {
+    background-color: transparent;
+    color: var(--text-color);
+  }
+}
+/*none background-color, none border*/
+.button--NONE__TEXT-POINT {
+  width: fit-content;
+  height: fit-content;
+  color: var(--point);
+  background-color: transparent;
+  font-family: "pretendardM";
+  &:hover {
+    background-color: transparent;
+  }
+}
+/*none background-color, none border, font-size 12*/
+.button--NONE__TEXT-MC2-16 {
+  width: fit-content;
+  height: fit-content;
+  color: var(--main-color2);
+  background-color: transparent;
+  font-family: "pretendardM";
+  font-size: 16px;
+  &:hover {
+    background-color: transparent;
+  }
+}
+/*none background-color, none border, font-size 12*/
+.button--NONE__TEXT-MC2-12 {
+  width: fit-content;
+  height: fit-content;
+  color: var(--main-color2);
+  background-color: transparent;
+  font-family: "pretendardM";
+  font-size: 12px;
+  &:hover {
+    background-color: transparent;
+    color: var(--main2-hover-color);
+  }
+}
+.button--SEC_120x40 {
+  width: 120px;
+  background-color: var(--select-color);
+  border-radius: 8px;
+  color: var(--text-color2);
+  &:hover {
+    background-color: var(--line-color);
+  }
+}
+/*select-color 150x40*/
+.button--SEC_150x40 {
+  width: 150px;
+  background-color: var(--select-color);
+  border-radius: 8px;
+  color: var(--text-color2);
+  &:hover {
+    background-color: var(--line-color);
+  }
+}
+/*select-color 70x40*/
+.button--SEC_70x40 {
+  width: 70px;
+  background-color: var(--select-color);
+  background-repeat: 8px;
+  color: var(--text-color2);
+  &:hover {
+    background-color: var(--line-color);
+  }
+}
+/*#741eff 150x40 - ai 포트폴리오 버튼*/
+.button--741EFF_150x40 {
+  background-color: #741eff;
+  &:hover {
+    background-color: #6119d6;
+  }
+}
+/*Point color 120x40*/
+.button--POINT_120x40 {
+  /*크기*/
+  width: 120px;
+  height: 40px;
+  /*테두리*/
+  border-radius: 10px;
+  color: white;
+  background-color: var(--point);
+  &:hover {
+    background-color: var(--point);
+  }
+}
+/* None background-color, border color point, 70x40*/
+.button--BOR_POINT_70x40 {
+  /*크기*/
+  width: 70px;
+  height: 40px;
+  /*테두리*/
+  border: 1px solid var(--point);
+  border-radius: 10px;
+  color: var(--point);
+  background-color: transparent;
+  &:hover {
+    background-color: transparent;
+  }
+}
+/* select color, 80x30*/
+.button--SEC_80x30 {
+  /*크기*/
+  width: 80px;
+  height: 30px;
+  /*테두리*/
+  border-radius: 4px;
+  /*배경색*/
+  background-color: var(--select-color);
+  /*텍스트*/
+  font-size: 14px;
+  color: var(--text-color2);
+  &:hover {
+    background-color: var(--select-color);
+    border: 1px solid var(--text-color1);
+  }
+}
+/*#444444 -> rgb(68,68,68)*/
+.button--444444_150x40 {
+  border-radius: 8px;
+  background-color: rgba(68, 68, 68, 0.63);
+
+  &:hover {
+    background-color: rgba(68, 68, 68, 0.8);
+  }
+}
+/*main-color2 180x40*/
+.button--MC2_180x40 {
+  width: 180px;
+  background-color: var(--main-color2);
+  border-radius: 8px;
+  &:hover {
+    background-color: var(--main2-hover-color);
+  }
+}
