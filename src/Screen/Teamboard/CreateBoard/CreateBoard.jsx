@@ -79,8 +79,6 @@ const CreateBoard = () => {
     );
   };
 
-  console.log(links);
-
   return (
     <div className={styles.createBoard}>
       {/*팀게시판 생성*/}
