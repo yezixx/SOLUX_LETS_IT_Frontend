@@ -95,6 +95,21 @@ const ProfileForm = ({ init }) => {
   const introduceRef = useRef();
   const selectPicRef = useRef();
 
+  const linkRef1 = useRef();
+  const linkRef2 = useRef();
+  const linkRefs = [linkRef1, linkRef2];
+  const skillRef1 = useRef();
+  const skillRef2 = useRef();
+  const skillRef3 = useRef();
+  const skillRef4 = useRef();
+  const skillRefs = [skillRef1, skillRef2, skillRef3, skillRef4];
+
+  const onFocusElement = (ref) => {
+    if (ref.current) {
+      ref.current.focus();
+    }
+  };
+
   const nav = useNavigate();
 
   const onClickProfilePic = () => {
@@ -107,29 +122,28 @@ const ProfileForm = ({ init }) => {
 
   const onClickSave = () => {
     if (nameRef.current.value === "") {
-      nameRef.current.focus();
+      onFocusElement(nameRef);
       return;
     }
     if (bioRef.current.value === "") {
-      bioRef.current.focus();
+      onFocusElement(bioRef);
       return;
+    }
+    for (let i = 0; i < links.length; i++) {
+      if (links[i].link === "") {
+        onFocusElement(linkRefs[i]);
+        return;
+      }
     }
     if (introduceRef.current.value === "") {
-      introduceRef.current.focus();
+      onFocusElement(introduceRef);
       return;
     }
-    if (links[0].link === "" || links[1].link === "") {
-      alert("SNS 링크를 입력해주세요.");
-      return;
-    }
-    if (
-      skills[0].skillName === "" ||
-      skills[1].skillName === "" ||
-      skills[2].skillName === "" ||
-      skills[3].skillName === ""
-    ) {
-      alert("기술 스택을 입력해주세요.");
-      return;
+    for (let i = 0; i < skills.length; i++) {
+      if (skills[i].skillName === "") {
+        onFocusElement(skillRefs[i]);
+        return;
+      }
     }
 
     if (confirm("프로필 작성을 완료하시겠습니까?")) {
@@ -229,7 +243,7 @@ const ProfileForm = ({ init }) => {
             <div className={styles.profileForm__sns}>
               <div className={styles.profileForm__formLabel}>SNS</div>
               <div className={styles.profileForm__link}>
-                {links.map((link) => (
+                {links.map((link, index) => (
                   <CollabLink
                     key={link.id}
                     id={link.id}
@@ -237,6 +251,7 @@ const ProfileForm = ({ init }) => {
                     init={link.type}
                     onClick={onChangeIcon}
                     onChange={onChangeLink}
+                    ref={linkRefs[index]}
                   />
                 ))}
               </div>
@@ -273,12 +288,13 @@ const ProfileForm = ({ init }) => {
           <span>숙련도</span>
         </div>
         <div className={styles.profileForm__skillRange}>
-          {skills.map((skill) => (
+          {skills.map((skill, index) => (
             <SkillRange
               key={skill.id}
               id={skill.id}
               skillName={skill.skillName}
               onChange={onChangeSkill}
+              ref={skillRefs[index]}
             />
           ))}
         </div>
