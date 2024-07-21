@@ -32,7 +32,7 @@ const TeamNav = () => {
   return (
     <div className={styles.nav}>
       <div className={styles.nav__container}>
-        <div className={styles.nav__label}>학원 청구 정산 서비스</div>
+        <div className={styles.nav__label}>{teamData.title}</div>
         <div className={styles.nav__buttonContainer}>
           <button
             className={`${styles.nav__button} ${

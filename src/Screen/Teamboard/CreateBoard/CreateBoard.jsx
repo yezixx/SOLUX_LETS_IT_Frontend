@@ -3,7 +3,7 @@ import MemberItem from "../../../Components/MemberItem/MemberItem";
 import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
 import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
 import styles from "./CreateBoard.module.css";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const mock_members = [
@@ -14,10 +14,12 @@ const mock_members = [
 const mock_collabLinks = [
   {
     id: 1,
+    tool: "notion",
     link: "",
   },
   {
     id: 2,
+    tool: "github",
     link: "",
   },
 ];
@@ -28,21 +30,36 @@ const CreateBoard = () => {
   const [title, setTitle] = useState("");
   const [links, setLinks] = useState(mock_collabLinks);
 
+  const titleRef = useRef();
+  const linkRef1 = useRef();
+  const linkRef2 = useRef();
+
+  const onFocusElement = (ref) => {
+    if (ref.current) {
+      ref.current.focus();
+    }
+  };
+
   const onClickCreate = () => {
     if (title === "") {
-      alert("프로젝트명을 입력해주세요.");
+      onFocusElement(titleRef);
       return;
     }
-    if (links[0].link === "" || links[1].link === "") {
-      alert(
-        '협업툴 링크를 입력해주세요.\n이후 "프로젝트 관리 > 프로젝트 정보 수정"에서 변경가능합니다.'
-      );
+    if (links[0].link === "") {
+      onFocusElement(linkRef1);
+      return;
+    }
+    if (links[1].link === "") {
+      onFocusElement(linkRef2);
       return;
     }
     if (confirm("팀게시판을 생성하시겠습니까?")) nav("/teamboard");
   };
 
   const onChangeTitleForm = (input) => {
+    if (input.length > 15) {
+      return;
+    }
     setTitle(input);
   };
 
@@ -50,6 +67,14 @@ const CreateBoard = () => {
     setLinks(
       links.map((item) =>
         String(item.id) === String(id) ? { ...item, link: url } : item
+      )
+    );
+  };
+
+  const onClickIcon = (id, tool) => {
+    setLinks(
+      links.map((item) =>
+        String(item.id) === String(id) ? { ...item, tool: tool.tool } : item
       )
     );
   };
@@ -71,11 +96,20 @@ const CreateBoard = () => {
           </div>
           {/*프로젝트명 */}
           <div className={styles.createBoard__projName}>
-            <ProjNameForm title={title} onChange={onChangeTitleForm} />
+            <ProjNameForm
+              title={title}
+              onChange={onChangeTitleForm}
+              ref={titleRef}
+            />
           </div>
           {/*협업툴 링크 */}
           <div className={styles.createBoard__linkForm}>
-            <CollabLinkForm links={links} onChange={onChangeUrlForm} />
+            <CollabLinkForm
+              links={links}
+              onChange={onChangeUrlForm}
+              onClick={onClickIcon}
+              ref={[linkRef1, linkRef2]}
+            />
           </div>
           {/*생성 버튼 */}
           <div className={styles.createBoard__button}>
