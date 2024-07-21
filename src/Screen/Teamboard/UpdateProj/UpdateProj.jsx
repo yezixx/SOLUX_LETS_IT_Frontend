@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
 import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
 import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 
 const UpdateProj = () => {
@@ -17,9 +17,17 @@ const UpdateProj = () => {
 
   const nav = useNavigate();
 
+  const titleRef = useRef();
+
+  const onFocusTitle = () => {
+    if (titleRef.current) {
+      titleRef.current.focus();
+    }
+  };
+
   const onClickSave = () => {
     if (title === "") {
-      alert("프로젝트명을 입력해주세요.");
+      onFocusTitle();
       return;
     }
     if (links[0].link === "" || links[1].link === "") {
@@ -44,6 +52,9 @@ const UpdateProj = () => {
   };
 
   const onChangeTitle = (input) => {
+    if (input.length > 15) {
+      return;
+    }
     setTitle(input);
   };
 
@@ -69,7 +80,7 @@ const UpdateProj = () => {
     <div className={styles.updateProj}>
       <div className={styles.updateProj__label}>프로젝트 정보 수정</div>
       <div className={styles.updateProj__projName}>
-        <ProjNameForm title={title} onChange={onChangeTitle} />
+        <ProjNameForm title={title} onChange={onChangeTitle} ref={titleRef} />
       </div>
       <div className={styles.updateProj__toolLink}>
         <CollabLinkForm
