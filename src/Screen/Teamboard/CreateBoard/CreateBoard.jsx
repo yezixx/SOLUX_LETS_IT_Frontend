@@ -31,22 +31,26 @@ const CreateBoard = () => {
   const [links, setLinks] = useState(mock_collabLinks);
 
   const titleRef = useRef();
+  const linkRef1 = useRef();
+  const linkRef2 = useRef();
 
-  const onFocusTitle = () => {
-    if (titleRef.current) {
-      titleRef.current.focus();
+  const onFocusElement = (ref) => {
+    if (ref.current) {
+      ref.current.focus();
     }
   };
 
   const onClickCreate = () => {
     if (title === "") {
-      onFocusTitle();
+      onFocusElement(titleRef);
       return;
     }
-    if (links[0].link === "" || links[1].link === "") {
-      alert(
-        '협업툴 링크를 입력해주세요.\n이후 "프로젝트 관리 > 프로젝트 정보 수정"에서 변경가능합니다.'
-      );
+    if (links[0].link === "") {
+      onFocusElement(linkRef1);
+      return;
+    }
+    if (links[1].link === "") {
+      onFocusElement(linkRef2);
       return;
     }
     if (confirm("팀게시판을 생성하시겠습니까?")) nav("/teamboard");
@@ -106,6 +110,7 @@ const CreateBoard = () => {
               links={links}
               onChange={onChangeUrlForm}
               onClick={onClickIcon}
+              ref={[linkRef1, linkRef2]}
             />
           </div>
           {/*생성 버튼 */}

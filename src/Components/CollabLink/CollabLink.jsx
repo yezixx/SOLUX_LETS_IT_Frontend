@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import styles from "./CollabLink.module.css";
 import ToolIcon from "../ToolIcon/ToolIcon";
 import SelectIcon from "../SelectIcon/SelectIcon";
@@ -69,58 +69,71 @@ const getToolList = (type) => {
       ];
 };
 
-const CollabLink = ({ id, value, type, init, onChange, onClick }) => {
-  const [visible, setVisible] = useState(false);
+const CollabLink = forwardRef(
+  ({ id, value, type, init, onChange, onClick }, ref) => {
+    const [visible, setVisible] = useState(false);
 
-  const toolList = getToolList(type);
-  const [selectedIcon, setSelectedIcon] = useState(
-    init
-      ? {
-          tool: { init },
-          image: getLogoImage(init),
-          altMsg: { init },
-        }
-      : toolList[0].tool
-  );
-  const onChangeInput = (e) => {
-    onChange(id, e.target.value);
-  };
+    const inputRef = useRef();
 
-  const onChangeIcon = (tool) => {
-    setSelectedIcon(tool);
-    onClick(id, tool);
-    setVisible(false);
-  };
+    useImperativeHandle(ref, () => ({
+      focus: () => {
+        inputRef.current.focus();
+      },
+    }));
 
-  return (
-    <div className={styles.collabLink}>
-      {visible === true ? (
-        <div className={styles.collabLink__selectIcon}>
-          <SelectIcon list={toolList} onChange={onChangeIcon} />
+    const toolList = getToolList(type);
+    const [selectedIcon, setSelectedIcon] = useState(
+      init
+        ? {
+            tool: { init },
+            image: getLogoImage(init),
+            altMsg: { init },
+          }
+        : toolList[0].tool
+    );
+    const onChangeInput = (e) => {
+      onChange(id, e.target.value);
+    };
+
+    const onChangeIcon = (tool) => {
+      setSelectedIcon(tool);
+      onClick(id, tool);
+      setVisible(false);
+    };
+
+    return (
+      <div className={styles.collabLink}>
+        {visible === true ? (
+          <div className={styles.collabLink__selectIcon}>
+            <SelectIcon list={toolList} onChange={onChangeIcon} />
+          </div>
+        ) : null}
+        <div
+          onClick={() => {
+            setVisible(!visible);
+          }}
+        >
+          <ToolIcon
+            title={selectedIcon.tool}
+            src={selectedIcon.image}
+            type={type === "SHORT" ? "" : "NONE"}
+          />
         </div>
-      ) : null}
-      <div
-        onClick={() => {
-          setVisible(!visible);
-        }}
-      >
-        <ToolIcon
-          title={selectedIcon.tool}
-          src={selectedIcon.image}
-          type={type === "SHORT" ? "" : "NONE"}
-        />
+        <input
+          className={`${styles.collabLink__input} ${
+            styles[`collabLink__input--${type}`]
+          }`}
+          type="text"
+          value={value}
+          ref={inputRef}
+          onChange={onChangeInput}
+          placeholder="URL을 입력해주세요."
+        ></input>
       </div>
-      <input
-        className={`${styles.collabLink__input} ${
-          styles[`collabLink__input--${type}`]
-        }`}
-        type="text"
-        value={value}
-        onChange={onChangeInput}
-        placeholder="URL을 입력해주세요."
-      ></input>
-    </div>
-  );
-};
+    );
+  }
+);
+
+CollabLink.displayName = "CollabLink";
 
 export default CollabLink;
