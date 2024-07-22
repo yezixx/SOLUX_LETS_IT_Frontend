@@ -30,6 +30,7 @@ import Apply from "./Apply/Apply";
 import APILogIn from "../Screen/LogIn/APILogIn";
 import Redirect from "./LogIn/Redirect";
 import ApplyProfile from "./MyProject/ApplyHireProj/ApplyProfile/ApplyProfile";
+import PrivateRoute from "./PrivateRoute";
 
 export const RouterInfo = [
   {
@@ -96,24 +97,24 @@ export const RouterInfo = [
             // path: "hiring-and-applied",
             //백엔드 연결용 동적 주소
             path: "hiring-and-applied",
-            element: <ApplyHireProj />,
+            element: <PrivateRoute element={<ApplyHireProj />} />,
             label: "구인/신청 프로젝트",
           },
           {
             //백엔드 연결용 동적 주소소
             path: "applyprofile/:applyId",
             // path: "applyprofile",
-            element: <ApplyProfile />,
+            element: <PrivateRoute element={<ApplyProfile />} />,
             label: "구인/신청 프로젝트",
           },
           {
             path: "attendproj",
-            element: <AttendProj />,
+            element: <PrivateRoute element={<AttendProj />} />,
             label: "참여 프로젝트",
           },
           {
             path: "scrap",
-            element: <Scrap />,
+            element: <PrivateRoute element={<Scrap />} />,
             label: "스크랩 프로젝트",
           },
         ],
@@ -127,27 +128,27 @@ export const RouterInfo = [
         children: [
           {
             path: "profile",
-            element: <MyProfile />,
+            element: <PrivateRoute element={<MyProfile />} />,
             label: "포트폴리오 관리",
           },
           {
             path: "portfolio",
-            element: <MyPortfolio />,
+            element: <PrivateRoute element={<MyPortfolio />} />,
             label: "포트폴리오 관리",
           },
           {
             path: "portfolio/post",
-            element: <PortfolioWrite />,
+            element: <PrivateRoute element={<PortfolioWrite />} />,
             label: "포트폴리오 작성창",
           },
           {
             path: "portfolio/post/summaryAI",
-            element: <CompletePort />,
+            element: <PrivateRoute element={<CompletePort />} />,
             label: "AI 생성 - 완성된 포트폴리오",
           },
           {
             path: "portfolio/board",
-            element: <PortfolioBoard />,
+            element: <PrivateRoute element={<PortfolioBoard />} />,
             label: "포트폴리오 게시판",
           },
         ],

@@ -65,25 +65,23 @@ const Nav = () => {
             </Link>
           )}
 
-          <Link to="mypage/profile">
-            <li onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-              마이페이지
-              {/*서브 네비게이터 */}
-              {ishovered && (
-                <ul className={styles.nav__subnav}>
-                  <Link to="mypage/profile">
-                    <li>프로필 관리</li>
-                  </Link>
-                  <Link to="mypage/portfolio">
-                    <li onClick={() => navigateTo("mypage/portfolio")}>
-                      포트폴리오 관리
-                    </li>
-                  </Link>
-                  <li onClick={() => alert("수정중")}>개인정보 수정</li>
-                </ul>
-              )}
-            </li>
-          </Link>
+          <li onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+            마이페이지
+            {/*서브 네비게이터 */}
+            {ishovered && (
+              <ul className={styles.nav__subnav}>
+                <Link to="mypage/profile">
+                  <li>프로필 관리</li>
+                </Link>
+                <Link to="mypage/portfolio">
+                  <li onClick={() => navigateTo("mypage/portfolio")}>
+                    포트폴리오 관리
+                  </li>
+                </Link>
+                <li onClick={() => alert("수정중")}>개인정보 수정</li>
+              </ul>
+            )}
+          </li>
           <li>
             <BellIcon />
           </li>
