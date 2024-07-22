@@ -5,6 +5,8 @@ import HeartIcon from "../../../Image/Icons/HeartIcon";
 import UserCircleIcon from "../../../Image/Icons/UserCircleIcon";
 import styles from "./CommentItem.module.css";
 import Button from "../../../Components/Button/Button";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../../atoms/atoms";
 
 const CommentItem = ({
   id,
@@ -15,9 +17,11 @@ const CommentItem = ({
   inputRef,
   onDelete,
 }) => {
+  const loginUserId = useAtomValue(userIdAtom);
+
   const [isOpen, setIsOpen] = useState(false);
   const isPostWriter = () => postWriter === writer;
-
+  const isCommentWriter = () => String(loginUserId) === String(writer);
   const onClickIcon = () => {
     setIsOpen(!isOpen);
   };
@@ -49,7 +53,7 @@ const CommentItem = ({
         <div className={styles.CommentItem__header}>
           <div>{writer}</div>
           <div>{date}</div>
-          {isPostWriter() && (
+          {isCommentWriter() && (
             <div className={styles.CommentItem__icon} onClick={onClickIcon}>
               <EllipsisHorizontalIcon />
             </div>
