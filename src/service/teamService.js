@@ -48,13 +48,36 @@ export const manageTeam = (teamId) => {
 };
 
 // 팀게시판 정보 수정
-export const updateTeam = (teamId, updatedTeamData) => {
-  return apiClient.patch(`/team/${teamId}`, updatedTeamData);
+export const updateTeam = async (teamId, updatedTeamData) => {
+  try {
+    const response = await apiClient.patch(`/team/${teamId}`, updatedTeamData);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching update team info", error);
+    throw error;
+  }
+};
+
+// 팀장 위임
+export const delegateTeamLeader = async (teamId, userId) => {
+  try {
+    const response = await apiClient.patch(`/team/${teamId}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching delegate team leader", error);
+    throw error;
+  }
 };
 
 // 팀원 평가 - 평가하기 버튼 눌렀을 때
-export const evaluateMember = (userId) => {
-  return apiClient.post(`/team/evaluation/${userId}`);
+export const evaluateMember = async (userId) => {
+  try {
+    const response = await apiClient.post(`/team/evaluation/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching evaluate member", error);
+    throw error;
+  }
 };
 
 // 프로젝트 종료 - 프로젝트 종료 버튼 눌렀을 때

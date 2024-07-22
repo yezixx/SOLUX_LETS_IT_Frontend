@@ -3,6 +3,11 @@ import styles from "./Teamboard.module.css";
 import { Outlet, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../atoms/atoms";
+import {
+  delegateTeamLeader,
+  evaluateMember,
+  updateTeam,
+} from "../../service/teamService";
 // import { getTeam } from "../../service/teamService";
 
 const mock_teamData = {
@@ -212,7 +217,6 @@ const Teamboard = () => {
       });
     }
   };
-  console.log(teamData);
 
   const onUpdateTeamData = (title, notion, github, selectedMember) => {
     teamDispatch({
@@ -230,6 +234,8 @@ const Teamboard = () => {
         }),
       },
     });
+    updateTeam({ teamName: title, notionLink: notion, githubLink: github });
+    delegateTeamLeader(teamId, selectedMember);
   };
 
   const onCreateEvent = (title, startDate, endDate, description) => {
@@ -360,11 +366,13 @@ const Teamboard = () => {
     feedbackDispatch({
       type: "SUBMIT_FEEDBACK",
       data: {
-        id: targetId,
+        userId: targetId,
         ...value,
       },
     });
+    evaluateMember(targetId, { userId: targetId, ...value });
   };
+  console.log(feedbackData);
 
   return (
     <div className={styles.teamboard}>
