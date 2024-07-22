@@ -6,12 +6,28 @@ import UserCircleIcon from "../../../Image/Icons/UserCircleIcon";
 import styles from "./CommentItem.module.css";
 import Button from "../../../Components/Button/Button";
 
-const CommentItem = ({ writer, date, description }) => {
+const CommentItem = ({
+  id,
+  writer,
+  date,
+  description,
+  postWriter,
+  inputRef,
+  onDelete,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const isLoginedUser = true;
+  const isPostWriter = () => postWriter === writer;
 
   const onClickIcon = () => {
     setIsOpen(!isOpen);
+  };
+
+  const onClickReply = () => {
+    inputRef.current.focus();
+  };
+
+  const onClickDelete = () => {
+    onDelete(id);
   };
 
   return (
@@ -19,15 +35,21 @@ const CommentItem = ({ writer, date, description }) => {
       {isOpen && (
         <div className={styles.CommentItem__menu}>
           <Button text="수정" type="NONE__TEXT-TC2" />
-          <Button text="삭제" type="NONE__TEXT-TC2" />
+          <Button text="삭제" type="NONE__TEXT-TC2" onClick={onClickDelete} />
         </div>
       )}
-      <UserCircleIcon />
-      <div className={styles.CommentItem__container}>
+      <UserCircleIcon
+        color={isPostWriter() ? "var(--main-color2)" : "var(--text-color2)"}
+      />
+      <div
+        className={`${styles.CommentItem__container} ${
+          isPostWriter() ? styles.CommentItem__container__WRITER : ""
+        }`}
+      >
         <div className={styles.CommentItem__header}>
           <div>{writer}</div>
           <div>{date}</div>
-          {isLoginedUser && (
+          {isPostWriter() && (
             <div className={styles.CommentItem__icon} onClick={onClickIcon}>
               <EllipsisHorizontalIcon />
             </div>
@@ -36,7 +58,7 @@ const CommentItem = ({ writer, date, description }) => {
         <div className={styles.CommentItem__description}>{description}</div>
         <div className={styles.CommentItem__icon}>
           <HeartIcon />
-          <ArrowTurnDownRight />
+          <ArrowTurnDownRight onClick={onClickReply} />
         </div>
       </div>
     </div>

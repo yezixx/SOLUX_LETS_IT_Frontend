@@ -7,7 +7,7 @@ import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../atoms/atoms";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getPosts } from "../../service/postService";
 import { useParams } from "react-router-dom";
 
@@ -76,11 +76,24 @@ const mock_comments = [
   },
 ];
 
+const getFormattedDate = (date) => {
+  const dateObj = new Date(date);
+  return `${dateObj.getFullYear()}-${
+    dateObj.getMonth() + 1
+  }-${dateObj.getDate()}, ${dateObj.getHours()}:${dateObj
+    .getMinutes()
+    .toString()
+    .padStart(2, "0")}`;
+};
+
 const ProjPost_detail = () => {
   const loginUserId = useAtomValue(userIdAtom);
   const [post, setPost] = useState(mock_post);
   const postId = useParams();
-  console.log(postId);
+
+  const [comments, setComments] = useState(mock_comments);
+  const commentIdRef = useRef(1);
+  const commentInputRef = useRef();
 
   const isWriter = () => {
     return String(post.postInfo.writer) === String(loginUserId);
@@ -96,6 +109,33 @@ const ProjPost_detail = () => {
       });
   }, []);
 
+  const onCraeteComment = (description) => {
+    setComments([
+      ...comments,
+      {
+        id: commentIdRef.current++,
+        writer: loginUserId,
+        date: getFormattedDate(new Date()),
+        description: description,
+      },
+    ]);
+  };
+
+  const onDeleteComment = (id) => {
+    setComments(
+      comments.filter((comment) => String(comment.id) !== String(id))
+    );
+  };
+
+  const onClickCreateComment = () => {
+    if (commentInputRef.current.value === "") {
+      commentInputRef.current.focus();
+      return;
+    }
+    onCraeteComment(commentInputRef.current.value);
+    commentInputRef.current.value = "";
+  };
+
   return (
     <div className={styles.ProjPost_detail}>
       <main>
@@ -104,12 +144,12 @@ const ProjPost_detail = () => {
         </div>
         <div>
           <div className={styles.ProjPost_detail__header}>
-            <PostInfo post={mock_post} />
+            <PostInfo post={post} />
           </div>
           <div className={styles.ProjPost_detail__content}>
             <div className={styles.ProjPost_detail__label}>상세 내용</div>
             <div className={styles.ProjPost_detail__description}>
-              {mock_post.description}
+              {post.description}
             </div>
           </div>
         </div>
@@ -117,18 +157,32 @@ const ProjPost_detail = () => {
       <div className={styles.ProjPost_detail__commentsWarp}>
         <div className={styles.ProjPost_detail__commentsContainer}>
           <div className={styles.ProjPost_detail__label}>
-            댓글 <span>{mock_comments.length}</span>
+            댓글 <span>{comments.length}</span>
           </div>
           <div className={styles.ProjPost_detail__commentsContent}>
             <div className={styles.ProjPost_detail__commentList}>
-              {mock_comments.map((comment, index) => (
-                <CommentItem key={index} {...comment} />
+              {comments.map((comment, index) => (
+                <CommentItem
+                  key={index}
+                  {...comment}
+                  postWriter={post.postInfo.writer}
+                  inputRef={commentInputRef}
+                  onDelete={onDeleteComment}
+                />
               ))}
             </div>
             <div className={styles.ProjPost_detail__commentInput}>
               <UserCircleIcon color="var(--main-color2)" />
-              <input type="text" placeholder="자유롭게 질문을 남겨주세요" />
-              <Button text="등록" type="MC2_120x40" />
+              <input
+                ref={commentInputRef}
+                type="text"
+                placeholder="자유롭게 질문을 남겨주세요"
+              />
+              <Button
+                text="등록"
+                type="MC2_120x40"
+                onClick={onClickCreateComment}
+              />
             </div>
           </div>
         </div>
@@ -138,7 +192,7 @@ const ProjPost_detail = () => {
           <BookmarkIcon width="30px" height="30px" />
         </div>
         <Button text="신청" type="MC2_180x40" />
-        {isWriter && <Button text="수정" type="SEC_120x40" />}
+        {isWriter() && <Button text="수정" type="SEC_120x40" />}
       </footer>
     </div>
   );
