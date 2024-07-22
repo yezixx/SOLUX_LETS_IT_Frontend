@@ -9,7 +9,7 @@ import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../atoms/atoms";
 import { useEffect, useRef, useState } from "react";
 import { getPosts } from "../../service/postService";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const mock_post = {
   // 구인글 정보
@@ -89,11 +89,13 @@ const getFormattedDate = (date) => {
 const ProjPost_detail = () => {
   const loginUserId = useAtomValue(userIdAtom);
   const [post, setPost] = useState(mock_post);
-  const postId = useParams();
+  const postId = useParams().postId;
 
   const [comments, setComments] = useState(mock_comments);
   const commentIdRef = useRef(1);
   const commentInputRef = useRef();
+
+  const nav = useNavigate();
 
   const isWriter = () => {
     return String(post.postInfo.writer) === String(loginUserId);
@@ -134,6 +136,10 @@ const ProjPost_detail = () => {
     }
     onCraeteComment(commentInputRef.current.value);
     commentInputRef.current.value = "";
+  };
+
+  const onClickApply = () => {
+    nav(`/apply/${postId}`);
   };
 
   return (
@@ -191,8 +197,11 @@ const ProjPost_detail = () => {
         <div className={styles.ProjPost_detail__scrap}>
           <BookmarkIcon width="30px" height="30px" />
         </div>
-        <Button text="신청" type="MC2_180x40" />
-        {isWriter() && <Button text="수정" type="SEC_120x40" />}
+        {isWriter() ? (
+          <Button text="수정" type="SEC_120x40" />
+        ) : (
+          <Button text="신청" type="MC2_180x40" onClick={onClickApply} />
+        )}
       </footer>
     </div>
   );
