@@ -14,16 +14,16 @@ const Redirect = () => {
     const kakaoLogin = async () => {
       await axios({
         method: "GET",
-        url: `${import.meta.env.VITE_REDIRECT_URL}/?code=${code}`,
+        url: `http://192.168.13.66:8080/login/oauth2/callback/kakao?code=${code}`,
         headers: {
           "Content-Type": "application/json;charset=utf-8", //json형태로 데이터를 보내겠다는뜻
         },
       }).then((res) => {
-        console.log(JSON.stringify(res, null, 1));
         //백에서 완료후 우리사이트 전용 토큰 넘겨주는게 성공했다면
+        console.log(res);
         setIsLogIn(true);
         const userData = res.data.user;
-        //계속 쓸 정보들( ex: 이름) 등은 localStorage에 저장해두자
+        //유저정보 localStorage에 저장
         localStorage.setItem("user", JSON.stringify(userData));
         //로그인 상태 true로 변경
         localStorage.setItem("isLoggedIn", "true");
