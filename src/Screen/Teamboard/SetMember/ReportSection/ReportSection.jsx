@@ -37,6 +37,11 @@ const ReportSection = ({ onReport }) => {
   const selectRef = useRef();
 
   const onClickKick = () => {
+    // 팀원이 2명 이하일 경우
+    if (members.length <= 2) {
+      alert("팀원이 2명 이하일 경우 강퇴할 수 없습니다.");
+      return;
+    }
     // 선택한 팀원이 없을 경우
     if (!selectedMemberId) {
       alert("팀원을 선택해주세요.");

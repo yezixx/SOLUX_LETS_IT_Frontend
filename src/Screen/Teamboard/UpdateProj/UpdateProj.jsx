@@ -60,7 +60,9 @@ const UpdateProj = () => {
         '프로젝트를 종료하시겠습니까?\n종료된 프로젝트의 팀게시판은 수정할 수 없으며,\n"종료된 프로젝트는 내 프로젝트 > 참여 프로젝트 > 완료한 프로젝트"에서 확인이 가능합니다.'
       )
     ) {
-      nav(`/teamboard/feedback/?team=${teamId}`);
+      teamData.teamMemberInfo.length < 2
+        ? nav("/myproj/attendproj", { replace: true })
+        : nav(`/teamboard/feedback/?team=${teamId}`);
     }
   };
 
