@@ -26,6 +26,12 @@ export const getComments = (postId) => {
 };
 
 // 프로젝트 상세 조회 - 구인글 상세 보기
-export const getPosts = (postId) => {
-  return apiClient.get(`/posts/${postId}`);
+export const getPosts = async (postId) => {
+  try {
+    const response = await apiClient.get(`/posts/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching post detail:", error);
+    throw error;
+  }
 };

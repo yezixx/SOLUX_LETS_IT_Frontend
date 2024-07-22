@@ -5,12 +5,17 @@ import Button from "../../Components/Button/Button";
 import BookmarkIcon from "../../Image/Icons/BookmarkIcon";
 import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../atoms/atoms";
+import { useEffect, useState } from "react";
+import { getPosts } from "../../service/postService";
+import { useParams } from "react-router-dom";
 
 const mock_post = {
   // 구인글 정보
   postInfo: {
     title: "웹 사이드 프로젝트 팀원 모집",
-    writer: "홍길동",
+    writer: "yuming",
     hireDate: {
       startDate: "2024-04-06",
       endDate: "2024-04-09",
@@ -72,7 +77,25 @@ const mock_comments = [
 ];
 
 const ProjPost_detail = () => {
-  const isWriter = true;
+  const loginUserId = useAtomValue(userIdAtom);
+  const [post, setPost] = useState(mock_post);
+  const postId = useParams();
+  console.log(postId);
+
+  const isWriter = () => {
+    return String(post.postInfo.writer) === String(loginUserId);
+  };
+
+  useEffect(() => {
+    getPosts(postId)
+      .then((data) => {
+        setPost(data);
+      })
+      .catch((error) => {
+        console.log("post detail error:", error);
+      });
+  }, []);
+
   return (
     <div className={styles.ProjPost_detail}>
       <main>
