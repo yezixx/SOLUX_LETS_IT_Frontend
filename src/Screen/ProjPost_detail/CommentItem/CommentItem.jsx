@@ -8,6 +8,16 @@ import Button from "../../../Components/Button/Button";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../atoms/atoms";
 
+const getFormattedDate = (date) => {
+  const dateObj = new Date(date);
+  return `${dateObj.getFullYear()}-${
+    dateObj.getMonth() + 1
+  }-${dateObj.getDate()}, ${dateObj.getHours()}:${dateObj
+    .getMinutes()
+    .toString()
+    .padStart(2, "0")}`;
+};
+
 const CommentItem = ({
   id,
   writer,
@@ -52,7 +62,7 @@ const CommentItem = ({
       >
         <div className={styles.CommentItem__header}>
           <div>{writer}</div>
-          <div>{date}</div>
+          <div>{getFormattedDate(date)}</div>
           {isCommentWriter() && (
             <div className={styles.CommentItem__icon} onClick={onClickIcon}>
               <EllipsisHorizontalIcon />

@@ -76,16 +76,6 @@ const mock_comments = [
   },
 ];
 
-const getFormattedDate = (date) => {
-  const dateObj = new Date(date);
-  return `${dateObj.getFullYear()}-${
-    dateObj.getMonth() + 1
-  }-${dateObj.getDate()}, ${dateObj.getHours()}:${dateObj
-    .getMinutes()
-    .toString()
-    .padStart(2, "0")}`;
-};
-
 const ProjPost_detail = () => {
   const loginUserId = useAtomValue(userIdAtom);
   const [post, setPost] = useState(mock_post);
@@ -117,7 +107,7 @@ const ProjPost_detail = () => {
       {
         id: commentIdRef.current++,
         writer: loginUserId,
-        date: getFormattedDate(new Date()),
+        date: new Date().getTime(),
         description: description,
       },
     ]);
