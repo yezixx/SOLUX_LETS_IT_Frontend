@@ -81,7 +81,7 @@ export const RouterInfo = [
       },
       // 구인글 보기, 추후  /:id 추가 필요
       {
-        path: "projects/detail",
+        path: "projects/detail/:postId",
         element: <ProjPost_detail />,
         label: "구인글 보기",
       },
@@ -183,7 +183,7 @@ export const RouterInfo = [
                 label: "프로젝트 정보 수정",
               },
               {
-                path: "member/profile/:userId",
+                path: "member/profile",
                 element: <MemberProfile />,
                 label: "팀원 프로필",
               },

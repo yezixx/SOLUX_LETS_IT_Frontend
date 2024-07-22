@@ -4,7 +4,10 @@ import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
 import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
 import styles from "./CreateBoard.module.css";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../../atoms/atoms";
+import { createTeam } from "../../../service/teamService";
 
 const mock_members = [
   { id: 1, userId: "yuming", name: "유밍 BE" },
@@ -30,6 +33,10 @@ const CreateBoard = () => {
   const [title, setTitle] = useState("");
   const [links, setLinks] = useState(mock_collabLinks);
 
+  const loginUserId = useAtomValue(userIdAtom);
+  const [params] = useSearchParams();
+  const postId = params.get("post");
+
   const titleRef = useRef();
   const linkRef1 = useRef();
   const linkRef2 = useRef();
@@ -53,7 +60,18 @@ const CreateBoard = () => {
       onFocusElement(linkRef2);
       return;
     }
-    if (confirm("팀게시판을 생성하시겠습니까?")) nav("/teamboard");
+    const newTeamData = {
+      teamId: 1,
+      title: title,
+      collabLink: links,
+      leader: loginUserId,
+      members: members,
+    };
+    console.log(newTeamData);
+    if (confirm("팀게시판을 생성하시겠습니까?")) {
+      nav(`/teamboard/?team=${newTeamData.teamId}`);
+      createTeam(postId, newTeamData);
+    }
   };
 
   const onChangeTitleForm = (input) => {

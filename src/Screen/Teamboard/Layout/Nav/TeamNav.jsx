@@ -7,26 +7,31 @@ import { TeamStateContext } from "../../Teamboard";
 
 const TeamNav = () => {
   const location = useLocation();
-  const currentUrl = location.pathname;
+  const currentUrl = location.pathname + location.search;
 
-  const { teamData } = useContext(TeamStateContext);
+  const { teamData, teamId } = useContext(TeamStateContext);
 
   const loginUserId = useAtomValue(userIdAtom);
 
   const nav = useNavigate();
 
+  const mainUrl = `/teamboard/?team=${teamId}`;
+  const setMemberUrl = `/teamboard/member/?team=${teamId}`;
+  const manageUrl = `/teamboard/manage/?team=${teamId}`;
+  const editUrl = `/teamboard/manage/edit/?team=${teamId}`;
+
   const navigateToTeamboard = () => {
-    nav("/teamboard");
+    nav(mainUrl);
   };
   const navigateToMember = () => {
-    nav("/teamboard/member");
+    nav(setMemberUrl);
   };
   const navigateToManage = () => {
     if (loginUserId !== teamData.leader) {
       alert("프로젝트 관리 화면은 팀장만 접근 가능합니다.");
       return;
     }
-    nav("/teamboard/manage");
+    nav(manageUrl);
   };
 
   return (
@@ -36,7 +41,7 @@ const TeamNav = () => {
         <div className={styles.nav__buttonContainer}>
           <button
             className={`${styles.nav__button} ${
-              currentUrl === "/teamboard" ? styles["nav__button--selected"] : ""
+              currentUrl === mainUrl ? styles["nav__button--selected"] : ""
             }`}
             onClick={navigateToTeamboard}
           >
@@ -44,9 +49,7 @@ const TeamNav = () => {
           </button>
           <button
             className={`${styles.nav__button} ${
-              currentUrl === "/teamboard/member"
-                ? styles["nav__button--selected"]
-                : ""
+              currentUrl === setMemberUrl ? styles["nav__button--selected"] : ""
             }`}
             onClick={navigateToMember}
           >
@@ -54,8 +57,7 @@ const TeamNav = () => {
           </button>
           <button
             className={`${styles.nav__button} ${
-              currentUrl === "/teamboard/manage" ||
-              currentUrl === "/teamboard/manage/edit"
+              currentUrl === manageUrl || currentUrl === editUrl
                 ? styles["nav__button--selected"]
                 : ""
             }`}

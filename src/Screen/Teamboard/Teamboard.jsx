@@ -1,8 +1,9 @@
-import { createContext, useReducer, useRef } from "react";
+import { createContext, useEffect, useReducer, useRef } from "react";
 import styles from "./Teamboard.module.css";
-import { Outlet } from "react-router-dom";
+import { Outlet, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../atoms/atoms";
+import { getTeam } from "../../service/teamService";
 
 const mock_teamData = {
   teamId: 1,
@@ -83,6 +84,8 @@ export const TeamDispatchContext = createContext();
 
 function teamReducer(state, action) {
   switch (action.type) {
+    case "GET":
+      return action.data;
     case "UPDATE":
       return action.data;
     case "DELETE_MEMBER":
@@ -156,6 +159,12 @@ function feedbackReducer(state, action) {
   }
 }
 
+/*const isMember = (teamData, loginUserId) => {
+  return teamData.members.some(
+    (member) => String(member.userId) === String(loginUserId)
+  );
+};*/
+
 const Teamboard = () => {
   const [teamData, teamDispatch] = useReducer(teamReducer, mock_teamData);
   const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
@@ -170,6 +179,28 @@ const Teamboard = () => {
   );
 
   const loginUserId = useAtomValue(userIdAtom);
+  const [params] = useSearchParams();
+  const teamId = params.get("team");
+
+  useEffect(() => {
+    const fetchTeamData = async () => {
+      try {
+        const data = await getTeam(teamId);
+        teamDispatch({
+          type: "GET",
+          data: data,
+        });
+
+        /*if (!isMember(data, loginUserId)) {
+          alert("팀원 외에는 접근할 수 없습니다.");
+          return;
+        }*/
+      } catch (error) {
+        console.log("teamboard error", error);
+      }
+    };
+    fetchTeamData();
+  }, []);
 
   const kickIdRef = useRef(2);
   const meetingRef = useRef(3);
@@ -331,7 +362,14 @@ const Teamboard = () => {
   return (
     <div className={styles.teamboard}>
       <TeamStateContext.Provider
-        value={{ teamData, feedbackData, scheduleData, meetingData, kickData }}
+        value={{
+          teamData,
+          feedbackData,
+          scheduleData,
+          meetingData,
+          kickData,
+          teamId,
+        }}
       >
         <TeamDispatchContext.Provider
           value={{
