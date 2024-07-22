@@ -6,7 +6,7 @@ import { TeamStateContext } from "../../Teamboard";
 
 const MemberList = () => {
   const { teamData } = useContext(TeamStateContext);
-  const members = teamData.members;
+  const members = teamData.teamMemberInfo;
 
   const nav = useNavigate();
 
@@ -17,10 +17,11 @@ const MemberList = () => {
   return (
     <div className={styles.memberList}>
       <div className={styles.memberList__item}>
-        {members.map((member) => (
+        {members.map((member, index) => (
           <MemberItem
-            key={member.id}
-            memberName={member.name}
+            key={index}
+            memberName={member.userName}
+            memberId={member.userId}
             onClick={() => {
               onClickMemberItem(member.userId);
             }}

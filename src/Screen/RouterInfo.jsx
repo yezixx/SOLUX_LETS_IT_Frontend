@@ -183,7 +183,7 @@ export const RouterInfo = [
                 label: "프로젝트 정보 수정",
               },
               {
-                path: "member/profile",
+                path: "member/profile/:userId",
                 element: <MemberProfile />,
                 label: "팀원 프로필",
               },

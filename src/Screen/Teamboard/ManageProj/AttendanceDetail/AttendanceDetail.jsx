@@ -6,7 +6,7 @@ import styles from "./AttendanceDetail.module.css";
 
 const AttendanceDetail = () => {
   const { teamData } = useContext(TeamStateContext);
-  const members = teamData.members;
+  const members = teamData.teamMemberInfo;
   const { meetingData } = useContext(TeamStateContext);
   const { onSaveMeeting } = useContext(TeamDispatchContext);
   const [selectedMember, setSelectedMember] = useState();
@@ -82,11 +82,11 @@ const AttendanceDetail = () => {
         <div className={styles.attendanceDetail__list}>
           <div className={styles.attendanceDetail__listLabel}>불참한 팀원</div>
           <div className={styles.attendanceDetail__members}>
-            {members.map((member) =>
+            {members.map((member, index) =>
               selectedMember && selectedMember.includes(member.userId) ? (
                 <MemberItem
-                  key={member.id}
-                  memberName={member.name}
+                  key={index}
+                  memberName={member.userName}
                   type="SELECTED"
                   onClick={() => {
                     onClickMember(member.userId);
@@ -94,8 +94,8 @@ const AttendanceDetail = () => {
                 />
               ) : (
                 <MemberItem
-                  key={member.id}
-                  memberName={member.name}
+                  key={index}
+                  memberName={member.userName}
                   onClick={() => {
                     onClickMember(member.userId);
                   }}

@@ -25,11 +25,11 @@ const msg = (
 );
 const ReportSection = ({ onReport }) => {
   const { teamData } = useContext(TeamStateContext);
-  const members = teamData.members;
+  const members = teamData.teamMemberInfo;
   const { onVote } = useContext(TeamDispatchContext);
 
   const [visible, setVisible] = useState(false);
-  const [selectedMember, setSelectedMember] = useState();
+  const [selectedMemberId, setSelectedMemberId] = useState();
   const [selectedOption, setSelectedOption] = useState();
 
   const loginUserId = useAtomValue(userIdAtom);
@@ -38,7 +38,7 @@ const ReportSection = ({ onReport }) => {
 
   const onClickKick = () => {
     // 선택한 팀원이 없을 경우
-    if (!selectedMember) {
+    if (!selectedMemberId) {
       alert("팀원을 선택해주세요.");
       return;
     }
@@ -50,9 +50,9 @@ const ReportSection = ({ onReport }) => {
     if (
       confirm("강퇴 제안은 취소할 수 없습니다.\n계속해서 진행하시겠습니까?")
     ) {
-      onVote(selectedMember, selectedOption);
+      onVote(selectedMemberId, selectedOption);
       // 선택 초기화
-      setSelectedMember(null);
+      setSelectedMemberId(null);
       setSelectedOption(null);
       selectRef.current.value = "null";
     }
@@ -60,7 +60,7 @@ const ReportSection = ({ onReport }) => {
 
   const onClickReport = () => {
     // 선택한 팀원이 없을 경우
-    if (!selectedMember) {
+    if (!selectedMemberId) {
       alert("팀원을 선택해주세요.");
       return;
     }
@@ -70,9 +70,9 @@ const ReportSection = ({ onReport }) => {
       return;
     }
     if (confirm("신고를 완료하시겠습니까?")) {
-      onReport(selectedMember, selectedOption);
+      onReport(selectedMemberId, selectedOption);
       // 선택 초기화
-      setSelectedMember(null);
+      setSelectedMemberId(null);
       setSelectedOption(null);
       selectRef.current.value = "null";
     }
@@ -81,10 +81,10 @@ const ReportSection = ({ onReport }) => {
   const onClickMemberItem = (userId) => {
     if (userId === loginUserId) {
       alert("본인은 신고할 수 없습니다.");
-      setSelectedMember(null);
+      setSelectedMemberId(null);
       return;
     }
-    setSelectedMember(userId);
+    setSelectedMemberId(userId);
   };
 
   const onChangeOption = (e) => {
@@ -109,12 +109,13 @@ const ReportSection = ({ onReport }) => {
         </div>
       </div>
       <div className={styles.reportSection__item}>
-        {members.map((member) => (
+        {members.map((member, index) => (
           <MemberItem
-            key={member.id}
-            memberName={member.name}
+            key={index}
+            memberName={member.userName}
+            memberId={member.userId}
             onClick={() => onClickMemberItem(member.userId)}
-            type={`${selectedMember === member.userId ? "SELECTED" : ""}`}
+            type={`${selectedMemberId === member.userId ? "SELECTED" : ""}`}
           />
         ))}
       </div>

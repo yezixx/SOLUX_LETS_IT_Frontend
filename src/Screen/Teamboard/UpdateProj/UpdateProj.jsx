@@ -9,11 +9,17 @@ import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 
 const UpdateProj = () => {
   const { onUpdateTeamData } = useContext(TeamDispatchContext);
-  const { teamData } = useContext(TeamStateContext);
+  const { teamData, teamId } = useContext(TeamStateContext);
 
-  const [title, setTitle] = useState(teamData.title);
-  const [links, setLinks] = useState(teamData.collabLink);
-  const [selectedMember, setSelectedMember] = useState(teamData.leader);
+  const [title, setTitle] = useState(teamData.teamName);
+  const [links, setLinks] = useState([
+    { tool: "notion", link: teamData.notionLink },
+    { tool: "github", link: teamData.githubLink },
+  ]);
+  const [selectedMember, setSelectedMember] = useState(
+    teamData.teamMemberInfo.find((member) => member.position === "Team_Leader")
+      .userId
+  );
 
   const nav = useNavigate();
 
@@ -40,10 +46,11 @@ const UpdateProj = () => {
       onFocusElement(linkRef2);
       return;
     }
+    console.log(title, links[0].link, links[1].link, selectedMember);
     if (confirm("수정된 정보를 저장하시겠습니까?")) {
-      onUpdateTeamData(title, links, selectedMember);
+      onUpdateTeamData(title, links[0].link, links[1].link, selectedMember);
 
-      nav("/teamboard");
+      nav(`/teamboard/?team=${teamId}`);
     }
   };
 
@@ -53,7 +60,7 @@ const UpdateProj = () => {
         '프로젝트를 종료하시겠습니까?\n종료된 프로젝트의 팀게시판은 수정할 수 없으며,\n"종료된 프로젝트는 내 프로젝트 > 참여 프로젝트 > 완료한 프로젝트"에서 확인이 가능합니다.'
       )
     ) {
-      nav("/teamboard/feedback");
+      nav(`/teamboard/feedback/?team=${teamId}`);
     }
   };
 
@@ -64,23 +71,31 @@ const UpdateProj = () => {
     setTitle(input);
   };
 
-  const onClickeIcon = (id, input) => {
-    console.log(input);
-    setLinks(
-      links.map((item) =>
-        String(item.id) === String(id) ? { ...item, tool: input.tool } : item
-      )
-    );
-  };
-
   const onChangeLink = (id, input) => {
-    setLinks(
-      links.map((item) =>
-        String(item.id) === String(id) ? { ...item, link: input } : item
-      )
-    );
+    if (id === 0) {
+      setLinks(
+        links.map((item) =>
+          item.tool === "notion"
+            ? {
+                ...item,
+                link: input,
+              }
+            : item
+        )
+      );
+    } else if (id === 1) {
+      setLinks(
+        links.map((item) =>
+          item.tool === "github"
+            ? {
+                ...item,
+                link: input,
+              }
+            : item
+        )
+      );
+    }
   };
-  console.log(links);
 
   return (
     <div className={styles.updateProj}>
@@ -92,29 +107,27 @@ const UpdateProj = () => {
         <CollabLinkForm
           links={links}
           onChange={onChangeLink}
-          onClick={onClickeIcon}
           ref={[linkRef1, linkRef2]}
-          type="SCROLL"
         />
       </div>
       <div className={styles.updateProj__delegation}>
         <div className={styles.updateProj__innerLabel}>팀장 위임</div>
         <div className={styles.updateProj__bottomInner}>
           <div className={styles.updateProj__members}>
-            {teamData.members.map((member) =>
+            {teamData.teamMemberInfo.map((member, index) =>
               String(member.userId) === String(selectedMember) ? (
                 <div
-                  key={member.id}
+                  key={index}
                   onClick={() => setSelectedMember(member.userId)}
                 >
-                  <MemberItem memberName={member.name} type="SELECTED" />
+                  <MemberItem memberName={member.userName} type="SELECTED" />
                 </div>
               ) : (
                 <div
-                  key={member.id}
+                  key={index}
                   onClick={() => setSelectedMember(member.userId)}
                 >
-                  <MemberItem memberName={member.name} />
+                  <MemberItem memberName={member.userName} />
                 </div>
               )
             )}

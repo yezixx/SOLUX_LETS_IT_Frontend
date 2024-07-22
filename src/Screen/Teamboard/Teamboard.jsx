@@ -1,30 +1,25 @@
-import { createContext, useEffect, useReducer, useRef } from "react";
+import { createContext, /*useEffect,*/ useReducer, useRef } from "react";
 import styles from "./Teamboard.module.css";
 import { Outlet, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../atoms/atoms";
-import { getTeam } from "../../service/teamService";
+// import { getTeam } from "../../service/teamService";
 
 const mock_teamData = {
-  teamId: 1,
-  title: "학원 청구 정산 서비스",
-  collabLink: [
+  teamName: "팀게시판 메인",
+  notionLink: "https://www.notion.so/project1",
+  githubLink: "https://github.com/project1",
+  teamMemberInfo: [
     {
-      id: 1,
-      tool: "notion",
-      link: "https://www.notion.so/ko-kr",
+      userId: "letsit_backend.model.Member@72f9fde6",
+      userName: "Alice",
+      position: "Team_Leader",
     },
     {
-      id: 2,
-      tool: "github",
-      link: "https://github.com/",
+      userId: "letsit_backend.model.Member@30b4fb38",
+      userName: "Bob",
+      position: "Team_Member",
     },
-  ],
-  leader: "yuming",
-  members: [
-    { id: 1, userId: "yuming", name: "유밍 BE" },
-    { id: 2, userId: "dora", name: "도라" },
-    { id: 3, userId: "tom", name: "Tom BE" },
   ],
 };
 
@@ -70,8 +65,8 @@ const mock_meetingData = [
 const mock_kickData = [
   {
     id: 1,
-    userId: "tom",
-    name: "Tom BE",
+    userId: "letsit_backend.model.Member@72f9fde6",
+    name: "Alice",
     reason: "사유2",
     voteCount: [],
     agree: 0,
@@ -88,25 +83,6 @@ function teamReducer(state, action) {
       return action.data;
     case "UPDATE":
       return action.data;
-    case "DELETE_MEMBER":
-      if (action.data === state.leader) {
-        return {
-          ...state,
-          members: state.members.filter(
-            (item) => String(item.userId) !== String(action.data)
-          ),
-          leader: state.members.filter(
-            (item) => String(item.userId) !== String(action.data)
-          )[0].userId,
-        };
-      }
-
-      return {
-        ...state,
-        members: state.members.filter(
-          (item) => String(item.userId) !== String(action.data)
-        ),
-      };
     default:
       return state;
   }
@@ -160,7 +136,7 @@ function feedbackReducer(state, action) {
 }
 
 /*const isMember = (teamData, loginUserId) => {
-  return teamData.members.some(
+  return teamData.teamMemberInfo.some(
     (member) => String(member.userId) === String(loginUserId)
   );
 };*/
@@ -182,45 +158,76 @@ const Teamboard = () => {
   const [params] = useSearchParams();
   const teamId = params.get("team");
 
-  useEffect(() => {
-    const fetchTeamData = async () => {
-      try {
-        const data = await getTeam(teamId);
-        teamDispatch({
-          type: "GET",
-          data: data,
-        });
+  // useEffect(() => {
+  //   const fetchTeamData = async () => {
+  //     try {
+  //       const data = await getTeam(teamId);
+  //       teamDispatch({
+  //         type: "GET",
+  //         data: data,
+  //       });
 
-        /*if (!isMember(data, loginUserId)) {
-          alert("팀원 외에는 접근할 수 없습니다.");
-          return;
-        }*/
-      } catch (error) {
-        console.log("teamboard error", error);
-      }
-    };
-    fetchTeamData();
-  }, []);
+  //       /*if (!isMember(data, loginUserId)) {
+  //         alert("팀원 외에는 접근할 수 없습니다.");
+  //         return;
+  //       }*/
+  //     } catch (error) {
+  //       console.log("teamboard error", error);
+  //     }
+  //   };
+  //   fetchTeamData();
+  // }, []);
 
   const kickIdRef = useRef(2);
   const meetingRef = useRef(3);
   const eventRef = useRef(3);
 
   const onDeleteMember = (userId) => {
-    teamDispatch({
-      type: "DELETE_MEMBER",
-      data: userId,
+    const filteredMember = teamData.teamMemberInfo.filter((item) => {
+      return String(item.userId) !== String(userId);
     });
+    if (
+      userId ===
+      teamData.teamMemberInfo.find((item) => item.position === "Team_Leader")
+        .userId
+    ) {
+      teamDispatch({
+        type: "UPDATE",
+        data: {
+          ...teamData,
+          teamMemberInfo: filteredMember.map((item, index) =>
+            index === 0
+              ? { ...item, position: "Team_Leader" }
+              : { ...item, position: "Team_Member" }
+          ),
+        },
+      });
+    } else {
+      teamDispatch({
+        type: "UPDATE",
+        data: {
+          ...teamData,
+          teamMemberInfo: [...filteredMember],
+        },
+      });
+    }
   };
+  console.log(teamData);
 
-  const onUpdateTeamData = (title, links, selectedMember) => {
+  const onUpdateTeamData = (title, notion, github, selectedMember) => {
     teamDispatch({
       type: "UPDATE",
       data: {
         ...teamData,
-        title: title,
-        collabLink: links,
-        leader: selectedMember,
+        teamName: title,
+        notionLink: notion,
+        githubLink: github,
+        teamMemberInfo: teamData.teamMemberInfo.map((member) => {
+          if (String(member.userId) === String(selectedMember)) {
+            return { ...member, position: "Team_Leader" };
+          }
+          return { ...member, position: "Team_Member" };
+        }),
       },
     });
   };
@@ -258,15 +265,14 @@ const Teamboard = () => {
 
       return;
     }
-
     kickDispatch({
       type: "CREATE_VOTE",
       data: {
         id: kickIdRef.current++,
         userId: memberId,
-        name: teamData.members.find(
+        name: teamData.teamMemberInfo.find(
           (member) => String(member.userId) === String(memberId)
-        ).name,
+        ).userName,
         reason: reason,
         voteCount: [],
         agree: 0,
@@ -274,8 +280,6 @@ const Teamboard = () => {
       },
     });
   };
-
-  console.log(kickData);
 
   const getTargetMember = (targetUserId) => {
     return kickData.find(
@@ -300,7 +304,10 @@ const Teamboard = () => {
       },
     });
 
-    if (Number(targetData.agree + 1) === Number(teamData.members.length - 1)) {
+    if (
+      Number(targetData.agree + 1) ===
+      Number(teamData.teamMemberInfo.length - 1)
+    ) {
       onDeleteVote(targetUserId);
       onDeleteMember(targetUserId);
     }
@@ -325,8 +332,8 @@ const Teamboard = () => {
 
     if (
       Number(targetData.voteCount.length) ===
-        Number(teamData.members.length - 1) &&
-      Number(targetData.agree) < Number(teamData.members.length - 1)
+        Number(teamData.teamMemberInfo.length - 1) &&
+      Number(targetData.agree) < Number(teamData.teamMemberInfo.length - 1)
     ) {
       onDeleteVote(targetUserId);
     }

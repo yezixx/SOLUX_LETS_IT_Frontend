@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styles from "./VoteItem.module.css";
 import { TeamDispatchContext } from "../../../Teamboard";
+import { getLogoImage } from "../../../../../util/getLogoImage";
 
 const VoteItem = ({ userName, userId }) => {
   const { onAgree, onDisagree } = useContext(TeamDispatchContext);
@@ -15,7 +16,10 @@ const VoteItem = ({ userName, userId }) => {
   return (
     <div className={styles.voteItem}>
       <div className={styles.voteItem__container}>
-        <div className={styles.voteItem__profilePic}>사진</div>
+        <img
+          className={styles.voteItem__profilePic}
+          src={getLogoImage("github")}
+        />
         <div className={styles.voteItem__name}>{userName}</div>
         <div className={styles.voteItem__button}>
           <button
