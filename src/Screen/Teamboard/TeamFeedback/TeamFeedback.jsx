@@ -24,7 +24,7 @@ const isCompletedMember = (targetId, data) => {
 
 const TeamFeedback = () => {
   const { teamData } = useContext(TeamStateContext);
-  const members = teamData.members;
+  const members = teamData.teamMemberInfo;
 
   const { feedbackData } = useContext(TeamStateContext);
   const { onSubmitFeedback } = useContext(TeamDispatchContext);
@@ -132,10 +132,10 @@ const TeamFeedback = () => {
           평가할 팀원을 선택해주세요
         </div>
         <div className={styles.teamFeedback__item}>
-          {membersExcludingSelf.map((member) => (
+          {membersExcludingSelf.map((member, index) => (
             <MemberItem
-              key={member.id}
-              memberName={member.name}
+              key={index}
+              memberName={member.userName}
               type={
                 isCompletedMember(member.userId, feedbackData)
                   ? "COMPLETED"
