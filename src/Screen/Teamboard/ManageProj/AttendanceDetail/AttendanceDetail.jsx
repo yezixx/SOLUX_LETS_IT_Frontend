@@ -23,14 +23,16 @@ const AttendanceDetail = () => {
       alert("회의 인증 사진을 첨부해주세요.");
       return;
     }
-    onSaveMeeting({
-      date: new Date().toISOString().split("T")[0],
-      nonParticipants: selectedMember ? selectedMember : [],
-      proofImages: proofImage,
-    });
-    setSelectedMember(null);
-    setPlaceholder("파일을 선택해주세요.");
-    setProofImage(null);
+    if (confirm("회의 기록을 저장하시겠습니까?")) {
+      onSaveMeeting({
+        date: new Date().toISOString().split("T")[0],
+        nonParticipants: selectedMember ? selectedMember : [],
+        proofImages: proofImage,
+      });
+      setSelectedMember(null);
+      setPlaceholder("파일을 선택해주세요.");
+      setProofImage(null);
+    }
   };
 
   const onClickMember = (userId) => {
