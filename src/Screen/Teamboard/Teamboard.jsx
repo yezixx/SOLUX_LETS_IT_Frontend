@@ -52,37 +52,43 @@ const mock_teamData = [
 const mock_scheduleData = [
   {
     id: 0,
-    title: "event 1",
+    title: "프엔 회의",
     start: "2024-07-01",
     end: "2024-07-01",
-    description: "test",
+    description: `회의 안건
+      - 라이브러리 선정
+      - 화면 구조 논의`,
   },
   {
     id: 1,
-    title: "event 2",
+    title: "정기 회의",
     start: "2024-07-03",
     end: "2024-07-03",
-    description: "test",
+    description: `회의 안건
+    - 프론트&백 스터디 진행 상황 공유
+    - 서비스 네이밍
+    - 다음주 일정 공유`,
   },
   {
     id: 2,
-    title: "event 3",
-    start: "2024-07-01",
-    end: "2024-07-03",
-    description: "test",
+    title: "스터디 인증 기간",
+    start: "2024-07-22",
+    end: "2024-07-27",
+    description:
+      "각자 수강한 스터디 강의 노션의 스터디 > 인증 보드에 인증해주세요!",
   },
 ];
 
 const mock_meetingData = [
   {
     id: 1,
-    date: "2024-04-10",
-    nonParticipants: ["tom"],
+    date: "2024-07-03",
+    nonParticipants: ["Alice"],
     proofImages: "first_week.png",
   },
   {
     id: 2,
-    date: "2024-04-14",
+    date: "2024-07-10",
     nonParticipants: [],
     proofImages: "second_week.png",
   },

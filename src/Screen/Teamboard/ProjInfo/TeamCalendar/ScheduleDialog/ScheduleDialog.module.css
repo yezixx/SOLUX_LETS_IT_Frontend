@@ -91,12 +91,32 @@
   border: 1px solid var(--line-color);
   border-radius: 4px;
 
+  white-space: pre-wrap;
+
   color: var(--text-color2);
   font-family: "pretendardM";
   letter-spacing: -8%;
   font-size: 12px;
 
   resize: none;
+}
+
+.scheuleDialog__textarea::-webkit-scrollbar {
+  width: 5px; /* 스크롤바 너비 */
+}
+
+.scheuleDialog__textarea::-webkit-scrollbar-track {
+  background: var(--dimmed); /* 스크롤바 트랙 색상 */
+  border-radius: 10px; /* 스크롤바 트랙 둥글기 */
+}
+
+.scheuleDialog__textarea::-webkit-scrollbar-thumb {
+  background: var(--line-color); /* 스크롤바 색상 */
+  border-radius: 10px; /* 스크롤바 둥글기 */
+}
+
+.scheuleDialog__textarea-webkit-scrollbar-thumb:hover {
+  background: var(--text-color2); /* 스크롤바 색상 (hover) */
 }
 
 /*input 태그 클릭시*/
