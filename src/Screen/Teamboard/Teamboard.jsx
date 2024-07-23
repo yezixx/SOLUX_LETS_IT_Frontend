@@ -372,7 +372,6 @@ const Teamboard = () => {
     });
     evaluateMember(targetId, { userId: targetId, ...value });
   };
-  console.log(feedbackData);
 
   return (
     <div className={styles.teamboard}>

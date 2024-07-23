@@ -5,7 +5,7 @@ import { TeamStateContext } from "../../Teamboard";
 
 const VoteSection = () => {
   const { kickData } = useContext(TeamStateContext);
-  console.log(kickData);
+
   return (
     <div className={styles.voteSection}>
       <div className={styles.voteSection__label}>강퇴 투표</div>
