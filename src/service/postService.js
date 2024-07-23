@@ -21,8 +21,14 @@ export const deletePosts = (userId) => {
 };
 
 // 댓글 목록 - 구인글 상세 보기 화면
-export const getComments = (postId) => {
-  return apiClient.get(`/posts/${postId}`);
+export const getComments = async (postId) => {
+  try {
+    const response = await apiClient.get(`/posts/${postId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching comment list:", error);
+    throw error;
+  }
 };
 
 // 프로젝트 상세 조회 - 구인글 상세 보기
