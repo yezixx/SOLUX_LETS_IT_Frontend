@@ -5,14 +5,19 @@ import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
 import styles from "./CreateBoard.module.css";
 import { useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../atoms/atoms";
 import { createTeam } from "../../../service/teamService";
 
 const mock_members = [
-  { id: 1, userId: "yuming", name: "유밍 BE" },
-  { id: 2, userId: "dora", name: "도라" },
-  { id: 3, userId: "tom", name: "Tom BE" },
+  {
+    userId: "letsit_backend.model.Member@72f9fde6",
+    userName: "Alice",
+    position: "Team_Leader",
+  },
+  {
+    userId: "letsit_backend.model.Member@30b4fb38",
+    userName: "Bob",
+    position: "Team_Member",
+  },
 ];
 const mock_collabLinks = [
   {
@@ -33,7 +38,6 @@ const CreateBoard = () => {
   const [title, setTitle] = useState("");
   const [links, setLinks] = useState(mock_collabLinks);
 
-  const loginUserId = useAtomValue(userIdAtom);
   const [params] = useSearchParams();
   const postId = params.get("post");
 
@@ -61,11 +65,9 @@ const CreateBoard = () => {
       return;
     }
     const newTeamData = {
-      teamId: 1,
-      title: title,
-      collabLink: links,
-      leader: loginUserId,
-      members: members,
+      teamName: title,
+      notionLink: links[0].link,
+      githubLink: links[1].link,
     };
     console.log(newTeamData);
     if (confirm("팀게시판을 생성하시겠습니까?")) {
@@ -108,8 +110,8 @@ const CreateBoard = () => {
           {/*팀원 리스트 */}
           <div className={styles.createBoard__memberItem}>
             <div className={styles.createBoard__innerLabel}>팀원</div>
-            {members.map((member) => (
-              <MemberItem key={member.id} memberName={member.name} />
+            {members.map((member, index) => (
+              <MemberItem key={index} memberName={member.userName} />
             ))}
           </div>
           {/*프로젝트명 */}
