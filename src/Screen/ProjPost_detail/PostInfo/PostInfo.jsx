@@ -5,14 +5,14 @@ import PlusCircleIcon from "../../../Image/Icons/PlusCircleIcon";
 import BookmarkIcon from "../../../Image/Icons/BookmarkIcon";
 import CheckIcon from "../../../Image/Icons/CheckIcon";
 
-const PostInfo = ({ post }) => {
+const PostInfo = ({ post, isBookmark, onClickScrap }) => {
   return (
     <div className={styles.PostInfo}>
       <div className={styles.PostInfo__container}>
         <div className={styles.PostInfo__header}>
           <div className={styles.PostInfo__title}>{post.postInfo.title}</div>
-          <div className={styles.PostInfo__scrap}>
-            <BookmarkIcon />
+          <div className={styles.PostInfo__scrap} onClick={onClickScrap}>
+            <BookmarkIcon isBookmark={isBookmark} />
           </div>
         </div>
         <div className={styles.PostInfo__body}>

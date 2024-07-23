@@ -79,7 +79,7 @@
   background-color: white;
   border-radius: 20px;
   color: var(--text-color1);
-  padding: 20px;
+  padding: 10px 20px;
   &:focus {
     outline: none;
     border: 2px solid var(--main-color2);

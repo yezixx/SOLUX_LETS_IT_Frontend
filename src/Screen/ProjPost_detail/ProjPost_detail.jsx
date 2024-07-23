@@ -85,6 +85,8 @@ const ProjPost_detail = () => {
   const commentIdRef = useRef(1);
   const commentInputRef = useRef();
 
+  const [isBookmark, setIsBookmark] = useState(false);
+
   const nav = useNavigate();
 
   const isWriter = () => {
@@ -147,6 +149,14 @@ const ProjPost_detail = () => {
     nav(`/apply/${postId}`);
   };
 
+  const onClickUpdate = () => {
+    alert("게시글 수정버튼 클릭");
+  };
+
+  const onClickScrap = () => {
+    setIsBookmark(!isBookmark);
+  };
+
   return (
     <div className={styles.ProjPost_detail}>
       <main>
@@ -155,7 +165,11 @@ const ProjPost_detail = () => {
         </div>
         <div>
           <div className={styles.ProjPost_detail__header}>
-            <PostInfo post={post} />
+            <PostInfo
+              post={post}
+              isBookmark={isBookmark}
+              onClickScrap={onClickScrap}
+            />
           </div>
           <div className={styles.ProjPost_detail__content}>
             <div className={styles.ProjPost_detail__label}>상세 내용</div>
@@ -199,11 +213,11 @@ const ProjPost_detail = () => {
         </div>
       </div>
       <footer>
-        <div className={styles.ProjPost_detail__scrap}>
-          <BookmarkIcon width="30px" height="30px" />
+        <div className={styles.ProjPost_detail__scrap} onClick={onClickScrap}>
+          <BookmarkIcon width="30px" height="30px" isBookmark={isBookmark} />
         </div>
         {isWriter() ? (
-          <Button text="수정" type="SEC_120x40" />
+          <Button text="수정" type="SEC_120x40" onClick={onClickUpdate} />
         ) : (
           <Button text="신청" type="MC2_180x40" onClick={onClickApply} />
         )}
