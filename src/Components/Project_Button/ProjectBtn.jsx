@@ -13,22 +13,23 @@ const ProjectBtn = ({
   onClick2 = undefined,
   button1Text = "add text",
   button2Text = "add text",
+  project,
 }) => {
   return (
     <div className={styles.PortfolioBtn__box}>
       {/*프로젝트명 */}
-      <div className={styles.PortfolioBtn__title}>{project.name}</div>
+      <div className={styles.PortfolioBtn__title}>{project.prtTitle}</div>
 
-      {/*프로젝트 참석자 프로필 사진 */}
+      {/*프로젝트 참석자 프로필 사진 - 백엔드 잇고 map으로 수정할 예정*/}
       <div className={styles.PortfolioBtn__photo}>
         <div className={styles.member1}>
-          <PortfolioBtnPhoto />
+          <PortfolioBtnPhoto photo={project.teamMembers[0].profile_url} />
         </div>
         <div className={styles.member2}>
-          <PortfolioBtnPhoto />
+          <PortfolioBtnPhoto photo={project.teamMembers[1].profile_url} />
         </div>
         <div className={styles.member3}>
-          <PortfolioBtnPhoto />
+          <PortfolioBtnPhoto photo={project.teamMembers[2].profile_url} />
         </div>
       </div>
 
