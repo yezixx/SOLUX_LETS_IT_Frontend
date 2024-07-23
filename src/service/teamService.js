@@ -81,8 +81,14 @@ export const evaluateMember = async (userId) => {
 };
 
 // 프로젝트 종료 - 프로젝트 종료 버튼 눌렀을 때
-export const completeProject = (teamId, teamData) => {
-  return apiClient.patch(`/team/${teamId}/completed`, teamData);
+export const completeProject = async (teamId) => {
+  try {
+    const response = await apiClient.patch(`/team/${teamId}/completed`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching complete project", error);
+    throw error;
+  }
 };
 
 // 캘린더 일정 등록
