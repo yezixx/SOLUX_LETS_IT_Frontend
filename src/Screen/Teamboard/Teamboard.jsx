@@ -1,6 +1,6 @@
-import { createContext, /*useEffect,*/ useReducer, useRef } from "react";
+import { createContext, useEffect, useReducer, useRef } from "react";
 import styles from "./Teamboard.module.css";
-import { Outlet, useSearchParams } from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../atoms/atoms";
 import {
@@ -140,11 +140,11 @@ function feedbackReducer(state, action) {
   }
 }
 
-/*const isMember = (teamData, loginUserId) => {
+const isMember = (teamData, loginUserId) => {
   return teamData.teamMemberInfo.some(
     (member) => String(member.userId) === String(loginUserId)
   );
-};*/
+};
 
 const Teamboard = () => {
   const [teamData, teamDispatch] = useReducer(teamReducer, mock_teamData);
@@ -163,25 +163,28 @@ const Teamboard = () => {
   const [params] = useSearchParams();
   const teamId = params.get("team");
 
-  // useEffect(() => {
-  //   const fetchTeamData = async () => {
-  //     try {
-  //       const data = await getTeam(teamId);
-  //       teamDispatch({
-  //         type: "GET",
-  //         data: data,
-  //       });
+  const nav = useNavigate();
 
-  //       /*if (!isMember(data, loginUserId)) {
-  //         alert("팀원 외에는 접근할 수 없습니다.");
-  //         return;
-  //       }*/
-  //     } catch (error) {
-  //       console.log("teamboard error", error);
-  //     }
-  //   };
-  //   fetchTeamData();
-  // }, []);
+  useEffect(() => {
+    //   const fetchTeamData = async () => {
+    //     try {
+    //       const data = await getTeam(teamId);
+    //       teamDispatch({
+    //         type: "GET",
+    //         data: data,
+    //       });
+
+    if (!isMember(teamData, loginUserId)) {
+      alert("팀원 외에는 접근할 수 없습니다.");
+      nav("/");
+      return;
+    }
+    //     } catch (error) {
+    //       console.log("teamboard error", error);
+    //     }
+    //   };
+    //   fetchTeamData();
+  }, []);
 
   const kickIdRef = useRef(2);
   const meetingRef = useRef(3);
