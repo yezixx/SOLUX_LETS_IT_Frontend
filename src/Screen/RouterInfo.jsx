@@ -93,16 +93,13 @@ export const RouterInfo = [
         label: "구인/신청 프로젝트",
         children: [
           {
-            // path: "hiring-and-applied",
-            //백엔드 연결용 동적 주소
             path: "hiring-and-applied",
             element: <ApplyHireProj />,
             label: "구인/신청 프로젝트",
           },
           {
-            //백엔드 연결용 동적 주소소
+            //백엔드 연결용 동적 주소
             path: "applyprofile/:applyId",
-            // path: "applyprofile",
             element: <ApplyProfile />,
             label: "구인/신청 프로젝트",
           },
@@ -131,7 +128,7 @@ export const RouterInfo = [
             label: "포트폴리오 관리",
           },
           {
-            path: "portfolio",
+            path: "portfolio/:prjId",
             element: <MyPortfolio />,
             label: "포트폴리오 관리",
           },

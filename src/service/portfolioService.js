@@ -17,7 +17,7 @@ export const getMyAppliedProjects = async (prjId) => {
     const response = await apiClient.get(`portfolios/${prjId}/write`);
     return response.data; // 서버에서 받은 데이터를 반환합니다.
   } catch (error) {
-    console.error("Error fetching project list:", error);
+    console.error("Error fetching post portfolio:", error);
     throw error; // 에러를 다시 throw하여 호출자에게 전달합니다.
   }
 };
@@ -28,7 +28,7 @@ export const getMyOnGoingProjects = async (userId) => {
     const response = await apiClient.get(`/project/${userId}/ongoinglist`);
     return response.data; // 서버에서 받은 데이터를 반환합니다.
   } catch (error) {
-    console.error("Error fetching project list:", error);
+    console.error("Error fetching AI portfolio :", error);
     throw error; // 에러를 다시 throw하여 호출자에게 전달합니다.
   }
 };
