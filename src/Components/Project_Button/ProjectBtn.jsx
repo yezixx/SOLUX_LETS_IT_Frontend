@@ -9,7 +9,8 @@ const project = {
 const ProjectBtn = ({
   //포트폴리오 작성, 삭제 버튼을 보여줄 것인가
   buttonShow = true,
-  onClick = undefined,
+  onClick1 = undefined,
+  onClick2 = undefined,
   button1Text = "add text",
   button2Text = "add text",
 }) => {
@@ -34,8 +35,8 @@ const ProjectBtn = ({
       {/*포트폴리오 작성,삭제 버튼 */}
       {buttonShow ? (
         <div className={styles.PortfolioBtn__button}>
-          <Button onClick={onClick} text={button1Text} />
-          <Button onClick={onClick} text={button2Text} type="SEC_120x40" />
+          <Button onClick={onClick1} text={button1Text} />
+          <Button onClick={onClick2} text={button2Text} type="SEC_120x40" />
         </div>
       ) : null}
     </div>
