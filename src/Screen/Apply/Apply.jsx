@@ -16,6 +16,7 @@ const user = {
   bio: "시각화로 소통하는 주니어 개발자",
 };
 const Apply = () => {
+  //postId 기반으로 프로젝트명 갖고오는 기능 구현 필요
   //'신청하기' 버튼 눌렀을 때 postId 할당 될 것
   const { postId } = useParams();
   const setApplicant = useSetAtom(applicant);
