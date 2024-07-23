@@ -10,23 +10,44 @@ import {
 } from "../../service/teamService";
 // import { getTeam } from "../../service/teamService";
 
-const mock_teamData = {
-  teamName: "팀게시판 메인",
-  notionLink: "https://www.notion.so/project1",
-  githubLink: "https://github.com/project1",
-  teamMemberInfo: [
-    {
-      userId: "letsit_backend.model.Member@72f9fde6",
-      userName: "Alice",
-      position: "Team_Leader",
-    },
-    {
-      userId: "letsit_backend.model.Member@30b4fb38",
-      userName: "Bob",
-      position: "Team_Member",
-    },
-  ],
-};
+const mock_teamData = [
+  {
+    teamId: 1,
+    teamName: "팀게시판 메인",
+    notionLink: "https://www.notion.so/project1",
+    githubLink: "https://github.com/project1",
+    teamMemberInfo: [
+      {
+        userId: "letsit_backend.model.Member@72f9fde6",
+        userName: "Alice",
+        position: "Team_Leader",
+      },
+      {
+        userId: "letsit_backend.model.Member@30b4fb38",
+        userName: "Bob",
+        position: "Team_Member",
+      },
+    ],
+  },
+  {
+    teamId: 2,
+    teamName: "팀 데이터 2",
+    notionLink: "https://www.notion.so/project2",
+    githubLink: "https://github.com/project2",
+    teamMemberInfo: [
+      {
+        userId: "letsit_backend.model.Member@123",
+        userName: "Charlie",
+        position: "Team_Leader",
+      },
+      {
+        userId: "letsit_backend.model.Member@456",
+        userName: "Diana",
+        position: "Team_Member",
+      },
+    ],
+  },
+];
 
 const mock_scheduleData = [
   {
@@ -68,7 +89,7 @@ const mock_meetingData = [
 ];
 
 const mock_kickData = [
-  {
+  /*{
     id: 1,
     userId: "letsit_backend.model.Member@72f9fde6",
     name: "Alice",
@@ -76,7 +97,7 @@ const mock_kickData = [
     voteCount: [],
     agree: 0,
     disagree: 0,
-  },
+  },*/
 ];
 
 export const TeamStateContext = createContext();
@@ -147,7 +168,21 @@ const isMember = (teamData, loginUserId) => {
 };
 
 const Teamboard = () => {
-  const [teamData, teamDispatch] = useReducer(teamReducer, mock_teamData);
+  const loginUserId = useAtomValue(userIdAtom);
+  const [params] = useSearchParams();
+  const teamId = params.get("team");
+
+  const nav = useNavigate();
+
+  const [teamData, teamDispatch] = useReducer(
+    teamReducer,
+    mock_teamData.find((team) => String(team.teamId) === teamId)
+  );
+  if (teamData === undefined) {
+    // 이후 useEffect 안으로 이동 필요
+    alert("존재하지 않는 페이지입니다.");
+    window.history.back();
+  }
   const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
   const [scheduleData, scheduleDispatch] = useReducer(
     scheduleReducer,
@@ -158,12 +193,6 @@ const Teamboard = () => {
     meetingReducer,
     mock_meetingData
   );
-
-  const loginUserId = useAtomValue(userIdAtom);
-  const [params] = useSearchParams();
-  const teamId = params.get("team");
-
-  const nav = useNavigate();
 
   useEffect(() => {
     //   const fetchTeamData = async () => {
