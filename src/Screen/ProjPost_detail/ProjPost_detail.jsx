@@ -185,9 +185,8 @@ const ProjPost_detail = () => {
             </div>
             <div className={styles.ProjPost_detail__commentInput}>
               <UserCircleIcon color="var(--main-color2)" />
-              <input
+              <textarea
                 ref={commentInputRef}
-                type="text"
                 placeholder="자유롭게 질문을 남겨주세요"
               />
               <Button

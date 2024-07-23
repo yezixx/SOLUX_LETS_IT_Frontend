@@ -104,11 +104,18 @@ const CommentItem = ({
         </div>
         <div className={styles.CommentItem__description}>
           {isOnChange ? (
-            <input
-              type="text"
+            <textarea
               ref={changeInputRef}
               value={changeInput}
               onChange={onChangeInput}
+              style={
+                isPostWriter
+                  ? {
+                      backgroundColor: "var(--syb-color1)",
+                      borderColor: "var(--text-color2)",
+                    }
+                  : {}
+              }
             />
           ) : (
             description
