@@ -14,6 +14,14 @@ const AttendanceDetail = () => {
   const [placeholder, setPlaceholder] = useState("파일을 선택해주세요.");
   const imgRef = useRef();
 
+  const getSelectedMemberName = () => {
+    if (!selectedMember) return [];
+    return selectedMember.map(
+      (memberId) =>
+        members.find((member) => member.userId === memberId).userName
+    );
+  };
+
   const onClickSave = () => {
     if (selectedMember && members.length - selectedMember.length < 1) {
       alert("참여인원은 1명 이상이어야 합니다.");
@@ -26,7 +34,7 @@ const AttendanceDetail = () => {
     if (confirm("회의 기록을 저장하시겠습니까?")) {
       onSaveMeeting({
         date: new Date().toISOString().split("T")[0],
-        nonParticipants: selectedMember ? selectedMember : [],
+        nonParticipants: getSelectedMemberName(),
         proofImages: proofImage,
       });
       setSelectedMember(null);
@@ -37,12 +45,14 @@ const AttendanceDetail = () => {
 
   const onClickMember = (userId) => {
     if (selectedMember && selectedMember.includes(userId)) {
+      // 이미 선택된 팀원을 다시 클릭했을 때
       setSelectedMember(
         selectedMember.filter((member) => String(member) !== String(userId))
       );
-    } else if (selectedMember && !selectedMember.includes(userId))
+    } else if (selectedMember && !selectedMember.includes(userId)) {
+      // 선택된 팀원이 있고, 선택된 팀원에 포함되지 않은 팀원을 클릭했을 때
       setSelectedMember([...selectedMember, userId]);
-    else setSelectedMember([userId]);
+    } else setSelectedMember([userId]); // 선택된 팀원이 없는 상태에서 팀원을 클릭했을 때
   };
 
   const onChangeFile = () => {
