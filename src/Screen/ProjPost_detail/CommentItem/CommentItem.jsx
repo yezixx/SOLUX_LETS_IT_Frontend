@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import ArrowTurnDownRight from "../../../Image/Icons/ArrowTurnDownRight";
 import EllipsisHorizontalIcon from "../../../Image/Icons/EllipsisHorizontalIcon";
 import HeartIcon from "../../../Image/Icons/HeartIcon";
@@ -26,10 +26,16 @@ const CommentItem = ({
   postWriter,
   inputRef,
   onDelete,
+  onUpdate,
 }) => {
   const loginUserId = useAtomValue(userIdAtom);
 
   const [isOpen, setIsOpen] = useState(false);
+  const [isOnChange, setIsOnChange] = useState(false);
+  const [changeInput, setChangeInput] = useState(description);
+
+  const changeInputRef = useRef();
+
   const isPostWriter = () => postWriter === writer;
   const isCommentWriter = () => String(loginUserId) === String(writer);
   const onClickIcon = () => {
@@ -44,11 +50,38 @@ const CommentItem = ({
     onDelete(id);
   };
 
+  const onChangeInput = (e) => {
+    setChangeInput(e.target.value);
+  };
+
+  const onClickCompleteUpdate = () => {
+    if (changeInput === description) {
+      setIsOnChange(false);
+      return;
+    }
+    if (changeInput === "") {
+      changeInputRef.current.focus();
+      return;
+    }
+    onUpdate(id, changeInput);
+  };
+
+  const onClickCancelUpdate = () => {
+    setIsOnChange(false);
+  };
+
   return (
     <div className={styles.CommentItem}>
       {isOpen && (
         <div className={styles.CommentItem__menu}>
-          <Button text="수정" type="NONE__TEXT-TC2" />
+          <Button
+            text="수정"
+            type="NONE__TEXT-TC2"
+            onClick={() => {
+              setIsOnChange(true);
+              setIsOpen(false);
+            }}
+          />
           <Button text="삭제" type="NONE__TEXT-TC2" onClick={onClickDelete} />
         </div>
       )}
@@ -63,16 +96,44 @@ const CommentItem = ({
         <div className={styles.CommentItem__header}>
           <div>{writer}</div>
           <div>{getFormattedDate(date)}</div>
-          {isCommentWriter() && (
+          {isCommentWriter() && !isOnChange && (
             <div className={styles.CommentItem__icon} onClick={onClickIcon}>
               <EllipsisHorizontalIcon />
             </div>
           )}
         </div>
-        <div className={styles.CommentItem__description}>{description}</div>
+        <div className={styles.CommentItem__description}>
+          {isOnChange ? (
+            <input
+              type="text"
+              ref={changeInputRef}
+              value={changeInput}
+              onChange={onChangeInput}
+            />
+          ) : (
+            description
+          )}
+        </div>
         <div className={styles.CommentItem__icon}>
-          <HeartIcon />
-          <ArrowTurnDownRight onClick={onClickReply} />
+          {isOnChange ? (
+            <>
+              <Button
+                text="수정"
+                type="NONE__TEXT-MC2-16"
+                onClick={onClickCompleteUpdate}
+              />
+              <Button
+                text="취소"
+                type="NONE__TEXT-TC2"
+                onClick={onClickCancelUpdate}
+              />
+            </>
+          ) : (
+            <>
+              <HeartIcon />
+              <ArrowTurnDownRight onClick={onClickReply} />
+            </>
+          )}
         </div>
       </div>
     </div>

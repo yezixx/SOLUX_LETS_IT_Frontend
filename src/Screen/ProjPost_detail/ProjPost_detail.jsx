@@ -8,7 +8,7 @@ import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../atoms/atoms";
 import { useEffect, useRef, useState } from "react";
-import { getPosts } from "../../service/postService";
+import { getComments, getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";
 
 const mock_post = {
@@ -97,7 +97,14 @@ const ProjPost_detail = () => {
         setPost(data);
       })
       .catch((error) => {
-        console.log("post detail error:", error);
+        console.log("post detail error(ProjPost_Datil.jsx):", error);
+      });
+    getComments(postId)
+      .then((data) => {
+        setComments(data);
+      })
+      .catch((error) => {
+        console.log("comment list error(ProjPost_Datil.jsx): ", error);
       });
   }, []);
 
@@ -111,6 +118,14 @@ const ProjPost_detail = () => {
         description: description,
       },
     ]);
+  };
+
+  const onUpdateComment = (id, description) => {
+    setComments(
+      comments.map((comment) =>
+        comment.id === id ? { ...comment, description } : comment
+      )
+    );
   };
 
   const onDeleteComment = (id) => {
@@ -164,6 +179,7 @@ const ProjPost_detail = () => {
                   postWriter={post.postInfo.writer}
                   inputRef={commentInputRef}
                   onDelete={onDeleteComment}
+                  onUpdate={onUpdateComment}
                 />
               ))}
             </div>

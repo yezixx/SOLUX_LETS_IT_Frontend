@@ -62,6 +62,17 @@
 .CommentItem__description {
   padding: 20px 0;
 }
+.CommentItem__description > input {
+  width: 90%;
+  max-height: 100px;
+  padding: 5px 10px;
+  border: 1px solid var(--line-color);
+  border-radius: 10px;
+  &:focus {
+    outline: none;
+    border-color: var(--main-color2);
+  }
+}
 
 .CommentItem__icon {
   align-self: flex-end;
