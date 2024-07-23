@@ -18,7 +18,8 @@ const OngoingProj = () => {
         {/*작성할 수 있는 포트폴리오 나열 */}
         <div className={styles.ongoingProj__cont}>
           <ProjectBtn
-            onClick={() => naviagateTo("/teamboard")}
+            onClick1={() => naviagateTo("/teamboard")}
+            onClick2={() => naviagateTo("/mypage/portfolio/board")}
             button1Text="팀 게시판"
             button2Text="포트폴리오"
           />
