@@ -17,6 +17,7 @@ const Nav = () => {
       .then((data) => {
         // 로그아웃 성공 후 처리
         localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("user");
         setIsLogin(false); // 로그인 상태 업데이트
         navigate("/"); // 홈 화면으로 이동
       })
