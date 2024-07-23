@@ -74,6 +74,7 @@
   width: 840px;
   height: 30px;
   resize: none;
+  overflow: auto;
   white-space: pre-wrap;
   background-color: white;
   border-radius: 20px;
@@ -86,7 +87,7 @@
 }
 
 .ProjPost_detail__commentInput > textarea::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 .ProjPost_detail__commentInput > textarea::-webkit-scrollbar-track {
@@ -96,7 +97,7 @@
 
 .ProjPost_detail__commentInput > textarea::-webkit-scrollbar-thumb {
   background: var(--line-color);
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .ProjPost_detail__commentInput > textarea::-webkit-scrollbar-thumb:hover {
