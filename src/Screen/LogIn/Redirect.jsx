@@ -1,14 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import axios from "axios";
-import { useSetAtom } from "jotai";
-import { isLoginAtom } from "../../atoms/atoms";
+import { useAtom, useSetAtom } from "jotai";
+import { isLoginAtom, userAtom } from "../../atoms/atoms";
 
 const Redirect = () => {
   const navigate = useNavigate();
   const code = new URL(window.location.href).searchParams.get("code");
   const setIsLogIn = useSetAtom(isLoginAtom);
-  console.log(code);
+  const [user, setUser] = useAtom(userAtom);
   //인가코드 백으로 보내는 코드
   useEffect(() => {
     const kakaoLogin = async () => {
@@ -20,9 +20,9 @@ const Redirect = () => {
         },
       }).then((res) => {
         //백에서 완료후 우리사이트 전용 토큰 넘겨주는게 성공했다면
-        console.log(res);
         setIsLogIn(true);
         const userData = res.data.user;
+        setUser(userData);
         //유저정보 localStorage에 저장
         localStorage.setItem("user", JSON.stringify(userData));
         //로그인 상태 true로 변경

@@ -5,7 +5,7 @@ import styles from "./ApplyHireProj.module.css";
 import MemberView from "./MemberView/MemberView";
 import { getMyProjects } from "../../../service/projectService";
 import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../atoms/atoms";
+import { userAtom, userIdAtom } from "../../../atoms/atoms";
 import ProjectList from "../../../Components/RecommendProject/ProjectList";
 import { approveApplicants } from "../../../service/applyService";
 
@@ -18,7 +18,8 @@ const ApplyHireProj = () => {
   /*팀원 data를 담을 state */
   const [memberList, setMemberList] = useState([]);
   /*userId 전역 상태에서 불러오기 */
-  const userId = useAtomValue(userIdAtom);
+  const user = useAtomValue(userAtom);
+  const userId = user.userId;
   /*프로젝트 리스트 db에서 갖고 와서 apHireProj에 저장 */
   useEffect(() => {
     getMyProjects(userId)
