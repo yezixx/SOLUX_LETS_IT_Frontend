@@ -1,7 +1,7 @@
 import apiClient from "./apiClient";
 
 //포트폴리오 리스트업 (조회)
-export const getMyProjects = async (prjId, userId) => {
+export const getMyPortfolios = async (prjId, userId) => {
   try {
     const response = await apiClient.get(`/portfolios/${prjId}/list/${userId}`);
     return response.data; // 서버에서 받은 데이터를 반환합니다.
@@ -12,7 +12,7 @@ export const getMyProjects = async (prjId, userId) => {
 };
 
 // 포트폴리오 작성
-export const getMyAppliedProjects = async (prjId) => {
+export const postPortfolios = async (prjId) => {
   try {
     const response = await apiClient.get(`portfolios/${prjId}/write`);
     return response.data; // 서버에서 받은 데이터를 반환합니다.
@@ -23,7 +23,7 @@ export const getMyAppliedProjects = async (prjId) => {
 };
 
 // AI 포트폴리오 조회
-export const getMyOnGoingProjects = async (userId) => {
+export const getMyAIPortfolios = async (userId) => {
   try {
     const response = await apiClient.get(`/project/${userId}/ongoinglist`);
     return response.data; // 서버에서 받은 데이터를 반환합니다.
