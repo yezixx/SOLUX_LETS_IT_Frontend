@@ -20,7 +20,7 @@ const Apply = () => {
   const { postId } = useParams();
   const setApplicant = useSetAtom(applicant);
   //applyData - onChange를 통해 input으로 받은 값을 모아둔 객체
-  const { applyData, onChange } = useApplyPost();
+  const { applyData, onChange, warning } = useApplyPost();
   console.log(applyData);
   //로그인 시 받아둔 유저 아이디값 가져옴
   const userId = useAtomValue(userIdAtom);
