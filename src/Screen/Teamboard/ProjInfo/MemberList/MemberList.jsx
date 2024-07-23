@@ -5,13 +5,13 @@ import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 
 const MemberList = () => {
-  const { teamData } = useContext(TeamStateContext);
+  const { teamData, teamId } = useContext(TeamStateContext);
   const members = teamData.teamMemberInfo;
 
   const nav = useNavigate();
 
   const onClickMemberItem = (userId) => {
-    nav(`/teamboard/member/profile/${userId}`);
+    nav(`/teamboard/member/profile/${userId}/?team=${teamId}`);
   };
 
   return (
@@ -23,7 +23,7 @@ const MemberList = () => {
             memberName={member.userName}
             memberId={member.userId}
             onClick={() => {
-              onClickMemberItem(member.userId);
+              onClickMemberItem(member.userName);
             }}
           />
         ))}
