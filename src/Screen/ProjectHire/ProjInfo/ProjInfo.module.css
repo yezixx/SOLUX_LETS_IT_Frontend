@@ -1,0 +1,40 @@
+/*부제목*/
+.projectHire__subTitle {
+  font-family: "pretendardB";
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+/*label + input*/
+.projectHire__detail {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.projectHire select {
+  min-width: 150px;
+  height: 40px;
+  padding: 10px 10px;
+  font-size: 16px;
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    font-size: 16px;
+  }
+  &:focus::placeholder {
+    opacity: 0;
+  }
+}
+/*지역 선택창*/
+.projectHire__selectArea {
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  font-size: 16px;
+}
