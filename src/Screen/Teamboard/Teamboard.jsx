@@ -8,7 +8,7 @@ import {
   evaluateMember,
   updateTeam,
 } from "../../service/teamService";
-// import { getTeam } from "../../service/teamService";
+import { getTeam } from "../../service/teamService";
 
 const mock_teamData = [
   {
@@ -26,6 +26,11 @@ const mock_teamData = [
         userId: "letsit_backend.model.Member@30b4fb38",
         userName: "Bob",
         position: "Team_Member",
+      },
+      {
+        userId: "letsit_backend.model.Member@123",
+        userName: "Charlie",
+        position: "Team_Leader",
       },
     ],
   },
@@ -201,27 +206,32 @@ const Teamboard = () => {
   );
 
   useEffect(() => {
-    //   const fetchTeamData = async () => {
-    //     try {
-    //       const data = await getTeam(teamId);
-    //       teamDispatch({
-    //         type: "GET",
-    //         data: data,
-    //       });
+    const fetchTeamData = async () => {
+      try {
+        const data = await getTeam(teamId);
+        teamDispatch({
+          type: "GET",
+          data: data,
+        });
 
-    if (!isMember(teamData, loginUserId)) {
-      alert("팀원 외에는 접근할 수 없습니다.");
-      nav("/");
-      return;
-    }
-    //     } catch (error) {
-    //       console.log("teamboard error", error);
-    //     }
-    //   };
-    //   fetchTeamData();
+        if (!isMember(teamData, loginUserId)) {
+          alert("팀원 외에는 접근할 수 없습니다.");
+          nav("/");
+          return;
+        }
+      } catch (error) {
+        console.log("teamboard error", error);
+        teamDispatch({
+          type: "GET",
+          data: mock_teamData[0],
+        });
+      }
+    };
+    fetchTeamData();
   }, []);
+  console.log(teamData);
 
-  const kickIdRef = useRef(2);
+  const kickIdRef = useRef(1);
   const meetingRef = useRef(3);
   const eventRef = useRef(3);
 
