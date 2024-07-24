@@ -7,6 +7,7 @@ import useHover from "../../../Hooks/useHover";
 import { useAtom } from "jotai";
 import { isLoginAtom } from "../../../atoms/atoms";
 import { logoutService } from "../../../service/logoutService";
+import { useEffect } from "react";
 
 const Nav = () => {
   //로그인 여부
@@ -22,9 +23,10 @@ const Nav = () => {
       .then((res) => {
         console.log(`로그아웃 성공 : ${res.data}`);
         alert("로그아웃 되었습니다");
+        navigate("/");
+        window.location.reload();
         localStorage.clear();
         isLogin(false);
-        navigate("/");
       })
       .catch((error) => {
         console.log(error);
