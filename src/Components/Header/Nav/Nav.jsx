@@ -11,26 +11,44 @@ import { logoutService } from "../../../service/logoutService";
 const Nav = () => {
   //로그인 여부
   const [isLogin, setIsLogin] = useAtom(isLoginAtom);
-  //로그아웃 핸들링
-  const handleLogout = () => {
-    logoutService()
-      .then((data) => {
-        // 로그아웃 성공 후 처리
-        localStorage.removeItem("isLoggedIn");
-        localStorage.removeItem("user");
-        setIsLogin(false); // 로그인 상태 업데이트
-        navigate("/"); // 홈 화면으로 이동
-      })
-      .catch((error) => {
-        console.error("Logout failed:", error);
-        alert("로그아웃에 실패했습니다.");
-      });
-  };
   //로고 클릭 시 홈화면 이동
   const navigate = useNavigate();
   const navigateTo = () => {
     navigate("/");
   };
+  //로그아웃 핸들링
+  const handleLogout = async () => {
+    // logoutService()
+    //   .then((data) => {
+    //     // 로그아웃 성공 후 처리
+    //     localStorage.removeItem("isLoggedIn");
+    //     localStorage.removeItem("user");
+    //     setIsLogin(false); // 로그인 상태 업데이트
+    //     navigate("/"); // 홈 화면으로 이동
+    //   })
+    //   .catch((error) => {
+    //     console.error("Logout failed:", error);
+    //     alert("로그아웃에 실패했습니다.");
+    //   });
+    const TOKEN = localStorage.getItem("token");
+    try {
+      const datas = await axios.post(
+        "https://kapi.kakao.com/v1/user/logout",
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${TOKEN}`,
+          },
+        }
+      );
+      localStorage.removeItem("token");
+      isLogin(false);
+      navigate("/");
+    } catch (error) {
+      console.error("카카오 로그아웃 실패", error);
+    }
+  };
+
   const { ishovered, handleMouseEnter, handleMouseLeave } = useHover();
 
   return (
