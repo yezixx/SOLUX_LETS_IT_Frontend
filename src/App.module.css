@@ -4,4 +4,5 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow: hidden; /*스크롤바 하나 더 생기는 거 방지*/
 }

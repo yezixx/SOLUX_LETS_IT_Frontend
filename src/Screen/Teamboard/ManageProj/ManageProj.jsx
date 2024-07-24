@@ -3,12 +3,16 @@ import AttendanceList from "./AttendanceList/AttendanceList";
 import AttendanceDetail from "./AttendanceDetail/AttendanceDetail";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
+import { useContext } from "react";
+import { TeamStateContext } from "../Teamboard";
 
 const ManageProj = () => {
+  const { teamId } = useContext(TeamStateContext);
+
   const nav = useNavigate();
 
   const navigateToEdit = () => {
-    nav("/teamboard/manage/edit");
+    nav(`/teamboard/manage/edit/?team=${teamId}`);
   };
   return (
     <div className={styles.manageProj}>

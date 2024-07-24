@@ -1,10 +1,13 @@
+import { useParams } from "react-router-dom";
 import Profile from "../../../Components/Profile/Profile";
 import styles from "./MemberProfile.module.css";
 
 const MemberProfile = () => {
+  const userId = useParams().userId;
+
   //mock user data
   const user = {
-    name: "김코더",
+    name: userId,
     age: "20대 초반",
     bio: "시각화로 소통하는 주니어 개발자",
     sns: {
@@ -28,4 +31,5 @@ const MemberProfile = () => {
     </div>
   );
 };
+
 export default MemberProfile;

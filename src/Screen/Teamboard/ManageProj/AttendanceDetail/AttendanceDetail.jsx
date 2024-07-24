@@ -6,13 +6,21 @@ import styles from "./AttendanceDetail.module.css";
 
 const AttendanceDetail = () => {
   const { teamData } = useContext(TeamStateContext);
-  const members = teamData.members;
+  const members = teamData.teamMemberInfo;
   const { meetingData } = useContext(TeamStateContext);
   const { onSaveMeeting } = useContext(TeamDispatchContext);
   const [selectedMember, setSelectedMember] = useState();
   const [proofImage, setProofImage] = useState();
   const [placeholder, setPlaceholder] = useState("파일을 선택해주세요.");
   const imgRef = useRef();
+
+  const getSelectedMemberName = () => {
+    if (!selectedMember) return [];
+    return selectedMember.map(
+      (memberId) =>
+        members.find((member) => member.userId === memberId).userName
+    );
+  };
 
   const onClickSave = () => {
     if (selectedMember && members.length - selectedMember.length < 1) {
@@ -23,24 +31,28 @@ const AttendanceDetail = () => {
       alert("회의 인증 사진을 첨부해주세요.");
       return;
     }
-    onSaveMeeting({
-      date: new Date().toISOString().split("T")[0],
-      nonParticipants: selectedMember ? selectedMember : [],
-      proofImages: proofImage,
-    });
-    setSelectedMember(null);
-    setPlaceholder("파일을 선택해주세요.");
-    setProofImage(null);
+    if (confirm("회의 기록을 저장하시겠습니까?")) {
+      onSaveMeeting({
+        date: new Date().toISOString().split("T")[0],
+        nonParticipants: getSelectedMemberName(),
+        proofImages: proofImage,
+      });
+      setSelectedMember(null);
+      setPlaceholder("파일을 선택해주세요.");
+      setProofImage(null);
+    }
   };
 
   const onClickMember = (userId) => {
     if (selectedMember && selectedMember.includes(userId)) {
+      // 이미 선택된 팀원을 다시 클릭했을 때
       setSelectedMember(
         selectedMember.filter((member) => String(member) !== String(userId))
       );
-    } else if (selectedMember && !selectedMember.includes(userId))
+    } else if (selectedMember && !selectedMember.includes(userId)) {
+      // 선택된 팀원이 있고, 선택된 팀원에 포함되지 않은 팀원을 클릭했을 때
       setSelectedMember([...selectedMember, userId]);
-    else setSelectedMember([userId]);
+    } else setSelectedMember([userId]); // 선택된 팀원이 없는 상태에서 팀원을 클릭했을 때
   };
 
   const onChangeFile = () => {
@@ -82,11 +94,11 @@ const AttendanceDetail = () => {
         <div className={styles.attendanceDetail__list}>
           <div className={styles.attendanceDetail__listLabel}>불참한 팀원</div>
           <div className={styles.attendanceDetail__members}>
-            {members.map((member) =>
+            {members.map((member, index) =>
               selectedMember && selectedMember.includes(member.userId) ? (
                 <MemberItem
-                  key={member.id}
-                  memberName={member.name}
+                  key={index}
+                  memberName={member.userName}
                   type="SELECTED"
                   onClick={() => {
                     onClickMember(member.userId);
@@ -94,8 +106,8 @@ const AttendanceDetail = () => {
                 />
               ) : (
                 <MemberItem
-                  key={member.id}
-                  memberName={member.name}
+                  key={index}
+                  memberName={member.userName}
                   onClick={() => {
                     onClickMember(member.userId);
                   }}

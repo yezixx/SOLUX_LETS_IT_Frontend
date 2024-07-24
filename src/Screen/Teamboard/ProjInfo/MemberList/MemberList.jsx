@@ -5,24 +5,25 @@ import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 
 const MemberList = () => {
-  const { teamData } = useContext(TeamStateContext);
-  const members = teamData.members;
+  const { teamData, teamId } = useContext(TeamStateContext);
+  const members = teamData.teamMemberInfo;
 
   const nav = useNavigate();
 
   const onClickMemberItem = (userId) => {
-    nav(`/teamboard/member/profile/${userId}`);
+    nav(`/teamboard/member/profile/${userId}/?team=${teamId}`);
   };
 
   return (
     <div className={styles.memberList}>
       <div className={styles.memberList__item}>
-        {members.map((member) => (
+        {members.map((member, index) => (
           <MemberItem
-            key={member.id}
-            memberName={member.name}
+            key={index}
+            memberName={member.userName}
+            memberId={member.userId}
             onClick={() => {
-              onClickMemberItem(member.userId);
+              onClickMemberItem(member.userName);
             }}
           />
         ))}

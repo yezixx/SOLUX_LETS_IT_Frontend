@@ -31,6 +31,9 @@ const ScheduleDialog = ({ selectedDate, closeDialog }) => {
   };
 
   const onChangeTitle = (e) => {
+    if (e.target.value.length > 14) {
+      return;
+    }
     setTitle(e.target.value);
   };
 

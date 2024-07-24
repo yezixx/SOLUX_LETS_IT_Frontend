@@ -29,7 +29,6 @@ const TeamCalendar = () => {
   };
 
   const onEventClick = (e) => {
-    console.log(e.event);
     openInfo();
     setSelectedEvent(e.event);
   };

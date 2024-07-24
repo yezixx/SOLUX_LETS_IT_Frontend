@@ -4,12 +4,20 @@ import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
 import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
 import styles from "./CreateBoard.module.css";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { createTeam } from "../../../service/teamService";
 
 const mock_members = [
-  { id: 1, userId: "yuming", name: "유밍 BE" },
-  { id: 2, userId: "dora", name: "도라" },
-  { id: 3, userId: "tom", name: "Tom BE" },
+  {
+    userId: "letsit_backend.model.Member@72f9fde6",
+    userName: "Alice",
+    position: "Team_Leader",
+  },
+  {
+    userId: "letsit_backend.model.Member@30b4fb38",
+    userName: "Bob",
+    position: "Team_Member",
+  },
 ];
 const mock_collabLinks = [
   {
@@ -29,6 +37,9 @@ const CreateBoard = () => {
   const members = mock_members;
   const [title, setTitle] = useState("");
   const [links, setLinks] = useState(mock_collabLinks);
+
+  const [params] = useSearchParams();
+  const postId = params.get("post");
 
   const titleRef = useRef();
   const linkRef1 = useRef();
@@ -53,7 +64,16 @@ const CreateBoard = () => {
       onFocusElement(linkRef2);
       return;
     }
-    if (confirm("팀게시판을 생성하시겠습니까?")) nav("/teamboard");
+    const newTeamData = {
+      teamName: title,
+      notionLink: links[0].link,
+      githubLink: links[1].link,
+    };
+    console.log(newTeamData);
+    if (confirm("팀게시판을 생성하시겠습니까?")) {
+      nav(`/teamboard/?team=${newTeamData.teamId}`);
+      createTeam(postId, newTeamData);
+    }
   };
 
   const onChangeTitleForm = (input) => {
@@ -90,8 +110,8 @@ const CreateBoard = () => {
           {/*팀원 리스트 */}
           <div className={styles.createBoard__memberItem}>
             <div className={styles.createBoard__innerLabel}>팀원</div>
-            {members.map((member) => (
-              <MemberItem key={member.id} memberName={member.name} />
+            {members.map((member, index) => (
+              <MemberItem key={index} memberName={member.userName} />
             ))}
           </div>
           {/*프로젝트명 */}

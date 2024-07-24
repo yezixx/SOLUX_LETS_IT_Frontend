@@ -17,19 +17,19 @@ const getMembersExcludingSelf = (loginUserId, members) => {
 
 const isCompletedMember = (targetId, data) => {
   const isIncluded = data.some(
-    (member) => String(member.id) === String(targetId)
+    (member) => String(member.userId) === String(targetId)
   );
   return isIncluded;
 };
 
 const TeamFeedback = () => {
   const { teamData } = useContext(TeamStateContext);
-  const members = teamData.members;
+  const members = teamData.teamMemberInfo;
 
   const { feedbackData } = useContext(TeamStateContext);
   const { onSubmitFeedback } = useContext(TeamDispatchContext);
 
-  const [selectedMember, setSelectedMember] = useState();
+  const [selectedMemberId, setSelectedMemberId] = useState();
   const [feedback, setFeedback] = useState();
   const [promiseValue, setPromiseValue] = useState();
   const [frequencyValue, setFrequencyValue] = useState();
@@ -73,7 +73,7 @@ const TeamFeedback = () => {
   };
 
   const isValidate = () => {
-    if (!selectedMember) {
+    if (!selectedMemberId) {
       alert("평가할 팀원을 선택해주세요.");
       return false;
     }
@@ -94,9 +94,12 @@ const TeamFeedback = () => {
     if (!isValidate()) return;
 
     if (!confirm("평가를 제출하시겠습니까?")) return;
-    onSubmitFeedback(selectedMember, feedback);
+    onSubmitFeedback(selectedMemberId, {
+      ...feedback,
+      total: promiseValue + frequencyValue + participateValue + kindnessValue,
+    });
 
-    setSelectedMember(null);
+    setSelectedMemberId(null);
     setPromiseValue(null);
     setFrequencyValue(null);
     setParticipateValue(null);
@@ -106,10 +109,13 @@ const TeamFeedback = () => {
 
   const onClickFinish = () => {
     if (!isValidate()) return;
-    onSubmitFeedback(selectedMember, feedback);
+    onSubmitFeedback(selectedMemberId, {
+      ...feedback,
+      total: promiseValue + frequencyValue + participateValue + kindnessValue,
+    });
     alert("팀원 평가를 완료합니다.");
 
-    setSelectedMember(null);
+    setSelectedMemberId(null);
     setPromiseValue(null);
     setFrequencyValue(null);
     setParticipateValue(null);
@@ -132,19 +138,19 @@ const TeamFeedback = () => {
           평가할 팀원을 선택해주세요
         </div>
         <div className={styles.teamFeedback__item}>
-          {membersExcludingSelf.map((member) => (
+          {membersExcludingSelf.map((member, index) => (
             <MemberItem
-              key={member.id}
-              memberName={member.name}
+              key={index}
+              memberName={member.userName}
               type={
                 isCompletedMember(member.userId, feedbackData)
                   ? "COMPLETED"
-                  : String(selectedMember) === String(member.userId)
+                  : String(selectedMemberId) === String(member.userId)
                   ? "ONLYBORDER_SELECTED"
                   : "ONLYBORDER"
               }
               onClick={() => {
-                setSelectedMember(member.userId);
+                setSelectedMemberId(member.userId);
               }}
             />
           ))}
@@ -152,25 +158,25 @@ const TeamFeedback = () => {
         <div className={styles.teamFeedback__formContainer}>
           <div className={styles.teamFeedback__form}>
             <FeedbackFormItem
-              targetId={selectedMember}
+              targetId={selectedMemberId}
               question={"시간 / 기한은 잘 지켰나요?"}
               answer={promiseValue}
               onChange={onChangePromise}
             />
             <FeedbackFormItem
-              targetId={selectedMember}
+              targetId={selectedMemberId}
               question={"답장 속도는 적절했나요?"}
               answer={frequencyValue}
               onChange={onChangeFrequency}
             />
             <FeedbackFormItem
-              targetId={selectedMember}
+              targetId={selectedMemberId}
               question={"적극적으로 프로젝트에 참여했나요?"}
               answer={participateValue}
               onChange={onChangeParticipate}
             />
             <FeedbackFormItem
-              targetId={selectedMember}
+              targetId={selectedMemberId}
               question={"상대방을 존중하고 배려했나요?"}
               answer={kindnessValue}
               onChange={onChangeKindness}

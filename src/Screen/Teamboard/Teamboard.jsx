@@ -1,81 +1,109 @@
-import { createContext, useReducer, useRef } from "react";
+import { createContext, useEffect, useReducer, useRef } from "react";
 import styles from "./Teamboard.module.css";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../atoms/atoms";
+import {
+  delegateTeamLeader,
+  evaluateMember,
+  updateTeam,
+} from "../../service/teamService";
+// import { getTeam } from "../../service/teamService";
 
-const mock_teamData = {
-  teamId: 1,
-  title: "학원 청구 정산 서비스",
-  collabLink: [
-    {
-      id: 1,
-      tool: "notion",
-      link: "https://www.notion.so/ko-kr",
-    },
-    {
-      id: 2,
-      tool: "github",
-      link: "https://github.com/",
-    },
-  ],
-  leader: "yuming",
-  members: [
-    { id: 1, userId: "yuming", name: "유밍 BE" },
-    { id: 2, userId: "dora", name: "도라" },
-    { id: 3, userId: "tom", name: "Tom BE" },
-  ],
-};
+const mock_teamData = [
+  {
+    teamId: 1,
+    teamName: "팀게시판 메인",
+    notionLink: "https://www.notion.so/project1",
+    githubLink: "https://github.com/project1",
+    teamMemberInfo: [
+      {
+        userId: "letsit_backend.model.Member@72f9fde6",
+        userName: "Alice",
+        position: "Team_Leader",
+      },
+      {
+        userId: "letsit_backend.model.Member@30b4fb38",
+        userName: "Bob",
+        position: "Team_Member",
+      },
+    ],
+  },
+  {
+    teamId: 2,
+    teamName: "팀 데이터 2",
+    notionLink: "https://www.notion.so/project2",
+    githubLink: "https://github.com/project2",
+    teamMemberInfo: [
+      {
+        userId: "letsit_backend.model.Member@123",
+        userName: "Charlie",
+        position: "Team_Leader",
+      },
+      {
+        userId: "letsit_backend.model.Member@456",
+        userName: "Diana",
+        position: "Team_Member",
+      },
+    ],
+  },
+];
 
 const mock_scheduleData = [
   {
     id: 0,
-    title: "event 1",
+    title: "프엔 회의",
     start: "2024-07-01",
     end: "2024-07-01",
-    description: "test",
+    description: `회의 안건
+      - 라이브러리 선정
+      - 화면 구조 논의`,
   },
   {
     id: 1,
-    title: "event 2",
+    title: "정기 회의",
     start: "2024-07-03",
     end: "2024-07-03",
-    description: "test",
+    description: `회의 안건
+    - 프론트&백 스터디 진행 상황 공유
+    - 서비스 네이밍
+    - 다음주 일정 공유`,
   },
   {
     id: 2,
-    title: "event 3",
-    start: "2024-07-01",
-    end: "2024-07-03",
-    description: "test",
+    title: "스터디 인증 기간",
+    start: "2024-07-22",
+    end: "2024-07-27",
+    description:
+      "각자 수강한 스터디 강의 노션의 스터디 > 인증 보드에 인증해주세요!",
   },
 ];
 
 const mock_meetingData = [
   {
     id: 1,
-    date: "2024-04-10",
-    nonParticipants: ["tom"],
+    date: "2024-07-03",
+    nonParticipants: ["Alice"],
     proofImages: "first_week.png",
   },
   {
     id: 2,
-    date: "2024-04-14",
+    date: "2024-07-10",
     nonParticipants: [],
     proofImages: "second_week.png",
   },
 ];
 
 const mock_kickData = [
-  {
+  /*{
     id: 1,
-    userId: "tom",
-    name: "Tom BE",
+    userId: "letsit_backend.model.Member@72f9fde6",
+    name: "Alice",
     reason: "사유2",
     voteCount: [],
     agree: 0,
     disagree: 0,
-  },
+  },*/
 ];
 
 export const TeamStateContext = createContext();
@@ -83,27 +111,10 @@ export const TeamDispatchContext = createContext();
 
 function teamReducer(state, action) {
   switch (action.type) {
+    case "GET":
+      return action.data;
     case "UPDATE":
       return action.data;
-    case "DELETE_MEMBER":
-      if (action.data === state.leader) {
-        return {
-          ...state,
-          members: state.members.filter(
-            (item) => String(item.userId) !== String(action.data)
-          ),
-          leader: state.members.filter(
-            (item) => String(item.userId) !== String(action.data)
-          )[0].userId,
-        };
-      }
-
-      return {
-        ...state,
-        members: state.members.filter(
-          (item) => String(item.userId) !== String(action.data)
-        ),
-      };
     default:
       return state;
   }
@@ -156,8 +167,28 @@ function feedbackReducer(state, action) {
   }
 }
 
+const isMember = (teamData, loginUserId) => {
+  return teamData.teamMemberInfo.some(
+    (member) => String(member.userId) === String(loginUserId)
+  );
+};
+
 const Teamboard = () => {
-  const [teamData, teamDispatch] = useReducer(teamReducer, mock_teamData);
+  const loginUserId = useAtomValue(userIdAtom);
+  const [params] = useSearchParams();
+  const teamId = params.get("team");
+
+  const nav = useNavigate();
+
+  const [teamData, teamDispatch] = useReducer(
+    teamReducer,
+    mock_teamData.find((team) => String(team.teamId) === teamId)
+  );
+  if (teamData === undefined) {
+    // 이후 useEffect 안으로 이동 필요
+    alert("존재하지 않는 페이지입니다.");
+    window.history.back();
+  }
   const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
   const [scheduleData, scheduleDispatch] = useReducer(
     scheduleReducer,
@@ -169,29 +200,80 @@ const Teamboard = () => {
     mock_meetingData
   );
 
-  const loginUserId = useAtomValue(userIdAtom);
+  useEffect(() => {
+    //   const fetchTeamData = async () => {
+    //     try {
+    //       const data = await getTeam(teamId);
+    //       teamDispatch({
+    //         type: "GET",
+    //         data: data,
+    //       });
+
+    if (!isMember(teamData, loginUserId)) {
+      alert("팀원 외에는 접근할 수 없습니다.");
+      nav("/");
+      return;
+    }
+    //     } catch (error) {
+    //       console.log("teamboard error", error);
+    //     }
+    //   };
+    //   fetchTeamData();
+  }, []);
 
   const kickIdRef = useRef(2);
   const meetingRef = useRef(3);
   const eventRef = useRef(3);
 
   const onDeleteMember = (userId) => {
-    teamDispatch({
-      type: "DELETE_MEMBER",
-      data: userId,
+    const filteredMember = teamData.teamMemberInfo.filter((item) => {
+      return String(item.userId) !== String(userId);
     });
+    if (
+      userId ===
+      teamData.teamMemberInfo.find((item) => item.position === "Team_Leader")
+        .userId
+    ) {
+      teamDispatch({
+        type: "UPDATE",
+        data: {
+          ...teamData,
+          teamMemberInfo: filteredMember.map((item, index) =>
+            index === 0
+              ? { ...item, position: "Team_Leader" }
+              : { ...item, position: "Team_Member" }
+          ),
+        },
+      });
+    } else {
+      teamDispatch({
+        type: "UPDATE",
+        data: {
+          ...teamData,
+          teamMemberInfo: [...filteredMember],
+        },
+      });
+    }
   };
 
-  const onUpdateTeamData = (title, links, selectedMember) => {
+  const onUpdateTeamData = (title, notion, github, selectedMember) => {
     teamDispatch({
       type: "UPDATE",
       data: {
         ...teamData,
-        title: title,
-        collabLink: links,
-        leader: selectedMember,
+        teamName: title,
+        notionLink: notion,
+        githubLink: github,
+        teamMemberInfo: teamData.teamMemberInfo.map((member) => {
+          if (String(member.userId) === String(selectedMember)) {
+            return { ...member, position: "Team_Leader" };
+          }
+          return { ...member, position: "Team_Member" };
+        }),
       },
     });
+    updateTeam({ teamName: title, notionLink: notion, githubLink: github });
+    delegateTeamLeader(teamId, selectedMember);
   };
 
   const onCreateEvent = (title, startDate, endDate, description) => {
@@ -227,15 +309,14 @@ const Teamboard = () => {
 
       return;
     }
-
     kickDispatch({
       type: "CREATE_VOTE",
       data: {
         id: kickIdRef.current++,
         userId: memberId,
-        name: teamData.members.find(
+        name: teamData.teamMemberInfo.find(
           (member) => String(member.userId) === String(memberId)
-        ).name,
+        ).userName,
         reason: reason,
         voteCount: [],
         agree: 0,
@@ -243,8 +324,6 @@ const Teamboard = () => {
       },
     });
   };
-
-  console.log(kickData);
 
   const getTargetMember = (targetUserId) => {
     return kickData.find(
@@ -269,7 +348,10 @@ const Teamboard = () => {
       },
     });
 
-    if (Number(targetData.agree + 1) === Number(teamData.members.length - 1)) {
+    if (
+      Number(targetData.agree + 1) ===
+      Number(teamData.teamMemberInfo.length - 1)
+    ) {
       onDeleteVote(targetUserId);
       onDeleteMember(targetUserId);
     }
@@ -294,8 +376,8 @@ const Teamboard = () => {
 
     if (
       Number(targetData.voteCount.length) ===
-        Number(teamData.members.length - 1) &&
-      Number(targetData.agree) < Number(teamData.members.length - 1)
+        Number(teamData.teamMemberInfo.length - 1) &&
+      Number(targetData.agree) < Number(teamData.teamMemberInfo.length - 1)
     ) {
       onDeleteVote(targetUserId);
     }
@@ -322,16 +404,24 @@ const Teamboard = () => {
     feedbackDispatch({
       type: "SUBMIT_FEEDBACK",
       data: {
-        id: targetId,
+        userId: targetId,
         ...value,
       },
     });
+    evaluateMember(targetId, { userId: targetId, ...value });
   };
 
   return (
     <div className={styles.teamboard}>
       <TeamStateContext.Provider
-        value={{ teamData, feedbackData, scheduleData, meetingData, kickData }}
+        value={{
+          teamData,
+          feedbackData,
+          scheduleData,
+          meetingData,
+          kickData,
+          teamId,
+        }}
       >
         <TeamDispatchContext.Provider
           value={{

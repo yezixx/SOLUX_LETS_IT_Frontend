@@ -11,19 +11,25 @@ import { userIdAtom } from "../../../atoms/atoms";
 import { getLogoImage } from "../../../util/getLogoImage";
 
 const ProjInfo = () => {
-  const { teamData } = useContext(TeamStateContext);
+  const { teamData, teamId } = useContext(TeamStateContext);
   const loginUserId = useAtomValue(userIdAtom);
 
-  const TOOLLIST = teamData.collabLink;
+  const notion = teamData.notionLink;
+  const github = teamData.githubLink;
 
   const nav = useNavigate();
 
   const navigateToManage = () => {
-    if (loginUserId !== teamData.leader) {
+    if (
+      loginUserId !==
+      teamData.teamMemberInfo.find(
+        (member) => member.position === "Team_Leader"
+      ).userId
+    ) {
       alert("팀장만 접근가능합니다.");
       return;
     }
-    nav("/teamboard/manage");
+    nav(`/teamboard/manage/?team=${teamId}`);
   };
 
   const navigateToPortfolio = () => {
@@ -33,7 +39,7 @@ const ProjInfo = () => {
   const onClickToolIcon = (url) => {
     window.open(url);
   };
-  console.log(TOOLLIST);
+
   return (
     <div className={styles.projInfo__wrapper}>
       <div className={styles.projInfo__container}>
@@ -46,15 +52,18 @@ const ProjInfo = () => {
           </div>
           <div className={styles.rightContent__buttonContainer}>
             <div className={styles.rightContent__toolButton}>
-              {TOOLLIST.map((tool) => (
-                <ToolIcon
-                  key={tool.id}
-                  alt={tool.tool}
-                  src={getLogoImage(tool.tool)}
-                  type="60x60"
-                  onClick={() => onClickToolIcon(tool.link)}
-                />
-              ))}
+              <ToolIcon
+                alt={"notion"}
+                src={getLogoImage("notion")}
+                type="60x60"
+                onClick={() => onClickToolIcon(notion)}
+              />
+              <ToolIcon
+                alt={"github"}
+                src={getLogoImage("github")}
+                type="60x60"
+                onClick={() => onClickToolIcon(github)}
+              />
             </div>
             <div className={styles.rightContent__rightButtons}>
               <Button

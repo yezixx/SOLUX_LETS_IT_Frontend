@@ -51,4 +51,5 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  overflow: hidden;
 }
