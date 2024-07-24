@@ -4,7 +4,7 @@ import RouteName from "../../Components/RouteName/RouteName";
 import styles from "./Apply.module.css";
 import BriefProfile from "./BriefProfile/BriefProfile";
 import useApplyPost from "./useApplyPost";
-import { applicant } from "../../atoms/atoms";
+import { applicant, userIdAtom } from "../../atoms/atoms";
 import { useParams } from "react-router-dom";
 import { startTransition, useEffect } from "react";
 import { submitApply } from "../../service/applyService";
@@ -17,19 +17,24 @@ const user = {
 };
 const Apply = () => {
   //'신청하기' 버튼 눌렀을 때 postId 할당 될 것
-  const postId = useParams();
+  const { postId } = useParams();
   const setApplicant = useSetAtom(applicant);
   //applyData - onChange를 통해 input으로 받은 값을 모아둔 객체
-  const { applyData, handleSubmit, onChange } = useApplyPost();
+  const { applyData, onChange, warning } = useApplyPost();
+  console.log(applyData);
   //로그인 시 받아둔 유저 아이디값 가져옴
-  const userId = useAtomValue();
-  useEffect(() => {
+  const userId = useAtomValue(userIdAtom);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
     startTransition(() => {
       setApplicant(submitApply(postId, userId, applyData));
       //applicant라는 atom을 변경하는 함수 setApplicant
       //submitApply (axios로 미리 설정함) 를 통해 db에 보냄
     });
-  }, []);
+    warning();
+  };
+
   return (
     <div>
       <RouteName route={["프로젝트 신청"]} />
@@ -54,7 +59,7 @@ const Apply = () => {
           <div className={styles.apply__container}>
             <div className={styles.apply__title}>선호 스택</div>
             <input
-              name="stack"
+              name="preferStack"
               onChange={onChange}
               className={styles.apply__input}
               placeholder="리액트"
@@ -64,7 +69,7 @@ const Apply = () => {
           <div className={styles.apply__container}>
             <div className={styles.apply__title}>희망 분야</div>
             <input
-              name="field"
+              name="desiredField"
               onChange={onChange}
               className={styles.apply__input}
               placeholder="프론트엔드"
@@ -75,7 +80,7 @@ const Apply = () => {
             <div className={styles.apply__title}>전달 메세지</div>
             <textarea
               onChange={onChange}
-              name="message"
+              name="applyContent"
               placeholder="사용할 수 있는 기술 스택, 자기 소개 등"
               className={`${styles.apply__input} ${
                 styles[`apply__input--textarea`]
