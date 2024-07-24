@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ProjectBtn from "../../../Components/Project_Button/ProjectBtn";
 import styles from "./AttendProj.module.css";
 import { useEffect, useState } from "react";
-import { getMyOnGoingProjects } from "../../../service/projectService";
+import { getMyAttendProjects } from "../../../service/projectService";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../atoms/atoms";
 
@@ -17,7 +17,7 @@ const OngoingProj = () => {
   const [ongoingProj, setOngoingProj] = useState([]);
 
   useEffect(() => {
-    getMyOnGoingProjects(userId)
+    getMyAttendProjects(userId)
       .then((res) => {
         //확인 필요
         setOngoingProj(res.data.editablePortfolios);
@@ -37,7 +37,9 @@ const OngoingProj = () => {
           <div key={project.projId} className={styles.ongoingProj__cont}>
             <ProjectBtn
               onClick1={() => naviagateTo("/teamboard")}
-              onClick2={() => naviagateTo("/mypage/portfolio/board")}
+              onClick2={() =>
+                naviagateTo(`/mypage/portfolio/${project.projId}`)
+              }
               button1Text="팀 게시판"
               button2Text="포트폴리오"
               project={project}

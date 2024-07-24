@@ -21,6 +21,7 @@ import MyPortfolio from "./MyPage/MyPortfolio/MyPortfolio";
 import PortfolioWrite from "./MyPage/MyPortfolio/PortfolioWrite/PortfolioWrite";
 import CompletePort from "./MyPage/MyPortfolio/PortfolioWrite/Complete/CompletePort";
 import PortfolioBoard from "./MyPage/MyPortfolio/PortfolioBoard/PortfolioBoard";
+import PortfolioDetail from "./MyPage/MyPortfolio/PortfolioDetail/PortfolioDetail";
 import MainLayout from "../MainLayout";
 import ProjPost_detail from "./ProjPost_detail/ProjPost_detail";
 import ProjectHire from "./ProjectHire/ProjectHire";
@@ -143,8 +144,14 @@ export const RouterInfo = [
             label: "AI 생성 - 완성된 포트폴리오",
           },
           {
-            path: "portfolio/board",
+            path: "portfolio/board/:prjId",
             element: <PortfolioBoard />,
+            label: "포트폴리오 게시판",
+          },
+          {
+            // path: "portfolio/board/detail/:prjId",
+            path: "portfolio/board/detail",
+            element: <PortfolioDetail />,
             label: "포트폴리오 게시판",
           },
         ],
