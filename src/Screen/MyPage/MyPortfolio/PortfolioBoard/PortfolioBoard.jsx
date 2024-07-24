@@ -29,7 +29,8 @@ const PortfolioBoard = () => {
     navigate(link);
   };
   //prjId , userId
-  const { prjId } = useParams();
+  // const { prjId } = useParams();
+  const prjId = 1; //1로 가정
   const userId = useAtomValue(userIdAtom); //1로 가정
   // const user = useAtomValue(userAtom);
   // const userId = user.userId;

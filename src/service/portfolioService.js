@@ -10,7 +10,15 @@ export const getMyPortfolios = async (prjId, userId) => {
     throw error; // 에러를 다시 throw하여 호출자에게 전달합니다.
   }
 };
-
+//포트폴리오 상세 조회
+export const getMyDetailPortfolios = async (prtId) => {
+  try {
+    const response = await apiClient.get(`/portfolios/${prtId}`);
+  } catch (error) {
+    console.lerror("Error fetching project detail list:", error);
+    throw error;
+  }
+};
 // 포트폴리오 작성
 export const postPortfolios = async (prjId) => {
   try {

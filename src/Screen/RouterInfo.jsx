@@ -144,14 +144,14 @@ export const RouterInfo = [
             label: "AI 생성 - 완성된 포트폴리오",
           },
           {
-            path: "portfolio/board/:prjId",
-            // path: "portfolio/board",
+            // path: "portfolio/board/:prjId",
+            path: "portfolio/board",
             element: <PortfolioBoard />,
             label: "포트폴리오 게시판",
           },
           {
-            // path: "portfolio/board/detail/:prjId",
-            path: "portfolio/board/detail",
+            path: "portfolio/board/detail/:prjId",
+            // path: "portfolio/board/detail",
             element: <PortfolioDetail />,
             label: "포트폴리오 게시판",
           },
