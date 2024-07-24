@@ -26,6 +26,8 @@
   width: 60px;
   /*배치*/
   margin: auto;
+  word-wrap: break-word;
+  line-height: 1;
 }
 
 .memberItem__profilePic {
