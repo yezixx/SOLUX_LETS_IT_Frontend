@@ -1,22 +1,18 @@
-import Button from "../../../Components/Button/Button";
-import MemberItem from "../../../Components/MemberItem/MemberItem";
-import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
-import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
+import Button from "../../Components/Button/Button";
+import MemberItem from "../../Components/MemberItem/MemberItem";
+import CollabLinkForm from "../../Components/CollabLinkForm/CollabLinkForm";
+import ProjNameForm from "../../Components/ProjNameForm/ProjNameForm";
 import styles from "./CreateBoard.module.css";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { createTeam } from "../../../service/teamService";
+import { createTeam } from "../../service/teamService";
+import { approveApplicants } from "../../service/applyService";
 
 const mock_members = [
   {
-    userId: "letsit_backend.model.Member@72f9fde6",
-    userName: "Alice",
-    position: "Team_Leader",
-  },
-  {
-    userId: "letsit_backend.model.Member@30b4fb38",
-    userName: "Bob",
-    position: "Team_Member",
+    applyId: 4,
+    nickname: "grace_nickzzzzzzzzzzzzzz",
+    profileImage: "grace.jpg",
   },
 ];
 const mock_collabLinks = [
@@ -34,9 +30,9 @@ const mock_collabLinks = [
 
 const CreateBoard = () => {
   const nav = useNavigate();
-  const members = mock_members;
   const [title, setTitle] = useState("");
   const [links, setLinks] = useState(mock_collabLinks);
+  const [applicantsList, setApplicantsList] = useState([]);
 
   const [params] = useSearchParams();
   const postId = params.get("post");
@@ -44,6 +40,17 @@ const CreateBoard = () => {
   const titleRef = useRef();
   const linkRef1 = useRef();
   const linkRef2 = useRef();
+
+  useEffect(() => {
+    approveApplicants(postId)
+      .then((data) => {
+        setApplicantsList(data);
+      })
+      .catch((error) => {
+        console.log("error (in CreateBoard):", error);
+        setApplicantsList(mock_members);
+      });
+  }, []);
 
   const onFocusElement = (ref) => {
     if (ref.current) {
@@ -110,8 +117,12 @@ const CreateBoard = () => {
           {/*팀원 리스트 */}
           <div className={styles.createBoard__memberItem}>
             <div className={styles.createBoard__innerLabel}>팀원</div>
-            {members.map((member, index) => (
-              <MemberItem key={index} memberName={member.userName} />
+            {applicantsList.map((member, index) => (
+              <MemberItem
+                key={index}
+                memberName={member.nickname}
+                profilePic={member.profileImage}
+              />
             ))}
           </div>
           {/*프로젝트명 */}
