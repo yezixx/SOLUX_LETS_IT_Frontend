@@ -33,11 +33,8 @@ const useApplyPost = () => {
       [name]: value,
     }));
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    warning();
-  };
-  return { navigateTo, handleSubmit, applyData, onChange };
+
+  return { navigateTo, applyData, onChange, warning };
 };
 
 export default useApplyPost;
