@@ -145,6 +145,7 @@ export const RouterInfo = [
           },
           {
             path: "portfolio/board/:prjId",
+            // path: "portfolio/board",
             element: <PortfolioBoard />,
             label: "포트폴리오 게시판",
           },
