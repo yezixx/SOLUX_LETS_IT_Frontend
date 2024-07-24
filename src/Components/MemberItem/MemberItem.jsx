@@ -1,7 +1,7 @@
-import { getLogoImage } from "../../util/getLogoImage";
 import styles from "./MemberItem.module.css";
+import defaultProfilePic from "../../assets/user.svg";
 
-const MemberItem = ({ memberName, memberId, type, onClick }) => {
+const MemberItem = ({ memberName, profilePic, type, onClick }) => {
   return (
     <div className={styles.memberItem}>
       <div className={styles.memberItem__container}>
@@ -14,7 +14,7 @@ const MemberItem = ({ memberName, memberId, type, onClick }) => {
         >
           <img
             className={styles.memberItem__profilePic}
-            src={getLogoImage("github")}
+            src={profilePic ? profilePic : defaultProfilePic}
           />
           <div className={styles.memberItem__name}>{memberName}</div>
         </button>
