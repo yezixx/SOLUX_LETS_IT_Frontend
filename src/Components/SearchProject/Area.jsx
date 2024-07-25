@@ -1,14 +1,11 @@
-// Area.jsx
-import React, { useState } from "react";
-import styles from "./Area.module.css";
-import { KoreaArea } from "../../Screen/KoreaArea"; // 새로 만든 파일에서 변수 가져오기
+// Area.js
+import React from 'react';
+import styles from './area.module.css';
+import { KoreaArea } from '../../Screen/KoreaArea';
+import useArea from '../../Hooks/useArea.jsx';
 
 const Area = () => {
-  const [selectedArea, setSelectedArea] = useState(null);
-
-  const handleAreaClick = (area) => {
-    setSelectedArea(area);
-  };
+  const { selectedArea, selectedSubAreas, handleAreaClick, handleSubAreaClick } = useArea();
 
   return (
     <div className={styles.container}>
@@ -24,19 +21,23 @@ const Area = () => {
           </button>
         ))}
       </div>
-      {/* 지역 부수적인 선택 */}
       {selectedArea && (
         <div className={styles.subAreaContainer}>
           <h2>{selectedArea.name}</h2>
           <div>
             {selectedArea.subArea.map((sub, index) => (
-              <button key={index} className={styles.sub}>
+              <button
+                key={index}
+                className={`${styles.sub} ${selectedSubAreas.includes(sub) ? styles.selected : ''}`}
+                onClick={() => handleSubAreaClick(sub)}
+              >
                 {sub}
               </button>
             ))}
           </div>
         </div>
       )}
+      
     </div>
   );
 };
