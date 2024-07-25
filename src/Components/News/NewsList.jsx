@@ -13,8 +13,8 @@ function NewsList({ news}) {
               alt="Blue" 
               className={styles.newsImage} 
             />
-            <div className={styles.newsTitle}><text>{news.title}</text></div>
-            <div><text className={styles.newscontent}>{news.content}</text></div>
+            <div className={styles.newsTitle}>{news.title}</div>
+            <div className={styles.newscontent}>{news.content}</div>
             
           </div>
         ))}

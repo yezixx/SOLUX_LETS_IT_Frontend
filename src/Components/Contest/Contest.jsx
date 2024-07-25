@@ -22,7 +22,7 @@ function Contest() {
   return (
     <div className={styles.contest}>
       <div className={styles.text}>최신 공모전 🏆</div>
-      <div>
+      <div className={styles.content}>
         <ContestList contests={contests} />
       </div>
     </div>
