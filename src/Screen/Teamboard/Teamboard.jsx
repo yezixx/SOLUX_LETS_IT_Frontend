@@ -227,7 +227,7 @@ const Teamboard = () => {
       setLoading(false);
       teamDispatch({
         type: "GET",
-        data: mock_teamData[0],
+        data: mock_teamData[teamId - 1],
       });
     }
   };
