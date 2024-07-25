@@ -13,8 +13,6 @@ export const postProjectAtom = atom({
   endDate: "",
   preference: "",
   projectInfo: "",
-  regionId: "",
-  subRegionId: "",
   projectPeriod: "",
   ageGroup: "",
   stack: "",

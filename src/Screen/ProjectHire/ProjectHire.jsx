@@ -11,7 +11,7 @@ import useProjectPost from "./useProjectPost";
 
 const ProjectHire = () => {
   const projectPost = useAtomValue(postProjectAtom);
-  const { handleSubmit } = useProjectPost();
+  const { handleSubmit, onChange } = useProjectPost();
   console.log(projectPost);
   return (
     <form onSubmit={handleSubmit} className={styles.projectHire}>
@@ -19,7 +19,8 @@ const ProjectHire = () => {
       {/* 구인글 제목란 */}
       <input
         className={styles.projectHire__projectTitle}
-        name="title"
+        name="prjTitle"
+        onChange={onChange}
         placeholder="구인글 제목을 입력해 주세요"
       />
       <div className={styles.projectHire__container}>
