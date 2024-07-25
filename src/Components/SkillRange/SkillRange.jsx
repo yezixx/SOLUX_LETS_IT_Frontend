@@ -45,6 +45,7 @@ const SkillRange = forwardRef(
             value={currentValue}
             min="0"
             max="100"
+            step="5"
             onChange={onChangeRange}
           />
         </div>
