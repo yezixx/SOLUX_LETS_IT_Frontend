@@ -27,7 +27,11 @@ export const useSearch = (searchData) => {
   /*GrayBox 만들 배열, 백엔드로 전달할 배열 */
   const [tech, setTech] = useState([]);
   const handleCreateBox = (item) => {
-    !tech.includes(item) && setTech((prev) => [...prev, item]);
+    if (tech.length < 4) {
+      !tech.includes(item) && setTech((prev) => [...prev, item]);
+    } else {
+      alert("4개까지만 추가할 수 있습니다");
+    }
   };
   /*graybox 제거 */
   const deleteGrayBox = (removeItem) => {
