@@ -1,6 +1,6 @@
 // Area.jsx
 import React, { useState } from "react";
-import styles from "./Area.module.css";
+import styles from "./area.module.css";
 import { KoreaArea } from "../../Screen/KoreaArea"; // 새로 만든 파일에서 변수 가져오기
 
 const Area = () => {
