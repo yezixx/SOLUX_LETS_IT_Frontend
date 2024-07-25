@@ -190,6 +190,7 @@ const ProfileForm = ({ init }) => {
   };
 
   const onChangeName = (e) => {
+    if (e.target.value.length > 10) return;
     setName(e.target.value);
   };
 
