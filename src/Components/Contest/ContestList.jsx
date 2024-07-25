@@ -13,22 +13,16 @@ function ContestList({ contests }) {
               className={styles.newsImage}
             />
             <div className={styles.contestTitle}>
-              <text>{contest.title}</text>
+              {contest.title}
             </div>
-            <div>
-              <text className={styles.contestPeriod}>
+            <div className={styles.contestPeriod}>
                 신청 기간 | {contest.period}
-              </text>
             </div>
-            <div>
-              <text className={styles.contestLocation}>
+            <div className={styles.contestLocation}>
                 지역 | {contest.location}
-              </text>
             </div>
-            <div>
-              <text className={styles.contestPrice}>
-                참가 비용 | {contest.price}
-              </text>
+            <div className={styles.contestPrice}>
+                참가 비용 | {contest.price}           
             </div>
           </div>
         ))}
