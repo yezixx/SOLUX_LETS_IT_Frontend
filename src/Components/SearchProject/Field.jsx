@@ -1,7 +1,7 @@
 import styles from "./Field.module.css";
 import SearchIcon from "../../Image/Icons/SearchIcon";
 import Button from "../Button/Button";
-import Stack from "./Stack";
+import Stack from "./GrayBox";
 
 const f = ["웹", "앱", "인공지능", "데이터 분석", "클라우드"];
 const s = ["React", "Javascript", "Java", "Python", "Spring"];
