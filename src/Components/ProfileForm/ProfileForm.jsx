@@ -169,20 +169,20 @@ const ProfileForm = ({ init }) => {
         introduce: introduce,
         skills: [
           {
-            name: "React",
-            level: 50,
+            name: skills[0].skillName,
+            level: skills[0].fluency,
           },
           {
-            name: "JavaScript",
-            level: 80,
+            name: skills[1].skillName,
+            level: skills[1].fluency,
           },
           {
-            name: "SpringBoot",
-            level: 10,
+            name: skills[2].skillName,
+            level: skills[2].fluency,
           },
           {
-            name: "Java",
-            level: 50,
+            name: skills[3].skillName,
+            level: skills[3].fluency,
           },
         ],
       });
