@@ -70,7 +70,7 @@ const getToolList = (type) => {
 };
 
 const CollabLink = forwardRef(
-  ({ id, value, type, init, onChange, onClick, selectable }, ref) => {
+  ({ id, value, type, init, onChange, onClick }, ref) => {
     const [visible, setVisible] = useState(false);
 
     const inputRef = useRef();
@@ -103,7 +103,7 @@ const CollabLink = forwardRef(
 
     return (
       <div className={styles.collabLink}>
-        {visible === true && selectable ? (
+        {visible === true && type ? (
           <div className={styles.collabLink__selectIcon}>
             <SelectIcon list={toolList} onChange={onChangeIcon} />
           </div>

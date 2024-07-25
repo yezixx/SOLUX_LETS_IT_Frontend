@@ -21,7 +21,7 @@ const CollabLinkForm = forwardRef(({ type, links, onChange, onClick }, ref) => {
             init={link.tool}
             onChange={onChange}
             onClick={onClick}
-            selectable={type ? true : false}
+            type={type}
             ref={ref[index]}
           />
         ))}
