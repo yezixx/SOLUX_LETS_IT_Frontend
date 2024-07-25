@@ -1,6 +1,10 @@
 import styles from "./Profile.module.css";
 import ProfileLink from "./Profile_Info/ProfileLink/ProfileLink.jsx";
-import TierIcon from "../../assets/Tier/tier_B.svg?react";
+import Tier_A from "../../assets/Tier/tier_A.svg?react";
+import Tier_B from "../../assets/Tier/tier_B.svg?react";
+import Tier_C from "../../assets/Tier/tier_C.svg?react";
+import Tier_F from "../../assets/Tier/tier_F.svg?react";
+import Tier_S from "../../assets/Tier/tier_S.svg?react";
 import ProfilePhoto from "./Profile_Info/Profile_Photo/ProfilePhoto.jsx";
 import PersonalDetail from "./Profile_Info/Profile_PersonalDetail/PersonalDetail.jsx";
 import ProfileTier from "./Profile_Tier/ProfileTier.jsx";
@@ -8,6 +12,24 @@ import ProfileIntroduce from "./Profile_Introduce/ProfileIntroduce.jsx";
 import ProfileSkills from "./Profile_Skills/ProfileSkills.jsx";
 
 const Profile = ({ user, type, tooltipShow = false }) => {
+  const tier = user.manner_tier; //B
+  const tierIcon = () => {
+    switch (tier) {
+      case "A":
+        return <Tier_A width="50px" height="50px" />;
+      case "B":
+        return <Tier_B width="50px" height="50px" />;
+      case "C":
+        return <Tier_C width="50px" height="50px" />;
+      case "F":
+        return <Tier_F width="50px" height="50px" />;
+      case "S":
+        return <Tier_S width="50px" height="50px" />;
+      default:
+        return null; // 또는 기본값을 설정할 수 있습니다.
+    }
+  };
+
   return (
     <div
       className={`${styles.myProfile__wrap} ${
@@ -25,7 +47,7 @@ const Profile = ({ user, type, tooltipShow = false }) => {
           {/*프로필 사진, 이름, 이메일/깃허브 등 링크 */}
 
           {/*프로필 사진*/}
-          <ProfilePhoto />
+          <ProfilePhoto src={user.profile_url} />
 
           {/*이름, 나이 */}
           <PersonalDetail name={user.name} age={user.age} />
@@ -35,21 +57,19 @@ const Profile = ({ user, type, tooltipShow = false }) => {
 
           {/*sns링크*/}
           <div className={styles.myProfile__info__sns}></div>
-          <ProfileLink url={user.profile_url[0]} />
-          <ProfileLink url={user.profile_url[1]} />
-          <ProfileLink url={user.profile_url[2]} />
+          {profile_url.map((url) => {
+            <ProfileLink url={url} />;
+          })}
           {/*객체를 순회하며 props로 값을 전달하도록 수정 예정 2024.06.20 */}
         </div>
 
         {/*매너티어 아이콘 */}
-        <div className={styles.myProfile__tierIcon}>
-          <TierIcon width="50px" height="50px" />
-        </div>
+        <div className={styles.myProfile__tierIcon}>{tierIcon()}</div>
 
         <div className={styles.myProfile__right}>
           {/*매너티어, 소개글, skills */}
           <ProfileTier tierScore={user.tierScore} tooltipShow={tooltipShow} />
-          <ProfileIntroduce introduce={user.introduce} />
+          <ProfileIntroduce introduce={user.self_intro} />
           <ProfileSkills skills={user.skills} />
         </div>
       </div>
