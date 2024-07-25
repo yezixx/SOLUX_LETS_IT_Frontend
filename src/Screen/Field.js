@@ -1,4 +1,4 @@
-const Field = [
+export const Field = [
   "웹 프론트",
   "앱 프론트",
   "웹 백",

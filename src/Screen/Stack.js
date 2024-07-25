@@ -17,7 +17,7 @@ export const Stack = [
   "Swift",
   "Kotlin",
   "Node.js",
-  "Djanggo",
+  "Django",
   "Spring Boot",
   "MySQL",
   "PostgreSQL",
