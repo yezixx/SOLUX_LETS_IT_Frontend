@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { KoreaArea } from "../../KoreaArea";
-import useProjectPost from "../useProjectPost";
 import { useSetAtom } from "jotai";
 import { postProjectAtom } from "../../../atoms/atoms";
 

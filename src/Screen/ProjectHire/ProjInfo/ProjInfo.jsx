@@ -55,7 +55,7 @@ const ProjInfo = () => {
               <button
                 value={subArea}
                 name="subRegionId"
-                onClick={onClick}
+                onClick={() => onClick(e)}
                 key={idx}
               >
                 {subArea}

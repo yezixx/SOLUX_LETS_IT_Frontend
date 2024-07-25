@@ -7,12 +7,14 @@ import DetailContent from "./DetailContent/DetailContent";
 import Button from "../../Components/Button/Button";
 import { useAtomValue } from "jotai";
 import { postProjectAtom } from "../../atoms/atoms";
+import useProjectPost from "./useProjectPost";
 
 const ProjectHire = () => {
   const projectPost = useAtomValue(postProjectAtom);
+  const { handleSubmit } = useProjectPost();
   console.log(projectPost);
   return (
-    <form className={styles.projectHire}>
+    <form onSubmit={handleSubmit} className={styles.projectHire}>
       구인글 작성
       {/* 구인글 제목란 */}
       <input
@@ -35,7 +37,7 @@ const ProjectHire = () => {
         </div>
       </div>
       <div className={styles.buttonWrap}>
-        <Button text="업로드" />
+        <Button type="submit" text="업로드" />
       </div>
     </form>
   );
