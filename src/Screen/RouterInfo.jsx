@@ -128,7 +128,7 @@ export const RouterInfo = [
           {
             path: "profile",
             element: <MyProfile />,
-            label: "포트폴리오 관리",
+            label: "프로필 관리",
           },
           {
             path: "portfolio",
