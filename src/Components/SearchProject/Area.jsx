@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./area.module.css";
+import styles from "./Area.module.css";
 
 const Koreastate = [
   {
