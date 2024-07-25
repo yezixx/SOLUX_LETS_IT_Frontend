@@ -30,7 +30,7 @@ export const useSearch = (searchData) => {
     if (tech.length < 4) {
       !tech.includes(item) && setTech((prev) => [...prev, item]);
     } else {
-      alert("4개까지만 추가할 수 있습니다");
+      alert("4개까지만 가능합니다");
     }
   };
   /*graybox 제거 */
