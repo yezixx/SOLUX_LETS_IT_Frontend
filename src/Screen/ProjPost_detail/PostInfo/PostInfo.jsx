@@ -10,7 +10,7 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
     <div className={styles.PostInfo}>
       <div className={styles.PostInfo__container}>
         <div className={styles.PostInfo__header}>
-          <div className={styles.PostInfo__title}>{post.postInfo.title}</div>
+          <div className={styles.PostInfo__title}>{post.title}</div>
           <div className={styles.PostInfo__scrap} onClick={onClickScrap}>
             <BookmarkIcon isBookmark={isBookmark} />
           </div>
@@ -20,22 +20,18 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
             <div>
               <CalendarIcon />
               <div className={styles.PostInfo__subLabel}>모집마감</div>
-              {`${post.postInfo.hireDate.endDate}`}
+              {`${post.recruitEndDate}`}
             </div>
             <div>
               <UserIcon />
               <div className={styles.PostInfo__subLabel}>모집인원</div>
-              {post.postInfo.hireTO === 0
-                ? "미정"
-                : post.postInfo.hireTO + "명"}
+              {`${post.recruitmentCount}명`}
             </div>
             <div>
               <PlusCircleIcon />{" "}
               <div className={styles.PostInfo__subLabel}>우대사항</div>
               <div className={styles.PostInfo__preferred}>
-                {post.postInfo.preferred.map((text, index) => (
-                  <div key={index}>{text}</div>
-                ))}
+                {post.preference}
               </div>
             </div>
           </div>
@@ -44,44 +40,50 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
             <div className={styles.PostInfo__projInfoDetail}>
               <div>
                 <div className={styles.PostInfo__subLabel}>예상 기간</div>
-                {`${post.projInfo.expectedPeriod.startDate} ~ ${post.projInfo.expectedPeriod.endDate}`}
+                {post.projectInfo.projectPeriod}
               </div>
               <div>
                 <div className={styles.PostInfo__subLabel}>진행 방식</div>
-                {post.projInfo.meetingType}
+                {post.projectInfo.method}
               </div>
               <div>
                 <div className={styles.PostInfo__subLabel}>지역</div>
-                {post.projInfo.area}
+                {post.projectInfo.regionId}
               </div>
               <div>
                 <div className={styles.PostInfo__subLabel}>난이도</div>
-                {post.projInfo.level}
+                {"중급"}
+              </div>
+              <div>
+                <div className={styles.PostInfo__subLabel}>연령대</div>
+                {post.projectInfo.ageGroup}
               </div>
             </div>
           </div>
           <div className={styles.PostInfo__skillInfo}>
-            <div className={styles.PostInfo__label}>
-              필요 스택
-              {post.isNegotiable && (
-                <span>
-                  <CheckIcon
-                    color="var(--main-color2)"
-                    width="14px"
-                    height="14px"
-                  />
-                  협의 가능
-                </span>
-              )}
+            <div>
+              <div className={styles.PostInfo__label}>
+                필요 스택
+                {post.isNegotiable && (
+                  <span>
+                    <CheckIcon
+                      color="var(--main-color2)"
+                      width="14px"
+                      height="14px"
+                    />
+                    협의 가능
+                  </span>
+                )}
+              </div>
+              <div className={styles.PostInfo__skill}>
+                {post.requiredSkills.map((skill, index) => (
+                  <div key={index}>{skill}</div>
+                ))}
+              </div>
             </div>
-            <div className={styles.PostInfo__skill}>
-              {post.needSkill.map((skill, index) => (
-                <div key={index}>{skill}</div>
-              ))}
-            </div>
-            <div
-              className={styles.PostInfo__meta}
-            >{`${post.postInfo.postedDate} . 조회 ${post.postInfo.hits} . 스크랩${post.postInfo.scrap}`}</div>
+            <div className={styles.PostInfo__meta}>{`${"2024-07-04"} . 조회 ${
+              post.viewCount
+            } . 스크랩${post.scrapCount}`}</div>
           </div>
         </div>
       </div>
