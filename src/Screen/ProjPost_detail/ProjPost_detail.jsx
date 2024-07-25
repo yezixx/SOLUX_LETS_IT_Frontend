@@ -5,6 +5,7 @@ import Button from "../../Components/Button/Button";
 import BookmarkIcon from "../../Image/Icons/BookmarkIcon";
 import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
+import Loading from "../../Components/Loading/Loading";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../atoms/atoms";
 import { useEffect, useRef, useState } from "react";
@@ -12,6 +13,7 @@ import { getComments, getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";
 
 const mock_post = {
+  /*
   // 구인글 정보
   postInfo: {
     title: "웹 사이드 프로젝트 팀원 모집",
@@ -63,7 +65,44 @@ const mock_post = {
     [ 기술 스택 ]
     - 프론트 : Nuxt.js로 되어 있으나 Next.js로 다시 구성하셔도 괜찮습니다.
     - 백엔드 : Java, Spring
+    `,*/
+  recruitmentCount: 5,
+  recruitEndDate: "2024-07-31",
+  preference: "관련 경력 3년 이상, Git 사용 경험",
+  projectInfo: {
+    method: "온라인 협업",
+    regionId: "서울",
+    projectPeriod: "3개월",
+    ageGroup: "20대 후반 ~ 30대 초반",
+  },
+  requiredSkills: ["Java", "React"],
+  content: `    [프로젝트 주제]
+    안녕하세요. 저희는 현재 한국에 거주하거나 방문한 또는 방문할 외국인을 위해 다양한 정보를 제공할 수 있는 커뮤니티 사이트를 만들고 있습니다. 
+    현재 150명 정도 있는 디스코드 채널에서 외국인들에게 필요한 정보들을 수집 및 정리하고 있으며 이러한 정보들을 외국인 친화적인 방법으로 제공하려고 합니다.
+    현재 MVP기능은 단순 게시판 기능으로 생각하고 있으며 운영하면서 다양한 기능들을 추가해보려고 합니다. 
+    현재 생각해 둔 기능을 다음과 같습니다.
+    맛집 및 관광지 지도
+    언어교환 첨삭 기능
+    물품 공구 기능
+    
+    [ 팀 구성 ]
+    현재는 주니어 백엔드 개발자 2명으로 이루어져 있으며, 프론트 개발까지 같이 하다보니 힘이 들어 프론트엔드 개발자님을 모시고 있습니다.
+    
+    [ 저희는 이렇게 협업하고 있어요 ]
+    슬랙을 통해 업무 내용을 주고 받고 있습니다.
+    Jira를 통해 일주일 단위로 작업을 공유하고 스프린트 하고 있습니다.
+    Figma를 통해 간단한 와이어프레임을 그리고 있습니다. 
+    최대한 이상적인 협업을 하기위해 노력하고 있으나 적은 경험으로 부족할 수 있습니다만, 부정적인 피드백에도 항상 열려있습니다 :)
+    
+    [ 기술 스택 ]
+    - 프론트 : Nuxt.js로 되어 있으나 Next.js로 다시 구성하셔도 괜찮습니다.
+    - 백엔드 : Java, Spring
     `,
+  scrapCount: 20,
+  viewCount: 50,
+  writer: "yuming",
+  title: "웹 사이드 프로젝트 팀원 모집",
+  isNegotiable: true,
 };
 
 const mock_comments = [
@@ -78,6 +117,7 @@ const mock_comments = [
 
 const ProjPost_detail = () => {
   const loginUserId = useAtomValue(userIdAtom);
+  const [loading, setLoading] = useState(true);
   const [post, setPost] = useState(mock_post);
   const postId = useParams().postId;
 
@@ -90,24 +130,29 @@ const ProjPost_detail = () => {
   const nav = useNavigate();
 
   const isWriter = () => {
-    return String(post.postInfo.writer) === String(loginUserId);
+    return String(post.writer) === String(loginUserId);
   };
 
   useEffect(() => {
-    getPosts(postId)
+    /*getPosts(postId)
       .then((data) => {
         setPost(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("post detail error(ProjPost_Datil.jsx):", error);
+        setLoading(false);
       });
     getComments(postId)
       .then((data) => {
         setComments(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("comment list error(ProjPost_Datil.jsx): ", error);
-      });
+        setLoading(false);
+      });*/
+    setLoading(false);
   }, []);
 
   const onCraeteComment = (description) => {
@@ -159,6 +204,7 @@ const ProjPost_detail = () => {
 
   return (
     <div className={styles.ProjPost_detail}>
+      {loading && <Loading />}
       <main>
         <div className={styles.ProjPost_detail__route}>
           <RouteName route={["프로젝트 찾기", "구인글 상세 보기"]} />
@@ -174,7 +220,7 @@ const ProjPost_detail = () => {
           <div className={styles.ProjPost_detail__content}>
             <div className={styles.ProjPost_detail__label}>상세 내용</div>
             <div className={styles.ProjPost_detail__description}>
-              {post.description}
+              {post.content}
             </div>
           </div>
         </div>
@@ -190,7 +236,7 @@ const ProjPost_detail = () => {
                 <CommentItem
                   key={index}
                   {...comment}
-                  postWriter={post.postInfo.writer}
+                  postWriter={post.writer}
                   inputRef={commentInputRef}
                   onDelete={onDeleteComment}
                   onUpdate={onUpdateComment}
