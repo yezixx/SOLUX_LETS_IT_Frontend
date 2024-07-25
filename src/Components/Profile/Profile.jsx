@@ -35,9 +35,9 @@ const Profile = ({ user, type, tooltipShow = false }) => {
 
           {/*sns링크*/}
           <div className={styles.myProfile__info__sns}></div>
-          <ProfileLink />
-          <ProfileLink />
-          <ProfileLink />
+          <ProfileLink url={user.profile_url[0]} />
+          <ProfileLink url={user.profile_url[1]} />
+          <ProfileLink url={user.profile_url[2]} />
           {/*객체를 순회하며 props로 값을 전달하도록 수정 예정 2024.06.20 */}
         </div>
 

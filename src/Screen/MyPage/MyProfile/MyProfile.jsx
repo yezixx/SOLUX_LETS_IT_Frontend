@@ -1,6 +1,10 @@
 import styles from "./MyProfile.module.css";
 import Button from "../../../Components/Button/Button.jsx";
 import Profile from "../../../Components/Profile/Profile.jsx";
+import { useEffect, useState } from "react";
+import { getProfile } from "../../../service/profileService.js";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../../atoms/atoms.js";
 
 //mock user data
 const user = {
@@ -24,10 +28,20 @@ const user = {
 };
 
 const MyProfile = () => {
+  const [profileData, setProfileData] = useState();
+  const userId = useAtomValue(userIdAtom);
+  useEffect(() => {
+    getProfile(userId)
+      .then((res) => {
+        setProfileData(res.data);
+        console.log(res.data);
+      })
+      .catch((error) => console.log(error));
+  }, [setProfileData]);
   return (
     <div className={styles.myProfile__contWrap}>
       {/*프로필 */}
-      <Profile user={user} tooltipShow={true} />
+      <Profile user={profileData} tooltipShow={true} />
       {/*수정 버튼 */}
       <Button text="수정" />
     </div>
