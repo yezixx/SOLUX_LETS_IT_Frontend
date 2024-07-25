@@ -38,3 +38,12 @@
   gap: 30px;
   font-size: 16px;
 }
+.projectHire__subRegion {
+  width: 100px;
+  &:hover {
+    color: var(--main-color2);
+  }
+  &:focus {
+    color: var(--main-color2);
+  }
+}

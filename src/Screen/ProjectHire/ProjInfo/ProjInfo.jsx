@@ -53,9 +53,11 @@ const ProjInfo = () => {
           {selectedAreaData &&
             selectedAreaData.subArea.map((subArea, idx) => (
               <button
+                className={styles.projectHire__subRegion}
+                type="button"
                 value={subArea}
                 name="subRegionId"
-                onClick={() => onClick(e)}
+                onClick={onClick}
                 key={idx}
               >
                 {subArea}
