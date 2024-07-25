@@ -10,12 +10,15 @@ import { userIdAtom } from "../../../atoms/atoms";
 
 const getFormattedDate = (date) => {
   const dateObj = new Date(date);
-  return `${dateObj.getFullYear()}-${
-    dateObj.getMonth() + 1
-  }-${dateObj.getDate()}, ${dateObj.getHours()}:${dateObj
-    .getMinutes()
+  return `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1)
     .toString()
-    .padStart(2, "0")}`;
+    .padStart(2, "0")}-${dateObj
+    .getDate()
+    .toString()
+    .padStart(2, "0")}, ${dateObj
+    .getHours()
+    .toString()
+    .padStart(2, "0")}:${dateObj.getMinutes().toString().padStart(2, "0")}`;
 };
 
 const CommentItem = ({
