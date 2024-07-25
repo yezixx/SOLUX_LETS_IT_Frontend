@@ -46,6 +46,7 @@ const ProfileForm = ({ init }) => {
   );
   const [name, setName] = useState(init ? init.name : "");
   const [bio, setBio] = useState(init ? init.bio : "");
+  const [age, setAge] = useState(init ? init.age : "20대 초반");
   const [introduce, setIntroduce] = useState(init ? init.introduce : "");
   const [links, setLinks] = useState(
     init
@@ -147,7 +148,44 @@ const ProfileForm = ({ init }) => {
     }
 
     if (confirm("프로필 작성을 완료하시겠습니까?")) {
-      nav("/");
+      //nav("/");
+      console.log({
+        manner_tier: "B",
+        manner_grade: 60,
+        name: name,
+        bio: bio,
+        age: age,
+        profile_url: [
+          {
+            type: links[0].type,
+            link: links[0].link,
+          },
+          {
+            type: links[1].type,
+            link: links[1].link,
+          },
+        ],
+        profile_picture: profilePic,
+        introduce: introduce,
+        skills: [
+          {
+            name: "React",
+            level: 50,
+          },
+          {
+            name: "JavaScript",
+            level: 80,
+          },
+          {
+            name: "SpringBoot",
+            level: 10,
+          },
+          {
+            name: "Java",
+            level: 50,
+          },
+        ],
+      });
     }
   };
 
