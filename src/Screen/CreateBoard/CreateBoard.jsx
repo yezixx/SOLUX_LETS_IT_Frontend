@@ -5,13 +5,14 @@ import ProjNameForm from "../../Components/ProjNameForm/ProjNameForm";
 import styles from "./CreateBoard.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { createTeam } from "../../service/teamService";
+// import { createTeam } from "../../service/teamService";
 import { approveApplicants } from "../../service/applyService";
+import Loading from "../../Components/Loading/Loading";
 
 const mock_members = [
   {
     applyId: 4,
-    nickname: "grace_nickzzzzzzzzzzzzzz",
+    nickname: "grace_nick",
     profileImage: "grace.jpg",
   },
 ];
@@ -30,6 +31,7 @@ const mock_collabLinks = [
 
 const CreateBoard = () => {
   const nav = useNavigate();
+  const [loading, setLoading] = useState(true);
   const [title, setTitle] = useState("");
   const [links, setLinks] = useState(mock_collabLinks);
   const [applicantsList, setApplicantsList] = useState([]);
@@ -45,9 +47,11 @@ const CreateBoard = () => {
     approveApplicants(postId)
       .then((data) => {
         setApplicantsList(data);
+        setLoading(false);
       })
       .catch((error) => {
         console.log("error (in CreateBoard):", error);
+        setLoading(false);
         setApplicantsList(mock_members);
       });
   }, []);
@@ -58,7 +62,19 @@ const CreateBoard = () => {
     }
   };
 
-  const onClickCreate = () => {
+  /*const createTeam = async (postId, newTeamData) => {
+    try {
+      const response = await createTeam(postId, newTeamData);
+
+      const result = await response.json();
+      return result.teamID; // 서버로부터 받은 teamID 반환
+    } catch (error) {
+      console.error("Error creating team:", error);
+      return null; // 오류 발생 시 null 반환
+    }
+  };*/
+
+  const onClickCreate = /*async*/ () => {
     if (title === "") {
       onFocusElement(titleRef);
       return;
@@ -78,8 +94,19 @@ const CreateBoard = () => {
     };
     console.log(newTeamData);
     if (confirm("팀게시판을 생성하시겠습니까?")) {
-      nav(`/teamboard/?team=${newTeamData.teamId}`);
-      createTeam(postId, newTeamData);
+      /*const teamID = await createTeam(postId, newTeamData);
+
+      if (teamID !== null) {
+        nav(`/teamboard/?team=${teamID}`);
+      } else {
+        alert("팀 생성에 실패했습니다. 다시 시도해주세요.");
+      }*/
+      // DB로부터 할당받을 teamID 받아온 후 팀게시판으로 이동해야됨
+      // 아직 해당 부분이 백엔드에 안되어있는 것 같아 참여중인 프로젝트 목록으로 이동
+      alert(
+        "팀게시판이 생성되었습니다.\n생성된 팀게시판은 내 프로젝트 > 참여 프로젝트에서 확인가능합니다."
+      );
+      nav(`/myproj/attendproj`);
     }
   };
 
@@ -108,6 +135,7 @@ const CreateBoard = () => {
 
   return (
     <div className={styles.createBoard}>
+      {loading && <Loading />}
       {/*팀게시판 생성*/}
       <div className={styles.createBoard__wrap}>
         {/*제목 */}
