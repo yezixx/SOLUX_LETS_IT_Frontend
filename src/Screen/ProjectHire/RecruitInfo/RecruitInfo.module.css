@@ -1,0 +1,27 @@
+/*부제목*/
+.projectHire__subTitle {
+  font-family: "pretendardB";
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+/*모집인원+모집마감*/
+.projectHire__countDue {
+  display: flex;
+  gap: 50px;
+  margin-bottom: 20px;
+}
+/*label + input*/
+.projectHire__detail {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+/*input style 1 - 제일 작은 사이즈*/
+.projectHire__inputStyle1 {
+  width: 160px;
+}
+/*input style 2 - 긴 사이즈*/
+.projectHire__inputStyle2 {
+  width: 70%;
+  border: 1px solid var(--line-color);
+}

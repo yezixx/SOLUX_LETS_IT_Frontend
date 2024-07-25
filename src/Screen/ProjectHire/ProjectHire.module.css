@@ -1,18 +1,57 @@
-.projectHire input {
-  padding: 0 10px;
+.projectHire input,
+.projectHire select {
+  min-width: 150px;
+  padding: 10px 10px;
+  font-size: 16px;
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    font-size: 16px;
+  }
+  &:focus::placeholder {
+    opacity: 0;
+  }
 }
 .projectHire {
   width: 1320px;
-  height: 40px;
   border-bottom: 1px solid var(--line-color);
-  margin-top: 100px;
+  margin-top: 80px;
   font-size: 28px;
   font-family: "pretendardB";
   padding: 20px 0;
   display: flex;
-  gap: 40px;
+  row-gap: 40px;
   flex-direction: column;
 }
 .projectHire__projectTitle {
-  border-bottom: 2px solid var(--line-color);
+  border: none;
+  border-bottom: 1px solid var(--line-color);
+  &::placeholder {
+    font-size: 28px;
+  }
+}
+/*제목 제외 모든 input 컨테이너*/
+.projectHire__container {
+  display: grid;
+  align-items: start;
+  column-gap: 100px;
+  row-gap: 50px;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: auto;
+}
+.projectHire__container > div:nth-child(5) {
+  grid-column: 1 / span 2;
+}
+/*input label*/
+.projectHire label {
+  font-family: "pretendardM";
+  font-size: 16px;
+}
+/*업로드 버튼*/
+.buttonWrap {
+  display: flex;
+  justify-content: right;
 }

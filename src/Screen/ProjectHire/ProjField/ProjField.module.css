@@ -1,0 +1,26 @@
+/*부제목*/
+.projectHire__subTitle {
+  font-family: "pretendardB";
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+/*label + input*/
+.projectHire__detail {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+/*input style 2 - 긴 사이즈*/
+.projectHire__inputStyle2 {
+  width: 70%;
+  border: 1px solid var(--line-color);
+}
+/*찾기 아이콘*/
+.projectHire__searchIcon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

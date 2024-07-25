@@ -1,0 +1,30 @@
+/*부제목*/
+.projectHire__subTitle {
+  font-family: "pretendardB";
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+/*label + input*/
+.projectHire__detail {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.projectHire__textarea {
+  width: 100%;
+  resize: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  height: 300px;
+  &:focus {
+    outline: none;
+  }
+  &::placeholder {
+    font-size: 16px;
+  }
+  &:focus::placeholder {
+    opacity: 0;
+  }
+}
