@@ -1,6 +1,5 @@
-.tech {
-  min-width: 60px;
-  max-width: 120px;
+.tech__wrap {
+  width: 60px;
   height: 20px;
   background-color: var(--select-color);
   border-radius: 20px;
@@ -8,6 +7,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 0 4px;
+  gap: 30px;
+  padding: 0 10px;
+  font-size: 12px;
 }
