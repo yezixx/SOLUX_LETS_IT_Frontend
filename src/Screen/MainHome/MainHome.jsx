@@ -17,7 +17,7 @@ function MainHome() {
       <PopularProject />
       <div className={styles.contestnews}>
         <Contest />
-        <News />
+        <div className={styles.news}><News /></div>
       </div>
       <div className={styles.main}>
         {/*<MyProfile />*/} {/*라우팅 시 outlet이 들어갈 부분*/}

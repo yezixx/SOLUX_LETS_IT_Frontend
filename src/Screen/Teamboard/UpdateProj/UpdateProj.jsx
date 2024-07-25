@@ -63,8 +63,8 @@ const UpdateProj = () => {
     ) {
       completeProject(teamId);
       teamData.teamMemberInfo.length < 2
-        ? nav("/myproj/attendproj", { replace: true })
-        : nav(`/teamboard/feedback/?team=${teamId}`);
+        ? nav("/myproj/attendproj")
+        : nav(`/teamboard/feedback/?team=${teamId}`, { replace: true });
     }
   };
 

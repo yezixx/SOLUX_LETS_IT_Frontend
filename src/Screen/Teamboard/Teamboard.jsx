@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer, useRef } from "react";
+import { createContext, useEffect, useReducer, useRef, useState } from "react";
 import styles from "./Teamboard.module.css";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
@@ -9,6 +9,7 @@ import {
   updateTeam,
 } from "../../service/teamService";
 import { getTeam } from "../../service/teamService";
+import Loading from "../../Components/Loading/Loading";
 
 const mock_teamData = [
   {
@@ -179,6 +180,7 @@ const isMember = (teamData, loginUserId) => {
 };
 
 const Teamboard = () => {
+  const [loading, setLoading] = useState(true);
   const loginUserId = useAtomValue(userIdAtom);
   const [params] = useSearchParams();
   const teamId = params.get("team");
@@ -189,11 +191,11 @@ const Teamboard = () => {
     teamReducer,
     mock_teamData.find((team) => String(team.teamId) === teamId)
   );
-  if (teamData === undefined) {
+  /*if (teamData === undefined) {
     // 이후 useEffect 안으로 이동 필요
     alert("존재하지 않는 페이지입니다.");
     window.history.back();
-  }
+  }*/
   const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
   const [scheduleData, scheduleDispatch] = useReducer(
     scheduleReducer,
@@ -205,28 +207,32 @@ const Teamboard = () => {
     mock_meetingData
   );
 
-  useEffect(() => {
-    const fetchTeamData = async () => {
-      try {
-        const data = await getTeam(teamId);
-        teamDispatch({
-          type: "GET",
-          data: data,
-        });
+  const fetchTeamData = async () => {
+    setLoading(true);
+    try {
+      const data = await getTeam(teamId);
+      teamDispatch({
+        type: "GET",
+        data: data,
+      });
+      setLoading(false);
 
-        if (!isMember(teamData, loginUserId)) {
-          alert("팀원 외에는 접근할 수 없습니다.");
-          nav("/");
-          return;
-        }
-      } catch (error) {
-        console.log("teamboard error", error);
-        teamDispatch({
-          type: "GET",
-          data: mock_teamData[0],
-        });
+      if (!isMember(teamData, loginUserId)) {
+        alert("팀원 외에는 접근할 수 없습니다.");
+        nav("/");
+        return;
       }
-    };
+    } catch (error) {
+      console.log("teamboard error", error);
+      setLoading(false);
+      teamDispatch({
+        type: "GET",
+        data: mock_teamData[teamId - 1],
+      });
+    }
+  };
+
+  useEffect(() => {
     fetchTeamData();
   }, []);
   console.log(teamData);
@@ -423,6 +429,7 @@ const Teamboard = () => {
 
   return (
     <div className={styles.teamboard}>
+      {loading ? <Loading /> : null}
       <TeamStateContext.Provider
         value={{
           teamData,
