@@ -1,7 +1,7 @@
 import styles from "./ProjectList.module.css";
 import Button from "../Button/Button.jsx";
 import { Link } from "react-router-dom";
-import Tech from "./Stack.jsx";
+import Tech from "./GrayBox.jsx";
 import Paging from "../Paging/Paging.jsx";
 import useProjListPaging from "./useProjListPaging.js";
 
