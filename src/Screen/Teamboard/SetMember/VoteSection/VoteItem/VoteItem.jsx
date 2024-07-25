@@ -1,10 +1,15 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styles from "./VoteItem.module.css";
 import { TeamDispatchContext } from "../../../Teamboard";
-import { getLogoImage } from "../../../../../util/getLogoImage";
+import defaultProfilePic from "../../../../../assets/user.svg";
 
-const VoteItem = ({ userName, userId }) => {
+const VoteItem = ({ userName, userId, profilePic }) => {
   const { onAgree, onDisagree } = useContext(TeamDispatchContext);
+  const [imgSrc, setImgSrc] = useState(profilePic || defaultProfilePic);
+
+  const handleImgError = () => {
+    setImgSrc(defaultProfilePic);
+  };
 
   const onClickAgree = () => {
     onAgree(userId);
@@ -18,7 +23,8 @@ const VoteItem = ({ userName, userId }) => {
       <div className={styles.voteItem__container}>
         <img
           className={styles.voteItem__profilePic}
-          src={getLogoImage("github")}
+          src={imgSrc}
+          onError={handleImgError}
         />
         <div className={styles.voteItem__name}>{userName}</div>
         <div className={styles.voteItem__button}>
