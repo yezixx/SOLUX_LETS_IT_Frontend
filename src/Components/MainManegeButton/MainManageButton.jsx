@@ -1,4 +1,5 @@
 import styles from "./MainManageButton.module.css";
+import { Link, useNavigate } from "react-router-dom";
 
 const MainManageButton = () => {
   return (
@@ -9,6 +10,7 @@ const MainManageButton = () => {
         {/*box - 빠른이동 박스 */}
         <div className={styles.box}>
           {/*box 내부 버튼 - 클릭할 영역 */}
+          <Link to="myproj/hiring-and-applied">
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -25,10 +27,10 @@ const MainManageButton = () => {
               />
             </svg>
             신청한 프로젝트
-          </button>
+          </button></Link>
         </div>
         <div className={styles.box}>
-          <button>
+          <Link to ="myproj/scrap"><button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -44,9 +46,10 @@ const MainManageButton = () => {
               />
             </svg>
             스크랩한 프로젝트
-          </button>
+          </button></Link>
         </div>
         <div className={styles.box}>
+          <Link to ="myproj/attendproj">
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -64,14 +67,16 @@ const MainManageButton = () => {
             </svg>
             진행중인 프로젝트
           </button>
+          </Link>
         </div>
         <div className={styles.box}>
+          <Link to="myproj/hiring-and-applied">
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
+              viewBox="0 -1 20 25"
+              strokeWidth={1.7}
               stroke="currentColor"
               className="size-6"
             >
@@ -82,14 +87,15 @@ const MainManageButton = () => {
               />
             </svg>
             프로젝트 신청자 관리
-          </button>
+          </button></Link>
         </div>
         <div className={styles.box}>
+          <Link to = "mypage/portfolio">
           <button>
-            <svg
+            <svg 
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
-              viewBox="0 0 36 36"
+              viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
               className="size-6"
@@ -101,14 +107,15 @@ const MainManageButton = () => {
               />
             </svg>
             포트폴리오 관리
-          </button>
+          </button></Link>
         </div>
         <div className={styles.box}>
+          <Link to="mypage/profile">
           <button>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
-              viewBox="0 0 36 36"
+              viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
               className="size-6"
@@ -125,7 +132,7 @@ const MainManageButton = () => {
               />
             </svg>
             프로필 관리
-          </button>
+          </button></Link>
         </div>
       </div>
     </div>
