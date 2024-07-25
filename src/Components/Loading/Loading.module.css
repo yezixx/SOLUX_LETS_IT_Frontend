@@ -1,0 +1,20 @@
+.Loading {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: white;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Loading__text {
+  text-align: center;
+  font-size: 30px;
+  font-family: "pretendardB";
+  color: var(--text-color1);
+}

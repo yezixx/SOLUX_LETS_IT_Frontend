@@ -119,7 +119,6 @@ export const RouterInfo = [
           },
         ],
       },
-
       //마이페이지
       {
         path: "mypage",
@@ -128,27 +127,27 @@ export const RouterInfo = [
         children: [
           {
             path: "profile",
-            element: <PrivateRoute element={<MyProfile />} />,
-            label: "포트폴리오 관리",
+            element: <MyProfile />,
+            label: "프로필 관리",
           },
           {
             path: "portfolio",
-            element: <PrivateRoute element={<MyPortfolio />} />,
+            element: <MyPortfolio />,
             label: "포트폴리오 관리",
           },
           {
             path: "portfolio/post",
-            element: <PrivateRoute element={<PortfolioWrite />} />,
+            element: <PortfolioWrite />,
             label: "포트폴리오 작성창",
           },
           {
             path: "portfolio/post/summaryAI",
-            element: <PrivateRoute element={<CompletePort />} />,
+            element: <CompletePort />,
             label: "AI 생성 - 완성된 포트폴리오",
           },
           {
             path: "portfolio/board",
-            element: <PrivateRoute element={<PortfolioBoard />} />,
+            element: <PortfolioBoard />,
             label: "포트폴리오 게시판",
           },
         ],
