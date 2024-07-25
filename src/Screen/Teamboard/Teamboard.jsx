@@ -56,6 +56,7 @@ const mock_teamData = [
 ];
 
 const mock_scheduleData = [
+  /*
   {
     id: 0,
     title: "프엔 회의",
@@ -82,10 +83,11 @@ const mock_scheduleData = [
     end: "2024-07-27",
     description:
       "각자 수강한 스터디 강의 노션의 스터디 > 인증 보드에 인증해주세요!",
-  },
+  },*/
 ];
 
 const mock_meetingData = [
+  /*
   {
     id: 1,
     date: "2024-07-03",
@@ -97,7 +99,7 @@ const mock_meetingData = [
     date: "2024-07-10",
     nonParticipants: [],
     proofImages: "second_week.png",
-  },
+  },*/
 ];
 
 const mock_kickData = [
@@ -187,10 +189,12 @@ const Teamboard = () => {
 
   const nav = useNavigate();
 
-  const [teamData, teamDispatch] = useReducer(
-    teamReducer,
-    mock_teamData.find((team) => String(team.teamId) === teamId)
-  );
+  const [teamData, teamDispatch] = useReducer(teamReducer, {
+    teamName: "",
+    notionLink: "",
+    githubLink: "",
+    teamMemberInfo: [],
+  });
   /*if (teamData === undefined) {
     // 이후 useEffect 안으로 이동 필요
     alert("존재하지 않는 페이지입니다.");
@@ -217,29 +221,28 @@ const Teamboard = () => {
       });
       setLoading(false);
 
-      if (!isMember(teamData, loginUserId)) {
+      /*if (!isMember(teamData, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
         nav("/");
         return;
-      }
+      }*/
     } catch (error) {
       console.log("teamboard error", error);
       setLoading(false);
-      teamDispatch({
-        type: "GET",
-        data: mock_teamData[teamId - 1],
-      });
+      alert("팀 정보를 불러오는 중 오류가 발생했습니다.");
+      //nav(`/myproj/attendproj`);
     }
   };
 
   useEffect(() => {
     fetchTeamData();
   }, []);
+  console.log(teamId);
   console.log(teamData);
 
   const kickIdRef = useRef(1);
-  const meetingRef = useRef(3);
-  const eventRef = useRef(3);
+  const meetingRef = useRef(1);
+  const eventRef = useRef(1);
 
   const onDeleteMember = (userId) => {
     const filteredMember = teamData.teamMemberInfo.filter((item) => {
