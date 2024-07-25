@@ -175,11 +175,16 @@ function feedbackReducer(state, action) {
   }
 }
 
-const isMember = (teamData, loginUserId) => {
+/*const isMember = (teamData, loginUserId) => {
+  console.log(
+    teamData.teamMemberInfo.some(
+      (member) => String(member.userId) === String(loginUserId)
+    )
+  );
   return teamData.teamMemberInfo.some(
     (member) => String(member.userId) === String(loginUserId)
   );
-};
+};*/
 
 const Teamboard = () => {
   const [loading, setLoading] = useState(true);
@@ -195,11 +200,7 @@ const Teamboard = () => {
     githubLink: "",
     teamMemberInfo: [],
   });
-  /*if (teamData === undefined) {
-    // 이후 useEffect 안으로 이동 필요
-    alert("존재하지 않는 페이지입니다.");
-    window.history.back();
-  }*/
+
   const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
   const [scheduleData, scheduleDispatch] = useReducer(
     scheduleReducer,
@@ -217,27 +218,38 @@ const Teamboard = () => {
       const data = await getTeam(teamId);
       teamDispatch({
         type: "GET",
-        data: data,
+        data: data.data,
       });
       setLoading(false);
-
+      // 데이터 받아올 때마다 아이디 달라져서 일단 보류
       /*if (!isMember(teamData, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
-        nav("/");
+        //nav("/");
         return;
       }*/
     } catch (error) {
       console.log("teamboard error", error);
       setLoading(false);
       alert("팀 정보를 불러오는 중 오류가 발생했습니다.");
-      //nav(`/myproj/attendproj`);
+      nav(`/`);
     }
   };
 
   useEffect(() => {
     fetchTeamData();
+    /*getTeam(teamId)
+      .then((res) => {
+        teamDispatch({
+          type: "GET",
+          data: res.data,
+        });
+        console.log(res);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log("teamboard error", error);
+      });*/
   }, []);
-  console.log(teamId);
   console.log(teamData);
 
   const kickIdRef = useRef(1);
