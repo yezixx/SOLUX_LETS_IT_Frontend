@@ -34,7 +34,7 @@ const ProjField = () => {
       <div className={styles.projectHire__subTitle}>분야</div>
       <div className={styles.projectHire__detail}>
         <input
-          name="field"
+          name="categoryId"
           onChange={handleSearch}
           className={styles.projectHire__inputStyle2}
           placeholder="프론트엔드"

@@ -1,10 +1,11 @@
-import { useAtom } from "jotai";
-import { postProjectAtom } from "../../atoms/atoms";
+import { useAtom, useAtomValue } from "jotai";
+import { postProjectAtom, userIdAtom } from "../../atoms/atoms";
 import { createPosts } from "../../service/postService";
 
 const useProjectPost = () => {
   const [postProj, setPostProj] = useAtom(postProjectAtom);
-
+  //임의로 설정한 userId
+  const userId = useAtomValue(userIdAtom);
   const onChange = (e) => {
     const { name, value } = e.target;
     setPostProj((prevData) => ({
@@ -35,7 +36,7 @@ const useProjectPost = () => {
     e.preventDefault();
     warning();
     //백엔드 연동 코드
-    createPosts(postProj)
+    createPosts(userId, postProj)
       .then((res) => console.log(`반환 : ${res}`))
       .catch((error) => {
         if (error.response) {
