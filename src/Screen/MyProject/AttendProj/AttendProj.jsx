@@ -1,12 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import ProjectBtn from "../../../Components/Project_Button/ProjectBtn";
 import styles from "./AttendProj.module.css";
+import { useEffect } from "react";
 
 const OngoingProj = () => {
   const navigate = useNavigate();
   const naviagateTo = (link) => {
     navigate(link);
   };
+  useEffect(()=>{
+    
+  })
   return (
     <div className={styles.ongoingProj__contWrap}>
       {/*진행 중인 프로젝트 + 팀원 평가*/}

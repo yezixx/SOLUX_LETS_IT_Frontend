@@ -13,6 +13,7 @@ const ProjectHire = () => {
   const projectPost = useAtomValue(postProjectAtom);
   const { handleSubmit, onChange } = useProjectPost();
   console.log(projectPost);
+
   return (
     <form onSubmit={handleSubmit} className={styles.projectHire}>
       구인글 작성
