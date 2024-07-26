@@ -11,6 +11,11 @@ import { userIdAtom } from "../../atoms/atoms";
 import { useEffect, useRef, useState } from "react";
 import { getComments, getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";
+import {
+  createComment,
+  deleteComment,
+  updateComment,
+} from "../../service/commentService";
 
 const mock_post = {
   /*
@@ -164,7 +169,7 @@ const ProjPost_detail = () => {
     setLoading(false);
   }, []);
 
-  const onCraeteComment = (description) => {
+  const onCraeteComment = (content) => {
     setComments([
       ...comments,
       {
@@ -172,9 +177,13 @@ const ProjPost_detail = () => {
         writer: loginUserId,
         createDate: new Date().getTime(),
         updateDate: new Date().getTime(),
-        content: description,
+        content: content,
       },
     ]);
+    const res = createComment(postId, {
+      comComment: content,
+    });
+    console.log(res.data);
   };
 
   const onUpdateComment = (id, content) => {
@@ -189,12 +198,18 @@ const ProjPost_detail = () => {
           : comment
       )
     );
+    const res = updateComment(postId, id, {
+      //updateDate: new Date().getTime(),
+      comComment: content,
+    });
+    console.log(res.data);
   };
 
   const onDeleteComment = (id) => {
     setComments(
       comments.filter((comment) => String(comment.id) !== String(id))
     );
+    deleteComment(id);
   };
 
   const onClickCreateComment = () => {
