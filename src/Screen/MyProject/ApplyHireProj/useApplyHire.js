@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMyProjects } from "../../../service/projectService";
 import { useAtomValue } from "jotai";
-import { userAtom } from "../../../atoms/atoms";
+import { userAtom, userIdAtom } from "../../../atoms/atoms";
 
 export const useApplyHire = () => {
   //클릭하면 팀원을 보여주도록 state 설정
@@ -13,11 +13,11 @@ export const useApplyHire = () => {
   const [memberList, setMemberList] = useState([]);
 
   // /*로그인 x */
-  // const userId = useAtomValue(userIdAtom);
+  const userId = useAtomValue(userIdAtom);
 
-  /*로그인 구동 시 - userId 전역 상태에서 불러오기 */
-  const user = useAtomValue(userAtom);
-  const userId = user.userId;
+  // /*로그인 구동 시 - userId 전역 상태에서 불러오기 */
+  // const user = useAtomValue(userAtom);
+  // const userId = user.userId;
 
   /*프로젝트 리스트 db에서 갖고 와서 apHireProj에 저장 */
   useEffect(() => {
