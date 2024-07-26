@@ -109,9 +109,18 @@ const mock_comments = [
   {
     id: 0,
     writer: "CODER.",
-    date: "2024-04-06, 15:30",
-    description:
+    createDate: "2024-04-06, 15:30",
+    updateDate: "2024-04-06, 15:30",
+    content:
       "정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?",
+  },
+  {
+    id: 1,
+    writer: "1",
+    createDate: "2024-04-06, 15:30",
+    updateDate: "2024-04-06, 16:00",
+    content:
+      "꼭 Next.js나 Nuxt.js를 사용해야 하나요? React만 사용해본 경험이 있습니다.",
   },
 ];
 
@@ -135,8 +144,8 @@ const ProjPost_detail = () => {
 
   useEffect(() => {
     /*getPosts(postId)
-      .then((data) => {
-        setPost(data);
+      .then((res) => {
+        setPost(res.data);
         setLoading(false);
       })
       .catch((error) => {
@@ -161,16 +170,23 @@ const ProjPost_detail = () => {
       {
         id: commentIdRef.current++,
         writer: loginUserId,
-        date: new Date().getTime(),
-        description: description,
+        createDate: new Date().getTime(),
+        updateDate: new Date().getTime(),
+        content: description,
       },
     ]);
   };
 
-  const onUpdateComment = (id, description) => {
+  const onUpdateComment = (id, content) => {
     setComments(
       comments.map((comment) =>
-        comment.id === id ? { ...comment, description } : comment
+        comment.id === id
+          ? {
+              ...comment,
+              updateDate: new Date().getTime(),
+              content: content,
+            }
+          : comment
       )
     );
   };

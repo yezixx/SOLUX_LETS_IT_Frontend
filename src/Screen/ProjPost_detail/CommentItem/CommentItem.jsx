@@ -24,8 +24,9 @@ const getFormattedDate = (date) => {
 const CommentItem = ({
   id,
   writer,
-  date,
-  description,
+  createDate,
+  updateDate,
+  content,
   postWriter,
   inputRef,
   onDelete,
@@ -35,7 +36,7 @@ const CommentItem = ({
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOnChange, setIsOnChange] = useState(false);
-  const [changeInput, setChangeInput] = useState(description);
+  const [changeInput, setChangeInput] = useState(content);
 
   const changeInputRef = useRef();
 
@@ -58,7 +59,7 @@ const CommentItem = ({
   };
 
   const onClickCompleteUpdate = () => {
-    if (changeInput === description) {
+    if (changeInput === content) {
       setIsOnChange(false);
       return;
     }
@@ -66,6 +67,7 @@ const CommentItem = ({
       changeInputRef.current.focus();
       return;
     }
+    setIsOnChange(false);
     onUpdate(id, changeInput);
   };
 
@@ -98,7 +100,8 @@ const CommentItem = ({
       >
         <div className={styles.CommentItem__header}>
           <div>{writer}</div>
-          <div>{getFormattedDate(date)}</div>
+          <div>{getFormattedDate(createDate)}</div>
+          {createDate !== updateDate && <div>(수정됨)</div>}
           {isCommentWriter() && !isOnChange && (
             <div className={styles.CommentItem__icon} onClick={onClickIcon}>
               <EllipsisHorizontalIcon />
@@ -121,7 +124,7 @@ const CommentItem = ({
               }
             />
           ) : (
-            description
+            content
           )}
         </div>
         <div className={styles.CommentItem__icon}>
