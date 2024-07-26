@@ -64,7 +64,7 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
             <div>
               <div className={styles.PostInfo__label}>
                 필요 스택
-                {post.isNegotiable && (
+                {/*post.isNegotiable && (
                   <span>
                     <CheckIcon
                       color="var(--main-color2)"
@@ -73,7 +73,7 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
                     />
                     협의 가능
                   </span>
-                )}
+                )*/}
               </div>
               <div className={styles.PostInfo__skill}>
                 {post.requiredSkills.map((skill, index) => (
