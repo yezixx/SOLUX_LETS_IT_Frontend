@@ -7,10 +7,14 @@ import { useSetAtom } from "jotai";
 import { postProjectAtom } from "../../../atoms/atoms";
 
 const ProjInfo = () => {
-  const { handleSelectedArea, selectedAreaData } = useProjInfo();
-  const { onChange, onClick } = useProjectPost();
+  //ProjInfo 화면에서만 사용하는 훅
+  const { onClick, handleSelectedArea, selectedAreaData, startSubRegion } =
+    useProjInfo();
+  //select에 필요한 이벤트 핸들러 (폼 공통)
+  const { onChange } = useProjectPost();
+  //백엔드에 보낼 data
   const setPostProj = useSetAtom(postProjectAtom);
-  //대면일 경우에만 지역선택 나타남
+  //대면일 경우에만 지역선택 나타남, 대면일 경우 onChange 이벤트 핸들러
   const [isFace, setIsFace] = useState(false);
   const handleIsFace = (e) => {
     const { name, value } = e.target;
@@ -18,6 +22,7 @@ const ProjInfo = () => {
       ...prevData,
       [name]: value,
     }));
+
     if (value === "대면") {
       setIsFace(true);
     } else {
@@ -60,7 +65,6 @@ const ProjInfo = () => {
       {isFace && (
         <div className={styles.projectHire__selectArea}>
           <select defaultValue="" name="regionId" onChange={handleSelectedArea}>
-            {" "}
             {/* onChange 이벤트로 지역 선택 업데이트 */}
             <option value="">지역 선택</option>
             {KoreaArea.map((area, idx) => (
@@ -75,7 +79,7 @@ const ProjInfo = () => {
                 <button
                   className={styles.projectHire__subRegion}
                   type="button"
-                  value={subArea}
+                  value={startSubRegion * 100 + (idx + 1)}
                   name="subRegionId"
                   onClick={onClick}
                   key={idx}

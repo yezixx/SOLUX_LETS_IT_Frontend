@@ -25,7 +25,7 @@ const ProjField = () => {
     //tech가 변경될 시 백엔드에 보낼 데이터 재렌더링
     setPostProj((prev) => ({
       ...prev,
-      field: [...tech],
+      categoryId: [...tech],
     }));
   }, [tech, setPostProj]);
 

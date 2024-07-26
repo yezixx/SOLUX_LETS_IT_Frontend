@@ -9,7 +9,7 @@ export const applicant = atom([]);
 export const isLoginAtom = atom(false);
 //구인글 작성 (세부화면으로 쪼갰기에 atom 필요)
 export const postProjectAtom = atom({
-  userId: 1,
+  userId: "",
   title: "",
   content: "",
   peopleNum: "",
@@ -20,7 +20,7 @@ export const postProjectAtom = atom({
   stack: [],
   difficulty: "",
   onOff: "",
-  regionId: "",
-  subRegionId: "",
+  regionId: 0,
+  subRegionId: 0,
   categoryId: [],
 });
