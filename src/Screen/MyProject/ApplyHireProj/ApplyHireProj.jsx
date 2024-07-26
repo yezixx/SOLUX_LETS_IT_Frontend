@@ -7,6 +7,7 @@ import { useApplyHire } from "./useApplyHire";
 
 const ApplyHireProj = () => {
   const { apHireProj, showMember, handleClickMember } = useApplyHire();
+  console.log(apHireProj);
   return (
     <div className={styles.ApplyHireProj__content}>
       {/*구인 중인 프로젝트 + 신청한 프로젝트 */}

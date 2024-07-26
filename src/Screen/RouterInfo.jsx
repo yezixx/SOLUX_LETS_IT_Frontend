@@ -97,7 +97,7 @@ export const RouterInfo = [
             // path: "hiring-and-applied",
             //백엔드 연결용 동적 주소
             path: "hiring-and-applied",
-            element: <PrivateRoute element={<ApplyHireProj />} />,
+            element: <ApplyHireProj />,
             label: "구인/신청 프로젝트",
           },
           {

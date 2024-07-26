@@ -10,12 +10,22 @@ const RecruitInfo = () => {
         {/* 모집 인원 */}
         <div className={styles.projectHire__detail}>
           <label>모집인원</label>
-          <input
+          {/* <input
             name="peopleNum"
             onChange={onChange}
             className={styles.projectHire__inputStyle1}
             placeholder="1명"
-          />
+          /> */}
+          <select defaultValue="" name="peopleNum" onChange={onChange}>
+            <option value="">선택</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+          </select>
         </div>
         {/* 모집 마감 */}
         <div className={styles.projectHire__detail}>

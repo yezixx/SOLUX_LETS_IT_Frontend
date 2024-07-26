@@ -18,7 +18,7 @@ const ProjInfo = () => {
       ...prevData,
       [name]: value,
     }));
-    if (value === "true") {
+    if (value === "대면") {
       setIsFace(true);
     } else {
       setIsFace(false);
@@ -31,8 +31,8 @@ const ProjInfo = () => {
       <div className={styles.projectHire__detail}>
         <select defaultValue="" name="onOff" onChange={handleIsFace}>
           <option value="">진행방식</option>
-          <option value="true">대면</option>
-          <option value="false">비대면</option>
+          <option value="대면">대면</option>
+          <option value="비대면">비대면</option>
         </select>
         <select defaultValue="" name="level" onChange={onChange}>
           <option value="">난이도</option>
