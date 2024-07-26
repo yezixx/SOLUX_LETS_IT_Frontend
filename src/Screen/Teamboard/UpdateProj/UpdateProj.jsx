@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
 import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
 import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { completeProject } from "../../../service/teamService";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../../atoms/atoms";
 
 const UpdateProj = () => {
   const { onUpdateTeamData } = useContext(TeamDispatchContext);
@@ -23,10 +25,25 @@ const UpdateProj = () => {
   );
 
   const nav = useNavigate();
+  const loginUserId = useAtomValue(userIdAtom);
 
   const titleRef = useRef();
   const linkRef1 = useRef();
   const linkRef2 = useRef();
+
+  /*useEffect(() => {
+    console.log(
+      teamData.teamMemberInfo.find((member) => {
+        member.position === "Team_Leader";
+      })
+    );
+    if (
+      teamData.teamMemberInfo.find((member) => {
+        member.position === "Team_Leader";
+      }).userId !== loginUserId
+    )
+      alert("팀장만 접근 가능한 페이지입니다.");
+  });*/
 
   const onFocusElement = (ref) => {
     if (ref.current) {
@@ -61,7 +78,12 @@ const UpdateProj = () => {
         '프로젝트를 종료하시겠습니까?\n종료된 프로젝트의 팀게시판은 수정할 수 없으며,\n"종료된 프로젝트는 내 프로젝트 > 참여 프로젝트 > 완료한 프로젝트"에서 확인이 가능합니다.'
       )
     ) {
-      completeProject(teamId);
+      try {
+        completeProject(teamId);
+      } catch (error) {
+        console.error("Error fetching complete project", error);
+        throw error;
+      }
       teamData.teamMemberInfo.length < 2
         ? nav("/myproj/attendproj")
         : nav(`/teamboard/feedback/?team=${teamId}`, { replace: true });

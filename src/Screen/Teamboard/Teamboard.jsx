@@ -227,6 +227,10 @@ const Teamboard = () => {
         //nav("/");
         return;
       }*/
+      if (!loginUserId) {
+        alert("로그인이 필요한 페이지입니다.");
+        //nav("/");
+      }
     } catch (error) {
       console.log("teamboard error", error);
       setLoading(false);
@@ -288,7 +292,7 @@ const Teamboard = () => {
   };
 
   const onUpdateTeamData = (title, notion, github, selectedMember) => {
-    teamDispatch({
+    /*teamDispatch({
       type: "UPDATE",
       data: {
         ...teamData,
@@ -302,9 +306,29 @@ const Teamboard = () => {
           return { ...member, position: "Team_Member" };
         }),
       },
-    });
-    updateTeam({ teamName: title, notionLink: notion, githubLink: github });
-    delegateTeamLeader(teamId, selectedMember);
+    });*/
+    try {
+      updateTeam(teamId, {
+        teamName: title,
+        notionLink: notion,
+        githubLink: github,
+      });
+    } catch (e) {
+      console.log("updateTeam error", e);
+    }
+
+    if (
+      // 선택한 팀원이 팀장이 아닌 경우
+      !teamData.teamMemberInfo.find(
+        (member) => String(member.userId) === String(selectedMember)
+      ).position === "Team_Leader"
+    ) {
+      try {
+        delegateTeamLeader(teamId, selectedMember);
+      } catch (e) {
+        console.log("delegateTeamLeader error", e);
+      }
+    }
   };
 
   const onCreateEvent = (title, startDate, endDate, description) => {
@@ -431,7 +455,7 @@ const Teamboard = () => {
     });
   };
 
-  const onSubmitFeedback = (targetId, value) => {
+  const onSubmitFeedback = (teamId, targetId, value) => {
     feedbackDispatch({
       type: "SUBMIT_FEEDBACK",
       data: {
@@ -439,7 +463,7 @@ const Teamboard = () => {
         ...value,
       },
     });
-    evaluateMember(targetId, { userId: targetId, ...value });
+    evaluateMember(teamId, targetId, value);
   };
 
   return (

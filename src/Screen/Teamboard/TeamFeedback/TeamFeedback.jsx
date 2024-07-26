@@ -23,7 +23,7 @@ const isCompletedMember = (targetId, data) => {
 };
 
 const TeamFeedback = () => {
-  const { teamData } = useContext(TeamStateContext);
+  const { teamData, teamId } = useContext(TeamStateContext);
   const members = teamData.teamMemberInfo;
 
   const { feedbackData } = useContext(TeamStateContext);
@@ -46,28 +46,28 @@ const TeamFeedback = () => {
   const onChangePromise = (value) => {
     setFeedback({
       ...feedback,
-      promise: value,
+      promise: Number(value),
     });
     setPromiseValue(value);
   };
   const onChangeFrequency = (value) => {
     setFeedback({
       ...feedback,
-      frequency: value,
+      frequency: Number(value),
     });
     setFrequencyValue(value);
   };
   const onChangeParticipate = (value) => {
     setFeedback({
       ...feedback,
-      participate: value,
+      participate: Number(value),
     });
     setParticipateValue(value);
   };
   const onChangeKindness = (value) => {
     setFeedback({
       ...feedback,
-      kindness: value,
+      kindness: Number(value),
     });
     setKindnessValue(value);
   };
@@ -94,10 +94,14 @@ const TeamFeedback = () => {
     if (!isValidate()) return;
 
     if (!confirm("평가를 제출하시겠습니까?")) return;
-    onSubmitFeedback(selectedMemberId, {
-      ...feedback,
-      total: promiseValue + frequencyValue + participateValue + kindnessValue,
-    });
+    try {
+      onSubmitFeedback(teamId, String(selectedMemberId), {
+        ...feedback,
+      });
+    } catch (error) {
+      console.error("Error fetching evaluate member", error);
+      throw error;
+    }
 
     setSelectedMemberId(null);
     setPromiseValue(null);
@@ -109,10 +113,14 @@ const TeamFeedback = () => {
 
   const onClickFinish = () => {
     if (!isValidate()) return;
-    onSubmitFeedback(selectedMemberId, {
-      ...feedback,
-      total: promiseValue + frequencyValue + participateValue + kindnessValue,
-    });
+    try {
+      onSubmitFeedback(teamId, selectedMemberId, {
+        ...feedback,
+      });
+    } catch (error) {
+      console.error("Error fetching evaluate member", error);
+      throw error;
+    }
     alert("팀원 평가를 완료합니다.");
 
     setSelectedMemberId(null);

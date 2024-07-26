@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 //삭제 예정
-export const userIdAtom = atom("letsit_backend.model.Member@78f1a1d1");
+export const userIdAtom = atom("letsit_backend.model.Member@2a85ed11");
 
 export const userAtom = atom({});
 //프로젝트 신청창 form
