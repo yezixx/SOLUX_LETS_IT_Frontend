@@ -40,7 +40,7 @@ const CommentItem = ({
 
   const changeInputRef = useRef();
 
-  const isPostWriter = () => postWriter === writer;
+  const isPostWriter = () => String(postWriter) === String(writer);
   const isCommentWriter = () => String(loginUserId) === String(writer);
   const onClickIcon = () => {
     setIsOpen(!isOpen);
