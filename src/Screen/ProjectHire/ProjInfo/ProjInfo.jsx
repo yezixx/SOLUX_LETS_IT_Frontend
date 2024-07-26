@@ -7,7 +7,7 @@ import { useSetAtom } from "jotai";
 import { postProjectAtom } from "../../../atoms/atoms";
 
 const ProjInfo = () => {
-  const { selectedArea, handleSelectedArea, selectedAreaData } = useProjInfo();
+  const { handleSelectedArea, selectedAreaData } = useProjInfo();
   const { onChange, onClick } = useProjectPost();
   const setPostProj = useSetAtom(postProjectAtom);
   //대면일 경우에만 지역선택 나타남
@@ -18,7 +18,7 @@ const ProjInfo = () => {
       ...prevData,
       [name]: value,
     }));
-    if (value === "대면") {
+    if (value === "true") {
       setIsFace(true);
     } else {
       setIsFace(false);

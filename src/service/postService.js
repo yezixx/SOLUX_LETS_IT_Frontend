@@ -8,7 +8,7 @@ export const getPostsList = () => {
 // 구인글 등록 - 구인글 작성 화면에서 업로드 버튼
 export const createPosts = async (postData) => {
   try {
-    const response = awaitapiClient.post("/posts/upload", postData);
+    const response = await apiClient.post("/posts/upload", postData);
     return response.data;
   } catch (error) {
     console.error("Error fetching create post:", error);

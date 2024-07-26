@@ -1,5 +1,6 @@
 import { useAtom } from "jotai";
 import { postProjectAtom } from "../../atoms/atoms";
+import { createPosts } from "../../service/postService";
 
 const useProjectPost = () => {
   const [postProj, setPostProj] = useAtom(postProjectAtom);
@@ -35,8 +36,21 @@ const useProjectPost = () => {
     warning();
     //백엔드 연동 코드
     createPosts(postProj)
-      .then((res) => console.log(res))
-      .catch((error) => console.log(`에러 발생 : ${error}`));
+      .then((res) => console.log(`반환 : ${res}`))
+      .catch((error) => {
+        if (error.response) {
+          // Server responded with a status other than 2xx
+          console.error("Error response from server:", error.response);
+        } else if (error.request) {
+          // No response was received
+          console.error("No response received:", error.request);
+        } else {
+          // Something happened in setting up the request
+          console.error("Error setting up request:", error.message);
+        }
+        console.error("Full error object:", error);
+        throw error;
+      });
   };
 
   return { onChange, onClick, handleSubmit };
