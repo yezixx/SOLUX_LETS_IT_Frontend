@@ -13,11 +13,11 @@ export const useApplyHire = () => {
   const [memberList, setMemberList] = useState([]);
 
   // /*로그인 x */
-  const userId = useAtomValue(userIdAtom);
+  // const userId = useAtomValue(userIdAtom);
 
   // /*로그인 구동 시 - userId 전역 상태에서 불러오기 */
-  // const user = useAtomValue(userAtom);
-  // const userId = user.userId;
+  const user = useAtomValue(userAtom);
+  const userId = user.userId;
 
   /*프로젝트 리스트 db에서 갖고 와서 apHireProj에 저장 */
   useEffect(() => {
@@ -26,7 +26,7 @@ export const useApplyHire = () => {
         setApHireProj(data);
       })
       .catch((error) => {
-        console.log("에러발생");
+        console.log(`에러 발생 : ${error}`);
       });
   }, []);
   // 팀원 버튼 클릭 시 호출되는 함수

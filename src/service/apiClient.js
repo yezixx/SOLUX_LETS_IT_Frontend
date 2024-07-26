@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const apiClient = axios.create({
-  baseURL: "http://192.168.13.66:8080",
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
   },
 });
 
