@@ -129,7 +129,8 @@ export const RouterInfo = [
             label: "포트폴리오 관리",
           },
           {
-            path: "portfolio/:prjId",
+            // path: "portfolio/:prjId",
+            path: "portfolio",
             element: <MyPortfolio />,
             label: "포트폴리오 관리",
           },

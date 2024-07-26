@@ -2,10 +2,6 @@ import Button from "../Button/Button";
 import styles from "./ProjectBtn.module.css";
 import PortfolioBtnPhoto from "./ProjectBtnPhoto";
 
-//mock data
-const project = {
-  name: "학원 정산 청구 서비스",
-};
 const ProjectBtn = ({
   //포트폴리오 작성, 삭제 버튼을 보여줄 것인가
   buttonShow = true,
@@ -15,6 +11,7 @@ const ProjectBtn = ({
   button2Text = "add text",
   project,
 }) => {
+  console.log(project);
   return (
     <div className={styles.PortfolioBtn__box}>
       {/*프로젝트명 */}

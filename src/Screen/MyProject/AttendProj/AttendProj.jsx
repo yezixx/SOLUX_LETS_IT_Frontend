@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import ProjectBtn from "../../../Components/Project_Button/ProjectBtn";
 import styles from "./AttendProj.module.css";
-import { useEffect, useState } from "react";
-import { getMyAttendProjects } from "../../../service/projectService";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../atoms/atoms";
+import { useEffect, useState } from "react";
+import { getMyAttendProjects } from "../../../service/projectService";
 
 const OngoingProj = () => {
   const navigate = useNavigate();
