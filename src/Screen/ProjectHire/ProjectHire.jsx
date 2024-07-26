@@ -8,19 +8,19 @@ import Button from "../../Components/Button/Button";
 import { useAtomValue } from "jotai";
 import { postProjectAtom } from "../../atoms/atoms";
 import useProjectPost from "./useProjectPost";
-import { useEffect } from "react";
 
 const ProjectHire = () => {
   const projectPost = useAtomValue(postProjectAtom);
-  const { handleSubmit, onChange } = useProjectPost();
+  const { handleSubmit, onChange, errors } = useProjectPost();
   console.log(projectPost);
-
   return (
     <form onSubmit={handleSubmit} className={styles.projectHire}>
       구인글 작성
       {/* 구인글 제목란 */}
       <input
-        className={styles.projectHire__projectTitle}
+        className={`${errors["title"] ? styles.formError : ""} ${
+          styles.projectHire__projectTitle
+        }`}
         name="title"
         onChange={onChange}
         placeholder="구인글 제목을 입력해 주세요"

@@ -26,6 +26,9 @@
   row-gap: 40px;
   flex-direction: column;
 }
+.projectHire .formError {
+  border: 2px solid var(--point);
+}
 .projectHire__projectTitle {
   border: none;
   border-bottom: 1px solid var(--line-color);
