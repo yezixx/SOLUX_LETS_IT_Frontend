@@ -11,7 +11,7 @@ const RecruitInfo = () => {
         <div className={styles.projectHire__detail}>
           <label>모집인원</label>
           <input
-            name="recruitPeriod"
+            name="peopleNum"
             onChange={onChange}
             className={styles.projectHire__inputStyle1}
             placeholder="1명"
@@ -21,7 +21,7 @@ const RecruitInfo = () => {
         <div className={styles.projectHire__detail}>
           <label>모집마감</label>
           <input
-            name="endDate"
+            name="recruitDueDate"
             onChange={onChange}
             type="date"
             className={styles.projectHire__inputStyle1}

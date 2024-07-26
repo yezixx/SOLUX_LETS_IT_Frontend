@@ -1,8 +1,9 @@
-import { useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import { postProjectAtom } from "../../atoms/atoms";
 
 const useProjectPost = () => {
-  const setPostProj = useSetAtom(postProjectAtom);
+  const [postProj, setPostProj] = useAtom(postProjectAtom);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setPostProj((prevData) => ({
@@ -32,7 +33,10 @@ const useProjectPost = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     warning();
-    console.log("제출완 "); // 백엔드 연동 코드로 수정 예정
+    //백엔드 연동 코드
+    createPosts(postProj)
+      .then((res) => console.log(res))
+      .catch((error) => console.log(`에러 발생 : ${error}`));
   };
 
   return { onChange, onClick, handleSubmit };

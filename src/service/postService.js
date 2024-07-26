@@ -6,8 +6,14 @@ export const getPostsList = () => {
 };
 
 // 구인글 등록 - 구인글 작성 화면에서 업로드 버튼
-export const createPosts = (userId, postData) => {
-  return apiClient.post(`/posts/${userId}/upload`, postData);
+export const createPosts = async (postData) => {
+  try {
+    const response = awaitapiClient.post("/posts/upload", postData);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching create post:", error);
+    throw error;
+  }
 };
 
 // 구인글 수정 - 구인글 상세 보기 화면에서 수정 버튼

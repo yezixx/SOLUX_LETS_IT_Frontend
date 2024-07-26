@@ -29,10 +29,10 @@ const ProjInfo = () => {
     <div className="프로젝트 정보">
       <div className={styles.projectHire__subTitle}>프로젝트 정보</div>
       <div className={styles.projectHire__detail}>
-        <select defaultValue="" name="method" onChange={handleIsFace}>
+        <select defaultValue="" name="onOff" onChange={handleIsFace}>
           <option value="">진행방식</option>
-          <option>대면</option>
-          <option>비대면</option>
+          <option value="true">대면</option>
+          <option value="false">비대면</option>
         </select>
         <select defaultValue="" name="level" onChange={onChange}>
           <option value="">난이도</option>
