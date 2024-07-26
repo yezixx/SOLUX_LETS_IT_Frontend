@@ -75,7 +75,7 @@ const mock_post = {
   recruitEndDate: "2024-07-31",
   preference: "관련 경력 3년 이상, Git 사용 경험",
   projectInfo: {
-    method: "온라인 협업",
+    method: "대면",
     regionId: "서울",
     projectPeriod: "3개월",
     ageGroup: "20대 후반 ~ 30대 초반",
@@ -105,7 +105,7 @@ const mock_post = {
     `,
   scrapCount: 20,
   viewCount: 50,
-  writer: "yuming",
+  writer: "1",
   title: "웹 사이드 프로젝트 팀원 모집",
   isNegotiable: true,
 };
@@ -116,16 +116,15 @@ const mock_comments = [
     writer: "CODER.",
     createDate: "2024-04-06, 15:30",
     updateDate: "2024-04-06, 15:30",
-    content:
-      "정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?",
+    content: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
   },
   {
     id: 1,
-    writer: "1",
+    writer: 1,
     createDate: "2024-04-06, 15:30",
     updateDate: "2024-04-06, 16:00",
-    content:
-      "꼭 Next.js나 Nuxt.js를 사용해야 하나요? React만 사용해본 경험이 있습니다.",
+    content: `모임 요일은 팀원 모집 후 상의하여 결정하려고 합니다.
+    스택은 경험이 없으셔도 상관없습니다. 함께 공부하면서 프로젝트를 진행하면 되니까요!`,
   },
 ];
 
