@@ -12,7 +12,7 @@ import Loading from "../../Components/Loading/Loading";
 const mock_members = [
   {
     applyId: 4,
-    nickname: "grace_nick",
+    nickname: "목업",
     profileImage: "grace.jpg",
   },
 ];
@@ -45,14 +45,19 @@ const CreateBoard = () => {
 
   useEffect(() => {
     approveApplicants(postId)
-      .then((data) => {
-        setApplicantsList(data);
+      .then((res) => {
+        setApplicantsList(res.data);
+        if (res.data.length === 0) {
+          alert("팀원이 없습니다. 팀원을 추가해주세요.");
+          nav("/");
+        }
         setLoading(false);
       })
       .catch((error) => {
         console.log("error (in CreateBoard):", error);
+        alert("팀원 목록을 불러오는데 실패했습니다. 다시 시도해주세요.");
         setLoading(false);
-        setApplicantsList(mock_members);
+        nav("/");
       });
   }, []);
 
@@ -67,7 +72,7 @@ const CreateBoard = () => {
       const response = await createTeam(postId, newTeamData);
 
       const result = await response.json();
-      console.log(result.data);
+      console.log(result);
       return result.data; // 서버로부터 받은 teamID 반환
     } catch (error) {
       console.error("Error creating team:", error);
@@ -97,7 +102,7 @@ const CreateBoard = () => {
     if (confirm("팀게시판을 생성하시겠습니까?")) {
       const teamID = await handleCreate(postId, newTeamData);
 
-      if (teamID !== null) {
+      if (!teamID) {
         nav(`/teamboard/?team=${teamID}`);
       } else {
         alert("팀 생성에 실패했습니다. 다시 시도해주세요.");
