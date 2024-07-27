@@ -87,21 +87,7 @@
 }
 
 .CommentItem__description > textarea::-webkit-scrollbar {
-  width: 8px;
-}
-
-.CommentItem__description > textareaL::-webkit-scrollbar-track {
-  background: var(--dimmed);
-  border-radius: 10px;
-}
-
-.CommentItem__description > textarea::-webkit-scrollbar-thumb {
-  background: var(--line-color);
-  border-radius: 10px;
-}
-
-.CommentItem__description > textarea::-webkit-scrollbar-thumb:hover {
-  background: var(--text-color2);
+  display: none;
 }
 
 .CommentItem__icon {

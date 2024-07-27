@@ -28,6 +28,7 @@
 
 .ProjPost_detail__description {
   width: 1100px;
+  min-height: 500px;
   white-space: pre-wrap;
 }
 
@@ -86,21 +87,7 @@
 }
 
 .ProjPost_detail__commentInput > textarea::-webkit-scrollbar {
-  width: 8px;
-}
-
-.ProjPost_detail__commentInput > textarea::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 10px;
-}
-
-.ProjPost_detail__commentInput > textarea::-webkit-scrollbar-thumb {
-  background: var(--line-color);
-  border-radius: 4px;
-}
-
-.ProjPost_detail__commentInput > textarea::-webkit-scrollbar-thumb:hover {
-  background: var(--text-color2);
+  display: none;
 }
 
 .ProjPost_detail > footer {
