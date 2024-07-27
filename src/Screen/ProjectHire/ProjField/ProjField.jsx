@@ -7,7 +7,7 @@ import { postProjectAtom } from "../../../atoms/atoms";
 import { useEffect } from "react";
 import GrayBox from "../../../Components/SearchProject/GrayBox";
 
-const ProjField = () => {
+const ProjField = ({ errors }) => {
   /*프로젝트 search 훅 */
   const {
     isFocus,
@@ -25,7 +25,7 @@ const ProjField = () => {
     //tech가 변경될 시 백엔드에 보낼 데이터 재렌더링
     setPostProj((prev) => ({
       ...prev,
-      field: [...tech],
+      categoryId: [...tech],
     }));
   }, [tech, setPostProj]);
 
@@ -34,9 +34,11 @@ const ProjField = () => {
       <div className={styles.projectHire__subTitle}>분야</div>
       <div className={styles.projectHire__detail}>
         <input
-          name="field"
+          name="categoryId"
           onChange={handleSearch}
-          className={styles.projectHire__inputStyle2}
+          className={`${errors["categoryId"] ? styles.formError : ""} ${
+            styles.projectHire__inputStyle2
+          }`}
           placeholder="프론트엔드"
           onFocus={handleFocus}
           onBlur={handleBlur}
