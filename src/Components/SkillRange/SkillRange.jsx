@@ -38,7 +38,14 @@ const SkillRange = forwardRef(
         <div className={styles.skillRange__slide}>
           <div
             className={styles.skillRange__track}
-            style={{ width: `${currentValue}%` }}
+            style={{
+              width:
+                currentValue <= 5
+                  ? `calc(${currentValue}% + 5px)`
+                  : `${currentValue}%`,
+              borderRadius:
+                currentValue <= 35 ? "5.5px 0px 0px 5.5px" : "5.5px",
+            }}
           ></div>
           <input
             type="range"
