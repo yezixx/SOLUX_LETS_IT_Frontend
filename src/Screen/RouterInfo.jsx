@@ -83,7 +83,7 @@ export const RouterInfo = [
       },
       // 구인글 보기, 추후  /:id 추가 필요
       {
-        path: "projects/detail",
+        path: "projects/detail/:postId",
         element: <ProjPost_detail />,
         label: "구인글 보기",
       },
