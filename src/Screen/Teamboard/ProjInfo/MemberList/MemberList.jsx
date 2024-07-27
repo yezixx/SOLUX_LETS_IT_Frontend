@@ -22,6 +22,7 @@ const MemberList = () => {
             key={index}
             memberName={member.userName}
             memberId={member.userId}
+            profilePic={member.profile_image_url}
             onClick={() => {
               onClickMemberItem(member.userName);
             }}

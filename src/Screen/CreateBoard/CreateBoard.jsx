@@ -148,7 +148,7 @@ const CreateBoard = () => {
               <MemberItem
                 key={index}
                 memberName={member.nickname}
-                profilePic={member.profileImage}
+                profilePic={member.profile_image_url}
               />
             ))}
           </div>
