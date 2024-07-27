@@ -44,6 +44,6 @@
   gap: 10px;
   flex-wrap: wrap;
 }
-.projectHire__requiredStack .formError {
-  border: 2px solid var(--point);
+.formError {
+  border: 2px solid var(--point) !important;
 }

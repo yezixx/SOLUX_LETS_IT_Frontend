@@ -1,7 +1,7 @@
 import useProjectPost from "../useProjectPost";
 import styles from "./RecruitInfo.module.css";
 
-const RecruitInfo = () => {
+const RecruitInfo = ({ errors }) => {
   const { onChange } = useProjectPost();
   return (
     <div className="모집정보">
@@ -10,13 +10,12 @@ const RecruitInfo = () => {
         {/* 모집 인원 */}
         <div className={styles.projectHire__detail}>
           <label>모집인원</label>
-          {/* <input
+          <select
+            className={errors["peopleNum"] ? styles.formError : ""}
+            defaultValue=""
             name="peopleNum"
             onChange={onChange}
-            className={styles.projectHire__inputStyle1}
-            placeholder="1명"
-          /> */}
-          <select defaultValue="" name="peopleNum" onChange={onChange}>
+          >
             <option value="">선택</option>
             <option>2명</option>
             <option>3명</option>
@@ -32,9 +31,11 @@ const RecruitInfo = () => {
           <label>모집마감</label>
           <input
             name="recruitDueDate"
+            className={`${errors["recruitDueDate"] ? styles.formError : ""} ${
+              styles.projectHire__inputStyle1
+            }`}
             onChange={onChange}
             type="date"
-            className={styles.projectHire__inputStyle1}
             placeholder="1명"
           />
         </div>
@@ -43,8 +44,10 @@ const RecruitInfo = () => {
         <label>우대사항</label>
         <input
           name="preference"
+          className={`${errors["preference"] ? styles.formError : ""} ${
+            styles.projectHire__inputStyle2
+          }`}
           onChange={onChange}
-          className={styles.projectHire__inputStyle2}
           placeholder="배포 경험 1회 이상"
         />
       </div>

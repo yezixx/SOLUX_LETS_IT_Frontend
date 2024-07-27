@@ -34,26 +34,46 @@ const ProjInfo = ({ errors }) => {
     <div className="프로젝트 정보">
       <div className={styles.projectHire__subTitle}>프로젝트 정보</div>
       <div className={styles.projectHire__detail}>
-        <select defaultValue="" name="onOff" onChange={handleIsFace}>
+        <select
+          className={`${errors["onOff"] ? styles.formError : ""} `}
+          defaultValue=""
+          name="onOff"
+          onChange={handleIsFace}
+        >
           <option value="">진행방식</option>
           <option value="대면">대면</option>
           <option value="비대면">비대면</option>
         </select>
-        <select defaultValue="" name="difficulty" onChange={onChange}>
+        <select
+          className={`${errors["difficulty"] ? styles.formError : ""} `}
+          defaultValue=""
+          name="difficulty"
+          onChange={onChange}
+        >
           <option value="">난이도</option>
           <option>입문</option>
           <option>초급</option>
           <option>중급</option>
           <option>고급</option>
         </select>
-        <select defaultValue="" name="projectPeriod" onChange={onChange}>
+        <select
+          className={`${errors["projectPeriod"] ? styles.formError : ""} `}
+          defaultValue=""
+          name="projectPeriod"
+          onChange={onChange}
+        >
           <option value="">예상 기간</option>
           <option>1개월</option>
           <option>3개월</option>
           <option>6개월</option>
           <option>1년 이상</option>
         </select>
-        <select defaultValue="" name="ageGroup" onChange={onChange}>
+        <select
+          className={`${errors["ageGroup"] ? styles.formError : ""} `}
+          defaultValue=""
+          name="ageGroup"
+          onChange={onChange}
+        >
           <option value="">연령대</option>
           <option>10대</option>
           <option>20대</option>
@@ -64,7 +84,12 @@ const ProjInfo = ({ errors }) => {
       {/* 지역 선택창 */}
       {isFace && (
         <div className={styles.projectHire__selectArea}>
-          <select defaultValue="" name="regionId" onChange={handleSelectedArea}>
+          <select
+            className={`${errors["regionId"] ? styles.formError : ""} `}
+            defaultValue=""
+            name="regionId"
+            onChange={handleSelectedArea}
+          >
             {/* onChange 이벤트로 지역 선택 업데이트 */}
             <option value="">지역 선택</option>
             {KoreaArea.map((area, idx) => (
@@ -77,7 +102,9 @@ const ProjInfo = ({ errors }) => {
             {selectedAreaData &&
               selectedAreaData.subArea.map((subArea, idx) => (
                 <button
-                  className={styles.projectHire__subRegion}
+                  className={`${
+                    errors["subRegionId"] ? styles.formError : ""
+                  } ${styles.projectHire__subRegion}`}
                   type="button"
                   value={startSubRegion * 100 + (idx + 1)}
                   name="subRegionId"

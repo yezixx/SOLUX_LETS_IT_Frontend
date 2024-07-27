@@ -48,3 +48,6 @@
     color: var(--main-color2);
   }
 }
+.formError {
+  border: 2px solid var(--point) !important;
+}
