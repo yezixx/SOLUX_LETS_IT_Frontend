@@ -133,6 +133,7 @@ const ProjPost_detail = () => {
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState(mock_post);
   const postId = useParams().postId;
+  console.log(postId);
 
   const [comments, setComments] = useState(mock_comments);
   const commentIdRef = useRef(1);
@@ -147,25 +148,28 @@ const ProjPost_detail = () => {
   };
 
   useEffect(() => {
-    /*getPosts(postId)
-      .then((res) => {
-        setPost(res.data);
+    setLoading(true);
+    getPosts(postId)
+      .then((data) => {
+        setPost(data.data);
         setLoading(false);
       })
       .catch((error) => {
-        console.log("post detail error(ProjPost_Datil.jsx):", error);
+        console.log("post detail error(ProjPost_Datil.jsx): ", error);
+        alert("게시글을 불러오는데 실패했습니다.");
         setLoading(false);
       });
+    /*
     getComments(postId)
       .then((data) => {
-        setComments(data);
+        setComments(data.data);
         setLoading(false);
       })
       .catch((error) => {
         console.log("comment list error(ProjPost_Datil.jsx): ", error);
+        alert("댓글 목록을 불러오는데 실패했습니다.");
         setLoading(false);
       });*/
-    setLoading(false);
   }, []);
 
   const onCraeteComment = (content) => {
@@ -288,7 +292,7 @@ const ProjPost_detail = () => {
           </div>
         </div>
       </div>
-      {isWriter ? null : (
+      {isWriter() ? null : (
         <footer>
           <div className={styles.ProjPost_detail__scrap} onClick={onClickScrap}>
             <BookmarkIcon width="30px" height="30px" isBookmark={isBookmark} />
