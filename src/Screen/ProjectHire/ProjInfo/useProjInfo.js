@@ -8,8 +8,23 @@ import { useRegionId } from "./useRegionId";
 export const useProjInfo = () => {
   /*state */
   const [selectedArea, setSelectedArea] = useState(""); // 선택된 지역 상태
+  const [isSubRegSelected, setIsSubRegSelected] = useState({}); //subRegion이 선택되었는가?
   const setPostProj = useSetAtom(postProjectAtom); //백엔드에 보낼 데이터
+  //대면일 경우에만 지역선택 나타남, 대면일 경우 onChange 이벤트 핸들러
+  const [isFace, setIsFace] = useState(false);
+  const handleIsFace = (e) => {
+    const { name, value } = e.target;
+    setPostProj((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
 
+    if (value === "대면") {
+      setIsFace(true);
+    } else {
+      setIsFace(false);
+    }
+  };
   /*region 이벤트 핸들러*/
   const handleSelectedArea = (e) => {
     const { value } = e.target;
@@ -28,7 +43,11 @@ export const useProjInfo = () => {
       ...prevData,
       subRegionId: Number(value),
     }));
+    setIsSubRegSelected(() => ({
+      [value]: true,
+    }));
   };
+  console.log(isSubRegSelected);
   /*선택한 region 변경 시 subRegion 데이터 0으로 초기화 */
   useEffect(() => {
     setPostProj((prevData) => ({
@@ -46,5 +65,8 @@ export const useProjInfo = () => {
     selectedAreaData,
     startSubRegion,
     onClick,
+    isFace,
+    handleIsFace,
+    isSubRegSelected,
   };
 };

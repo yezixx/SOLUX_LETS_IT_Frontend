@@ -8,27 +8,20 @@ import { postProjectAtom } from "../../../atoms/atoms";
 
 const ProjInfo = ({ errors }) => {
   //ProjInfo 화면에서만 사용하는 훅
-  const { onClick, handleSelectedArea, selectedAreaData, startSubRegion } =
-    useProjInfo();
+  const {
+    onClick,
+    handleSelectedArea,
+    selectedAreaData,
+    startSubRegion,
+    isFace,
+    handleIsFace,
+    isSubRegSelected,
+  } = useProjInfo();
   //select에 필요한 이벤트 핸들러 (폼 공통)
   const { onChange } = useProjectPost();
   //백엔드에 보낼 data
   const setPostProj = useSetAtom(postProjectAtom);
-  //대면일 경우에만 지역선택 나타남, 대면일 경우 onChange 이벤트 핸들러
-  const [isFace, setIsFace] = useState(false);
-  const handleIsFace = (e) => {
-    const { name, value } = e.target;
-    setPostProj((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-
-    if (value === "대면") {
-      setIsFace(true);
-    } else {
-      setIsFace(false);
-    }
-  };
+  // console.log(setPostProj)
 
   return (
     <div className="프로젝트 정보">
@@ -90,7 +83,7 @@ const ProjInfo = ({ errors }) => {
             name="regionId"
             onChange={handleSelectedArea}
           >
-            {/* onChange 이벤트로 지역 선택 업데이트 */}
+            {/* region 선택 */}
             <option value="">지역 선택</option>
             {KoreaArea.map((area, idx) => (
               <option key={idx} value={area.name}>
@@ -98,13 +91,18 @@ const ProjInfo = ({ errors }) => {
               </option>
             ))}
           </select>
+          {/*subRegion 선택 */}
           <div className={styles.projectHire__subArea}>
             {selectedAreaData &&
               selectedAreaData.subArea.map((subArea, idx) => (
                 <button
                   className={`${
                     errors["subRegionId"] ? styles.formError : ""
-                  } ${styles.projectHire__subRegion}`}
+                  } ${
+                    isSubRegSelected[startSubRegion * 100 + (idx + 1)]
+                      ? styles.selected
+                      : styles.projectHire__subRegion
+                  }`}
                   type="button"
                   value={startSubRegion * 100 + (idx + 1)}
                   name="subRegionId"
