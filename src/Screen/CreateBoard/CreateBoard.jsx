@@ -12,7 +12,7 @@ import Loading from "../../Components/Loading/Loading";
 const mock_members = [
   {
     applyId: 4,
-    nickname: "grace_nick",
+    nickname: "목업",
     profileImage: "grace.jpg",
   },
 ];
@@ -31,30 +31,35 @@ const mock_collabLinks = [
 
 const CreateBoard = () => {
   const nav = useNavigate();
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [links, setLinks] = useState(mock_collabLinks);
-  const [applicantsList, setApplicantsList] = useState([]);
+  const [applicantsList, setApplicantsList] = useState(mock_members);
 
   const [params] = useSearchParams();
-  const postId = params.get("post");
+  const postId = 4; //params.get("post");
 
   const titleRef = useRef();
   const linkRef1 = useRef();
   const linkRef2 = useRef();
 
-  useEffect(() => {
+  /*useEffect(() => {
     approveApplicants(postId)
-      .then((data) => {
-        setApplicantsList(data);
+      .then((res) => {
+        setApplicantsList(res.data);
+        if (res.data.length === 0) {
+          alert("팀원이 없습니다. 팀원을 추가해주세요.");
+          nav("/");
+        }
         setLoading(false);
       })
       .catch((error) => {
         console.log("error (in CreateBoard):", error);
+        alert("팀원 목록을 불러오는데 실패했습니다. 다시 시도해주세요.");
         setLoading(false);
-        setApplicantsList(mock_members);
+        nav("/");
       });
-  }, []);
+  }, []);*/
 
   const onFocusElement = (ref) => {
     if (ref.current) {
@@ -66,9 +71,7 @@ const CreateBoard = () => {
     try {
       const response = await createTeam(postId, newTeamData);
 
-      const result = await response.json();
-      console.log(result.data);
-      return result.data; // 서버로부터 받은 teamID 반환
+      return response.data; // 서버로부터 받은 teamID 반환
     } catch (error) {
       console.error("Error creating team:", error);
       return null; // 오류 발생 시 null 반환
@@ -93,13 +96,14 @@ const CreateBoard = () => {
       notionLink: links[0].link,
       githubLink: links[1].link,
     };
-    console.log(newTeamData);
     if (confirm("팀게시판을 생성하시겠습니까?")) {
       const teamID = await handleCreate(postId, newTeamData);
-
-      if (teamID !== null) {
+      console.log(teamID);
+      if (teamID) {
+        // 정상적으로 teamID를 받았을 때
         nav(`/teamboard/?team=${teamID}`);
       } else {
+        // teamID를 받지 못했을 때
         alert("팀 생성에 실패했습니다. 다시 시도해주세요.");
       }
     }
