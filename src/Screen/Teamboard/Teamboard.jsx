@@ -235,12 +235,12 @@ const Teamboard = () => {
 
       if (!isMember(teamData, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
-        //nav("/");
+        nav("/");
         return;
       }
       if (!loginUserId) {
         alert("로그인이 필요한 페이지입니다.");
-        //nav("/");
+        nav("/");
       }
     } catch (error) {
       console.log("teamboard error", error);
