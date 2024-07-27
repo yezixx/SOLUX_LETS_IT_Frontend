@@ -4,19 +4,7 @@ import styles from "./PostInfo.module.css";
 import PlusCircleIcon from "../../../Image/Icons/PlusCircleIcon";
 import BookmarkIcon from "../../../Image/Icons/BookmarkIcon";
 //import CheckIcon from "../../../Image/Icons/CheckIcon";
-
-const getFormattedDate = (date) => {
-  const dateObj = new Date(date);
-  return `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}-${dateObj
-    .getDate()
-    .toString()
-    .padStart(2, "0")}, ${dateObj
-    .getHours()
-    .toString()
-    .padStart(2, "0")}:${dateObj.getMinutes().toString().padStart(2, "0")}`;
-};
+import { getFormattedDate } from "../getFormattedDate";
 
 const PostInfo = ({ post, isBookmark, onClickScrap }) => {
   return (

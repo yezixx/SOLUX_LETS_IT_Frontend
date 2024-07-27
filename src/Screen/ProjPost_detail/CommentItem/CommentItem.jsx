@@ -7,19 +7,7 @@ import styles from "./CommentItem.module.css";
 import Button from "../../../Components/Button/Button";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../atoms/atoms";
-
-const getFormattedDate = (date) => {
-  const dateObj = new Date(date);
-  return `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}-${dateObj
-    .getDate()
-    .toString()
-    .padStart(2, "0")}, ${dateObj
-    .getHours()
-    .toString()
-    .padStart(2, "0")}:${dateObj.getMinutes().toString().padStart(2, "0")}`;
-};
+import { getFormattedDate } from "../getFormattedDate";
 
 const CommentItem = ({
   id,
