@@ -37,7 +37,6 @@ export const useSearch = (searchData) => {
   const deleteGrayBox = (removeItem) => {
     setTech((prev) => prev.filter((item) => item != removeItem));
   };
-  console.log(tech);
   return {
     handleFocus,
     handleBlur,

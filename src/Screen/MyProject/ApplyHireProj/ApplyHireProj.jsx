@@ -13,6 +13,7 @@ import ProjectList from "../../../Components/RecommendProject/ProjectList";
 import { approveApplicants } from "../../../service/applyService";
 
 const ApplyHireProj = () => {
+
   //클릭하면 팀원을 보여주도록 state 설정
   const [showMember, setShowMember] = useState({});
   /*구인/신청 프로젝트 data 담을 state */

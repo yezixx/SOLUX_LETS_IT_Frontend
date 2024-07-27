@@ -96,7 +96,7 @@ export const RouterInfo = [
         children: [
           {
             path: "hiring-and-applied",
-            element: <PrivateRoute element={<ApplyHireProj />} />,
+            element: <ApplyHireProj />,
             label: "구인/신청 프로젝트",
           },
           {
