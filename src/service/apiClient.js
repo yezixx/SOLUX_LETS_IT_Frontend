@@ -1,5 +1,10 @@
 import axios from "axios";
 
+const updateApiClientToken = (token) => {
+  apiClient.defaults.headers.Authorization = token ? `Bearer ${token}` : "";
+};
+
+const token = localStorage.getItem("token");
 const apiClient = axios.create({
   baseURL: "/api",
   headers: {
@@ -9,3 +14,4 @@ const apiClient = axios.create({
 });
 
 export default apiClient;
+export { updateApiClientToken };
