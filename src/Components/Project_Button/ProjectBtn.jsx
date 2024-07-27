@@ -9,24 +9,29 @@ const ProjectBtn = ({
   onClick2 = undefined,
   button1Text = "add text",
   button2Text = "add text",
-  project,
+  project, //부모 요소에서 전달한 project
 }) => {
-  console.log(project);
   return (
     <div className={styles.PortfolioBtn__box}>
       {/*프로젝트명 */}
-      <div className={styles.PortfolioBtn__title}>{project.prtTitle}</div>
+      <div className={styles.PortfolioBtn__title}>
+        {/*부모 객체로부터 오는 시간 동안 '로딩'을 보여줌 */}
+        {project ? project.prjTitle : "Loading"}
+      </div>
 
       {/*프로젝트 참석자 프로필 사진 - 백엔드 잇고 map으로 수정할 예정*/}
       <div className={styles.PortfolioBtn__photo}>
         <div className={styles.member1}>
-          <PortfolioBtnPhoto photo={project.teamMembers[0].profile_url} />
+          <PortfolioBtnPhoto />
+          {/* <PortfolioBtnPhoto photo={project.teamMembers[0].profile_url} /> */}
         </div>
         <div className={styles.member2}>
-          <PortfolioBtnPhoto photo={project.teamMembers[1].profile_url} />
+          {/* <PortfolioBtnPhoto photo={project.teamMembers[1].profile_url} /> */}
+          <PortfolioBtnPhoto />
         </div>
         <div className={styles.member3}>
-          <PortfolioBtnPhoto photo={project.teamMembers[2].profile_url} />
+          {/* <PortfolioBtnPhoto photo={project.teamMembers[2].profile_url} /> */}
+          <PortfolioBtnPhoto />
         </div>
       </div>
 
