@@ -9,12 +9,17 @@ export const applicant = atom([]);
 export const isLoginAtom = atom(false);
 //구인글 작성 (세부화면으로 쪼갰기에 atom 필요)
 export const postProjectAtom = atom({
+  title: "",
+  content: "",
   peopleNum: "",
-  endDate: "",
+  recruitDueDate: "",
   preference: "",
-  projectInfo: "",
   projectPeriod: "",
   ageGroup: "",
-  stack: "",
-  content: "",
+  stack: [],
+  difficulty: "",
+  onOff: "",
+  regionId: 0,
+  subRegionId: 0,
+  categoryId: [],
 });
