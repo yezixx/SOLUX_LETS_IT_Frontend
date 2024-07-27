@@ -7,7 +7,7 @@ import { postProjectAtom } from "../../../atoms/atoms";
 import { useEffect } from "react";
 import GrayBox from "../../../Components/SearchProject/GrayBox";
 
-const ProjField = () => {
+const ProjField = ({ errors }) => {
   /*프로젝트 search 훅 */
   const {
     isFocus,
@@ -36,7 +36,9 @@ const ProjField = () => {
         <input
           name="categoryId"
           onChange={handleSearch}
-          className={styles.projectHire__inputStyle2}
+          className={`${errors["categoryId"] ? styles.formError : ""} ${
+            styles.projectHire__inputStyle2
+          }`}
           placeholder="프론트엔드"
           onFocus={handleFocus}
           onBlur={handleBlur}

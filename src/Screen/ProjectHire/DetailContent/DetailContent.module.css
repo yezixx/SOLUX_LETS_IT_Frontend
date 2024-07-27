@@ -29,5 +29,5 @@
   }
 }
 .formError {
-  background-color: #000;
+  border: 2px solid var(--point);
 }

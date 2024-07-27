@@ -6,7 +6,7 @@ import { useProjInfo } from "./useProjInfo";
 import { useSetAtom } from "jotai";
 import { postProjectAtom } from "../../../atoms/atoms";
 
-const ProjInfo = () => {
+const ProjInfo = ({ errors }) => {
   //ProjInfo 화면에서만 사용하는 훅
   const { onClick, handleSelectedArea, selectedAreaData, startSubRegion } =
     useProjInfo();
@@ -39,7 +39,7 @@ const ProjInfo = () => {
           <option value="대면">대면</option>
           <option value="비대면">비대면</option>
         </select>
-        <select defaultValue="" name="level" onChange={onChange}>
+        <select defaultValue="" name="difficulty" onChange={onChange}>
           <option value="">난이도</option>
           <option>입문</option>
           <option>초급</option>

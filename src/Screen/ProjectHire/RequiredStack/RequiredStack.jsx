@@ -7,7 +7,7 @@ import { useSearch } from "../../../Hooks/useSearch";
 import { useAtomValue, useSetAtom } from "jotai";
 import { postProjectAtom } from "../../../atoms/atoms";
 
-const RequiredStack = () => {
+const RequiredStack = ({ errors }) => {
   /*프로젝트 search 훅 */
   const {
     isFocus,
@@ -39,7 +39,9 @@ const RequiredStack = () => {
         <input
           name="stack"
           onChange={handleSearch}
-          className={styles.projectHire__inputStyle2}
+          className={`${errors["stack"] ? styles.formError : ""} ${
+            styles.projectHire__inputStyle2
+          }`}
           placeholder="JavaScript"
           onFocus={handleFocus}
           onBlur={handleBlur}

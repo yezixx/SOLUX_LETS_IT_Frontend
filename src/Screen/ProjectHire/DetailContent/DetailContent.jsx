@@ -1,8 +1,8 @@
 import styles from "./DetailContent.module.css";
 import useProjectPost from "../useProjectPost";
 
-const DetailContent = () => {
-  const { onChange, errors } = useProjectPost();
+const DetailContent = ({ errors }) => {
+  const { onChange } = useProjectPost();
   return (
     <div className="상세 내용">
       <div className={styles.projectHire__subTitle}>상세 내용</div>

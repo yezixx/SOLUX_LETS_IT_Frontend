@@ -38,6 +38,3 @@ button {
   background: none;
   cursor: pointer;
 }
-.formError {
-  border: 2px solid var(--point);
-}

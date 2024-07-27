@@ -26,16 +26,14 @@
   row-gap: 40px;
   flex-direction: column;
 }
-.projectHire .formError {
-  border: 2px solid var(--point);
-}
+
 .projectHire__projectTitle {
-  border: none;
-  border-bottom: 1px solid var(--line-color);
+  border: 1px solid var(--line-color);
   &::placeholder {
     font-size: 28px;
   }
 }
+
 /*제목 제외 모든 input 컨테이너*/
 .projectHire__container {
   display: grid;
@@ -57,4 +55,7 @@
 .buttonWrap {
   display: flex;
   justify-content: right;
+}
+.formError {
+  border: 2px solid var(--point) !important;
 }
