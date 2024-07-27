@@ -62,3 +62,26 @@
 .subAreaContainer div {
   font-size: 15px;
 }
+
+.sub.selected {
+  background-color: #f0f0f0; /* 선택된 상태의 스타일 예시 */
+  border: 2px solid #007bff; /* 선택된 상태의 스타일 예시 */
+}
+
+.selectedAreas {
+  margin-top: 20px;
+}
+
+.selectedAreas h3 {
+  margin-bottom: 10px;
+}
+
+.selectedAreas ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.selectedAreas li {
+  background-color: #e0e0e0; /* 선택된 항목의 스타일 예시 */
+  margin: 5px 0;
+  padding: 5px 10px;}
