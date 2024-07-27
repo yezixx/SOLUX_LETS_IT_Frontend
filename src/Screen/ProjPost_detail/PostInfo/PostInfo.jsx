@@ -3,7 +3,7 @@ import UserIcon from "../../../Image/Icons/UserIcon";
 import styles from "./PostInfo.module.css";
 import PlusCircleIcon from "../../../Image/Icons/PlusCircleIcon";
 import BookmarkIcon from "../../../Image/Icons/BookmarkIcon";
-import CheckIcon from "../../../Image/Icons/CheckIcon";
+//import CheckIcon from "../../../Image/Icons/CheckIcon";
 
 const PostInfo = ({ post, isBookmark, onClickScrap }) => {
   return (
@@ -20,12 +20,12 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
             <div>
               <CalendarIcon />
               <div className={styles.PostInfo__subLabel}>모집마감</div>
-              {`${post.recruitEndDate}`}
+              {`${post.recruitDueDate}`}
             </div>
             <div>
               <UserIcon />
               <div className={styles.PostInfo__subLabel}>모집인원</div>
-              {`${post.recruitmentCount}명`}
+              {`${post.peopleNum}명`}
             </div>
             <div>
               <PlusCircleIcon />{" "}
@@ -40,23 +40,23 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
             <div className={styles.PostInfo__projInfoDetail}>
               <div>
                 <div className={styles.PostInfo__subLabel}>예상 기간</div>
-                {post.projectInfo.projectPeriod}
+                {post.projectPeriod}
               </div>
               <div>
                 <div className={styles.PostInfo__subLabel}>진행 방식</div>
-                {post.projectInfo.method}
+                {post.onOff}
               </div>
               <div>
                 <div className={styles.PostInfo__subLabel}>지역</div>
-                {post.projectInfo.regionId}
+                {`${post.region} ${post.subRegion ? post.subRegion : ""}`}
               </div>
               <div>
                 <div className={styles.PostInfo__subLabel}>난이도</div>
-                {"중급"}
+                {post.difficulty}
               </div>
               <div>
                 <div className={styles.PostInfo__subLabel}>연령대</div>
-                {post.projectInfo.ageGroup}
+                {post.ageGroup}
               </div>
             </div>
           </div>
@@ -76,14 +76,14 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
                 )*/}
               </div>
               <div className={styles.PostInfo__skill}>
-                {post.requiredSkills.map((skill, index) => (
+                {post.stack.map((skill, index) => (
                   <div key={index}>{skill}</div>
                 ))}
               </div>
             </div>
-            <div className={styles.PostInfo__meta}>{`${"2024-07-04"} . 조회 ${
-              post.viewCount
-            } . 스크랩${post.scrapCount}`}</div>
+            <div
+              className={styles.PostInfo__meta}
+            >{`${post.createdAt} . 조회 ${post.viewCount} . 스크랩${post.scrapCount}`}</div>
           </div>
         </div>
       </div>
