@@ -31,6 +31,7 @@ import Apply from "./Apply/Apply";
 import APILogIn from "../Screen/LogIn/APILogIn";
 import Redirect from "./LogIn/Redirect";
 import ApplyProfile from "./MyProject/ApplyHireProj/ApplyProfile/ApplyProfile";
+import PrivateRoute from "./PrivateRoute";
 
 export const RouterInfo = [
   {
@@ -95,28 +96,28 @@ export const RouterInfo = [
         children: [
           {
             path: "hiring-and-applied",
-            element: <ApplyHireProj />,
+            element: <PrivateRoute element={<ApplyHireProj />} />,
             label: "구인/신청 프로젝트",
           },
           {
             //백엔드 연결용 동적 주소
             path: "applyprofile/:applyId",
-            element: <ApplyProfile />,
+            // path: "applyprofile",
+            element: <PrivateRoute element={<ApplyProfile />} />,
             label: "구인/신청 프로젝트",
           },
           {
             path: "attendproj",
-            element: <AttendProj />,
+            element: <PrivateRoute element={<AttendProj />} />,
             label: "참여 프로젝트",
           },
           {
             path: "scrap",
-            element: <Scrap />,
+            element: <PrivateRoute element={<Scrap />} />,
             label: "스크랩 프로젝트",
           },
         ],
       },
-
       //마이페이지
       {
         path: "mypage",
@@ -126,7 +127,7 @@ export const RouterInfo = [
           {
             path: "profile",
             element: <MyProfile />,
-            label: "포트폴리오 관리",
+            label: "프로필 관리",
           },
           {
             // path: "portfolio/:prjId",

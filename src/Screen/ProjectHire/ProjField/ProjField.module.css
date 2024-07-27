@@ -1,0 +1,46 @@
+/*부제목*/
+.projectHire__subTitle {
+  font-family: "pretendardB";
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+/*label + input*/
+.projectHire__detail {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+/*input style 2 - 긴 사이즈*/
+.projectHire__inputStyle2 {
+  width: 70%;
+  border: 1px solid var(--line-color);
+}
+/*연관검색어 창*/
+.projectHire__relatedSearch {
+  width: 71%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  position: relative;
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  background-color: white;
+}
+.projectHire__relatedSearchItem {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--select-color);
+  }
+}
+.projectHire__techWrap {
+  width: 70%;
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}

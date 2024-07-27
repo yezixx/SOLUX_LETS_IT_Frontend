@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ProjectList.module.css";
-import Stack from "../SearchProject/Stack";
+import Stack from "../SearchProject/GrayBox";
 /*db 배열자체를 projects로 보내줄 것 */
 /*객체의 key 값을 백엔드와 맞출 필요 있음 */
 function ProjectList({ project }) {
