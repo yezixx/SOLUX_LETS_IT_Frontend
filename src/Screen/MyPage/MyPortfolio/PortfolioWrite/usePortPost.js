@@ -2,13 +2,13 @@ import { useState } from "react";
 
 const usePortPost = () => {
   const [portfolioData, setPortfolioData] = useState({
-    title: "",
-    role: "",
-    stack: "",
-    tasks: "",
-    difficulties: "",
+    prtTitle: "",
+    // role: "",
+    // stack: "",
+    workDescription: "",
+    issues: "",
     solutions: "",
-    learnings: "",
+    feedback: "",
   });
   const onChange = (e) => {
     const { name, value } = e.target;
