@@ -78,7 +78,11 @@ const CommentItem = ({
   return (
     <div className={styles.CommentItem}>
       {isOpen && (
-        <div className={styles.CommentItem__menu}>
+        <div
+          className={`${styles.CommentItem__menu} ${
+            isPostWriter() ? styles.CommentItem__menu__WRITER : ""
+          }`}
+        >
           <Button
             text="수정"
             type="NONE__TEXT-TC2"

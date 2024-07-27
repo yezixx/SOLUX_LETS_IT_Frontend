@@ -118,3 +118,7 @@
   background-color: white;
   border-radius: 8px;
 }
+
+.CommentItem__menu__WRITER {
+  background-color: var(--sub-color);
+}
