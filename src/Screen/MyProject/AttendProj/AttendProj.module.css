@@ -15,9 +15,8 @@
   margin-bottom: 40px;
   border-bottom: 1px solid var(--line-color);
 }
-.ongoingProj__cont {
+.attendProj__container {
   display: flex;
   flex-wrap: wrap;
-  width: 1115px;
-  gap: 20px;
+  gap: 30px;
 }

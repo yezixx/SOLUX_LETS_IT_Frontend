@@ -51,30 +51,34 @@ const OngoingProj = () => {
         {/*제목 */}
         <div className={styles.ongoingProj__title}>진행중인 프로젝트</div>
         {/*작성할 수 있는 포트폴리오 나열 , key값으로 prjId 할당*/}
-        {ongoingProj.map((project) => (
-          <div key={project.teamId} className={styles.ongoingProj__cont}>
-            <ProjectBtn
-              onClick1={() => naviagateTo("/teamboard")}
-              onClick2={() =>
-                naviagateTo(`/mypage/portfolio/${project.teamId}`)
-              }
-              button1Text="팀 게시판"
-              button2Text="포트폴리오"
-              project={project}
-            />
-          </div>
-        ))}
+        <div className={styles.attendProj__container}>
+          {ongoingProj.map((project) => (
+            <div key={project.teamId} className={styles.ongoingProj__cont}>
+              <ProjectBtn
+                onClick1={() => naviagateTo("/teamboard")}
+                onClick2={() =>
+                  naviagateTo(`/mypage/portfolio/${project.teamId}`)
+                }
+                button1Text="팀 게시판"
+                button2Text="포트폴리오"
+                project={project}
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/*제목 */}
       <div className={styles.ongoingProj__ongoingproj}>
         <div className={styles.ongoingProj__title}>완료한 프로젝트</div>
         {/*작성할 수 있는 포트폴리오 나열 */}
-        {completeProj.map((project) => (
-          <div key={project.teamId} className={styles.ongoingProj__cont}>
-            <ProjectBtn buttonShow={false} project={project} />
-          </div>
-        ))}
+        <div className={styles.attendProj__container}>
+          {completeProj.map((project) => (
+            <div key={project.teamId} className={styles.ongoingProj__cont}>
+              <ProjectBtn buttonShow={false} project={project} />
+            </div>
+          ))}
+        </div>
       </div>
 
       {/*팀원평가 */}
