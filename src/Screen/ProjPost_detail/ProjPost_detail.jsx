@@ -59,6 +59,14 @@ const mock_post = {
 
 const mock_comments = [
   {
+    id: 1,
+    writer: "CODER.",
+    createDate: "2024-04-06, 15:30",
+    updateDate: "2024-04-06, 15:30",
+    content: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
+  },
+  /*
+  {
     id: 0,
     writer: "CODER.",
     createDate: "2024-04-06, 15:30",
@@ -72,12 +80,12 @@ const mock_comments = [
     updateDate: "2024-04-06, 16:00",
     content: `모임 요일은 팀원 모집 후 상의하여 결정하려고 합니다.
     해당 스택을 조금이라도 사용해보신 분을 찾고있습니다.`,
-  },
+  },*/
 ];
 
 const ProjPost_detail = () => {
   const loginUserId = useAtomValue(userIdAtom);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [post, setPost] = useState(mock_post);
   const postId = useParams().postId;
 
@@ -93,32 +101,32 @@ const ProjPost_detail = () => {
     return String(post.userId) === String(loginUserId);
   };
 
-  useEffect(() => {
-    setLoading(true);
-    getPosts(postId)
-      .then((data) => {
-        setPost(data);
-        setLoading(false);
-        console.log(data);
-      })
-      .catch((error) => {
-        console.log("post detail error(ProjPost_Datil.jsx): ", error);
-        //alert("게시글을 불러오는데 실패했습니다.");
-        setLoading(false);
-        //nav(-1);
-      });
-    /*
-    getComments(postId)
-      .then((data) => {
-        setComments(data.data);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("comment list error(ProjPost_Datil.jsx): ", error);
-        alert("댓글 목록을 불러오는데 실패했습니다.");
-        setLoading(false);
-      });*/
-  }, []);
+  // useEffect(() => {
+  //   setLoading(true);
+  //   getPosts(postId)
+  //     .then((data) => {
+  //       setPost(data);
+  //       setLoading(false);
+  //       console.log(data);
+  //     })
+  //     .catch((error) => {
+  //       console.log("post detail error(ProjPost_Datil.jsx): ", error);
+  //       //alert("게시글을 불러오는데 실패했습니다.");
+  //       setLoading(false);
+  //       //nav(-1);
+  //     });
+  //   /*
+  //   getComments(postId)
+  //     .then((data) => {
+  //       setComments(data.data);
+  //       setLoading(false);
+  //     })
+  //     .catch((error) => {
+  //       console.log("comment list error(ProjPost_Datil.jsx): ", error);
+  //       alert("댓글 목록을 불러오는데 실패했습니다.");
+  //       setLoading(false);
+  //     });*/
+  // }, []);
 
   const onCraeteComment = (content) => {
     setComments([
@@ -131,16 +139,16 @@ const ProjPost_detail = () => {
         content: content,
       },
     ]);
-    const res = createComment(postId, {
-      comComment: content,
+    const res = createComment(Number(postId), Number(loginUserId), {
+      comContent: content,
     });
     console.log(res.data);
   };
 
-  const onUpdateComment = (id, content) => {
+  const onUpdateComment = (commentId, content) => {
     setComments(
       comments.map((comment) =>
-        comment.id === id
+        comment.id === commentId
           ? {
               ...comment,
               updateDate: new Date().getTime(),
@@ -149,18 +157,22 @@ const ProjPost_detail = () => {
           : comment
       )
     );
-    const res = updateComment(postId, id, {
-      //updateDate: new Date().getTime(),
-      comComment: content,
-    });
+    const res = updateComment(
+      Number(postId),
+      Number(commentId),
+      Number(loginUserId),
+      {
+        comContent: content,
+      }
+    );
     console.log(res.data);
   };
 
-  const onDeleteComment = (id) => {
+  const onDeleteComment = (commentId) => {
     setComments(
-      comments.filter((comment) => String(comment.id) !== String(id))
+      comments.filter((comment) => String(comment.id) !== String(commentId))
     );
-    deleteComment(id);
+    deleteComment(Number(postId), Number(commentId));
   };
 
   const onClickCreateComment = () => {
