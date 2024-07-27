@@ -8,6 +8,7 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   plugins: [react(), svgr()],
   server: {
+    port: 3000,
     proxy: {
       //프론트엔드 상에서 대치할 주소명
       "/api": {

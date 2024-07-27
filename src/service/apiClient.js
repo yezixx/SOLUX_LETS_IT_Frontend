@@ -4,7 +4,6 @@ const apiClient = axios.create({
   baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
-    ...(token ? { Authorization: `Bearer ${token}` } : {}),
   },
 });
 

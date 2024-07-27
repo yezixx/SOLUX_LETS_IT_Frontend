@@ -21,28 +21,10 @@ const Apply = () => {
   const { postId } = useParams();
   const setApplicant = useSetAtom(applicant);
   // applyData - onChange를 통해 input으로 받은 값을 모아둔 객체
-  const { applyData, onChange, warning } = useApplyPost();
+  const { applyData, onChange, handleSubmit } = useApplyPost();
   console.log(applyData);
   // 로그인 시 받아둔 유저 아이디값 가져옴
   const userId = useAtomValue(userIdAtom);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    startTransition(() => {
-      submitApply(postId, userId, applyData)
-        .then((response) => {
-          // 서버 응답 처리
-          setApplicant(response.data); // 예시: 응답 데이터로 상태 업데이트
-          warning(
-            '프로젝트를 신청할 경우, 구인글 작성자에게 "실명, 이메일, 프로필"이 제공됩니다. 계속하시겠습니까?'
-          );
-        })
-        .catch((error) => {
-          console.error("신청 제출 중 오류 발생:", error);
-          alert("이미 신청하였습니다.");
-        });
-    });
-  };
 
   return (
     <div>
