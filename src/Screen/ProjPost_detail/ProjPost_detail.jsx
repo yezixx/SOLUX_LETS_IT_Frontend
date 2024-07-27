@@ -288,16 +288,18 @@ const ProjPost_detail = () => {
           </div>
         </div>
       </div>
-      <footer>
-        <div className={styles.ProjPost_detail__scrap} onClick={onClickScrap}>
-          <BookmarkIcon width="30px" height="30px" isBookmark={isBookmark} />
-        </div>
-        {isWriter() ? (
-          <Button text="수정" type="SEC_120x40" onClick={onClickUpdate} />
-        ) : (
-          <Button text="신청" type="MC2_180x40" onClick={onClickApply} />
-        )}
-      </footer>
+      {isWriter ? null : (
+        <footer>
+          <div className={styles.ProjPost_detail__scrap} onClick={onClickScrap}>
+            <BookmarkIcon width="30px" height="30px" isBookmark={isBookmark} />
+          </div>
+          {isWriter() ? (
+            <Button text="수정" type="SEC_120x40" onClick={onClickUpdate} />
+          ) : (
+            <Button text="신청" type="MC2_180x40" onClick={onClickApply} />
+          )}
+        </footer>
+      )}
     </div>
   );
 };
