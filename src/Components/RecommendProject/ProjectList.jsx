@@ -4,6 +4,10 @@ import Stack from "../SearchProject/Stack";
 /*db 배열자체를 projects로 보내줄 것 */
 /*객체의 key 값을 백엔드와 맞출 필요 있음 */
 function ProjectList({ project }) {
+  //백엔드 없을 경우 null이 되도록 설정 (오류화면 방지)
+  if (!project) {
+    return null;
+  }
   return (
     <div className={styles.projectList}>
       <div className={styles.projectItem} key={project.postId}>
