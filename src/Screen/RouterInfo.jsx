@@ -152,7 +152,7 @@ export const RouterInfo = [
             label: "포트폴리오 게시판",
           },
           {
-            path: "portfolio/board/detail/:prjId",
+            path: "portfolio/board/detail/:prtId/:teamId",
             // path: "portfolio/board/detail",
             element: <PortfolioDetail />,
             label: "포트폴리오 게시판",

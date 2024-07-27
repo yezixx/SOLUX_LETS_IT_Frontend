@@ -5,6 +5,7 @@ import Paging from "../../../../Components/Paging/Paging";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../../atoms/atoms";
+import { getMyPortfolios } from "../../../../service/portfolioService";
 // import { userAtom } from "../../../../atoms/atoms";
 
 //mock data
@@ -30,16 +31,19 @@ const PortfolioBoard = () => {
   };
   //prjId , userId
   // const { prjId } = useParams();
-  const prjId = 1; //1로 가정
+  const teamId = 1; //1로 가정/
   const userId = useAtomValue(userIdAtom); //1로 가정
-  // const user = useAtomValue(userAtom);
-  // const userId = user.userId;
+  console.log(userId);
 
   //포트폴리오 리스트업
   const [portfolioList, setPortfolioList] = useState([]);
   useEffect(() => {
-    getMyPortfolios(prjId, userId)
-      .then((res) => setPortfolioList(res.data.data))
+    getMyPortfolios(teamId, userId)
+      .then((res) => {
+        console.log(res.data);
+        setPortfolioList(res.data);
+        console.log(portfolioList);
+      })
       .catch((error) => alert(`에러가 발생했습니다 : ${error}`));
   }, [setPortfolioList]);
 
@@ -63,9 +67,7 @@ const PortfolioBoard = () => {
   return (
     <div className={styles.PortfolioBoard__contentWrap}>
       {/*포트폴리오명 */}
-      <div className={styles.PorfolioBoard__portfolioTitle}>
-        포트폴리오 명 상의 필요
-      </div>
+      <div className={styles.PorfolioBoard__portfolioTitle}>프로젝트 명</div>
 
       {/*포트폴리오 리스트 */}
       <ul className={styles.PortfolioBoard__table}>
@@ -86,7 +88,7 @@ const PortfolioBoard = () => {
                 {idx + (activePage - 1) * itemsCountPerPage}
               </li>
               <li
-                onClick={() => navigateTo(`detail/${data.prtId}`)}
+                onClick={() => navigateTo(`detail/${data.prtId}/${teamId}`)}
                 className={styles.PortfolioBoard__cell}
               >
                 {data.prtTitle}

@@ -1,9 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ProjectBtn from "../../../Components/Project_Button/ProjectBtn";
 import styles from "./AttendProj.module.css";
-<<<<<<< HEAD
-import { useEffect } from "react";
-=======
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../atoms/atoms";
 import { useEffect, useState } from "react";
@@ -11,18 +8,12 @@ import {
   getCompleteProjects,
   getMyOngoingProjects,
 } from "../../../service/projectService";
->>>>>>> 82fe60763438a8435c8735ab1937b4712b37b7cd
 
 const OngoingProj = () => {
   const navigate = useNavigate();
   const naviagateTo = (link) => {
     navigate(link);
   };
-<<<<<<< HEAD
-  useEffect(()=>{
-    
-  })
-=======
   /*1로 가정, 추후 로그인과 연동 시 로그인한 userId로 변동 */
   const userId = useAtomValue(userIdAtom);
   /*진행 중인 프로젝트 리스트 */
@@ -51,7 +42,6 @@ const OngoingProj = () => {
   console.log(JSON.stringify(ongoingProj, null, 2)); // 받아온 data 확인
   console.log(JSON.stringify(completeProj, null, 2)); // 받아온 data 확인
 
->>>>>>> 82fe60763438a8435c8735ab1937b4712b37b7cd
   return (
     <div className={styles.ongoingProj__contWrap}>
       {/*진행 중인 프로젝트 + 팀원 평가*/}

@@ -4,20 +4,20 @@ import { useEffect, useState } from "react";
 import { getMyDetailPortfolios } from "../../../../service/portfolioService";
 
 const PortfolioDetail = () => {
-  const { prtId } = useParams();
+  const { prtId, teamId } = useParams();
   /*프로젝트 상세 데이터 담을 state */
   const [prtDetailList, setPrtDetailList] = useState({});
 
   useEffect(() => {
-    getMyDetailPortfolios(prtId)
+    getMyDetailPortfolios(prtId, teamId)
       .then((res) => {
         console.log(res.data);
-        setPrtDetailList(res.data.data); //확인 필요
+        setPrtDetailList(res.data); //확인 필요
       })
       .catch((error) =>
         console.log(`Error get portfolioDetail list : ${error}`)
       );
-  });
+  }, [setPrtDetailList]);
   //prtId 기반으로 포트폴리오 리스트 불러올 것
   return (
     <div className={styles.portfolioDetail__wrap}>
