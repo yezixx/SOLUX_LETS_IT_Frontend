@@ -5,6 +5,19 @@ import PlusCircleIcon from "../../../Image/Icons/PlusCircleIcon";
 import BookmarkIcon from "../../../Image/Icons/BookmarkIcon";
 //import CheckIcon from "../../../Image/Icons/CheckIcon";
 
+const getFormattedDate = (date) => {
+  const dateObj = new Date(date);
+  return `${dateObj.getFullYear()}-${(dateObj.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}-${dateObj
+    .getDate()
+    .toString()
+    .padStart(2, "0")}, ${dateObj
+    .getHours()
+    .toString()
+    .padStart(2, "0")}:${dateObj.getMinutes().toString().padStart(2, "0")}`;
+};
+
 const PostInfo = ({ post, isBookmark, onClickScrap }) => {
   return (
     <div className={styles.PostInfo}>
@@ -20,12 +33,12 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
             <div>
               <CalendarIcon />
               <div className={styles.PostInfo__subLabel}>모집마감</div>
-              {`${post.recruitDueDate}`}
+              {`${getFormattedDate(new Date(post.recruitDueDate))}`}
             </div>
             <div>
               <UserIcon />
               <div className={styles.PostInfo__subLabel}>모집인원</div>
-              {`${post.peopleNum}명`}
+              {post.peopleNum}
             </div>
             <div>
               <PlusCircleIcon />{" "}
@@ -81,9 +94,9 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
                 ))}
               </div>
             </div>
-            <div
-              className={styles.PostInfo__meta}
-            >{`${post.createdAt} . 조회 ${post.viewCount} . 스크랩${post.scrapCount}`}</div>
+            <div className={styles.PostInfo__meta}>{`${getFormattedDate(
+              new Date(post.createdAt)
+            )} . 조회 ${post.viewCount} . 스크랩 ${post.scrapCount}`}</div>
           </div>
         </div>
       </div>

@@ -34,10 +34,15 @@ export const getComments = async (postId) => {
 // 프로젝트 상세 조회 - 구인글 상세 보기
 export const getPosts = async (postId) => {
   try {
-    const response = await apiClient.get(`/posts/${postId}`);
+    const response = await apiClient.get(`/posts/${Number(postId)}`);
+    console.log(response);
     return response.data;
   } catch (error) {
-    console.error("Error fetching post detail:", error);
+    // 에러 처리
+    console.error("Error fetching post detail:");
+
+    // 에러의 기본 메시지 출력
+    console.error("Message:", error.message);
     throw error;
   }
 };
