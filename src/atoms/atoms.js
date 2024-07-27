@@ -17,4 +17,5 @@ export const postProjectAtom = atom({
   ageGroup: "",
   stack: "",
   content: "",
+  field: "",
 });
