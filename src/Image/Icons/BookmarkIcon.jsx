@@ -1,31 +1,15 @@
-import { useRef, useState } from "react";
-
-const BookmarkIcon = ({ width = "30px", height = "30px" }) => {
-  const [isClicked, setIsClicked] = useState(false);
-  const iconRef = useRef();
-  const onClickBookmark = () => {
-    setIsClicked(!isClicked);
-    if (isClicked) {
-      iconRef.current.style.stroke = "#FFD600";
-      iconRef.current.style.fill = "#FFD600";
-    } else {
-      iconRef.current.style.stroke = "var(--text-color1)";
-      iconRef.current.style.fill = "transparent";
-    }
-  };
+const BookmarkIcon = ({ width = "30px", height = "30px", isBookmark }) => {
   return (
     <svg
-      ref={iconRef}
       xmlns="http://www.w3.org/2000/svg"
-      fill="none"
+      fill={isBookmark ? "#FFD600" : "transparent"}
       viewBox="0 0 24 24"
       strokeWidth={1.5}
-      stroke="var(--text-color1)"
+      stroke={isBookmark ? "#FFD600" : "var(--text-color1)"}
       className="size-6"
       width={width}
       height={height}
       cursor={"pointer"}
-      onClick={onClickBookmark}
     >
       <path
         strokeLinecap="round"

@@ -44,3 +44,6 @@
   gap: 10px;
   flex-wrap: wrap;
 }
+.formError {
+  border: 2px solid var(--point) !important;
+}
