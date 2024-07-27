@@ -19,19 +19,22 @@ const mock_teamData = [
     githubLink: "https://github.com/project1",
     teamMemberInfo: [
       {
-        userId: "letsit_backend.model.Member@72f9fde6",
+        userId: 1,
         userName: "Alice",
         position: "Team_Leader",
+        profile_image_url: "testurl1",
       },
       {
-        userId: "letsit_backend.model.Member@30b4fb38",
+        userId: 2,
         userName: "Bob",
         position: "Team_Member",
+        profile_image_url: "testurl2",
       },
       {
-        userId: "letsit_backend.model.Member@123",
+        userId: 3,
         userName: "Charlie",
         position: "Team_Leader",
+        profile_image_url: "testurl3",
       },
     ],
   },
@@ -42,14 +45,22 @@ const mock_teamData = [
     githubLink: "https://github.com/project2",
     teamMemberInfo: [
       {
-        userId: "letsit_backend.model.Member@123",
+        userId: "1",
         userName: "Charlie",
         position: "Team_Leader",
+        profile_image_url: "testurl1",
       },
       {
-        userId: "letsit_backend.model.Member@456",
+        userId: "2",
         userName: "Diana",
         position: "Team_Member",
+        profile_image_url: "testurl2",
+      },
+      {
+        userId: 3,
+        userName: "3",
+        position: "Team_Member",
+        profile_image_url: "testurl3",
       },
     ],
   },
@@ -175,7 +186,7 @@ function feedbackReducer(state, action) {
   }
 }
 
-/*const isMember = (teamData, loginUserId) => {
+const isMember = (teamData, loginUserId) => {
   console.log(
     teamData.teamMemberInfo.some(
       (member) => String(member.userId) === String(loginUserId)
@@ -184,7 +195,7 @@ function feedbackReducer(state, action) {
   return teamData.teamMemberInfo.some(
     (member) => String(member.userId) === String(loginUserId)
   );
-};*/
+};
 
 const Teamboard = () => {
   const [loading, setLoading] = useState(true);
@@ -221,12 +232,12 @@ const Teamboard = () => {
         data: data.data,
       });
       setLoading(false);
-      // 데이터 받아올 때마다 아이디 달라져서 일단 보류
-      /*if (!isMember(teamData, loginUserId)) {
+
+      if (!isMember(teamData, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
         //nav("/");
         return;
-      }*/
+      }
       if (!loginUserId) {
         alert("로그인이 필요한 페이지입니다.");
         //nav("/");
@@ -307,14 +318,23 @@ const Teamboard = () => {
         }),
       },
     });*/
-    try {
-      updateTeam(teamId, {
-        teamName: title,
-        notionLink: notion,
-        githubLink: github,
-      });
-    } catch (e) {
-      console.log("updateTeam error", e);
+    if (
+      // 수정된 정보가 기존 정보와 다를 경우에만 실행
+      !(
+        teamData.teamName === title &&
+        teamData.notionLink === notion &&
+        teamData.githubLink === github
+      )
+    ) {
+      try {
+        updateTeam(teamId, {
+          teamName: title,
+          notionLink: notion,
+          githubLink: github,
+        });
+      } catch (e) {
+        console.log("updateTeam error", e);
+      }
     }
 
     if (
