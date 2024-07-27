@@ -54,6 +54,14 @@
   font-family: "pretendardR";
 }
 
+.CommentItem__writer {
+  color: var(--main-color) !important;
+}
+
+.CommentItem__writer > span {
+  color: var(--main-color);
+}
+
 .CommentItem__icon {
   margin-left: auto;
   cursor: pointer;

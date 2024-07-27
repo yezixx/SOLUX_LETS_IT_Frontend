@@ -103,7 +103,9 @@ const CommentItem = ({
         }`}
       >
         <div className={styles.CommentItem__header}>
-          <div>{writer}</div>
+          <div className={isPostWriter() ? styles.CommentItem__writer : ""}>
+            {writer} {isPostWriter() ? <span>(글쓴이)</span> : null}
+          </div>
           <div>{getFormattedDate(createDate)}</div>
           {createDate !== updateDate && <div>(수정됨)</div>}
           {isCommentWriter() && !isOnChange && (
