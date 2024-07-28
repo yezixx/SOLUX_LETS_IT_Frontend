@@ -26,9 +26,11 @@ const Redirect = () => {
         const userData = res.data.user;
         const TOKEN = res.data.token;
         setUser(userData);
+        console.log(`user state : ${user}`);
         //유저정보 localStorage에 저장
         localStorage.setItem("user", JSON.stringify(userData));
         localStorage.setItem("token", JSON.stringify(TOKEN));
+        //header에 토큰 update
         updateApiClientToken(TOKEN);
         //로그인 상태 true로 변경
         localStorage.setItem("isLoggedIn", "true");
