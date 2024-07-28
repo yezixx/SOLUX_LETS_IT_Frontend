@@ -10,11 +10,12 @@ import { userIdAtom } from "../../../atoms/atoms";
 import { getFormattedDate } from "../getFormattedDate";
 
 const CommentItem = ({
-  id,
-  writer,
+  commentId,
+  userId,
+  name,
   createDate,
   updateDate,
-  content,
+  comContent,
   postWriter,
   inputRef,
   onDelete,
@@ -24,12 +25,12 @@ const CommentItem = ({
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOnChange, setIsOnChange] = useState(false);
-  const [changeInput, setChangeInput] = useState(content);
+  const [changeInput, setChangeInput] = useState(comContent);
 
   const changeInputRef = useRef();
 
-  const isPostWriter = () => String(postWriter) === String(writer);
-  const isCommentWriter = () => String(loginUserId) === String(writer);
+  const isPostWriter = () => String(postWriter) === String(name);
+  const isCommentWriter = () => String(loginUserId) === String(name);
   const onClickIcon = () => {
     setIsOpen(!isOpen);
   };
@@ -39,7 +40,7 @@ const CommentItem = ({
   };
 
   const onClickDelete = () => {
-    onDelete(id);
+    onDelete(commentId);
   };
 
   const onChangeInput = (e) => {
@@ -47,7 +48,7 @@ const CommentItem = ({
   };
 
   const onClickCompleteUpdate = () => {
-    if (changeInput === content) {
+    if (changeInput === comContent) {
       setIsOnChange(false);
       return;
     }
@@ -56,7 +57,7 @@ const CommentItem = ({
       return;
     }
     setIsOnChange(false);
-    onUpdate(id, changeInput);
+    onUpdate(userId, commentId, changeInput);
   };
 
   const onClickCancelUpdate = () => {
@@ -92,7 +93,7 @@ const CommentItem = ({
       >
         <div className={styles.CommentItem__header}>
           <div className={isPostWriter() ? styles.CommentItem__writer : ""}>
-            {writer} {isPostWriter() ? <span>(글쓴이)</span> : null}
+            {name} {isPostWriter() ? <span>(글쓴이)</span> : null}
           </div>
           <div>{getFormattedDate(createDate)}</div>
           {createDate !== updateDate && <div>(수정됨)</div>}
@@ -118,7 +119,7 @@ const CommentItem = ({
               }
             />
           ) : (
-            content
+            comContent
           )}
         </div>
         <div className={styles.CommentItem__icon}>

@@ -59,11 +59,12 @@ const mock_post = {
 
 const mock_comments = [
   {
-    id: 1,
-    writer: "CODER.",
+    commentId: 1,
+    userId: "coder",
+    name: "CODER.",
     createDate: "2024-04-06, 15:30",
     updateDate: "2024-04-06, 15:30",
-    content: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
+    comContent: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
   },
   /*
   {
@@ -106,6 +107,7 @@ const ProjPost_detail = () => {
   //   getPosts(postId)
   //     .then((data) => {
   //       setPost(data);
+  //       setComments(data.comments);
   //       setLoading(false);
   //       console.log(data);
   //     })
@@ -115,28 +117,18 @@ const ProjPost_detail = () => {
   //       setLoading(false);
   //       //nav(-1);
   //     });
-  //   /*
-  //   getComments(postId)
-  //     .then((data) => {
-  //       setComments(data.data);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log("comment list error(ProjPost_Datil.jsx): ", error);
-  //       alert("댓글 목록을 불러오는데 실패했습니다.");
-  //       setLoading(false);
-  //     });*/
   // }, []);
 
   const onCraeteComment = (content) => {
     setComments([
       ...comments,
       {
-        id: commentIdRef.current++,
-        writer: loginUserId,
+        commentId: commentIdRef.current++,
+        userId: loginUserId,
+        name: loginUserId,
         createDate: new Date().getTime(),
         updateDate: new Date().getTime(),
-        content: content,
+        comContent: content,
       },
     ]);
     const res = createComment(Number(postId), Number(loginUserId), {
@@ -145,14 +137,14 @@ const ProjPost_detail = () => {
     console.log(res.data);
   };
 
-  const onUpdateComment = (commentId, content) => {
+  const onUpdateComment = (writerId, commentId, content) => {
     setComments(
       comments.map((comment) =>
-        comment.id === commentId
+        comment.userId === writerId
           ? {
               ...comment,
               updateDate: new Date().getTime(),
-              content: content,
+              comContent: content,
             }
           : comment
       )
@@ -170,7 +162,9 @@ const ProjPost_detail = () => {
 
   const onDeleteComment = (commentId) => {
     setComments(
-      comments.filter((comment) => String(comment.id) !== String(commentId))
+      comments.filter(
+        (comment) => String(comment.commentId) !== String(commentId)
+      )
     );
     deleteComment(Number(postId), Number(commentId));
   };
