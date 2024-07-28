@@ -12,3 +12,7 @@
   justify-content: center;
   padding: 50px;
 }
+.popularproj__container {
+  display: flex;
+  gap: 20px;
+}
