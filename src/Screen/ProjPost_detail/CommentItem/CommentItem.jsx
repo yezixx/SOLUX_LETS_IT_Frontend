@@ -13,8 +13,8 @@ const CommentItem = ({
   commentId,
   userId,
   name,
-  createDate,
-  updateDate,
+  comCreateDate,
+  comUpdateDate,
   comContent,
   postWriter,
   inputRef,
@@ -95,8 +95,8 @@ const CommentItem = ({
           <div className={isPostWriter() ? styles.CommentItem__writer : ""}>
             {name} {isPostWriter() ? <span>(글쓴이)</span> : null}
           </div>
-          <div>{getFormattedDate(createDate)}</div>
-          {createDate !== updateDate && <div>(수정됨)</div>}
+          <div>{getFormattedDate(comCreateDate)}</div>
+          {comCreateDate !== comUpdateDate && <div>(수정됨)</div>}
           {isCommentWriter() && !isOnChange && (
             <div className={styles.CommentItem__icon} onClick={onClickIcon}>
               <EllipsisHorizontalIcon />

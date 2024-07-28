@@ -29,6 +29,7 @@
 .ProjPost_detail__description {
   width: 1100px;
   min-height: 500px;
+  padding-top: 5px;
   white-space: pre-wrap;
 }
 

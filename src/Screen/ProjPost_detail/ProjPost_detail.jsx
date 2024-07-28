@@ -113,22 +113,22 @@ const ProjPost_detail = () => {
     return String(post.userId) === String(loginUserId);
   };
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   getPosts(postId)
-  //     .then((data) => {
-  //       setPost(data);
-  //       setComments(data.comments);
-  //       setLoading(false);
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log("post detail error(ProjPost_Datil.jsx): ", error);
-  //       //alert("게시글을 불러오는데 실패했습니다.");
-  //       setLoading(false);
-  //       //nav(-1);
-  //     });
-  // }, []);
+  useEffect(() => {
+    setLoading(true);
+    getPosts(postId)
+      .then((data) => {
+        setPost(data);
+        setComments(data.comments);
+        setLoading(false);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log("post detail error(ProjPost_Datil.jsx): ", error);
+        //alert("게시글을 불러오는데 실패했습니다.");
+        setLoading(false);
+        //nav(-1);
+      });
+  }, []);
 
   const onCraeteComment = (content) => {
     setComments([
