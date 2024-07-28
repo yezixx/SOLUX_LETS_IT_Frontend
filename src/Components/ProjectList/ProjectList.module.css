@@ -1,8 +1,8 @@
 /* ProjectList.module.css */
 
 .projectList {
-  align-items: center;
   display: flex;
+  align-items: center;
   gap: 15px;
   border-radius: 15px;
 }
