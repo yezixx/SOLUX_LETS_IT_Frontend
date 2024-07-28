@@ -14,17 +14,20 @@ const Redirect = () => {
     const kakaoLogin = async () => {
       await axios({
         method: "GET",
-        url: `http://192.168.202.1:8080/login/oauth2/callback/kakao?code=${code}`,
+        url: `http://172.20.6.43:8080/login/oauth2/callback/kakao?code=${code}`,
         headers: {
           "Content-Type": "application/json;charset=utf-8", //json형태로 데이터를 보내겠다는뜻
         },
       }).then((res) => {
+        console.log(res);
         //백에서 완료후 우리사이트 전용 토큰 넘겨주는게 성공했다면
         setIsLogIn(true);
         const userData = res.data.user;
+        const TOKEN = res.data.token;
         setUser(userData);
         //유저정보 localStorage에 저장
         localStorage.setItem("user", JSON.stringify(userData));
+        localStorage.setItem("token", JSON.stringify(TOKEN));
         //로그인 상태 true로 변경
         localStorage.setItem("isLoggedIn", "true");
         //로그인이 성공하면 이동할 페이지

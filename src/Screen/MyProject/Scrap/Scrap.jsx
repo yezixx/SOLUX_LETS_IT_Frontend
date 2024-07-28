@@ -1,4 +1,4 @@
-import ProjectList from "../../../Components/RecommendProject/ProjectList";
+import ProjectList from "../../../Components/ProjectList/ProjectList";
 import styles from "./Scrap.module.css";
 
 const projects = [

@@ -63,6 +63,7 @@ export const updateTeam = async (teamId, updatedTeamData) => {
 // 팀장 위임
 export const delegateTeamLeader = async (teamId, userId) => {
   try {
+    console.log("delegateTeamLeader", teamId, userId);
     const response = await apiClient.patch(`/team/${teamId}/${userId}`);
     return response.data;
   } catch (error) {
@@ -72,10 +73,10 @@ export const delegateTeamLeader = async (teamId, userId) => {
 };
 
 // 팀원 평가 - 평가하기 버튼 눌렀을 때
-export const evaluateMember = async (teamId, userId, value) => {
+export const evaluateMember = async (teamId, userId, targetId, value) => {
   try {
     const response = await apiClient.post(
-      `/team/evaluation/${teamId}/${userId}`,
+      `/team/evaluation/${teamId}/${userId}/${targetId}`,
       value
     );
     return response.data;
@@ -94,6 +95,18 @@ export const evaluateMember = async (teamId, userId, value) => {
       // 설정 문제나 다른 에러
       console.error("Error setting up the request:", error.message);
     }
+    throw error;
+  }
+};
+
+export const getEvaluatedList = async (teamId, userId) => {
+  try {
+    const response = await apiClient.get(
+      `team/evaluation/info/${teamId}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching evaluated member list", error);
     throw error;
   }
 };

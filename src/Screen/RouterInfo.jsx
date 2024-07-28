@@ -136,7 +136,7 @@ export const RouterInfo = [
             label: "포트폴리오 관리",
           },
           {
-            path: "portfolio/post",
+            path: "portfolio/post/:teamId",
             element: <PortfolioWrite />,
             label: "포트폴리오 작성창",
           },
@@ -146,13 +146,13 @@ export const RouterInfo = [
             label: "AI 생성 - 완성된 포트폴리오",
           },
           {
-            // path: "portfolio/board/:prjId",
-            path: "portfolio/board",
+            path: "portfolio/board/:teamId",
+            // path: "portfolio/board",
             element: <PortfolioBoard />,
             label: "포트폴리오 게시판",
           },
           {
-            path: "portfolio/board/detail/:prjId",
+            path: "portfolio/board/:teamId/detail/:prtId",
             // path: "portfolio/board/detail",
             element: <PortfolioDetail />,
             label: "포트폴리오 게시판",

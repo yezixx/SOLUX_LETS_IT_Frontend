@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "../../../Components/Button/Button";
 import MemberItem from "../../../Components/MemberItem/MemberItem";
 import CheckCircleIcon from "../../../Image/Icons/CheckCircleIcon";
@@ -8,6 +8,8 @@ import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../atoms/atoms";
 import { useNavigate } from "react-router-dom";
+import { getEvaluatedList } from "../../../service/teamService";
+import Loading from "../../../Components/Loading/Loading";
 
 const getMembersExcludingSelf = (loginUserId, members) => {
   return members.filter(
@@ -15,9 +17,10 @@ const getMembersExcludingSelf = (loginUserId, members) => {
   );
 };
 
-const isCompletedMember = (targetId, data) => {
-  const isIncluded = data.some(
-    (member) => String(member.userId) === String(targetId)
+const isCompletedMember = (feedbackTargetId, evaluatedList) => {
+  //if (!evaluatedList) return false;
+  const isIncluded = evaluatedList.find(
+    (member) => member.userId === feedbackTargetId
   );
   return isIncluded;
 };
@@ -35,6 +38,8 @@ const TeamFeedback = () => {
   const [frequencyValue, setFrequencyValue] = useState();
   const [participateValue, setParticipateValue] = useState();
   const [kindnessValue, setKindnessValue] = useState();
+  const [loading, setLoading] = useState(true);
+  const [evaluatedList, setEvaluatedList] = useState([]);
 
   /*userId 전역 상태에서 불러오기 */
   const loginUserId = useAtomValue(userIdAtom);
@@ -42,6 +47,42 @@ const TeamFeedback = () => {
   const nav = useNavigate();
 
   const membersExcludingSelf = getMembersExcludingSelf(loginUserId, members);
+
+  const [pollingInterval, setPollingInterval] = useState(null); // 폴링 간격을 관리할 상태
+
+  console.log(feedbackData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getEvaluatedList(teamId, loginUserId);
+        setEvaluatedList(response.data);
+        console.log("evaluatedList", response.data);
+      } catch (error) {
+        console.error("Error fetching evaluated member list", error);
+        alert("평가한 팀원 목록을 불러오는데 실패했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // 초기 데이터 로드
+    fetchData();
+
+    // 폴링 설정
+    if (!pollingInterval) {
+      const interval = setInterval(fetchData, 5000); // 5초마다 데이터 요청
+      setPollingInterval(interval);
+    }
+
+    // 컴포넌트 언마운트 시 폴링 중지
+    return () => {
+      if (pollingInterval) {
+        clearInterval(pollingInterval);
+        setPollingInterval(null);
+      }
+    };
+  }, [feedbackData, pollingInterval, teamId, loginUserId]);
 
   const onChangePromise = (value) => {
     setFeedback({
@@ -95,7 +136,7 @@ const TeamFeedback = () => {
 
     if (!confirm("평가를 제출하시겠습니까?")) return;
     try {
-      onSubmitFeedback(teamId, String(selectedMemberId), {
+      onSubmitFeedback(teamId, String(loginUserId), String(selectedMemberId), {
         ...feedback,
       });
     } catch (error) {
@@ -114,7 +155,7 @@ const TeamFeedback = () => {
   const onClickFinish = () => {
     if (!isValidate()) return;
     try {
-      onSubmitFeedback(teamId, selectedMemberId, {
+      onSubmitFeedback(teamId, String(loginUserId), String(selectedMemberId), {
         ...feedback,
       });
     } catch (error) {
@@ -135,6 +176,7 @@ const TeamFeedback = () => {
 
   return (
     <div className={styles.teamFeedback}>
+      {loading && <Loading />}
       <div className={styles.teamFeedback__label}>팀원 평가</div>
       <div className={styles.teamFeedback__container}>
         <div className={styles.teamFeedback__innerLabel}>
@@ -151,7 +193,7 @@ const TeamFeedback = () => {
               key={index}
               memberName={member.userName}
               type={
-                isCompletedMember(member.userId, feedbackData)
+                isCompletedMember(member.userId, evaluatedList)
                   ? "COMPLETED"
                   : String(selectedMemberId) === String(member.userId)
                   ? "ONLYBORDER_SELECTED"
@@ -192,7 +234,7 @@ const TeamFeedback = () => {
           </div>
         </div>
         <div className={styles.teamFeedback__submitButton}>
-          {feedbackData.length === membersExcludingSelf.length - 1 ? (
+          {feedbackData.length >= membersExcludingSelf.length - 1 ? (
             <Button
               text={"평가종료"}
               type={"RAD-10__FONT-M"}

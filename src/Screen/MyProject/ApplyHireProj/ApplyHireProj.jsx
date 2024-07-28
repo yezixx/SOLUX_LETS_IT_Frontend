@@ -9,11 +9,10 @@ import {
 } from "../../../service/projectService";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../atoms/atoms";
-import ProjectList from "../../../Components/RecommendProject/ProjectList";
+import ProjectList from "../../../Components/ProjectList/ProjectList";
 import { approveApplicants } from "../../../service/applyService";
 
 const ApplyHireProj = () => {
-
   //클릭하면 팀원을 보여주도록 state 설정
   const [showMember, setShowMember] = useState({});
   /*구인/신청 프로젝트 data 담을 state */

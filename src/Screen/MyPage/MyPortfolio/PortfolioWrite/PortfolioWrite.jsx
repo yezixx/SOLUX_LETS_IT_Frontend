@@ -1,8 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../../../Components/Button/Button";
 import FormInput from "./FormInput";
 import styles from "./PortfolioWrite.module.css";
 import usePortPost from "./usePortPost";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../../../atoms/atoms";
+import { startTransition } from "react";
+import { postPortfolios } from "../../../../service/portfolioService";
 
 const PortfolioWrite = () => {
   const { portfolioData, onChange } = usePortPost();
@@ -10,18 +14,23 @@ const PortfolioWrite = () => {
   const navigatetTo = (link) => {
     navigate(link);
   };
+  //teamId
+  const { teamId } = useParams();
+  //userId 변경 필요
+  const userId = useAtomValue(userIdAtom);
   //백엔드 전송 함수
   const handleSubmit = (e) => {
     e.preventDefault();
     const confirmSubmit = window.confirm("포트폴리오를 제출하시겠습니까?");
     if (confirmSubmit) {
       startTransition(() => {
-        postPortfolios(postId, userId, portfolioData);
+        postPortfolios(teamId, userId, portfolioData);
       });
-      navigatetTo("/"); // 우선은 홈 화면으로 이동
+      navigatetTo(`/mypage/portfolio/board/${teamId}`); // 우선은 홈 화면으로 이동
     } else {
     }
   };
+  console.log(portfolioData);
   return (
     <div className={styles.portfolioWrite__contentWrap}>
       {/*프로젝트명 + 포트폴리오 작성 폼 */}

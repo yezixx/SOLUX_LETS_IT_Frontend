@@ -2,7 +2,7 @@ import { createContext, useEffect, useReducer, useRef, useState } from "react";
 import styles from "./Teamboard.module.css";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../atoms/atoms";
+import { isLoginAtom, userIdAtom } from "../../atoms/atoms";
 import {
   delegateTeamLeader,
   evaluateMember,
@@ -19,19 +19,22 @@ const mock_teamData = [
     githubLink: "https://github.com/project1",
     teamMemberInfo: [
       {
-        userId: "letsit_backend.model.Member@72f9fde6",
+        userId: 1,
         userName: "Alice",
         position: "Team_Leader",
+        profile_image_url: "testurl1",
       },
       {
-        userId: "letsit_backend.model.Member@30b4fb38",
+        userId: 2,
         userName: "Bob",
         position: "Team_Member",
+        profile_image_url: "testurl2",
       },
       {
-        userId: "letsit_backend.model.Member@123",
+        userId: 3,
         userName: "Charlie",
         position: "Team_Leader",
+        profile_image_url: "testurl3",
       },
     ],
   },
@@ -42,14 +45,22 @@ const mock_teamData = [
     githubLink: "https://github.com/project2",
     teamMemberInfo: [
       {
-        userId: "letsit_backend.model.Member@123",
+        userId: "1",
         userName: "Charlie",
         position: "Team_Leader",
+        profile_image_url: "testurl1",
       },
       {
-        userId: "letsit_backend.model.Member@456",
+        userId: "2",
         userName: "Diana",
         position: "Team_Member",
+        profile_image_url: "testurl2",
+      },
+      {
+        userId: 3,
+        userName: "3",
+        position: "Team_Member",
+        profile_image_url: "testurl3",
       },
     ],
   },
@@ -175,7 +186,7 @@ function feedbackReducer(state, action) {
   }
 }
 
-/*const isMember = (teamData, loginUserId) => {
+const isMember = (teamData, loginUserId) => {
   console.log(
     teamData.teamMemberInfo.some(
       (member) => String(member.userId) === String(loginUserId)
@@ -184,11 +195,14 @@ function feedbackReducer(state, action) {
   return teamData.teamMemberInfo.some(
     (member) => String(member.userId) === String(loginUserId)
   );
-};*/
+};
 
 const Teamboard = () => {
   const [loading, setLoading] = useState(true);
   const loginUserId = useAtomValue(userIdAtom);
+
+  const islogin = useAtomValue(isLoginAtom);
+
   const [params] = useSearchParams();
   const teamId = params.get("team");
 
@@ -221,15 +235,15 @@ const Teamboard = () => {
         data: data.data,
       });
       setLoading(false);
-      // 데이터 받아올 때마다 아이디 달라져서 일단 보류
+
       /*if (!isMember(teamData, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
-        //nav("/");
+        nav("/");
         return;
       }*/
       if (!loginUserId) {
         alert("로그인이 필요한 페이지입니다.");
-        //nav("/");
+        nav("/");
       }
     } catch (error) {
       console.log("teamboard error", error);
@@ -240,6 +254,10 @@ const Teamboard = () => {
   };
 
   useEffect(() => {
+    /*if (!islogin) { // 로그인 안되어있으면 로그인 페이지로 이동
+      nav("/login");
+    }*/
+    console.log(islogin);
     fetchTeamData();
     /*getTeam(teamId)
       .then((res) => {
@@ -292,7 +310,7 @@ const Teamboard = () => {
   };
 
   const onUpdateTeamData = (title, notion, github, selectedMember) => {
-    /*teamDispatch({
+    teamDispatch({
       type: "UPDATE",
       data: {
         ...teamData,
@@ -306,24 +324,36 @@ const Teamboard = () => {
           return { ...member, position: "Team_Member" };
         }),
       },
-    });*/
-    try {
-      updateTeam(teamId, {
-        teamName: title,
-        notionLink: notion,
-        githubLink: github,
-      });
-    } catch (e) {
-      console.log("updateTeam error", e);
+    });
+    if (
+      // 수정된 정보가 기존 정보와 다를 경우에만 실행
+      !(
+        teamData.teamName === title &&
+        teamData.notionLink === notion &&
+        teamData.githubLink === github
+      )
+    ) {
+      try {
+        updateTeam(teamId, {
+          teamName: title,
+          notionLink: notion,
+          githubLink: github,
+        });
+      } catch (e) {
+        console.log("updateTeam error", e);
+      }
     }
 
     if (
       // 선택한 팀원이 팀장이 아닌 경우
-      !teamData.teamMemberInfo.find(
-        (member) => String(member.userId) === String(selectedMember)
-      ).position === "Team_Leader"
+      !(
+        teamData.teamMemberInfo.find(
+          (member) => String(member.userId) === String(selectedMember)
+        ).position === "Team_Leader"
+      )
     ) {
       try {
+        console.log(teamId, selectedMember);
         delegateTeamLeader(teamId, selectedMember);
       } catch (e) {
         console.log("delegateTeamLeader error", e);
@@ -455,15 +485,14 @@ const Teamboard = () => {
     });
   };
 
-  const onSubmitFeedback = (teamId, targetId, value) => {
+  const onSubmitFeedback = (teamId, loginUserId, targetId, value) => {
     feedbackDispatch({
       type: "SUBMIT_FEEDBACK",
       data: {
         userId: targetId,
-        ...value,
       },
     });
-    evaluateMember(teamId, targetId, value);
+    evaluateMember(teamId, loginUserId, targetId, value);
   };
 
   return (

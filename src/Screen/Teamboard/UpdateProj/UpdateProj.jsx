@@ -31,19 +31,16 @@ const UpdateProj = () => {
   const linkRef1 = useRef();
   const linkRef2 = useRef();
 
-  /*useEffect(() => {
-    console.log(
-      teamData.teamMemberInfo.find((member) => {
-        member.position === "Team_Leader";
-      })
-    );
+  useEffect(() => {
     if (
-      teamData.teamMemberInfo.find((member) => {
-        member.position === "Team_Leader";
-      }).userId !== loginUserId
-    )
+      teamData.teamMemberInfo.find(
+        (member) => member.position === "Team_Leader"
+      ).userId !== loginUserId
+    ) {
       alert("팀장만 접근 가능한 페이지입니다.");
-  });*/
+      nav(`/teamboard/?team=${teamId}`);
+    }
+  });
 
   const onFocusElement = (ref) => {
     if (ref.current) {
