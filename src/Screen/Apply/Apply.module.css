@@ -95,3 +95,6 @@
   bottom: 0;
   right: 0;
 }
+.formError {
+  border: 2px solid var(--point);
+}

@@ -4,28 +4,23 @@ import RouteName from "../../Components/RouteName/RouteName";
 import styles from "./Apply.module.css";
 import BriefProfile from "./BriefProfile/BriefProfile";
 import useApplyPost from "./useApplyPost";
-import { applicant, userIdAtom } from "../../atoms/atoms";
-import { useParams } from "react-router-dom";
-import { startTransition } from "react"; // removed useEffect import
-import { submitApply } from "../../service/applyService";
 
-// mock data
+// profile mock data
 const user = {
   name: "김코더",
   age: "20대 초반",
   bio: "시각화로 소통하는 주니어 개발자",
 };
-const Apply = () => {
-  //postId 기반으로 프로젝트명 갖고오는 기능 구현 필요
-  //'신청하기' 버튼 눌렀을 때 postId 할당 될 것
-  const { postId } = useParams();
-  const setApplicant = useSetAtom(applicant);
-  // applyData - onChange를 통해 input으로 받은 값을 모아둔 객체
-  const { applyData, onChange, handleSubmit } = useApplyPost();
-  console.log(applyData);
-  // 로그인 시 받아둔 유저 아이디값 가져옴
-  const userId = useAtomValue(userIdAtom);
 
+const Apply = () => {
+  // applyData - onChange를 통해 input으로 받은 값을 모아둔 객체
+  const { onChange, handleSubmit, ApplyFormError } = useApplyPost();
+  //CSS className 분리 - 오류 시 focus
+  const getInputClassName = (name) => {
+    return `${styles.apply__input} ${
+      ApplyFormError.includes(name) ? styles.formError : ""
+    }`;
+  };
   return (
     <div>
       <RouteName route={["프로젝트 신청"]} />
@@ -52,7 +47,7 @@ const Apply = () => {
             <input
               name="preferStack"
               onChange={onChange}
-              className={styles.apply__input}
+              className={getInputClassName("preferStack")}
               placeholder="리액트"
             />
           </div>
@@ -62,7 +57,7 @@ const Apply = () => {
             <input
               name="desiredField"
               onChange={onChange}
-              className={styles.apply__input}
+              className={getInputClassName("desiredField")}
               placeholder="프론트엔드"
             />
           </div>
@@ -73,9 +68,9 @@ const Apply = () => {
               onChange={onChange}
               name="applyContent"
               placeholder="사용할 수 있는 기술 스택, 자기 소개 등"
-              className={`${styles.apply__input} ${
+              className={`${
                 styles[`apply__input--textarea`]
-              }`}
+              } ${getInputClassName("applyContent")}`}
             />
           </div>
           {/*연락 수단 */}
@@ -84,7 +79,7 @@ const Apply = () => {
             <input
               onChange={onChange}
               name="contact"
-              className={styles.apply__input}
+              className={getInputClassName("contact")}
               placeholder="1234@gmail.com"
             />
           </div>
