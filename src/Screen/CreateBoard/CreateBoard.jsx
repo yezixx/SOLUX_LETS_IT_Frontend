@@ -8,6 +8,8 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { createTeam } from "../../service/teamService";
 import { approveApplicants } from "../../service/applyService";
 import Loading from "../../Components/Loading/Loading";
+import { useAtomValue } from "jotai";
+import { isLoginAtom } from "../../atoms/atoms";
 
 const mock_members = [
   {
@@ -37,13 +39,18 @@ const CreateBoard = () => {
   const [applicantsList, setApplicantsList] = useState(mock_members);
 
   const [params] = useSearchParams();
-  const postId = 4; //params.get("post");
+  const postId = params.get("post");
 
   const titleRef = useRef();
   const linkRef1 = useRef();
   const linkRef2 = useRef();
 
-  /*useEffect(() => {
+  const isLogin = useAtomValue(isLoginAtom);
+
+  useEffect(() => {
+    /*if (!isLogin) {
+      nav("/login");
+    }*/
     approveApplicants(postId)
       .then((res) => {
         setApplicantsList(res.data);
@@ -59,7 +66,7 @@ const CreateBoard = () => {
         setLoading(false);
         nav("/");
       });
-  }, []);*/
+  }, []);
 
   const onFocusElement = (ref) => {
     if (ref.current) {
@@ -70,7 +77,6 @@ const CreateBoard = () => {
   const handleCreate = async (postId, newTeamData) => {
     try {
       const response = await createTeam(postId, newTeamData);
-
       return response.data; // 서버로부터 받은 teamID 반환
     } catch (error) {
       console.error("Error creating team:", error);

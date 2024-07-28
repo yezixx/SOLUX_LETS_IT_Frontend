@@ -2,7 +2,7 @@ import { createContext, useEffect, useReducer, useRef, useState } from "react";
 import styles from "./Teamboard.module.css";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../atoms/atoms";
+import { isLoginAtom, userIdAtom } from "../../atoms/atoms";
 import {
   delegateTeamLeader,
   evaluateMember,
@@ -200,6 +200,9 @@ const isMember = (teamData, loginUserId) => {
 const Teamboard = () => {
   const [loading, setLoading] = useState(true);
   const loginUserId = useAtomValue(userIdAtom);
+
+  const islogin = useAtomValue(isLoginAtom);
+
   const [params] = useSearchParams();
   const teamId = params.get("team");
 
@@ -233,11 +236,11 @@ const Teamboard = () => {
       });
       setLoading(false);
 
-      if (!isMember(teamData, loginUserId)) {
+      /*if (!isMember(teamData, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
         nav("/");
         return;
-      }
+      }*/
       if (!loginUserId) {
         alert("로그인이 필요한 페이지입니다.");
         nav("/");
@@ -251,6 +254,10 @@ const Teamboard = () => {
   };
 
   useEffect(() => {
+    /*if (!islogin) { // 로그인 안되어있으면 로그인 페이지로 이동
+      nav("/login");
+    }*/
+    console.log(islogin);
     fetchTeamData();
     /*getTeam(teamId)
       .then((res) => {
@@ -339,11 +346,14 @@ const Teamboard = () => {
 
     if (
       // 선택한 팀원이 팀장이 아닌 경우
-      !teamData.teamMemberInfo.find(
-        (member) => String(member.userId) === String(selectedMember)
-      ).position === "Team_Leader"
+      !(
+        teamData.teamMemberInfo.find(
+          (member) => String(member.userId) === String(selectedMember)
+        ).position === "Team_Leader"
+      )
     ) {
       try {
+        console.log(teamId, selectedMember);
         delegateTeamLeader(teamId, selectedMember);
       } catch (e) {
         console.log("delegateTeamLeader error", e);
@@ -475,15 +485,14 @@ const Teamboard = () => {
     });
   };
 
-  const onSubmitFeedback = (teamId, targetId, value) => {
+  const onSubmitFeedback = (teamId, loginUserId, targetId, value) => {
     feedbackDispatch({
       type: "SUBMIT_FEEDBACK",
       data: {
         userId: targetId,
-        ...value,
       },
     });
-    evaluateMember(teamId, targetId, value);
+    evaluateMember(teamId, loginUserId, targetId, value);
   };
 
   return (

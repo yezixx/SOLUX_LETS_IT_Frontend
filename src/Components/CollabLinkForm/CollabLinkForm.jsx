@@ -4,7 +4,6 @@ import CollabLink from "../CollabLink/CollabLink";
 import styles from "./CollabLinkForm.module.css";
 
 const CollabLinkForm = forwardRef(({ type, links, onChange, onClick }, ref) => {
-  console.log(links);
   return (
     <div className={styles.collabLinkForm}>
       <div className={styles.collabLinkForm__label}>협업툴 링크</div>
