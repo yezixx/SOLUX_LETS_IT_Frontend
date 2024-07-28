@@ -1,3 +1,8 @@
+.portfolioWrite__form input,
+.portfolioWrite__form textarea {
+  padding: 10px 10px;
+}
+
 /*side navigator + 컨텐츠*/
 .portfolioWrite__wrap {
   display: flex;
@@ -27,9 +32,11 @@
   border: none;
   border-bottom: 1px solid var(--line-color);
   grid-column: span 2;
-  height: 62px;
+  height: 40px;
   font-size: 24px;
   font-family: "pretendardB";
+  padding: 0 10px;
+  width: 100%;
 }
 /*담당역할 입력란*/
 .portfolioWrite__form__role {
@@ -69,4 +76,8 @@ textarea:focus {
 /*input, textarea 클릭할 경우 placeholder text 숨겨짐*/
 .portfolioWrite__form input:focus::placeholder {
   color: transparent;
+}
+.formError {
+  border: 2px solid var(--point);
+  border-radius: 4px;
 }
