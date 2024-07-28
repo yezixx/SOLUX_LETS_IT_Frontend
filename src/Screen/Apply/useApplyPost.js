@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { submitApply } from "../../service/applyService";
 import { useAtomValue, useSetAtom } from "jotai";
 import { applicant, userIdAtom } from "../../atoms/atoms";
+import { useValidate } from "../../Hooks/useValidate";
 
 const useApplyPost = () => {
   // input data 수집
@@ -12,16 +13,7 @@ const useApplyPost = () => {
     applyContent: "",
     contact: "",
   });
-  //제출 전 유효값 검사
-  const [ApplyFormError, setApplyFormError] = useState([]);
-  const validation = () => {
-    const errorArray = Object.keys(applyData).filter(
-      (key) => applyData[key] === ""
-    );
-    setApplyFormError(errorArray);
-    //에러 배열 길이가 0일 경우 true (모든 폼 작성 완료)
-    return errorArray.length === 0;
-  };
+  const { validation, ApplyFormError } = useValidate(applyData);
 
   // 제출 전 alert
   const navigate = useNavigate();

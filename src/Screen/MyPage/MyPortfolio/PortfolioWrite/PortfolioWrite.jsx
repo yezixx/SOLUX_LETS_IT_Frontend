@@ -1,36 +1,14 @@
-import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../../../Components/Button/Button";
 import FormInput from "./FormInput";
 import styles from "./PortfolioWrite.module.css";
 import usePortPost from "./usePortPost";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../../atoms/atoms";
-import { startTransition } from "react";
-import { postPortfolios } from "../../../../service/portfolioService";
 
 const PortfolioWrite = () => {
-  const { portfolioData, onChange } = usePortPost();
-  const navigate = useNavigate();
-  const navigatetTo = (link) => {
-    navigate(link);
-  };
-  //teamId
-  const { teamId } = useParams();
-  //userId 변경 필요
-  const userId = useAtomValue(userIdAtom);
-  //백엔드 전송 함수
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const confirmSubmit = window.confirm("포트폴리오를 제출하시겠습니까?");
-    if (confirmSubmit) {
-      startTransition(() => {
-        postPortfolios(teamId, userId, portfolioData);
-      });
-      navigatetTo(`/mypage/portfolio/board/${teamId}`); // 우선은 홈 화면으로 이동
-    } else {
-    }
-  };
+  const { portfolioData, ApplyFormError, onChange, handleSubmit } =
+    usePortPost();
+
   console.log(portfolioData);
+
   return (
     <div className={styles.portfolioWrite__contentWrap}>
       {/*프로젝트명 + 포트폴리오 작성 폼 */}
@@ -43,10 +21,12 @@ const PortfolioWrite = () => {
         <input
           name="prtTitle"
           onChange={onChange}
-          className={styles.portfolioWrite__form__title}
+          className={`${styles.portfolioWrite__form__title} ${
+            ApplyFormError.includes("prtTitle") ? styles.formError : ""
+          }`}
           placeholder="제목을 입력하세요"
-        ></input>
-
+        />
+        {/*추가한다면 css 변경 필요 */}
         {/* <label htmlFor="role">
           담당역할
           <FormInput
@@ -72,8 +52,8 @@ const PortfolioWrite = () => {
           <label htmlFor="workDescription">이번 주 한 일</label>
           <FormInput
             name="workDescription"
+            error={ApplyFormError}
             onChange={onChange}
-            textarea={true}
             height="90px"
           />
         </div>
@@ -82,8 +62,8 @@ const PortfolioWrite = () => {
           <label htmlFor="issues">발생한 문제 / 어려움</label>
           <FormInput
             name="issues"
+            error={ApplyFormError}
             onChange={onChange}
-            textarea={true}
             height="200px"
           />
         </div>
@@ -92,8 +72,8 @@ const PortfolioWrite = () => {
           <label htmlFor="solutions">해결 방법</label>
           <FormInput
             name="solutions"
+            error={ApplyFormError}
             onChange={onChange}
-            textarea={true}
             height="200px"
           />
         </div>
@@ -102,8 +82,8 @@ const PortfolioWrite = () => {
           <label htmlFor="feedback">새로 알게된 점 / 깨달은 점</label>
           <FormInput
             name="feedback"
+            error={ApplyFormError}
             onChange={onChange}
-            textarea={true}
             height="195px"
           />
         </div>
