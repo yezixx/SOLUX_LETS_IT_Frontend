@@ -18,12 +18,6 @@
 }
 
 .SelectIcon__msg {
-  /*텍스트 색상*/
-  color: var(--text1-color);
-  /*폰트 크기*/
-  font-size: 14px;
-  /*글자 간격*/
-  letter-spacing: -0.25px;
   /* Flexbox 설정 */
   display: flex;
   flex-direction: column; /* 수직 정렬 */

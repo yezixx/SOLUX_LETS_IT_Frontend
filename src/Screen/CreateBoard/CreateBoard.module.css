@@ -1,16 +1,13 @@
 .createBoard {
-  width: fit-content;
+  width: 1320px;
   margin: 50px auto;
 }
 
 .createBoard__wrap {
-  display: flex;
-}
-.createBoard__contWrap {
+  width: fit-content;
+  margin: 0px auto;
   display: flex;
   flex-direction: column;
-  gap: 100px;
-  height: 100vh;
 }
 .createBoard__title {
   font-family: "pretendardB";

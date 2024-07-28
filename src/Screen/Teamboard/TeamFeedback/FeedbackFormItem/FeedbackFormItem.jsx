@@ -1,8 +1,7 @@
-import { useState } from "react";
 import CheckIcon from "../../../../Image/Icons/CheckIcon";
 import styles from "./FeedbackFormItem.module.css";
 
-const FeedbackFormItem = ({ question }) => {
+const FeedbackFormItem = ({ question, answer, onChange }) => {
   const OPTIONS = [
     {
       style: "NOT_AT_ALL",
@@ -26,7 +25,9 @@ const FeedbackFormItem = ({ question }) => {
     },
   ];
 
-  const [answer, setAnswer] = useState(null);
+  const onChangeInput = (value) => {
+    onChange(value);
+  };
 
   return (
     <div className={styles.feedbackFormItem}>
@@ -48,7 +49,9 @@ const FeedbackFormItem = ({ question }) => {
               type="radio"
               value={option.value}
               checked={answer === option.value}
-              onChange={() => setAnswer(option.value)}
+              onChange={() => {
+                onChangeInput(option.value);
+              }}
               className={styles[`feedbackFormItem__radio--${option.style}`]}
             />
           ))}
