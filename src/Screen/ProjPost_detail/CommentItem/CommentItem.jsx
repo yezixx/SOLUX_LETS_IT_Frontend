@@ -29,8 +29,8 @@ const CommentItem = ({
 
   const changeInputRef = useRef();
 
-  const isPostWriter = () => String(postWriter) === String(name);
-  const isCommentWriter = () => String(loginUserId) === String(name);
+  const isPostWriter = () => String(postWriter) === String(userId);
+  const isCommentWriter = () => String(loginUserId) === String(userId);
   const onClickIcon = () => {
     setIsOpen(!isOpen);
   };

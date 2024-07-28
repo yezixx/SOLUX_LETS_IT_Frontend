@@ -7,7 +7,7 @@ import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
 import Loading from "../../Components/Loading/Loading";
 import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../atoms/atoms";
+import { userIdAtom, userNameAtom } from "../../atoms/atoms";
 import { useEffect, useRef, useState } from "react";
 import { getComments, getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";
@@ -55,6 +55,16 @@ const mock_post = {
   viewCount: 50,
   userId: "1",
   title: "웹 사이드 프로젝트 팀원 모집",
+  comments: [
+    {
+      commentId: 1,
+      userId: "coder",
+      name: "CODER.",
+      createDate: "2024-04-06, 15:30",
+      updateDate: "2024-04-06, 15:30",
+      comContent: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
+    },
+  ],
 };
 
 const mock_comments = [
@@ -86,11 +96,12 @@ const mock_comments = [
 
 const ProjPost_detail = () => {
   const loginUserId = useAtomValue(userIdAtom);
+  const loginUserName = useAtomValue(userNameAtom);
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState(mock_post);
   const postId = useParams().postId;
 
-  const [comments, setComments] = useState(mock_comments);
+  const [comments, setComments] = useState(mock_post.comments);
   const commentIdRef = useRef(2);
   const commentInputRef = useRef();
 
@@ -125,7 +136,7 @@ const ProjPost_detail = () => {
       {
         commentId: commentIdRef.current++,
         userId: loginUserId,
-        name: loginUserId,
+        name: loginUserName,
         createDate: new Date().getTime(),
         updateDate: new Date().getTime(),
         comContent: content,
