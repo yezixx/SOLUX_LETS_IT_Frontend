@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getMyProjects } from "../../../service/projectService";
 import { useAtomValue } from "jotai";
-import { userAtom } from "../../../atoms/atoms";
+import { userAtom, userIdAtom } from "../../../atoms/atoms";
 
 export const useApplyHire = () => {
   //클릭하면 팀원을 보여주도록 state 설정
@@ -15,7 +15,7 @@ export const useApplyHire = () => {
   // /*로그인 x */
   // const userId = useAtomValue(userIdAtom);
 
-  /*로그인 구동 시 - userId 전역 상태에서 불러오기 */
+  // /*로그인 구동 시 - userId 전역 상태에서 불러오기 */
   const user = useAtomValue(userAtom);
   const userId = user.userId;
 
@@ -26,7 +26,7 @@ export const useApplyHire = () => {
         setApHireProj(data);
       })
       .catch((error) => {
-        console.log("에러발생");
+        console.log(`에러 발생 : ${error}`);
       });
   }, []);
   // 팀원 버튼 클릭 시 호출되는 함수
