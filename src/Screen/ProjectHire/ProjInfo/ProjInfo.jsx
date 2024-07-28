@@ -6,49 +6,67 @@ import { useProjInfo } from "./useProjInfo";
 import { useSetAtom } from "jotai";
 import { postProjectAtom } from "../../../atoms/atoms";
 
-const ProjInfo = () => {
-  const { selectedArea, handleSelectedArea, selectedAreaData } = useProjInfo();
-  const { onChange, onClick } = useProjectPost();
+const ProjInfo = ({ errors }) => {
+  //ProjInfo 화면에서만 사용하는 훅
+  const {
+    onClick,
+    handleSelectedArea,
+    selectedAreaData,
+    startSubRegion,
+    isFace,
+    handleIsFace,
+    isSubRegSelected,
+  } = useProjInfo();
+  //select에 필요한 이벤트 핸들러 (폼 공통)
+  const { onChange } = useProjectPost();
+  //백엔드에 보낼 data
   const setPostProj = useSetAtom(postProjectAtom);
-  //대면일 경우에만 지역선택 나타남
-  const [isFace, setIsFace] = useState(false);
-  const handleIsFace = (e) => {
-    const { name, value } = e.target;
-    setPostProj((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    if (value === "대면") {
-      setIsFace(true);
-    } else {
-      setIsFace(false);
-    }
-  };
+  // console.log(setPostProj)
 
   return (
     <div className="프로젝트 정보">
       <div className={styles.projectHire__subTitle}>프로젝트 정보</div>
       <div className={styles.projectHire__detail}>
-        <select defaultValue="" name="method" onChange={handleIsFace}>
+        <select
+          className={`${errors["onOff"] ? styles.formError : ""} `}
+          defaultValue=""
+          name="onOff"
+          onChange={handleIsFace}
+        >
           <option value="">진행방식</option>
-          <option>대면</option>
-          <option>비대면</option>
+          <option value="대면">대면</option>
+          <option value="비대면">비대면</option>
         </select>
-        <select defaultValue="" name="level" onChange={onChange}>
+        <select
+          className={`${errors["difficulty"] ? styles.formError : ""} `}
+          defaultValue=""
+          name="difficulty"
+          onChange={onChange}
+        >
           <option value="">난이도</option>
           <option>입문</option>
           <option>초급</option>
           <option>중급</option>
           <option>고급</option>
         </select>
-        <select defaultValue="" name="projectPeriod" onChange={onChange}>
+        <select
+          className={`${errors["projectPeriod"] ? styles.formError : ""} `}
+          defaultValue=""
+          name="projectPeriod"
+          onChange={onChange}
+        >
           <option value="">예상 기간</option>
           <option>1개월</option>
           <option>3개월</option>
           <option>6개월</option>
           <option>1년 이상</option>
         </select>
-        <select defaultValue="" name="ageGroup" onChange={onChange}>
+        <select
+          className={`${errors["ageGroup"] ? styles.formError : ""} `}
+          defaultValue=""
+          name="ageGroup"
+          onChange={onChange}
+        >
           <option value="">연령대</option>
           <option>10대</option>
           <option>20대</option>
@@ -59,9 +77,13 @@ const ProjInfo = () => {
       {/* 지역 선택창 */}
       {isFace && (
         <div className={styles.projectHire__selectArea}>
-          <select defaultValue="" name="regionId" onChange={handleSelectedArea}>
-            {" "}
-            {/* onChange 이벤트로 지역 선택 업데이트 */}
+          <select
+            className={`${errors["regionId"] ? styles.formError : ""} `}
+            defaultValue=""
+            name="regionId"
+            onChange={handleSelectedArea}
+          >
+            {/* region 선택 */}
             <option value="">지역 선택</option>
             {KoreaArea.map((area, idx) => (
               <option key={idx} value={area.name}>
@@ -69,13 +91,20 @@ const ProjInfo = () => {
               </option>
             ))}
           </select>
+          {/*subRegion 선택 */}
           <div className={styles.projectHire__subArea}>
             {selectedAreaData &&
               selectedAreaData.subArea.map((subArea, idx) => (
                 <button
-                  className={styles.projectHire__subRegion}
+                  className={`${
+                    errors["subRegionId"] ? styles.formError : ""
+                  } ${
+                    isSubRegSelected[startSubRegion * 100 + (idx + 1)]
+                      ? styles.selected
+                      : styles.projectHire__subRegion
+                  }`}
                   type="button"
-                  value={subArea}
+                  value={startSubRegion * 100 + (idx + 1)}
                   name="subRegionId"
                   onClick={onClick}
                   key={idx}

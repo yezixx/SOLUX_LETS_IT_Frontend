@@ -1,0 +1,10 @@
+.formInput__textarea {
+  background-color: #fff;
+  border-radius: 4px;
+  padding: "10px";
+  resize: none;
+  border: 1px solid var(--line-color);
+}
+.formError {
+  border: 2px solid var(--point);
+}

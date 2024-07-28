@@ -1,0 +1,60 @@
+.portfolioDetail__wrap {
+  width: 100%;
+  height: calc(100vh + 200px);
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  flex: 1;
+}
+/*프로젝트명*/
+.portfolioDetail__prjTitle {
+  font-family: "pretendardB";
+  font-size: 28px;
+}
+/*포트폴리오 내용 container*/
+.portfolioDetail__portfolioContainer {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.portfolioDetail__prtTitle {
+  width: 100%;
+  padding: 10px;
+  font-size: 24px;
+  font-family: "pretendardB";
+  border-bottom: 1px solid var(--line-color);
+}
+/*포트폴리오 container*/
+.portfolioDetail__container {
+  width: 100%;
+}
+/*포트폴리오 항목별 소제목*/
+.portfolioDetail__detailTitle {
+  font-family: "pretendardB";
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+/*담당역할 + 스택*/
+.portfolioDetail__rolestack {
+  display: flex;
+  gap: 80px;
+}
+/*포트폴리오 내용 담을 칸 - small*/
+.portfolioDeatil__contentsBox1 {
+  width: 100%;
+  height: 40px;
+  border: 1px solid var(--line-color);
+  border-radius: 4px;
+}
+.portfolioDetail__contentsBox2 {
+  width: 100%;
+  height: 200px;
+  border: 1px solid var(--line-color);
+  border-radius: 4px;
+}
+/*발생한 문제 / 어려움 + 해결 방법*/
+.portfolioDetail__problemSolution {
+  display: flex;
+  gap: 10px;
+}
