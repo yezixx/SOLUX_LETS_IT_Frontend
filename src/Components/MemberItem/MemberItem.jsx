@@ -1,8 +1,9 @@
 import styles from "./MemberItem.module.css";
 import defaultProfilePic from "../../assets/user.svg";
 import { useState } from "react";
+import crown from "../../assets/crown.svg";
 
-const MemberItem = ({ memberName, profilePic, type, onClick }) => {
+const MemberItem = ({ memberName, profilePic, type, onClick, isLeader }) => {
   const [imgSrc, setImgSrc] = useState(profilePic || defaultProfilePic);
 
   const handleImgError = () => {
@@ -11,11 +12,12 @@ const MemberItem = ({ memberName, profilePic, type, onClick }) => {
 
   return (
     <div className={styles.memberItem}>
+      {isLeader && <img src={crown} />}
       <div className={styles.memberItem__container}>
         <button
           className={`${styles.memberItem__button} ${
             styles[`memberItem__button--${type}`]
-          }`}
+          } `}
           onClick={onClick}
           disabled={type === "COMPLETED"}
         >

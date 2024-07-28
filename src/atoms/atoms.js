@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 //삭제 예정
-export const userIdAtom = atom(1);
+export const userIdAtom = atom(2);
 //유저 정보 atom
 export const userAtom = atom({});
 //프로젝트 신청창 form
