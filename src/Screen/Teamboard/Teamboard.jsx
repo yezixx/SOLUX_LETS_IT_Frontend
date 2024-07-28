@@ -303,7 +303,7 @@ const Teamboard = () => {
   };
 
   const onUpdateTeamData = (title, notion, github, selectedMember) => {
-    /*teamDispatch({
+    teamDispatch({
       type: "UPDATE",
       data: {
         ...teamData,
@@ -317,7 +317,7 @@ const Teamboard = () => {
           return { ...member, position: "Team_Member" };
         }),
       },
-    });*/
+    });
     if (
       // 수정된 정보가 기존 정보와 다를 경우에만 실행
       !(
