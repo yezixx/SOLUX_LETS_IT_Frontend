@@ -98,6 +98,18 @@ export const evaluateMember = async (teamId, userId, value) => {
   }
 };
 
+export const getEvaluatedList = async (teamId, userId) => {
+  try {
+    const response = await apiClient.get(
+      `team/evaluation/info/${teamId}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching evaluated member list", error);
+    throw error;
+  }
+};
+
 // 프로젝트 종료 - 프로젝트 종료 버튼 눌렀을 때
 export const completeProject = async (teamId) => {
   try {

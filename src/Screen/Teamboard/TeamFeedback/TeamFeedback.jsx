@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Button from "../../../Components/Button/Button";
 import MemberItem from "../../../Components/MemberItem/MemberItem";
 import CheckCircleIcon from "../../../Image/Icons/CheckCircleIcon";
@@ -8,6 +8,8 @@ import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { useAtomValue } from "jotai";
 import { userIdAtom } from "../../../atoms/atoms";
 import { useNavigate } from "react-router-dom";
+import { getEvaluatedList } from "../../../service/teamService";
+import Loading from "../../../Components/Loading/Loading";
 
 const getMembersExcludingSelf = (loginUserId, members) => {
   return members.filter(
@@ -15,10 +17,8 @@ const getMembersExcludingSelf = (loginUserId, members) => {
   );
 };
 
-const isCompletedMember = (targetId, data) => {
-  const isIncluded = data.some(
-    (member) => String(member.userId) === String(targetId)
-  );
+const isCompletedMember = (feedbackTargetId, evaluatedList) => {
+  const isIncluded = evaluatedList.includes(feedbackTargetId);
   return isIncluded;
 };
 
@@ -35,6 +35,8 @@ const TeamFeedback = () => {
   const [frequencyValue, setFrequencyValue] = useState();
   const [participateValue, setParticipateValue] = useState();
   const [kindnessValue, setKindnessValue] = useState();
+  const [loading, setLoading] = useState(true);
+  const [evaluatedList, setEvaluatedList] = useState([]);
 
   /*userId 전역 상태에서 불러오기 */
   const loginUserId = useAtomValue(userIdAtom);
@@ -42,6 +44,20 @@ const TeamFeedback = () => {
   const nav = useNavigate();
 
   const membersExcludingSelf = getMembersExcludingSelf(loginUserId, members);
+
+  useEffect(() => {
+    setLoading(true);
+    try {
+      const response = getEvaluatedList(teamId, loginUserId);
+      setEvaluatedList(response.data);
+      console.log("evaluatedList", evaluatedList);
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching evaluated member list", error);
+      alert("평가한 팀원 목록을 불러오는데 실패했습니다.");
+      throw error;
+    }
+  }, []);
 
   const onChangePromise = (value) => {
     setFeedback({
@@ -135,6 +151,7 @@ const TeamFeedback = () => {
 
   return (
     <div className={styles.teamFeedback}>
+      {loading && <Loading />}
       <div className={styles.teamFeedback__label}>팀원 평가</div>
       <div className={styles.teamFeedback__container}>
         <div className={styles.teamFeedback__innerLabel}>
@@ -151,7 +168,7 @@ const TeamFeedback = () => {
               key={index}
               memberName={member.userName}
               type={
-                isCompletedMember(member.userId, feedbackData)
+                isCompletedMember(member.userId, evaluatedList)
                   ? "COMPLETED"
                   : String(selectedMemberId) === String(member.userId)
                   ? "ONLYBORDER_SELECTED"
