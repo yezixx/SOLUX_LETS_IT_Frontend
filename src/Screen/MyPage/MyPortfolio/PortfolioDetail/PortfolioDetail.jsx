@@ -4,12 +4,12 @@ import { useEffect, useState } from "react";
 import { getMyDetailPortfolios } from "../../../../service/portfolioService";
 
 const PortfolioDetail = () => {
-  const { prtId, teamId } = useParams();
+  const { teamId, prtId } = useParams();
   /*프로젝트 상세 데이터 담을 state */
   const [prtDetailList, setPrtDetailList] = useState({});
 
   useEffect(() => {
-    getMyDetailPortfolios(prtId, teamId)
+    getMyDetailPortfolios(teamId, prtId)
       .then((res) => {
         console.log(res.data);
         setPrtDetailList(res.data); //확인 필요

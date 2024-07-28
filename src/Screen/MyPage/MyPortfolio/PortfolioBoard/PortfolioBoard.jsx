@@ -31,7 +31,7 @@ const PortfolioBoard = () => {
   };
   //prjId , userId
   // const { prjId } = useParams();
-  const teamId = 1; //1로 가정/
+  const { teamId } = useParams(); //1로 가정/
   const userId = useAtomValue(userIdAtom); //1로 가정
   console.log(userId);
 
@@ -88,7 +88,7 @@ const PortfolioBoard = () => {
                 {idx + (activePage - 1) * itemsCountPerPage}
               </li>
               <li
-                onClick={() => navigateTo(`detail/${data.prtId}/${teamId}`)}
+                onClick={() => navigateTo(`detail/${teamId}`)}
                 className={styles.PortfolioBoard__cell}
               >
                 {data.prtTitle}
@@ -112,7 +112,7 @@ const PortfolioBoard = () => {
         />
         <Button
           onClick={() => {
-            navigateTo("/mypage/portfolio/post");
+            navigateTo(`/mypage/portfolio/post/${teamId}`);
           }}
           text="글쓰기"
         />

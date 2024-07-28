@@ -5,9 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 const MyPortfolio = () => {
   //버튼 누를 시 위치 이동, 이벤트 핸들러
   const navigate = useNavigate();
-  const onClick = (link) => {
+  const navigateTo = (link) => {
     navigate(link);
   };
+  //(수정) 백엔드 db에서 teamId 받아옴
+  const teamId = 1;
   return (
     <div className={styles.myPortfolio__contentWrap}>
       {/*지금 작성할 수 있는 포트폴리오 + 포트폴리오 열람 */}
@@ -21,8 +23,11 @@ const MyPortfolio = () => {
         {/*작성할 수 있는 포트폴리오 나열 */}
         <div className={styles.myPortfolio__cont}>
           <PortfolioBtn
-            onClick={() => {
-              onClick("post");
+            onClick1={() => {
+              navigateTo(`post/${teamId}`);
+            }}
+            onClick2={() => {
+              navigateTo(`/`); //임시로 홈화면 이동 설정
             }}
             button1Text="작성하기"
             button2Text="삭제"
@@ -36,7 +41,8 @@ const MyPortfolio = () => {
         <div className={styles.myPortfolio__title}>포트폴리오 열람하기</div>
         {/*열람할 수 있는 포트폴리오 나열 */}
         <div className={styles.myPortfolio__cont}>
-          <Link to="board">
+          {/*백엔드 연결 후에 teamId 매핑시켜줘야 함 */}
+          <Link to={`board/${teamId}`}>
             <PortfolioBtn buttonShow={false} />
           </Link>
         </div>

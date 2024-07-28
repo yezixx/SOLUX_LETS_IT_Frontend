@@ -25,9 +25,12 @@ export const getMyDetailPortfolios = async (teamId, prtId) => {
   }
 };
 // 포트폴리오 작성
-export const postPortfolios = async (prjId) => {
+export const postPortfolios = async (teamId, userId, postData) => {
   try {
-    const response = await apiClient.get(`portfolios/${prjId}/write`);
+    const response = await apiClient.post(
+      `portfolios/${teamId}/${userId}/write`,
+      postData
+    );
     return response.data; // 서버에서 받은 데이터를 반환합니다.
   } catch (error) {
     console.error("Error fetching post portfolio:", error);
