@@ -7,7 +7,7 @@ import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
 import Loading from "../../Components/Loading/Loading";
 import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../atoms/atoms";
+import { userIdAtom, userNameAtom } from "../../atoms/atoms";
 import { useEffect, useRef, useState } from "react";
 import { getComments, getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";
@@ -55,15 +55,26 @@ const mock_post = {
   viewCount: 50,
   userId: "1",
   title: "웹 사이드 프로젝트 팀원 모집",
+  comments: [
+    {
+      commentId: 1,
+      userId: "coder",
+      name: "CODER.",
+      createDate: "2024-04-06, 15:30",
+      updateDate: "2024-04-06, 15:30",
+      comContent: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
+    },
+  ],
 };
 
 const mock_comments = [
   {
-    id: 1,
-    writer: "CODER.",
+    commentId: 1,
+    userId: "coder",
+    name: "CODER.",
     createDate: "2024-04-06, 15:30",
     updateDate: "2024-04-06, 15:30",
-    content: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
+    comContent: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
   },
   /*
   {
@@ -85,11 +96,12 @@ const mock_comments = [
 
 const ProjPost_detail = () => {
   const loginUserId = useAtomValue(userIdAtom);
+  const loginUserName = useAtomValue(userNameAtom);
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState(mock_post);
   const postId = useParams().postId;
 
-  const [comments, setComments] = useState(mock_comments);
+  const [comments, setComments] = useState(mock_post.comments);
   const commentIdRef = useRef(2);
   const commentInputRef = useRef();
 
@@ -101,42 +113,33 @@ const ProjPost_detail = () => {
     return String(post.userId) === String(loginUserId);
   };
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   getPosts(postId)
-  //     .then((data) => {
-  //       setPost(data);
-  //       setLoading(false);
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log("post detail error(ProjPost_Datil.jsx): ", error);
-  //       //alert("게시글을 불러오는데 실패했습니다.");
-  //       setLoading(false);
-  //       //nav(-1);
-  //     });
-  //   /*
-  //   getComments(postId)
-  //     .then((data) => {
-  //       setComments(data.data);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log("comment list error(ProjPost_Datil.jsx): ", error);
-  //       alert("댓글 목록을 불러오는데 실패했습니다.");
-  //       setLoading(false);
-  //     });*/
-  // }, []);
+  useEffect(() => {
+    setLoading(true);
+    getPosts(postId)
+      .then((data) => {
+        setPost(data);
+        setComments(data.comments);
+        setLoading(false);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log("post detail error(ProjPost_Datil.jsx): ", error);
+        //alert("게시글을 불러오는데 실패했습니다.");
+        setLoading(false);
+        //nav(-1);
+      });
+  }, []);
 
   const onCraeteComment = (content) => {
     setComments([
       ...comments,
       {
-        id: commentIdRef.current++,
-        writer: loginUserId,
+        commentId: commentIdRef.current++,
+        userId: loginUserId,
+        name: loginUserName,
         createDate: new Date().getTime(),
         updateDate: new Date().getTime(),
-        content: content,
+        comContent: content,
       },
     ]);
     const res = createComment(Number(postId), Number(loginUserId), {
@@ -145,14 +148,14 @@ const ProjPost_detail = () => {
     console.log(res.data);
   };
 
-  const onUpdateComment = (commentId, content) => {
+  const onUpdateComment = (writerId, commentId, content) => {
     setComments(
       comments.map((comment) =>
-        comment.id === commentId
+        comment.userId === writerId
           ? {
               ...comment,
               updateDate: new Date().getTime(),
-              content: content,
+              comContent: content,
             }
           : comment
       )
@@ -170,7 +173,9 @@ const ProjPost_detail = () => {
 
   const onDeleteComment = (commentId) => {
     setComments(
-      comments.filter((comment) => String(comment.id) !== String(commentId))
+      comments.filter(
+        (comment) => String(comment.commentId) !== String(commentId)
+      )
     );
     deleteComment(Number(postId), Number(commentId));
   };
