@@ -29,16 +29,13 @@ const PortfolioBoard = () => {
   const navigateTo = (link) => {
     navigate(link);
   };
-  //prjId , userId
   // const { prjId } = useParams();
   const { teamId } = useParams(); //1로 가정/
-  const userId = useAtomValue(userIdAtom); //1로 가정
-  console.log(userId);
 
   //포트폴리오 리스트업
   const [portfolioList, setPortfolioList] = useState([]);
   useEffect(() => {
-    getMyPortfolios(teamId, userId)
+    getMyPortfolios(teamId)
       .then((res) => {
         console.log(res.data);
         setPortfolioList(res.data);

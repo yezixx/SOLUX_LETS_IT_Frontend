@@ -12,12 +12,9 @@ export const getApplicantList = async (postId) => {
 };
 
 // 지원서 등록
-export const submitApply = async (postId, userId, applyData) => {
+export const submitApply = async (postId, applyData) => {
   try {
-    const response = await apiClient.post(
-      `/apply/${postId}/write/${userId}`,
-      applyData
-    );
+    const response = await apiClient.post(`/apply/${postId}/write`, applyData);
     return response.data; //성공메세지 반환
   } catch (error) {
     console.error("Error fetching applicant list:", error);
