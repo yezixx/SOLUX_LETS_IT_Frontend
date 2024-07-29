@@ -63,7 +63,12 @@ const ReportSection = ({ onReport }) => {
     }
   };
 
-  const onClickReport = () => {
+  const onClickReport = (userId) => {
+    if (userId === loginUserId) {
+      alert("본인은 신고할 수 없습니다.");
+      setSelectedMemberId(null);
+      return;
+    }
     // 선택한 팀원이 없을 경우
     if (!selectedMemberId) {
       alert("팀원을 선택해주세요.");
