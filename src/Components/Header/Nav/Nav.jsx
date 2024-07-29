@@ -18,18 +18,17 @@ const Nav = () => {
     navigate("/");
   };
   //로그아웃 핸들링
-  const handleLogout = async () => {
+  const handleLogout = () => {
     logoutService()
       .then((res) => {
         console.log(`로그아웃 성공 : ${res.data}`);
         alert("로그아웃 되었습니다");
-        navigate("/");
-        window.location.reload();
         localStorage.clear();
-        isLogin(false);
+        setIsLogin(false);
+        navigate("/");
       })
       .catch((error) => {
-        console.log(error);
+        console.log(`로그아웃 중 에러 발생 : ${error}`);
       });
   };
 

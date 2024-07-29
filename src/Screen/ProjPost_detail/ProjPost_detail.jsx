@@ -7,7 +7,7 @@ import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
 import Loading from "../../Components/Loading/Loading";
 import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../atoms/atoms";
+import { userIdAtom, userNameAtom } from "../../atoms/atoms";
 import { useEffect, useRef, useState } from "react";
 import { getComments, getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";
@@ -19,7 +19,7 @@ import {
 
 const mock_post = {
   peopleNum: 5,
-  createdAt: "2024-04-06, 15:30",
+  createdAt: "2024-07-06, 15:30",
   recruitDueDate: "2024-07-31",
   preference: "관련 경력 3년 이상, Git 사용 경험",
   onOff: "대면",
@@ -55,41 +55,26 @@ const mock_post = {
   viewCount: 50,
   userId: "1",
   title: "웹 사이드 프로젝트 팀원 모집",
+  comments: [
+    {
+      commentId: 1,
+      userId: "coder",
+      name: "CODER.",
+      comCreateDate: "2024-07-06, 15:30",
+      comUpdateDate: "2024-07-06, 15:30",
+      comContent: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
+    },
+  ],
 };
-
-const mock_comments = [
-  {
-    id: 1,
-    writer: "CODER.",
-    createDate: "2024-04-06, 15:30",
-    updateDate: "2024-04-06, 15:30",
-    content: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
-  },
-  /*
-  {
-    id: 0,
-    writer: "CODER.",
-    createDate: "2024-04-06, 15:30",
-    updateDate: "2024-04-06, 15:30",
-    content: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
-  },
-  {
-    id: 1,
-    writer: 1,
-    createDate: "2024-04-06, 15:30",
-    updateDate: "2024-04-06, 16:00",
-    content: `모임 요일은 팀원 모집 후 상의하여 결정하려고 합니다.
-    해당 스택을 조금이라도 사용해보신 분을 찾고있습니다.`,
-  },*/
-];
 
 const ProjPost_detail = () => {
   const loginUserId = useAtomValue(userIdAtom);
+  const loginUserName = useAtomValue(userNameAtom);
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState(mock_post);
   const postId = useParams().postId;
 
-  const [comments, setComments] = useState(mock_comments);
+  const [comments, setComments] = useState(mock_post.comments);
   const commentIdRef = useRef(2);
   const commentInputRef = useRef();
 
@@ -101,63 +86,44 @@ const ProjPost_detail = () => {
     return String(post.userId) === String(loginUserId);
   };
 
-  // useEffect(() => {
-  //   setLoading(true);
-  //   getPosts(postId)
-  //     .then((data) => {
-  //       setPost(data);
-  //       setLoading(false);
-  //       console.log(data);
-  //     })
-  //     .catch((error) => {
-  //       console.log("post detail error(ProjPost_Datil.jsx): ", error);
-  //       //alert("게시글을 불러오는데 실패했습니다.");
-  //       setLoading(false);
-  //       //nav(-1);
-  //     });
-  //   /*
-  //   getComments(postId)
-  //     .then((data) => {
-  //       setComments(data.data);
-  //       setLoading(false);
-  //     })
-  //     .catch((error) => {
-  //       console.log("comment list error(ProjPost_Datil.jsx): ", error);
-  //       alert("댓글 목록을 불러오는데 실패했습니다.");
-  //       setLoading(false);
-  //     });*/
-  // }, []);
+  useEffect(() => {
+    setLoading(true);
+    getPosts(postId)
+      .then((data) => {
+        setPost(data);
+        setComments(data.comments);
+        setLoading(false);
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log("post detail error(ProjPost_Datil.jsx): ", error);
+        //alert("게시글을 불러오는데 실패했습니다.");
+        setLoading(false);
+        //nav(-1);
+      });
+  }, []);
 
-  const onCraeteComment = (content) => {
+  const onCraeteComment = async (content) => {
+    const res = await createComment(Number(postId), Number(loginUserId), {
+      comContent: content,
+    });
+    const commentData = res.data;
+    console.log(res.data);
     setComments([
       ...comments,
       {
-        id: commentIdRef.current++,
-        writer: loginUserId,
-        createDate: new Date().getTime(),
-        updateDate: new Date().getTime(),
-        content: content,
+        commentId: commentData.commentId,
+        userId: loginUserId,
+        name: commentData.nickname,
+        comCreateDate: commentData.comCreateDate,
+        comUpdateDate: commentData.comUpdateDate,
+        comContent: commentData.comContent,
       },
     ]);
-    const res = createComment(Number(postId), Number(loginUserId), {
-      comContent: content,
-    });
-    console.log(res.data);
   };
 
-  const onUpdateComment = (commentId, content) => {
-    setComments(
-      comments.map((comment) =>
-        comment.id === commentId
-          ? {
-              ...comment,
-              updateDate: new Date().getTime(),
-              content: content,
-            }
-          : comment
-      )
-    );
-    const res = updateComment(
+  const onUpdateComment = async (writerId, commentId, content) => {
+    const res = await updateComment(
       Number(postId),
       Number(commentId),
       Number(loginUserId),
@@ -165,12 +131,26 @@ const ProjPost_detail = () => {
         comContent: content,
       }
     );
+    const commentData = res.data;
     console.log(res.data);
+    setComments(
+      comments.map((comment) =>
+        comment.userId === writerId
+          ? {
+              ...comment,
+              comUpdateDate: commentData.comUpdateDate,
+              comContent: content,
+            }
+          : comment
+      )
+    );
   };
 
   const onDeleteComment = (commentId) => {
     setComments(
-      comments.filter((comment) => String(comment.id) !== String(commentId))
+      comments.filter(
+        (comment) => String(comment.commentId) !== String(commentId)
+      )
     );
     deleteComment(Number(postId), Number(commentId));
   };
@@ -229,7 +209,12 @@ const ProjPost_detail = () => {
               {comments.map((comment, index) => (
                 <CommentItem
                   key={index}
-                  {...comment}
+                  commentId={comment.commentId}
+                  userId={comment.userId}
+                  name={comment.name}
+                  comCreateDate={comment.comCreateDate}
+                  comUpdateDate={comment.comUpdateDate}
+                  comContent={comment.comContent}
                   postWriter={post.userId}
                   inputRef={commentInputRef}
                   onDelete={onDeleteComment}

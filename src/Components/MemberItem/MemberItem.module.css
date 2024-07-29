@@ -1,5 +1,13 @@
 .memberItem {
   /*border: 1px solid pink;*/
+  position: relative;
+}
+
+.memberItem > img {
+  position: absolute;
+  top: 5px;
+  left: 20px;
+  width: 32px;
 }
 
 .memberItem__container {
@@ -38,6 +46,8 @@
   border-radius: 25px;
   /*마진*/
   margin-left: 10px;
+
+  border: 1px solid var(--line-color);
 }
 
 .memberItem__button:hover {

@@ -3,6 +3,7 @@ import MemberItem from "../../../../Components/MemberItem/MemberItem";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
+import { isLeader } from "../../isLeader";
 
 const MemberList = () => {
   const { teamData, teamId } = useContext(TeamStateContext);
@@ -26,6 +27,7 @@ const MemberList = () => {
             onClick={() => {
               onClickMemberItem(member.userName);
             }}
+            isLeader={isLeader(members, member.userId) ? "LEADER" : ""}
           />
         ))}
       </div>
