@@ -6,8 +6,14 @@ import ProjectList from "../../../Components/ProjectList/ProjectList";
 import { useApplyHire } from "./useApplyHire";
 
 const ApplyHireProj = () => {
-  const { hireProj, applyProj, showMember, handleClickMember, completeHire } =
-    useApplyHire();
+  const {
+    hireProj,
+    applyProj,
+    showMember,
+    handleClickMember,
+    completeHire,
+    deleteHireProj,
+  } = useApplyHire();
   return (
     <div className={styles.ApplyHireProj__content}>
       {/*구인 중인 프로젝트 + 신청한 프로젝트 */}
@@ -36,7 +42,11 @@ const ApplyHireProj = () => {
                     type="SEC_70x40"
                     onClick={() => handleClickMember(item.postId)}
                   />
-                  <Button text="글 삭제" type="NONE__TEXT-TC2" />
+                  <Button
+                    text="글 삭제"
+                    type="NONE__TEXT-TC2"
+                    onClick={() => deleteHireProj(item.postId)}
+                  />
                 </div>
 
                 {/*프로젝트 팀원창 */}

@@ -32,8 +32,16 @@ export const updatePosts = (postId, userId, updatedPostData) => {
 };
 
 // 구인글 삭제 - 내 프로젝트 > 구인/신청 프로젝트 화면에서 글 삭제 버튼
-export const deletePosts = (userId) => {
-  return apiClient.delete(`/posts/${userId}/delete`);
+export const deletePosts = async (userId, postId) => {
+  try {
+    const response = await apiClient.delete(
+      `/posts/${userId}/delete/${postId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching create post:", error);
+    throw error;
+  }
 };
 
 // 댓글 목록 - 구인글 상세 보기 화면
