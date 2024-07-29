@@ -23,4 +23,6 @@ export const postProjectAtom = atom({
   regionId: 0,
   subRegionId: 0,
   categoryId: [],
+
+  field: "",
 });

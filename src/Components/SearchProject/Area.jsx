@@ -1,16 +1,11 @@
 // Area.js
-import React from "react";
-import styles from "./area.module.css";
-import { KoreaArea } from "../../Screen/KoreaArea";
-import useArea from "../../Hooks/useArea.jsx";
+import React from 'react';
+import styles from './area.module.css';
+import { KoreaArea } from '../../Screen/KoreaArea';
+import useArea from '../../Hooks/useArea.jsx';
 
 const Area = () => {
-  const {
-    selectedArea,
-    selectedSubAreas,
-    handleAreaClick,
-    handleSubAreaClick,
-  } = useArea();
+  const { selectedArea, selectedSubAreas, handleAreaClick, handleSubAreaClick } = useArea();
 
   return (
     <div className={styles.container}>
@@ -33,9 +28,7 @@ const Area = () => {
             {selectedArea.subArea.map((sub, index) => (
               <button
                 key={index}
-                className={`${styles.sub} ${
-                  selectedSubAreas.includes(sub) ? styles.selected : ""
-                }`}
+                className={`${styles.sub} ${selectedSubAreas.includes(sub) ? styles.selected : ''}`}
                 onClick={() => handleSubAreaClick(sub)}
               >
                 {sub}
@@ -44,6 +37,7 @@ const Area = () => {
           </div>
         </div>
       )}
+      
     </div>
   );
 };
