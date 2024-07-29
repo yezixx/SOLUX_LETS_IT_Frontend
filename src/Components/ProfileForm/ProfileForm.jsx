@@ -200,7 +200,7 @@ const ProfileForm = ({ init }) => {
   };
 
   const onChangeIntroduce = (e) => {
-    if (e.target.value.length > 500) return;
+    if (e.target.value.length > 300) return;
     setIntroduce(e.target.value);
   };
 
