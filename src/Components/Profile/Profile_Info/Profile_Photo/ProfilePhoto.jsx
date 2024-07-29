@@ -1,5 +1,4 @@
-import UserCircleIcon from "../../../../Image/Icons/UserCircleIcon";
-import UserIcon from "../../../../Image/Icons/UserIcon";
+import ProfileDefaultPhoto from "../../../../Image/Icons/ProfileDefaultPhoto";
 import styles from "./ProfilePhoto.module.css";
 
 const ProfilePhoto = ({ type, src }) => {
@@ -15,7 +14,7 @@ const ProfilePhoto = ({ type, src }) => {
         />
       ) : (
         <div className={styles.myProfile__photo__circle}>
-          <ProfilePhoto />
+          <ProfileDefaultPhoto />
         </div>
       )}
     </>

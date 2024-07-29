@@ -3,11 +3,9 @@ import Button from "../../../Components/Button/Button.jsx";
 import Profile from "../../../Components/Profile/Profile.jsx";
 import { useEffect, useState } from "react";
 import { getProfile } from "../../../service/profileService.js";
-import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
-  const navigate = useNavigate();
-  const [profileData, setProfileData] = useState();
+  const [profileData, setProfileData] = useState(null);
   //로컬스토리지에서 user, userId 갖고 옴
   const user = localStorage.getItem("user");
   const userId = JSON.parse(user).userId;
@@ -21,7 +19,7 @@ const MyProfile = () => {
         setProfileData(res);
       })
       .catch((error) => console.log(error));
-  }, [userId]);
+  }, []);
 
   return (
     <div className={styles.myProfile__contWrap}>

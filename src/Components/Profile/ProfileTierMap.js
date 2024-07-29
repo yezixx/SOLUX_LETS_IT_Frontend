@@ -11,7 +11,8 @@ export const tierColor = (tierScore) => {
     return "var(--text-color2)"; //F등급
   }
 };
-export const ageMapping = () => {
+export const ageMapping = (age) => {
+  if (!age) return "정보 없음";
   switch (age) {
     case "10~19":
       return "10대";

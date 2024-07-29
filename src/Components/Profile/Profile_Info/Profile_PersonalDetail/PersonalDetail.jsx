@@ -9,7 +9,7 @@ const PersonalDetail = ({ name, age }) => {
 
       {/*나이*/}
       {age && (
-        <span className={styles.myProfile__info__age}>{ageMapping()}</span>
+        <span className={styles.myProfile__info__age}>{ageMapping(age)}</span>
       )}
     </div>
   );

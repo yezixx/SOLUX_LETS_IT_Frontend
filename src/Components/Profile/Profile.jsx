@@ -52,7 +52,7 @@ const Profile = ({ user, type, tooltipShow = false }) => {
           {/*프로필 사진, 이름, 이메일/깃허브 등 링크 */}
 
           {/*프로필 사진*/}
-          <ProfilePhoto src={user.profile_image_url} />
+          <ProfilePhoto src={user.profileImageUrl} />
 
           {/*이름, 나이 */}
           <PersonalDetail name={user.nickname} age={user.age} />

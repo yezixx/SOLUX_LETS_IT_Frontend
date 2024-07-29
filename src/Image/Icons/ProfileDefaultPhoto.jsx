@@ -1,4 +1,4 @@
-const ProfilePhoto = () => {
+const ProfileDefaultPhoto = () => {
   <svg
     width="300"
     height="300"
@@ -28,4 +28,4 @@ const ProfilePhoto = () => {
   </svg>;
 };
 
-export default ProfilePhoto;
+export default ProfileDefaultPhoto;

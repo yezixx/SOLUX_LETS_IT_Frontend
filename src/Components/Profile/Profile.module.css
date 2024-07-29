@@ -16,8 +16,6 @@
 
 .myProfile__box {
   /*프로필 박스*/
-  width: 990px;
-  height: 550px;
   border: 1px solid var(--line-color);
   border-radius: 8px;
   padding: 50px 60px;
