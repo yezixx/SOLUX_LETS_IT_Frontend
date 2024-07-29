@@ -142,6 +142,15 @@
   display: none; /* 기본적으로 숨김 */
 }
 
+.noResultsMessage {
+  font-family: "PretendardM";
+  text-align: center; /* 텍스트 중앙 정렬 */
+  margin: 20px; /* 위와 아래에 여백 추가 (필요에 따라 조정) */
+  font-size: 18px; /* 텍스트 크기 조정 (필요에 따라 조정) */
+  color: #333; /* 텍스트 색상 (필요에 따라 조정) */
+}
+
+
 /* 툴팁이 보여질 때 */
 .iconAndDropdown:hover .tooltip,
 .tooltip:hover {

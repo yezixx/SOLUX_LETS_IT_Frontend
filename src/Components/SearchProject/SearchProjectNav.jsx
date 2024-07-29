@@ -20,6 +20,7 @@ const SearchProjectNav = () => {
   const [selectedOnOff, setSelectedOnOff] = useState([]);
   const [selectedAgeGroup, setSelectedAgeGroup] = useState("전체");
   const [sortCriteria, setSortCriteria] = useState("최신순");
+  const [noResults, setNoResults] = useState(false); // 조건에 맞는 프로젝트가 없는지 여부를 나타내는 상태
 
   const { stack: selectedStacks, field: selectedFields } = useAtomValue(postProjectAtom);
   const resetPostProjectAtom = useSetAtom(postProjectAtom);
@@ -47,6 +48,11 @@ const SearchProjectNav = () => {
       setSelectedAgeGroup("전체");
     };
   }, [resetPostProjectAtom]);
+
+  useEffect(() => {
+    // 필터링된 프로젝트가 없을 경우 noResults 상태를 true로 설정
+    setNoResults(filteredProjects.length === 0);
+  }, [projects, selectedArea, selectedSubAreas, selectedDifficulty, selectedPeriod, selectedOnOff, selectedAgeGroup, selectedFields, selectedStacks]);
 
   const handleDifficultyChange = (e) => {
     setSelectedDifficulty(e.target.value);
@@ -133,11 +139,10 @@ const SearchProjectNav = () => {
 
         <div className={styles.dropdownContainer}>
           <div className={styles.dropdownGroup}>
-            <div className={styles.iconAndDropdown}
-                 >
+            <div className={styles.iconAndDropdown}>
               <div className={styles.questionmark}
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}>
+                   onMouseEnter={handleMouseEnter}
+                   onMouseLeave={handleMouseLeave}>
                 <QuestionMarkIcon width="15px" height="15px" />
               </div>
               {ishovered && (
@@ -179,7 +184,13 @@ const SearchProjectNav = () => {
         </div>
       </div>
 
-      <ProjectList projects={sortedProjects} />
+      {noResults ? (
+        <div className={styles.noResultsMessage}>
+          조건에 맞는 프로젝트가 없습니다.
+        </div>
+      ) : (
+        <ProjectList projects={sortedProjects} />
+      )}
     </div>
   );
 };
