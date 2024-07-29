@@ -9,6 +9,7 @@
   align-items: start;
   gap: 30px;
   margin-bottom: 20px;
+  margin-right: 70px;
 }
 
 .title {
@@ -18,14 +19,16 @@
 .buttonContainer {
   display: grid;
   grid-template-columns: repeat(7, 1fr); /* 한 줄에 7개의 버튼 */
-  max-width: 100%;
+ 
   border-radius: 10px;
   gap: 5 px;
+  
+  
 }
 
 .stateButton {
   height: 50px; /* 고정된 높이 */
-  width: 140px;
+  width: 135px;
   background-color: white;
   border: 1px solid var(--line-color);
   border-radius: 8px;

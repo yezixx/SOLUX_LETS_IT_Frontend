@@ -1,8 +1,14 @@
 import apiClient from "./apiClient";
 
 // 전체 프로젝트 조회 - 프로젝트 찾기 (전체) 화면
-export const getPostsList = () => {
-  return apiClient.get(`/posts/list`);
+export const getPostsList = async () => {
+  try {
+    const response = await apiClient.get('/posts/list');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching project list:', error);
+    throw error; // 에러를 다시 throw하여 호출자에게 전달
+  }
 };
 
 // 모집마감버튼
