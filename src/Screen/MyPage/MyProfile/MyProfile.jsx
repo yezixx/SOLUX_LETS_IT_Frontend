@@ -3,8 +3,10 @@ import Button from "../../../Components/Button/Button.jsx";
 import Profile from "../../../Components/Profile/Profile.jsx";
 import { useEffect, useState } from "react";
 import { getProfile } from "../../../service/profileService.js";
+import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
+  const navigate = useNavigate();
   const [profileData, setProfileData] = useState();
   //로컬스토리지에서 user, userId 갖고 옴
   const user = localStorage.getItem("user");
@@ -13,7 +15,7 @@ const MyProfile = () => {
   console.log(userId);
 
   useEffect(() => {
-    getProfile(2)
+    getProfile(userId)
       .then((res) => {
         console.log(res); // 확인 필요
         setProfileData(res);

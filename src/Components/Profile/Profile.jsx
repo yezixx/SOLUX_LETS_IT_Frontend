@@ -1,22 +1,23 @@
 import styles from "./Profile.module.css";
 import ProfileLink from "./Profile_Info/ProfileLink/ProfileLink.jsx";
-import Tier_A from "../../assets/Tier/tier_A.svg?react";
-import Tier_B from "../../assets/Tier/tier_B.svg?react";
-import Tier_C from "../../assets/Tier/tier_C.svg?react";
-import Tier_F from "../../assets/Tier/tier_F.svg?react";
-import Tier_S from "../../assets/Tier/tier_S.svg?react";
 import ProfilePhoto from "./Profile_Info/Profile_Photo/ProfilePhoto.jsx";
 import PersonalDetail from "./Profile_Info/Profile_PersonalDetail/PersonalDetail.jsx";
 import ProfileTier from "./Profile_Tier/ProfileTier.jsx";
 import ProfileIntroduce from "./Profile_Introduce/ProfileIntroduce.jsx";
 import ProfileSkills from "./Profile_Skills/ProfileSkills.jsx";
+import Tier_A from "../../assets/Tier/tier_A.svg?react";
+import Tier_B from "../../assets/Tier/tier_B.svg?react";
+import Tier_C from "../../assets/Tier/tier_C.svg?react";
+import Tier_F from "../../assets/Tier/tier_F.svg?react";
+import Tier_S from "../../assets/Tier/tier_S.svg?react";
 
 const Profile = ({ user, type, tooltipShow = false }) => {
   console.log(user);
   if (!user) {
-    return <div>프로필이 없습니다.</div>;
+    return <div>loading</div>;
   }
   const tier = user.mannerTier; //B
+
   const tierIcon = () => {
     switch (tier) {
       case "A":
@@ -30,7 +31,7 @@ const Profile = ({ user, type, tooltipShow = false }) => {
       case "S":
         return <Tier_S width="50px" height="50px" />;
       default:
-        return null; // 또는 기본값을 설정할 수 있습니다.
+        return <Tier_C width="50px" height="50px" />;
     }
   };
 
