@@ -1,6 +1,6 @@
 import { atom } from "jotai";
 //삭제 예정
-export const userIdAtom = atom(1);
+export const userIdAtom = atom(2);
 export const userNameAtom = atom(1);
 
 export const userAtom = atom({});
