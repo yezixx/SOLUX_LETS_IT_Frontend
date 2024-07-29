@@ -86,7 +86,7 @@ const ProjPost_detail = () => {
     return String(post.userId) === String(loginUserId);
   };
 
-  /*useEffect(() => {
+  useEffect(() => {
     setLoading(true);
     getPosts(postId)
       .then((data) => {
@@ -101,7 +101,7 @@ const ProjPost_detail = () => {
         setLoading(false);
         //nav(-1);
       });
-  }, []);*/
+  }, []);
 
   const onCraeteComment = async (content) => {
     const res = await createComment(Number(postId), Number(loginUserId), {
