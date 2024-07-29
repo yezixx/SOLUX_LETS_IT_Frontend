@@ -1,7 +1,6 @@
-import { useState } from "react";
 import styles from "./MainTitle.module.css";
-import Logo from "../../assets/Logo.svg?react";
-import SearchIcon from "../../Image/Icons/SearchIcon";
+import Logo from "../../../assets/Logo.svg?react";
+import SearchIcon from "../../../Image/Icons/SearchIcon";
 
 const MainTitle = () => {
   return (

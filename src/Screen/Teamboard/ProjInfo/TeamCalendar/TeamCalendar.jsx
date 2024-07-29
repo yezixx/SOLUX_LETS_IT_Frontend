@@ -2,45 +2,66 @@ import "./TeamCalendar.css";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ScheduleDialog from "./ScheduleDialog/ScheduleDialog";
+import ScheduleContent from "./ScheduleContent/ScheduleContent";
+import { TeamStateContext } from "../../Teamboard";
 
-const mock_events = [
-  { title: "event 1", date: "2024-07-12" },
-  { title: "event 2", date: "2024-07-15" },
-  {
-    title: "event 3",
-    start: "2024-07-01",
-    end: "2024-07-03",
-  },
-];
 const TeamCalendar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { scheduleData } = useContext(TeamStateContext);
+
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+  const [isOpenInfo, setIsOpenInfo] = useState(false);
+  const [selectedDate, setSelectedDate] = useState();
+  const [selectedEvent, setSelectedEvent] = useState();
+
+  const onDateClick = (date) => {
+    setSelectedDate(date.dateStr);
+    openDialog();
+  };
 
   const openDialog = () => {
-    setIsOpen(true);
+    setIsOpenDialog(true);
   };
 
   const closeDialog = () => {
-    setIsOpen(false);
+    setIsOpenDialog(false);
   };
 
-  const onDateClick = () => {
-    console.log("달력 클릭");
-    openDialog();
+  const onEventClick = (e) => {
+    openInfo();
+    setSelectedEvent(e.event);
+  };
+
+  const openInfo = () => {
+    setIsOpenInfo(true);
+  };
+
+  const closeInfo = () => {
+    setIsOpenInfo(false);
   };
 
   return (
     <div className="calendar">
-      {isOpen && <ScheduleDialog closeDialog={closeDialog} />}
+      {isOpenDialog && (
+        <ScheduleDialog selectedDate={selectedDate} closeDialog={closeDialog} />
+      )}
+      {isOpenInfo && (
+        <ScheduleContent
+          event={selectedEvent}
+          closeDialog={closeDialog}
+          closeInfo={closeInfo}
+        />
+      )}
       <FullCalendar
         plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
-        events={mock_events}
+        events={scheduleData}
         timeZone="local"
         locale="kr"
         selectable="true"
         dateClick={onDateClick}
+        eventClick={onEventClick}
       />
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import ProjectList from "../RecommendProject/ProjectList";
+import ProjectList from "../../../Components/ProjectList/ProjectList";
 import styles from "./PopularProject.module.css";
 
 function PopularProject() {
@@ -42,8 +42,10 @@ function PopularProject() {
     <div className={styles.popularproj}>
       <div className={styles.popularproj_content}>
         <div className={styles.text}>지금 인기있는 프로젝트 🔥 </div>
-        <div>
-          <ProjectList projects={projects} />
+        <div className={styles.popularproj__container}>
+          {projects.map((project) => (
+            <ProjectList project={project} />
+          ))}
         </div>
       </div>
     </div>

@@ -37,7 +37,7 @@
   padding-left: 10px;
   /*텍스트*/
   font-size: 16px;
-  color: var(--text-color2);
+  color: var(--text-color1);
 }
 
 /*협업툴 링크 input 태그 클릭시*/

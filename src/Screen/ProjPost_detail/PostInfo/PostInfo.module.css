@@ -68,6 +68,7 @@
 .PostInfo__preferred {
   width: 210px;
   word-wrap: break-word;
+  white-space: pre-line;
 }
 
 .PostInfo__projInfoDetail {
@@ -109,6 +110,12 @@
   width: 550px;
 }
 
+.PostInfo__skillInfo > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .PostInfo__skill {
   height: 80px;
   display: flex;
@@ -133,4 +140,5 @@
   font-size: 14px;
   color: var(--text-color2);
   align-self: flex-end;
+  margin-top: 20px;
 }

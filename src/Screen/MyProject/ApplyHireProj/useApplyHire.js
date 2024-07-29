@@ -1,55 +1,113 @@
 import { useEffect, useState } from "react";
-import { getMyProjects } from "../../../service/projectService";
+import {
+  getMyApplyProjects,
+  getMyProjects,
+} from "../../../service/projectService";
 import { useAtomValue } from "jotai";
-import { userAtom } from "../../../atoms/atoms";
+import { userIdAtom } from "../../../atoms/atoms";
+import { completePosts, deletePosts } from "../../../service/postService";
 
 export const useApplyHire = () => {
-  //클릭하면 팀원을 보여주도록 state 설정
-  const [showMember, setShowMember] = useState(false);
-
-  /*구인/신청 프로젝트 data 담을 state */
-  const [apHireProj, setApHireProj] = useState([]);
-  /*팀원 data를 담을 state */
+  // 클릭하면 팀원을 보여주도록 state 설정
+  const [showMember, setShowMember] = useState({});
+  // 구인/신청 프로젝트 data 담을 state
+  const [hireProj, setHireProj] = useState([]);
+  const [applyProj, setApplyProj] = useState([]);
+  // 팀원 data를 담을 state
   const [memberList, setMemberList] = useState([]);
+  // userId 전역 상태에서 불러오기
+  const userId = useAtomValue(userIdAtom);
 
-  // /*로그인 x */
-  // const userId = useAtomValue(userIdAtom);
-
-  /*로그인 구동 시 - userId 전역 상태에서 불러오기 */
-  const user = useAtomValue(userAtom);
-  const userId = user.userId;
-
-  /*프로젝트 리스트 db에서 갖고 와서 apHireProj에 저장 */
+  // 프로젝트 리스트 db에서 갖고 와서 hireProj 저장
   useEffect(() => {
     getMyProjects(userId)
-      .then((data) => {
-        setApHireProj(data);
+      .then((res) => {
+        setHireProj(res.projects);
       })
       .catch((error) => {
-        console.log("에러발생");
+        console.log("프로젝트 데이터 가져오기 오류:", error);
       });
-  }, []);
-  // 팀원 버튼 클릭 시 호출되는 함수
+    getMyApplyProjects(userId)
+      .then((res) => {
+        setApplyProj(res.projects);
+      })
+      .catch((error) => {
+        console.log(`apply 프로젝트 데이터 가져오는 중 에러 발생 : ${error}`);
+      });
+  }, [userId]);
+
+  // 클릭했을 시 멤버 보여주는 함수
   const handleClickMember = (postId) => {
-    if (showMember === postId) {
-      setShowMember(null); // 이미 열려있는 경우 닫기
-    } else {
-      setShowMember(postId); // 클릭한 프로젝트 ID로 팀원 목록 표시
+    setShowMember((prevState) => ({
+      ...prevState,
+      [postId]: !prevState[postId], // 해당 프로젝트의 팀원 목록 표시 상태를 토글
+    }));
+
+    if (!showMember[postId]) {
       approveApplicants(postId)
         .then((data) => {
-          setMemberList(data);
+          setMemberList((prevList) => ({
+            ...prevList,
+            [postId]: data, // 해당 프로젝트의 팀원 목록 업데이트
+          }));
         })
         .catch((error) => {
           console.log("승인 멤버 리스트 오류:", error);
         });
     }
   };
+
+  // 모집 마감 버튼
+  const completeHire = (postId) => {
+    if (window.confirm("마감하시겠습니까? (마감 후 취소는 불가능합니다.)")) {
+      completePosts(postId)
+        .then(() => {
+          alert("마감되었습니다");
+          // 팀게시판 생성 navigate 추가해야 함
+          console.log(`모집 마감 성공`);
+          // 모집 마감 후 프로젝트 목록을 새로 가져오기
+          return getMyProjects(userId);
+        })
+        .then((res) => {
+          setHireProj(res.projects);
+        })
+        .catch((error) => {
+          console.log("모집 마감 처리 오류:", error);
+        });
+    }
+  };
+
+  // 글 삭제
+  const deleteHireProj = (postId) => {
+    const isConfirm = window.confirm(
+      "구인글을 삭제하시겠습니까? (삭제 후 취소는 불가능합니다.)"
+    );
+    if (isConfirm) {
+      deletePosts(userId, postId)
+        .then(() => {
+          alert("삭제되었습니다");
+          // 팀게시판 생성 navigate 추가해야 함
+          console.log(`구인글 삭제 성공`);
+          // 모집 마감 후 프로젝트 목록을 새로 가져오기
+          return getMyProjects(userId);
+        })
+        .then((res) => {
+          setHireProj(res.projects);
+        })
+        .catch((error) => {
+          console.log("구인글 삭제 오류:", error);
+        });
+    } else {
+      alert("취소되었습니다.");
+    }
+  };
+
   return {
-    apHireProj,
+    hireProj,
+    applyProj,
     showMember,
-    setShowMember,
-    memberList,
-    setMemberList,
     handleClickMember,
+    completeHire,
+    deleteHireProj,
   };
 };

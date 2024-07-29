@@ -5,13 +5,25 @@ import apiClient from "./apiClient";
 */
 
 // 팀게시판 생성
-export const createTeam = (postId, teamData) => {
-  return apiClient.post(`/team/${postId}/create`, teamData);
+export const createTeam = async (postId, teamData) => {
+  try {
+    const response = await apiClient.post(`/team/${postId}/create`, teamData);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching create team");
+    throw error;
+  }
 };
 
 // 팀게시파 메인 - 팀게시판 프로젝트 정보 화면
-export const getTeam = (teamId) => {
-  return apiClient.get(`/team/${teamId}/main`);
+export const getTeam = async (teamId) => {
+  try {
+    const response = await apiClient.get(`/team/${teamId}/main`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching get team", error);
+    throw error;
+  }
 };
 
 // 팀게시판 강퇴 제안
@@ -35,18 +47,79 @@ export const manageTeam = (teamId) => {
 };
 
 // 팀게시판 정보 수정
-export const updateTeam = (teamId, updatedTeamData) => {
-  return apiClient.patch(`/team/${teamId}`, updatedTeamData);
+export const updateTeam = async (teamId, updatedTeamData) => {
+  try {
+    const response = await apiClient.patch(
+      `/team/${teamId}/update`,
+      updatedTeamData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating team information:", error.message || error);
+    throw error;
+  }
+};
+
+// 팀장 위임
+export const delegateTeamLeader = async (teamId, userId) => {
+  try {
+    console.log("delegateTeamLeader", teamId, userId);
+    const response = await apiClient.patch(`/team/${teamId}/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching delegate team leader", error);
+    throw error;
+  }
 };
 
 // 팀원 평가 - 평가하기 버튼 눌렀을 때
-export const evaluateMember = (userId) => {
-  return apiClient.post(`/team/evaluation/${userId}`);
+export const evaluateMember = async (teamId, userId, targetId, value) => {
+  try {
+    const response = await apiClient.post(
+      `/team/evaluation/${teamId}/${userId}/${targetId}`,
+      value
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching evaluate member", error);
+    if (error.response) {
+      // 서버가 응답을 반환했지만 상태 코드가 오류를 나타냄
+      console.error("Error response received:");
+      console.error("Status:", error.response.status);
+      console.error("Data:", error.response.data); // 서버에서 반환한 에러 메시지
+      console.error("Headers:", error.response.headers);
+    } else if (error.request) {
+      // 요청이 전송되었지만 응답을 받지 못함
+      console.error("No response received:", error.request);
+    } else {
+      // 설정 문제나 다른 에러
+      console.error("Error setting up the request:", error.message);
+    }
+    throw error;
+  }
+};
+
+export const getEvaluatedList = async (teamId, userId) => {
+  try {
+    const response = await apiClient.get(
+      `team/evaluation/info/${teamId}/${userId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching evaluated member list", error);
+    throw error;
+  }
 };
 
 // 프로젝트 종료 - 프로젝트 종료 버튼 눌렀을 때
-export const completeProject = (teamId, teamData) => {
-  return apiClient.patch(`/team/${teamId}/completed`, teamData);
+export const completeProject = async (teamId) => {
+  try {
+    const response = await apiClient.patch(`/team/${Number(teamId)}/complete`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching complete project", error);
+    throw error;
+  }
 };
 
 // 캘린더 일정 등록

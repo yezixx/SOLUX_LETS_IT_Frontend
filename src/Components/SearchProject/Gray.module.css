@@ -1,5 +1,6 @@
 .tech__wrap {
-  width: 60px;
+  min-width: 40px;
+  max-width: 60px;
   height: 20px;
   background-color: var(--select-color);
   border-radius: 20px;
