@@ -5,6 +5,16 @@ export const getPostsList = () => {
   return apiClient.get(`/posts/list`);
 };
 
+// 모집마감버튼
+export const completePosts = async (postId) => {
+  try {
+    const response = await apiClient.post(`/posts/${postId}/close`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching complete post:", error);
+    throw error;
+  }
+};
 // 구인글 등록 - 구인글 작성 화면에서 업로드 버튼
 export const createPosts = async (userId, postData) => {
   try {
