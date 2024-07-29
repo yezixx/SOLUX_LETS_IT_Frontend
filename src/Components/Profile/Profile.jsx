@@ -12,7 +12,11 @@ import ProfileIntroduce from "./Profile_Introduce/ProfileIntroduce.jsx";
 import ProfileSkills from "./Profile_Skills/ProfileSkills.jsx";
 
 const Profile = ({ user, type, tooltipShow = false }) => {
-  const tier = user.manner_tier; //B
+  console.log(user);
+  if (!user) {
+    return <div>프로필이 없습니다.</div>;
+  }
+  const tier = user.mannerTier; //B
   const tierIcon = () => {
     switch (tier) {
       case "A":
@@ -47,19 +51,20 @@ const Profile = ({ user, type, tooltipShow = false }) => {
           {/*프로필 사진, 이름, 이메일/깃허브 등 링크 */}
 
           {/*프로필 사진*/}
-          <ProfilePhoto src={user.profile_url} />
+          <ProfilePhoto src={user.profile_image_url} />
 
           {/*이름, 나이 */}
-          <PersonalDetail name={user.name} age={user.age} />
+          <PersonalDetail name={user.nickname} age={user.age} />
 
           {/*바이오*/}
           <div className={styles.myProfile__info__bio}>{user.bio}</div>
 
           {/*sns링크*/}
           <div className={styles.myProfile__info__sns}></div>
-          {profile_url.map((url) => {
+          {/* {user.sns.map((url) => {
             <ProfileLink url={url} />;
-          })}
+          })} */}
+          <ProfileLink url={user.sns} />
           {/*객체를 순회하며 props로 값을 전달하도록 수정 예정 2024.06.20 */}
         </div>
 
@@ -68,8 +73,8 @@ const Profile = ({ user, type, tooltipShow = false }) => {
 
         <div className={styles.myProfile__right}>
           {/*매너티어, 소개글, skills */}
-          <ProfileTier tierScore={user.tierScore} tooltipShow={tooltipShow} />
-          <ProfileIntroduce introduce={user.self_intro} />
+          <ProfileTier tierScore={user.mannerScore} tooltipShow={tooltipShow} />
+          <ProfileIntroduce introduce={user.selfIntro} />
           <ProfileSkills skills={user.skills} />
         </div>
       </div>

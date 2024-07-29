@@ -1,13 +1,12 @@
-import styles from './ProfileLink.module.css'
+import styles from "./ProfileLink.module.css";
 
-const ProfileLink = ()=>{
-    return(
-        <div className={styles.ProfileLink}>
-            <div className={styles.ProfileLink__icon}>icon</div>
-            <div className={styles.ProfileLink__link}>link</div>
-        </div>
-        
-    )
-}
+const ProfileLink = ({ url }) => {
+  return (
+    <div className={styles.ProfileLink}>
+      <div className={styles.ProfileLink__icon}>icon</div>
+      <div className={styles.ProfileLink__link}>{url}</div>
+    </div>
+  );
+};
 
-export default ProfileLink
+export default ProfileLink;
