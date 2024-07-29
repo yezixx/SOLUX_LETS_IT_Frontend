@@ -122,12 +122,40 @@ export const completeProject = async (teamId) => {
   }
 };
 
+// 캘린더 일정 데이터 가져오기
+export const getSchedule = async (teamId) => {
+  try {
+    const responese = await apiClient.get(`team/calendar/${teamId}/info`);
+    return responese.data;
+  } catch (error) {
+    console.error("Error fetching get schedule", error);
+    throw error;
+  }
+};
+
 // 캘린더 일정 등록
-export const createSchedule = (teamId, scheduleData) => {
-  return apiClient.post(`/team/${teamId}/schedule`, scheduleData);
+export const createSchedule = async (teamId, scheduleData) => {
+  try {
+    const response = await apiClient.post(
+      `team/calendar/${teamId}/create`,
+      scheduleData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching create schedule", error);
+    throw error;
+  }
 };
 
 // 캘린더 일정 삭제
-export const deleteSchedule = (teamId, scheduleData) => {
-  return apiClient.patch(`/team/${teamId}/schedule`, scheduleData);
+export const deleteSchedule = async (calendarId) => {
+  try {
+    const response = await apiClient.delete(
+      `team/calendar/${calendarId}/delete`
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching delete schedule", error);
+    throw error;
+  }
 };
