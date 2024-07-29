@@ -1,11 +1,12 @@
 import styles from "./ProjectList.module.css";
 import Button from "../Button/Button.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Tech from "./GrayBox.jsx";
 import Paging from "../Paging/Paging.jsx";
 import useProjListPaging from "./useProjListPaging.js";
 
 function ProjectList({ projects }) {
+  const nav = useNavigate();
   //프로젝트 리스트 페이지 커스텀 훅
   const {
     activePage,
@@ -23,7 +24,7 @@ function ProjectList({ projects }) {
   return (
     <div className={styles.projectList}>
       {renderData.map((project, index) => (
-        <div className={styles.projectItem} key={index}>
+        <div className={styles.projectItem} key={index} onClick={()=>{nav(`/projects/detail/${project.postId}`)}}>
           {/*제목 + 정보 + 상세내용 + 버튼 */}
 
           {/*프로젝트 제목 */}
@@ -72,6 +73,12 @@ function ProjectList({ projects }) {
           <Link to={`/apply/${index}`}>
             <Button text="신청하기" />
           </Link>
+          <button className={styles.save}><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" >
+  <path strokeLinecap="round" strokeLinejoin="round" d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z" />
+</svg></button>
+
+        
+
         </div>
       ))}
       <Paging
