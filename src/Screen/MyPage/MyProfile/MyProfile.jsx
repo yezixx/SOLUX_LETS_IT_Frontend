@@ -34,7 +34,7 @@ const MyProfile = () => {
     getProfile(userId)
       .then((res) => {
         setProfileData(res.data);
-        console.log(res.data);
+        console.log(res.data); // 확인 필요
       })
       .catch((error) => console.log(error));
   }, [setProfileData]);
