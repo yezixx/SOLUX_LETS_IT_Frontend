@@ -1,8 +1,13 @@
-import { useSetAtom } from "jotai";
-import { postProjectAtom } from "../../atoms/atoms";
+import { useAtom, useAtomValue } from "jotai";
+import { postProjectAtom, userIdAtom } from "../../atoms/atoms";
+import { createPosts } from "../../service/postService";
+import { useState } from "react";
 
 const useProjectPost = () => {
-  const setPostProj = useSetAtom(postProjectAtom);
+  const [postProj, setPostProj] = useAtom(postProjectAtom);
+  const [errors, setErrors] = useState({});
+  const userId = useAtomValue(userIdAtom);
+
   const onChange = (e) => {
     const { name, value } = e.target;
     setPostProj((prevData) => ({
@@ -10,31 +15,57 @@ const useProjectPost = () => {
       [name]: value,
     }));
   };
-  //버튼 value 갖고오기
-  const onClick = (e) => {
-    // 버튼의 name 속성 가져옴
-    const { name, value } = e.target; // 클릭된 버튼
-    setPostProj((prevData) => ({
-      ...prevData,
-      [name]: value, // 또는 원하는 값으로 업데이트
-    }));
-  };
-  //제출 전 warning
+
   const warning = () => {
-    const isConfirm = confirm("제출하시겠습니까?");
-    if (isConfirm) {
-      alert("제출되었습니다.");
-    } else {
-      alert("취소되었습니다");
-    }
-  };
-  //제출
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    warning();
-    console.log("제출완 "); // 백엔드 연동 코드로 수정 예정
+    return window.confirm("제출하시겠습니까?");
   };
 
-  return { onChange, onClick, handleSubmit };
+  //form 유효성 검사
+  const validateForm = () => {
+    const newErrors = {};
+    Object.keys(postProj).forEach((key) => {
+      if (
+        //비대면일 경우엔 regionId, subRegionId 검사 패스
+        postProj["onOff"] === "비대면" &&
+        (key === "regionId" || key === "subRegionId") &&
+        postProj[key] === 0
+      ) {
+      } else if (
+        (key === "stack" || key === "categoryId") &&
+        postProj[key].length === 0
+      ) {
+        newErrors[key] = true;
+      } else if (postProj[key] === "" || !postProj[key]) {
+        newErrors[key] = true;
+      }
+    });
+    setErrors(newErrors);
+    // Errors가 있는지 여부 확인
+    if (Object.keys(newErrors).length > 0) {
+      alert("폼을 모두 작성해 주세요");
+      //에러 key값 확인용
+      console.log(JSON.stringify(errors, null, 2));
+      console.log(JSON.stringify(newErrors, null, 2));
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validateForm()) {
+      if (warning()) {
+        createPosts(userId, postProj)
+          .then((res) => console.log(`반환 : ${res}`))
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        alert("취소되었습니다");
+      }
+    }
+  };
+  return { onChange, handleSubmit, errors };
 };
+
 export default useProjectPost;

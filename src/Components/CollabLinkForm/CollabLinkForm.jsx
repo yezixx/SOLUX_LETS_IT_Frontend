@@ -1,19 +1,9 @@
 //import Button from "../Button/Button";
+import { forwardRef } from "react";
 import CollabLink from "../CollabLink/CollabLink";
 import styles from "./CollabLinkForm.module.css";
 
-const CollabLinkForm = ({ type }) => {
-  const collabLinks = [
-    {
-      id: 0,
-      link: "http://github.com",
-    },
-    {
-      id: 1,
-      link: "http://www.notion.org",
-    },
-  ];
-
+const CollabLinkForm = forwardRef(({ type, links, onChange, onClick }, ref) => {
   return (
     <div className={styles.collabLinkForm}>
       <div className={styles.collabLinkForm__label}>협업툴 링크</div>
@@ -22,8 +12,17 @@ const CollabLinkForm = ({ type }) => {
           styles[`collabLinkForm__linkItem--${type}`]
         }`}
       >
-        {collabLinks.map((link) => (
-          <CollabLink key={link.id} link={link.link} />
+        {links.map((link, index) => (
+          <CollabLink
+            key={index}
+            id={link.id ? link.id : index}
+            value={link.link}
+            init={link.tool}
+            onChange={onChange}
+            onClick={onClick}
+            selectable={type ? true : false}
+            ref={ref[index]}
+          />
         ))}
       </div>
       {/*<div className={styles.collabLinkForm__button}>
@@ -31,6 +30,8 @@ const CollabLinkForm = ({ type }) => {
       </div>*/}
     </div>
   );
-};
+});
+
+CollabLinkForm.displayName = "CollabLinkForm";
 
 export default CollabLinkForm;

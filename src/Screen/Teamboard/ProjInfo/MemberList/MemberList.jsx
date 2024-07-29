@@ -1,25 +1,34 @@
 import styles from "./MemberList.module.css";
 import MemberItem from "../../../../Components/MemberItem/MemberItem";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { TeamStateContext } from "../../Teamboard";
+import { isLeader } from "../../isLeader";
 
 const MemberList = () => {
-  const members = [
-    { id: 1, name: "유밍 BE" },
-    { id: 2, name: "도라" },
-    { id: 3, name: "Tom BE" },
-  ];
+  const { teamData, teamId } = useContext(TeamStateContext);
+  const members = teamData.teamMemberInfo;
+
+  const nav = useNavigate();
+
+  const onClickMemberItem = (userId) => {
+    nav(`/teamboard/member/profile/${userId}/?team=${teamId}`);
+  };
 
   return (
     <div className={styles.memberList}>
       <div className={styles.memberList__item}>
-        {members.map((member) => (
-          <Link
-            key={member.id}
-            to={"/teamboard/member/profile"}
-            style={{ textDecoration: "none" }}
-          >
-            <MemberItem key={member.id} memberName={member.name} />
-          </Link>
+        {members.map((member, index) => (
+          <MemberItem
+            key={index}
+            memberName={member.userName}
+            memberId={member.userId}
+            profilePic={member.profile_image_url}
+            onClick={() => {
+              onClickMemberItem(member.userName);
+            }}
+            isLeader={isLeader(members, member.userId) ? "LEADER" : ""}
+          />
         ))}
       </div>
     </div>

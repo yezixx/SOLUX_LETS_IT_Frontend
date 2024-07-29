@@ -1,10 +1,17 @@
 import axios from "axios";
 
+const updateApiClientToken = (token) => {
+  apiClient.defaults.headers.Authorization = token ? `Bearer ${token}` : "";
+};
+
+const token = localStorage.getItem("token");
 const apiClient = axios.create({
-  baseURL: "http://172.20.32.121:8080",
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
+    "ngrok-skip-browser-warning": "true",
   },
 });
 
 export default apiClient;
+export { updateApiClientToken };

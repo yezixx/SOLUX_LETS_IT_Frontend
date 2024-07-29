@@ -6,7 +6,7 @@ import ManageProj from "./Teamboard/ManageProj/ManageProj";
 import ProjInfo from "./Teamboard/ProjInfo/ProjInfo";
 import SetMember from "./Teamboard/SetMember/SetMember";
 import Teamboard from "./Teamboard/Teamboard";
-import CreateBoard from "./Teamboard/CreateBoard/CreateBoard";
+import CreateBoard from "./CreateBoard/CreateBoard";
 import CreateProfile from "./CreateProfile/CreateProfile";
 import MainHome from "./MainHome/MainHome";
 import SearchProject from "./SearchProject/SearchProject";
@@ -21,6 +21,7 @@ import MyPortfolio from "./MyPage/MyPortfolio/MyPortfolio";
 import PortfolioWrite from "./MyPage/MyPortfolio/PortfolioWrite/PortfolioWrite";
 import CompletePort from "./MyPage/MyPortfolio/PortfolioWrite/Complete/CompletePort";
 import PortfolioBoard from "./MyPage/MyPortfolio/PortfolioBoard/PortfolioBoard";
+import PortfolioDetail from "./MyPage/MyPortfolio/PortfolioDetail/PortfolioDetail";
 import MainLayout from "../MainLayout";
 import ProjPost_detail from "./ProjPost_detail/ProjPost_detail";
 import ProjectHire from "./ProjectHire/ProjectHire";
@@ -82,7 +83,7 @@ export const RouterInfo = [
       },
       // 구인글 보기, 추후  /:id 추가 필요
       {
-        path: "projects/detail",
+        path: "projects/detail/:postId",
         element: <ProjPost_detail />,
         label: "구인글 보기",
       },
@@ -94,14 +95,12 @@ export const RouterInfo = [
         label: "구인/신청 프로젝트",
         children: [
           {
-            // path: "hiring-and-applied",
-            //백엔드 연결용 동적 주소
             path: "hiring-and-applied",
-            element: <PrivateRoute element={<ApplyHireProj />} />,
+            element: <ApplyHireProj />,
             label: "구인/신청 프로젝트",
           },
           {
-            //백엔드 연결용 동적 주소소
+            //백엔드 연결용 동적 주소
             path: "applyprofile/:applyId",
             // path: "applyprofile",
             element: <PrivateRoute element={<ApplyProfile />} />,
@@ -131,12 +130,13 @@ export const RouterInfo = [
             label: "프로필 관리",
           },
           {
+            // path: "portfolio/:prjId",
             path: "portfolio",
             element: <MyPortfolio />,
             label: "포트폴리오 관리",
           },
           {
-            path: "portfolio/post",
+            path: "portfolio/post/:teamId",
             element: <PortfolioWrite />,
             label: "포트폴리오 작성창",
           },
@@ -146,8 +146,15 @@ export const RouterInfo = [
             label: "AI 생성 - 완성된 포트폴리오",
           },
           {
-            path: "portfolio/board",
+            path: "portfolio/board/:teamId",
+            // path: "portfolio/board",
             element: <PortfolioBoard />,
+            label: "포트폴리오 게시판",
+          },
+          {
+            path: "portfolio/board/:teamId/detail/:prtId",
+            // path: "portfolio/board/detail",
+            element: <PortfolioDetail />,
             label: "포트폴리오 게시판",
           },
         ],
@@ -183,7 +190,7 @@ export const RouterInfo = [
                 label: "프로젝트 정보 수정",
               },
               {
-                path: "member/profile",
+                path: "member/profile/:userId",
                 element: <MemberProfile />,
                 label: "팀원 프로필",
               },
@@ -194,12 +201,12 @@ export const RouterInfo = [
             element: <TeamFeedback />,
             label: "팀원 평가",
           },
-          {
-            path: "new",
-            element: <CreateBoard />,
-            label: "팀게시판 생성",
-          },
         ],
+      },
+      {
+        path: "teamboard/new",
+        element: <CreateBoard />,
+        label: "팀게시판 생성",
       },
       {
         path: "profile/new",

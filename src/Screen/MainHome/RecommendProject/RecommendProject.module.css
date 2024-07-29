@@ -10,3 +10,7 @@
   font-family: "pretendardB";
   font-size: 26px;
 }
+.recommedproj__container {
+  display: flex;
+  gap: 20px;
+}

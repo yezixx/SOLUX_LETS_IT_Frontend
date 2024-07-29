@@ -1,5 +1,5 @@
 import React from "react";
-import ProjectList from "./ProjectList";
+import ProjectList from "../../../Components/ProjectList/ProjectList";
 import styles from "./RecommendProject.module.css";
 
 function RecommendProject() {
@@ -41,8 +41,10 @@ function RecommendProject() {
   return (
     <div className={styles.recommendproj}>
       <div className={styles.text}>이런 프로젝트는 어떠신가요? 💫</div>
-      <div>
-        <ProjectList projects={projects} />
+      <div className={styles.recommedproj__container}>
+        {projects.map((project) => (
+          <ProjectList project={project} />
+        ))}
       </div>
     </div>
   );

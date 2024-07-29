@@ -1,25 +1,182 @@
+import { useContext, useEffect, useState } from "react";
 import Button from "../../../Components/Button/Button";
 import MemberItem from "../../../Components/MemberItem/MemberItem";
 import CheckCircleIcon from "../../../Image/Icons/CheckCircleIcon";
 import FeedbackFormItem from "./FeedbackFormItem/FeedbackFormItem";
 import styles from "./TeamFeedback.module.css";
+import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../../atoms/atoms";
+import { useNavigate } from "react-router-dom";
+import { getEvaluatedList } from "../../../service/teamService";
+import Loading from "../../../Components/Loading/Loading";
+
+const getMembersExcludingSelf = (loginUserId, members) => {
+  return members.filter(
+    (member) => String(member.userId) !== String(loginUserId)
+  );
+};
+
+const isCompletedMember = (feedbackTargetId, evaluatedList) => {
+  //if (!evaluatedList) return false;
+  const isIncluded = evaluatedList.find(
+    (member) => member.userId === feedbackTargetId
+  );
+  return isIncluded;
+};
 
 const TeamFeedback = () => {
-  const members = [
-    { id: 1, name: "유밍 BE" },
-    { id: 2, name: "도라" },
-    { id: 3, name: "Tom BE" },
-  ];
+  const { teamData, teamId } = useContext(TeamStateContext);
+  const members = teamData.teamMemberInfo;
 
-  const questions = [
-    "시간 / 기한은 잘 지켰나요?",
-    "답장 속도는 적절했나요?",
-    "적극적으로 프로젝트에 참여했나요?",
-    "상대방을 존중하고 배려했나요?",
-  ];
+  const { feedbackData } = useContext(TeamStateContext);
+  const { onSubmitFeedback } = useContext(TeamDispatchContext);
+
+  const [selectedMemberId, setSelectedMemberId] = useState();
+  const [feedback, setFeedback] = useState();
+  const [promiseValue, setPromiseValue] = useState();
+  const [frequencyValue, setFrequencyValue] = useState();
+  const [participateValue, setParticipateValue] = useState();
+  const [kindnessValue, setKindnessValue] = useState();
+  const [loading, setLoading] = useState(true);
+  const [evaluatedList, setEvaluatedList] = useState([]);
+
+  /*userId 전역 상태에서 불러오기 */
+  const loginUserId = useAtomValue(userIdAtom);
+
+  const nav = useNavigate();
+
+  const membersExcludingSelf = getMembersExcludingSelf(loginUserId, members);
+
+  const [pollingInterval, setPollingInterval] = useState(null); // 폴링 간격을 관리할 상태
+
+  console.log(feedbackData);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getEvaluatedList(teamId, loginUserId);
+        setEvaluatedList(response.data);
+        console.log("evaluatedList", response.data);
+      } catch (error) {
+        console.error("Error fetching evaluated member list", error);
+        alert("평가한 팀원 목록을 불러오는데 실패했습니다.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // 초기 데이터 로드
+    fetchData();
+
+    // 폴링 설정
+    if (!pollingInterval) {
+      const interval = setInterval(fetchData, 5000); // 5초마다 데이터 요청
+      setPollingInterval(interval);
+    }
+
+    // 컴포넌트 언마운트 시 폴링 중지
+    return () => {
+      if (pollingInterval) {
+        clearInterval(pollingInterval);
+        setPollingInterval(null);
+      }
+    };
+  }, [feedbackData, pollingInterval, teamId, loginUserId]);
+
+  const onChangePromise = (value) => {
+    setFeedback({
+      ...feedback,
+      promise: Number(value),
+    });
+    setPromiseValue(value);
+  };
+  const onChangeFrequency = (value) => {
+    setFeedback({
+      ...feedback,
+      frequency: Number(value),
+    });
+    setFrequencyValue(value);
+  };
+  const onChangeParticipate = (value) => {
+    setFeedback({
+      ...feedback,
+      participate: Number(value),
+    });
+    setParticipateValue(value);
+  };
+  const onChangeKindness = (value) => {
+    setFeedback({
+      ...feedback,
+      kindness: Number(value),
+    });
+    setKindnessValue(value);
+  };
+
+  const isValidate = () => {
+    if (!selectedMemberId) {
+      alert("평가할 팀원을 선택해주세요.");
+      return false;
+    }
+
+    const feedbackValues = feedback ? Object.values(feedback) : null;
+    if (
+      feedbackValues === null ||
+      Number(feedbackValues.length) !== 4 ||
+      feedbackValues.every((data) => data === undefined)
+    ) {
+      alert("모든 항목에 체크해주세요.");
+      return false;
+    }
+    return true;
+  };
+
+  const onClickSubimt = () => {
+    if (!isValidate()) return;
+
+    if (!confirm("평가를 제출하시겠습니까?")) return;
+    try {
+      onSubmitFeedback(teamId, String(loginUserId), String(selectedMemberId), {
+        ...feedback,
+      });
+    } catch (error) {
+      console.error("Error fetching evaluate member", error);
+      throw error;
+    }
+
+    setSelectedMemberId(null);
+    setPromiseValue(null);
+    setFrequencyValue(null);
+    setParticipateValue(null);
+    setKindnessValue(null);
+    setFeedback(null);
+  };
+
+  const onClickFinish = () => {
+    if (!isValidate()) return;
+    try {
+      onSubmitFeedback(teamId, String(loginUserId), String(selectedMemberId), {
+        ...feedback,
+      });
+    } catch (error) {
+      console.error("Error fetching evaluate member", error);
+      throw error;
+    }
+    alert("팀원 평가를 완료합니다.");
+
+    setSelectedMemberId(null);
+    setPromiseValue(null);
+    setFrequencyValue(null);
+    setParticipateValue(null);
+    setKindnessValue(null);
+    setFeedback(null);
+
+    nav("/myproj/attendproj", { replace: true });
+  };
 
   return (
     <div className={styles.teamFeedback}>
+      {loading && <Loading />}
       <div className={styles.teamFeedback__label}>팀원 평가</div>
       <div className={styles.teamFeedback__container}>
         <div className={styles.teamFeedback__innerLabel}>
@@ -31,23 +188,65 @@ const TeamFeedback = () => {
           평가할 팀원을 선택해주세요
         </div>
         <div className={styles.teamFeedback__item}>
-          {members.map((member) => (
+          {membersExcludingSelf.map((member, index) => (
             <MemberItem
-              key={member.id}
-              memberName={member.name}
-              type={"ONLYBORDER"}
+              key={index}
+              memberName={member.userName}
+              type={
+                isCompletedMember(member.userId, evaluatedList)
+                  ? "COMPLETED"
+                  : String(selectedMemberId) === String(member.userId)
+                  ? "ONLYBORDER_SELECTED"
+                  : "ONLYBORDER"
+              }
+              onClick={() => {
+                setSelectedMemberId(member.userId);
+              }}
             />
           ))}
         </div>
         <div className={styles.teamFeedback__formContainer}>
           <div className={styles.teamFeedback__form}>
-            {questions.map((question, index) => (
-              <FeedbackFormItem key={index} question={question} />
-            ))}
+            <FeedbackFormItem
+              targetId={selectedMemberId}
+              question={"시간 / 기한은 잘 지켰나요?"}
+              answer={promiseValue}
+              onChange={onChangePromise}
+            />
+            <FeedbackFormItem
+              targetId={selectedMemberId}
+              question={"답장 속도는 적절했나요?"}
+              answer={frequencyValue}
+              onChange={onChangeFrequency}
+            />
+            <FeedbackFormItem
+              targetId={selectedMemberId}
+              question={"적극적으로 프로젝트에 참여했나요?"}
+              answer={participateValue}
+              onChange={onChangeParticipate}
+            />
+            <FeedbackFormItem
+              targetId={selectedMemberId}
+              question={"상대방을 존중하고 배려했나요?"}
+              answer={kindnessValue}
+              onChange={onChangeKindness}
+            />
           </div>
         </div>
         <div className={styles.teamFeedback__submitButton}>
-          <Button text={"제출하기"} type={"RAD-10__FONT-M"} />
+          {feedbackData.length >= membersExcludingSelf.length - 1 ? (
+            <Button
+              text={"평가종료"}
+              type={"RAD-10__FONT-M"}
+              onClick={onClickFinish}
+            />
+          ) : (
+            <Button
+              text={"제출하기"}
+              type={"RAD-10__FONT-M"}
+              onClick={onClickSubimt}
+            />
+          )}
         </div>
       </div>
     </div>
