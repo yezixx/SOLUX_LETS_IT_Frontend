@@ -8,13 +8,15 @@ function ProjectList({ project }) {
   if (!project) {
     return null;
   }
+  console.log(project);
+  console.log(project.requiredStack);
   return (
     <div className={styles.projectList}>
       <div className={styles.projectItem} key={project.postId}>
         <div className={styles.projectCont}>
           <div className={styles.stack}>
-            {project.stack &&
-              project.stack.map((tech, idx) => (
+            {project.requiredStack &&
+              project.requiredStack.map((tech, idx) => (
                 <Stack key={idx} tech={tech}>
                   {tech}
                 </Stack>

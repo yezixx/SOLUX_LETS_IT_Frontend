@@ -6,7 +6,7 @@ import ManageProj from "./Teamboard/ManageProj/ManageProj";
 import ProjInfo from "./Teamboard/ProjInfo/ProjInfo";
 import SetMember from "./Teamboard/SetMember/SetMember";
 import Teamboard from "./Teamboard/Teamboard";
-import CreateBoard from "./Teamboard/CreateBoard/CreateBoard";
+import CreateBoard from "./CreateBoard/CreateBoard";
 import CreateProfile from "./CreateProfile/CreateProfile";
 import MainHome from "./MainHome/MainHome";
 import SearchProject from "./SearchProject/SearchProject";
@@ -190,7 +190,7 @@ export const RouterInfo = [
                 label: "프로젝트 정보 수정",
               },
               {
-                path: "member/profile",
+                path: "member/profile/:userId",
                 element: <MemberProfile />,
                 label: "팀원 프로필",
               },
@@ -201,12 +201,12 @@ export const RouterInfo = [
             element: <TeamFeedback />,
             label: "팀원 평가",
           },
-          {
-            path: "new",
-            element: <CreateBoard />,
-            label: "팀게시판 생성",
-          },
         ],
+      },
+      {
+        path: "teamboard/new",
+        element: <CreateBoard />,
+        label: "팀게시판 생성",
       },
       {
         path: "profile/new",

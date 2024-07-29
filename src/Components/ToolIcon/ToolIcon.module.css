@@ -16,6 +16,7 @@
 .toolIcon > img {
   width: 25px;
   height: 25px;
+  object-fit: contain;
   color: var(--text-color2);
 }
 
