@@ -4,8 +4,11 @@ import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { isLoginAtom, userIdAtom } from "../../atoms/atoms";
 import {
+  createSchedule,
   delegateTeamLeader,
+  deleteSchedule,
   evaluateMember,
+  getSchedule,
   updateTeam,
 } from "../../service/teamService";
 import { getTeam } from "../../service/teamService";
@@ -141,6 +144,16 @@ function teamReducer(state, action) {
 
 function scheduleReducer(state, action) {
   switch (action.type) {
+    case "GET_EVENT":
+      return action.data.map((item) => {
+        return {
+          id: String(item.calendarId),
+          title: String(item.title),
+          start: String(item.startDate),
+          end: String(item.endDate),
+          description: String(item.description),
+        };
+      });
     case "CREATE_EVENT":
       return [...state, action.data];
     case "DELETE_EVENT":
@@ -253,11 +266,24 @@ const Teamboard = () => {
     }
   };
 
+  const fetchScheduleData = async () => {
+    try {
+      const data = await getSchedule(teamId);
+      scheduleDispatch({
+        type: "GET_EVENT",
+        data: data.data,
+      });
+    } catch (error) {
+      console.log("schedule error", error);
+    }
+  };
+
   useEffect(() => {
     /*if (!islogin) { // 로그인 안되어있으면 로그인 페이지로 이동
       nav("/login");
     }*/
     console.log(islogin);
+    fetchScheduleData();
     fetchTeamData();
     /*getTeam(teamId)
       .then((res) => {
@@ -272,7 +298,6 @@ const Teamboard = () => {
         console.log("teamboard error", error);
       });*/
   }, []);
-  console.log(teamData);
 
   const kickIdRef = useRef(1);
   const meetingRef = useRef(1);
@@ -361,26 +386,24 @@ const Teamboard = () => {
     }
   };
 
-  const onCreateEvent = (title, startDate, endDate, description) => {
+  const onCreateEvent = async (title, startDate, endDate, description) => {
     if (startDate !== endDate) {
       const newDate = new Date(endDate);
       newDate.setDate(newDate.getDate() + 1);
       endDate = newDate.toISOString().split("T")[0];
     }
-    scheduleDispatch({
-      type: "CREATE_EVENT",
-      data: {
-        id: eventRef.current++,
-        title: title,
-        start: startDate,
-        end: endDate,
-        description: description,
-      },
+    await createSchedule(teamId, {
+      title: title,
+      description: description,
+      startDate: startDate,
+      endDate: endDate,
     });
+    fetchScheduleData();
   };
 
   const onDeleteEvent = (targetId) => {
     if (confirm("일정을 삭제하시겠습니까?")) {
+      deleteSchedule(targetId);
       scheduleDispatch({
         type: "DELETE_EVENT",
         data: targetId,
