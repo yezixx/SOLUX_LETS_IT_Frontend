@@ -1,49 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ProjectList from "../../../Components/ProjectList/ProjectList";
 import styles from "./RecommendProject.module.css";
+import { getPostsList } from "../../../service/postService";
+
 
 function RecommendProject() {
-  const projects = [
-    {
-      prtTitle: "웹 사이드 프로젝트 팀원 모집",
-      period: "4월 10일 - 5월 10일",
-      regionId: "서울",
-      onoff: "오프라인",
-      difficulty: "초급",
-      requiredStack: ["react", "spring", "R"],
-    },
-    {
-      prtTitle: "앱 사이드 프로젝트 팀원 모집",
-      period: "4월 10일 - 5월 10일",
-      regionId: "서울",
-      onoff: "오프라인",
-      difficulty: "초급",
-      requiredStack: ["react", "spring"],
-    },
-    {
-      prtTitle: "앱 사이드 프로젝트 팀원 모집",
-      period: "4월 10일 - 5월 10일",
-      regionId: "서울",
-      onoff: "오프라인",
-      difficulty: "초급",
-      requiredStack: ["react", "spring"],
-    },
-    {
-      prtTitle: "앱 사이드 프로젝트 팀원 모집",
-      period: "4월 10일 - 5월 10일",
-      regionId: "서울",
-      onoff: "오프라인",
-      difficulty: "초급",
-      requiredStack: ["react", "spring"],
-    },
-  ];
+  const [projList, setProjList] = useState([]);
+  const [sortedList, setSortedList] = useState([]);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const data = await getPostsList();
+        setProjList(data);
+      } catch (error) {
+        console.error('Error fetching projects:', error);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+  useEffect(() => {
+    if (projList.length > 0) {
+      const sorted = [...projList].sort((a, b) => b.viewCount - a.viewCount);
+      setSortedList(sorted);
+    }
+  }, [projList]);
+
+  
+
 
   return (
     <div className={styles.recommendproj}>
       <div className={styles.text}>이런 프로젝트는 어떠신가요? 💫</div>
       <div className={styles.recommedproj__container}>
-        {projects.map((project) => (
-          <ProjectList project={project} />
+      {sortedList.slice(0, 4).map((project, index) => (
+          <ProjectList key={index} project={project} />
         ))}
       </div>
     </div>

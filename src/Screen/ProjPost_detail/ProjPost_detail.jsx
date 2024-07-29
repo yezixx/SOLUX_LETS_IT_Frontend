@@ -211,7 +211,7 @@ const ProjPost_detail = () => {
                   key={index}
                   commentId={comment.commentId}
                   userId={comment.userId}
-                  name={comment.name}
+                  nickname={comment.nickname}
                   comCreateDate={comment.comCreateDate}
                   comUpdateDate={comment.comUpdateDate}
                   comContent={comment.comContent}

@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./ProjectList.module.css";
 import Stack from "../SearchProject/GrayBox";
+import { useNavigate } from "react-router-dom";
 /*db 배열자체를 projects로 보내줄 것 */
 /*객체의 key 값을 백엔드와 맞출 필요 있음 */
 function ProjectList({ project }) {
@@ -8,15 +9,16 @@ function ProjectList({ project }) {
   if (!project) {
     return null;
   }
+  const nav=useNavigate();
+
   console.log(project);
-  console.log(project.requiredStack);
   return (
-    <div className={styles.projectList}>
-      <div className={styles.projectItem} key={project.postId}>
+    <div className={styles.projectList} >
+      <div className={styles.projectItem} key={project.postId} onClick={()=>{nav(`/projects/detail/${project.postId}`)}}>
         <div className={styles.projectCont}>
           <div className={styles.stack}>
-            {project.requiredStack &&
-              project.requiredStack.map((tech, idx) => (
+            {project.stack &&
+              project.stack.map((tech, idx) => (
                 <Stack key={idx} tech={tech}>
                   {tech}
                 </Stack>
@@ -25,21 +27,21 @@ function ProjectList({ project }) {
           {/*프로젝트 세부사항 */}
           <div className={styles.projectlist__content}>
             <div className={styles.projectTitle}>
-              <div>{project.prtTitle}</div>
+              <div>{project.title}</div>
             </div>
             <div>
               <div className={styles.projectPeriod}>
-                기간 | {project.period}
+                기간 | {project.projectPeriod}
               </div>
             </div>
             <div>
               <div className={styles.projectLocation}>
-                지역 | {project.regionId}
+                지역 | {project.region} {project.subRegion}
               </div>
             </div>
             <div>
               <div className={styles.projectLocation}>
-                방식 | {project.onoff}
+                방식 | {project.onOff}
               </div>
             </div>
             <div>

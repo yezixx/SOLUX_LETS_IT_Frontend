@@ -26,7 +26,7 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
             <div>
               <UserIcon />
               <div className={styles.PostInfo__subLabel}>모집인원</div>
-              {post.peopleNum}
+              {post.totalPersonnel}
             </div>
             <div>
               <PlusCircleIcon />{" "}

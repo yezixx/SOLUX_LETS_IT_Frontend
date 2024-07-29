@@ -27,7 +27,12 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
+  cursor:pointer;
+  &:hover{
+    background-color: rgb(156, 201, 253,0.5);
+  }
 }
+
 .projectCont {
   width: 250px;
   height: 200px;

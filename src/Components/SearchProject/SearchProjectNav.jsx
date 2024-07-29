@@ -99,6 +99,10 @@ const SearchProjectNav = () => {
   const sortedProjects = [...filteredProjects].sort((a, b) => {
     if (sortCriteria === "최신순") {
       return new Date(b.createdAt) - new Date(a.createdAt);
+    } else if (sortCriteria === "조회순") {
+      return b.viewCount - a.viewCount;
+    } else if (sortCriteria === "스크랩순") {
+      return b.scrapCount - a.scrapCount;
     }
     return 0;
   });

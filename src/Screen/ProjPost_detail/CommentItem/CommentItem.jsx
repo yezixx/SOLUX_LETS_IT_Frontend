@@ -12,7 +12,7 @@ import { getFormattedDate } from "../getFormattedDate";
 const CommentItem = ({
   commentId,
   userId,
-  name,
+  nickname,
   comCreateDate,
   comUpdateDate,
   comContent,
@@ -93,7 +93,7 @@ const CommentItem = ({
       >
         <div className={styles.CommentItem__header}>
           <div className={isPostWriter() ? styles.CommentItem__writer : ""}>
-            {name} {isPostWriter() ? <span>(글쓴이)</span> : null}
+            {nickname} {isPostWriter() ? <span>(글쓴이)</span> : null}
           </div>
           <div>{getFormattedDate(comCreateDate)}</div>
           {comCreateDate !== comUpdateDate && <div>(수정됨)</div>}
