@@ -34,17 +34,17 @@ function ProjectList({ projects }) {
           <div className={styles.projectInfo}>
             <div>
               <div className={styles.projectPeriod}>
-                기간 | {project.period}
+                기간 | {project.projectPeriod}
               </div>
             </div>
             <div>
               <div className={styles.projectLocation}>
-                지역 | {project.location}
+                지역 | {project.region} {project.subRegion}
               </div>
             </div>
             <div>
               <div className={styles.projectLocation}>
-                방식 | {project.onoff}
+                방식 | {project.onOff}
               </div>
             </div>
             <div>

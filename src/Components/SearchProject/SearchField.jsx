@@ -33,7 +33,7 @@ const SearchField = () => {
 
   return (
     <div className={styles.projectHire__requiredStack}>
-      <div className={styles.projectHire__subTitle}>분야</div>
+      <div className={styles.projectHire__subTitle}>개발 분야</div>
       <div className={styles.projectHire__detail}>
         <input
           name="field"

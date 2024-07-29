@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'; // useEffect 추가
 import styles from './SearchProjectNav.module.css';
 import ProjectList from './ProjectList';
 import useArea from '../../Hooks/useArea.jsx';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { postProjectAtom } from '../../atoms/atoms';
 import { getPostsList } from '../../service/postService.js';
+import QuestionMarkIcon from '../../Image/Icons/QuestionMarkIcon.jsx';
+import useHover from '../../Hooks/useHover.js';
 
 const SearchProjectNav = () => {
   const { selectedArea, selectedSubAreas } = useArea();
   const navCont = ["최신순", "스크랩순", "조회순"];
   const OnOff = ["대면", "비대면"];
+  const { ishovered, handleMouseEnter, handleMouseLeave } = useHover();
 
   const [projects, setProjects] = useState([]);
   const [selectedDifficulty, setSelectedDifficulty] = useState("전체");
   const [selectedPeriod, setSelectedPeriod] = useState("전체");
   const [selectedOnOff, setSelectedOnOff] = useState([]);
   const [selectedAgeGroup, setSelectedAgeGroup] = useState("전체");
+  const [sortCriteria, setSortCriteria] = useState("최신순");
 
   const { stack: selectedStacks, field: selectedFields } = useAtomValue(postProjectAtom);
   const resetPostProjectAtom = useSetAtom(postProjectAtom);
@@ -46,24 +50,25 @@ const SearchProjectNav = () => {
 
   const handleDifficultyChange = (e) => {
     setSelectedDifficulty(e.target.value);
-    console.log('Selected Difficulty:', e.target.value);
   };
 
   const handlePeriodChange = (e) => {
     setSelectedPeriod(e.target.value);
-    console.log('Selected Period:', e.target.value);
   };
 
   const handleOnOffChange = (menu) => {
-    setSelectedOnOff(prev =>
-      prev.includes(menu) ? prev.filter(item => item !== menu) : [...prev, menu]
-    );
-    console.log('Selected OnOff:', menu);
+    setSelectedOnOff(prev => {
+      const newSelected = prev.includes(menu) ? prev.filter(item => item !== menu) : [...prev, menu];
+      return newSelected;
+    });
   };
 
   const handleAgeGroupChange = (e) => {
     setSelectedAgeGroup(e.target.value);
-    console.log('Selected Age Group:', e.target.value);
+  };
+
+  const handleSortChange = (criteria) => {
+    setSortCriteria(criteria);
   };
 
   const filteredProjects = projects.filter((project) => {
@@ -85,6 +90,13 @@ const SearchProjectNav = () => {
     return areaMatch && subAreaMatch && difficultyMatch && periodMatch && onOffMatch && ageGroupMatch && fieldMatch && stackMatch;
   });
 
+  const sortedProjects = [...filteredProjects].sort((a, b) => {
+    if (sortCriteria === "최신순") {
+      return new Date(b.createdAt) - new Date(a.createdAt);
+    }
+    return 0;
+  });
+
   return (
     <div className={styles.searchProjWrap}>
       <div className={styles.nav2}>
@@ -94,7 +106,12 @@ const SearchProjectNav = () => {
               className={styles.nav2__contents}
               key={id}
             >
-              <button className={styles.nav2__button}>{menu}</button>
+              <button
+                className={`${styles.nav2__button} ${sortCriteria === menu ? styles.selected : ''}`}
+                onClick={() => handleSortChange(menu)}
+              >
+                {menu}
+              </button>
               {id < navCont.length - 1 && (
                 <span className={styles.divider}>|</span>
               )}
@@ -116,14 +133,29 @@ const SearchProjectNav = () => {
 
         <div className={styles.dropdownContainer}>
           <div className={styles.dropdownGroup}>
-            <select value={selectedDifficulty} onChange={handleDifficultyChange}>
-              <option value="" disabled>난이도</option>
-              <option value="전체">전체</option>
-              <option value="입문">입문</option>
-              <option value="초급">초급</option>
-              <option value="중급">중급</option>
-              <option value="고급">고급</option>
-            </select>
+            <div className={styles.iconAndDropdown}
+                 >
+              <div className={styles.questionmark}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}>
+                <QuestionMarkIcon width="15px" height="15px" />
+              </div>
+              {ishovered && (
+                <div className={styles.tooltip}>
+                  <p>여기에는 난이도에 대한 설명이 표시됩니다.여기에는 난이도에 대한 설명이 표시됩니다.여기에는 난이도에 대한 설명이 표시됩니다.
+                  여기에는 난이도에 대한 설명이 표시됩니다.여기에는 난이도에 대한 설명이 표시됩니다.여기에는 난이도에 대한 설명이 표시됩니다.
+                  </p>
+                </div>
+              )}
+              <select value={selectedDifficulty} onChange={handleDifficultyChange}>
+                <option value="" disabled>난이도</option>
+                <option value="전체">전체</option>
+                <option value="입문">입문</option>
+                <option value="초급">초급</option>
+                <option value="중급">중급</option>
+                <option value="고급">고급</option>
+              </select>
+            </div>
           </div>
           <div className={styles.dropdownGroup}>
             <select value={selectedPeriod} onChange={handlePeriodChange}>
@@ -147,7 +179,7 @@ const SearchProjectNav = () => {
         </div>
       </div>
 
-      <ProjectList projects={filteredProjects} />
+      <ProjectList projects={sortedProjects} />
     </div>
   );
 };
