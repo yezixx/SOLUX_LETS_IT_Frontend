@@ -6,6 +6,9 @@ import CollabLink from "../CollabLink/CollabLink";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import defaultProfilePic from "../../assets/user.svg";
+import { updateProfile } from "../../service/profileService";
+import { useAtomValue } from "jotai";
+import { userIdAtom } from "../../atoms/atoms";
 
 /*const sampleData = {
   name: "홍길동",
@@ -41,6 +44,8 @@ import defaultProfilePic from "../../assets/user.svg";
 };*/
 
 const ProfileForm = ({ init }) => {
+  const loginUserId = useAtomValue(userIdAtom);
+
   const [profileImage, setProfileImage] = useState(
     init ? init.profileImage : defaultProfilePic
   );
@@ -150,10 +155,19 @@ const ProfileForm = ({ init }) => {
         bio: bio,
         age: age,
         sns: links,
-        profileImage: profileImage,
+        profileImage: selectPicRef.current.files[0],
         introduce: introduce,
         skills: skills,
       });
+      /*updateProfile(loginUserId, {
+        nickname: nickname,
+        bio: bio,
+        age: age,
+        sns: links,
+        profileImage: selectPicRef.current.files[0],
+        introduce: introduce,
+        skills: skills,
+      });*/
     }
   };
 

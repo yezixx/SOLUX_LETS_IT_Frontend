@@ -12,5 +12,14 @@ export const getProfile = async (userId) => {
 };
 // 프로필 수정 - 프로필 수정 화면에서 저장 버튼
 export const updateProfile = (userId, updatedProfileData) => {
-  return apiClient.patch(`/profile/${userId}/modify`, updatedProfileData);
+  try {
+    const response = apiClient.patch(
+      `/profile/${userId}/modify`,
+      updatedProfileData
+    );
+    return response.data;
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    throw error;
+  }
 };
