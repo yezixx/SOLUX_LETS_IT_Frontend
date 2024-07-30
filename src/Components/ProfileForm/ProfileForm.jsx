@@ -41,24 +41,22 @@ import defaultProfilePic from "../../assets/user.svg";
 };*/
 
 const ProfileForm = ({ init }) => {
-  const [profilePic, setProfilePic] = useState(
-    init ? init.profile_picture : defaultProfilePic
+  const [profileImage, setProfileImage] = useState(
+    init ? init.profileImage : defaultProfilePic
   );
-  const [name, setName] = useState(init ? init.name : "");
+  const [nickname, setNickname] = useState(init ? init.nickname : "");
   const [bio, setBio] = useState(init ? init.bio : "");
-  const [age, setAge] = useState(init ? init.age : "20대 초반");
+  const [age] = useState(init ? init.age : "20대 초반");
   const [introduce, setIntroduce] = useState(init ? init.introduce : "");
   const [links, setLinks] = useState(
     init
-      ? init.links1
+      ? init.sns
       : [
           {
-            id: 1,
             type: "email",
             link: "",
           },
           {
-            id: 2,
             type: "github",
             link: "",
           },
@@ -69,22 +67,18 @@ const ProfileForm = ({ init }) => {
       ? init.skills
       : [
           {
-            id: 1,
             skillName: "",
             fluency: 50,
           },
           {
-            id: 2,
             skillName: "",
             fluency: 50,
           },
           {
-            id: 3,
             skillName: "",
             fluency: 50,
           },
           {
-            id: 4,
             skillName: "",
             fluency: 50,
           },
@@ -114,7 +108,7 @@ const ProfileForm = ({ init }) => {
   const nav = useNavigate();
 
   const onClickProfilePic = () => {
-    setProfilePic(
+    setProfileImage(
       /*imgRef.current.files*/ URL.createObjectURL(
         selectPicRef.current.files[0]
       )
@@ -150,48 +144,22 @@ const ProfileForm = ({ init }) => {
     if (confirm("프로필 작성을 완료하시겠습니까?")) {
       //nav("/");
       console.log({
-        manner_tier: "B",
-        manner_grade: 60,
-        name: name,
+        mannerTier: "B",
+        mannerGrade: 60,
+        nickname: nickname,
         bio: bio,
         age: age,
-        profile_url: [
-          {
-            type: links[0].type,
-            link: links[0].link,
-          },
-          {
-            type: links[1].type,
-            link: links[1].link,
-          },
-        ],
-        profile_picture: profilePic,
+        sns: links,
+        profileImage: profileImage,
         introduce: introduce,
-        skills: [
-          {
-            name: skills[0].skillName,
-            level: skills[0].fluency,
-          },
-          {
-            name: skills[1].skillName,
-            level: skills[1].fluency,
-          },
-          {
-            name: skills[2].skillName,
-            level: skills[2].fluency,
-          },
-          {
-            name: skills[3].skillName,
-            level: skills[3].fluency,
-          },
-        ],
+        skills: skills,
       });
     }
   };
 
   const onChangeName = (e) => {
     if (e.target.value.length > 10) return;
-    setName(e.target.value);
+    setNickname(e.target.value);
   };
 
   const onChangeBio = (e) => {
@@ -206,16 +174,16 @@ const ProfileForm = ({ init }) => {
 
   const onChangeIcon = (id, input) => {
     setLinks(
-      links.map((item) =>
-        String(item.id) === String(id) ? { ...item, type: input.tool } : item
+      links.map((item, index) =>
+        String(index) === String(id) ? { ...item, type: input.tool } : item
       )
     );
   };
 
   const onChangeLink = (id, input) => {
     setLinks(
-      links.map((item) =>
-        String(item.id) === String(id) ? { ...item, link: input } : item
+      links.map((item, index) =>
+        String(index) === String(id) ? { ...item, link: input } : item
       )
     );
   };
@@ -223,14 +191,16 @@ const ProfileForm = ({ init }) => {
   const onChangeSkill = (id, type, input) => {
     if (type === "name") {
       setSkills(
-        skills.map((item) =>
-          String(item.id) === String(id) ? { ...item, skillName: input } : item
+        skills.map((item, index) =>
+          String(index) === String(id) ? { ...item, skillName: input } : item
         )
       );
     } else if (type === "fluency") {
       setSkills(
-        skills.map((item) =>
-          String(item.id) === String(id) ? { ...item, fluency: input } : item
+        skills.map((item, index) =>
+          String(index) === String(id)
+            ? { ...item, fluency: Number(input) }
+            : item
         )
       );
     }
@@ -240,7 +210,7 @@ const ProfileForm = ({ init }) => {
     <div className={styles.profileForm}>
       <div className={styles.profileForm__infoSection}>
         <div className={styles.profileForm__picture}>
-          <img src={profilePic} alt="프로필 사진" />
+          <img src={profileImage} alt="프로필 사진" />
           <input
             type="file"
             id="input_img"
@@ -259,7 +229,7 @@ const ProfileForm = ({ init }) => {
                 type="text"
                 ref={nameRef}
                 placeholder="ex) 홍길동"
-                value={name}
+                value={nickname}
                 onChange={onChangeName}
               />
             </div>
@@ -284,8 +254,8 @@ const ProfileForm = ({ init }) => {
               <div className={styles.profileForm__link}>
                 {links.map((link, index) => (
                   <CollabLink
-                    key={link.id}
-                    id={link.id}
+                    key={index}
+                    id={index}
                     type="SHORT"
                     init={link.type}
                     onClick={onChangeIcon}
@@ -329,8 +299,8 @@ const ProfileForm = ({ init }) => {
         <div className={styles.profileForm__skillRange}>
           {skills.map((skill, index) => (
             <SkillRange
-              key={skill.id}
-              id={skill.id}
+              key={index}
+              id={index}
               skillName={skill.skillName}
               onChange={onChangeSkill}
               ref={skillRefs[index]}
