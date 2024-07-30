@@ -6,8 +6,47 @@ export const getApplicantList = async (postId) => {
     const response = await apiClient.get(`/apply/${postId}/list`);
     return response.data; // 서버에서 받은 데이터를 반환합니다.
   } catch (error) {
-    console.error("Error fetching applicant list:", error);
-    throw error; // 에러를 다시 throw하여 호출자에게 전달합니다.
+    // 에러를 자세히 파악하기 위한 처리
+    if (error.response) {
+      // 서버가 요청을 이해하고 있지만 클라이언트에게 접근 권한이 없는 경우
+      console.error(
+        "Server responded with error:",
+        error.response.status,
+        error.response.data
+      );
+      switch (error.response.status) {
+        case 400:
+          console.error("Bad Request:", error.response.data.message);
+          break;
+        case 401:
+          console.error("Unauthorized:", error.response.data.message);
+          break;
+        case 403:
+          console.error("Forbidden:", error.response.data.message);
+          break;
+        case 404:
+          console.error("Not Found:", error.response.data.message);
+          break;
+        case 500:
+          console.error("Internal Server Error:", error.response.data.message);
+          break;
+        default:
+          console.error(
+            "Unexpected Error:",
+            error.response.status,
+            error.response.data.message
+          );
+          break;
+      }
+    } else if (error.request) {
+      // 요청이 서버로 전달되었지만 응답을 받지 못한 경우
+      console.error("No response received from server:", error.request);
+    } else {
+      // 요청을 설정하는 동안 문제가 발생한 경우
+      console.error("Error setting up the request:", error.message);
+    }
+    // 에러를 다시 throw하여 호출자에게 전달합니다.
+    throw error;
   }
 };
 

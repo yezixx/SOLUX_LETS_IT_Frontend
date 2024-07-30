@@ -11,6 +11,7 @@ const useApplicant = (postId) => {
   useEffect(() => {
     getApplicantList(postId) // 가져오는 프로젝트 data에 따라 매개변수를 바꿔야 함
       .then((data) => {
+        console.log(data);
         setApplicantList(data.data);
       })
       .catch((error) => {
