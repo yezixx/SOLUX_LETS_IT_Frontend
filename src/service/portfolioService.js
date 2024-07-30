@@ -1,12 +1,22 @@
 import apiClient from "./apiClient";
 
-//포트폴리오 리스트업 (조회)
+//포트폴리오 리스트업
+export const getPortfolioList = async () => {
+  try {
+    const response = await apiClient.get("/portfolios/total/list");
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching project list:", error);
+    throw error;
+  }
+};
+//포트폴리오 게시판 (board) 리스트업 (조회)
 export const getMyPortfolios = async (teamId) => {
   try {
     const response = await apiClient.get(`/portfolios/${teamId}/list`);
     return response.data; // 서버에서 받은 데이터를 반환합니다.
   } catch (error) {
-    console.error("Error fetching project list:", error);
+    console.error("Error fetching project board list:", error);
     throw error; // 에러를 다시 throw하여 호출자에게 전달합니다.
   }
 };

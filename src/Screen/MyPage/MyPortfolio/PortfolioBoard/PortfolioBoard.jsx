@@ -3,26 +3,8 @@ import styles from "./PortfolioBoard.module.css";
 import { useEffect, useState } from "react";
 import Paging from "../../../../Components/Paging/Paging";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../../atoms/atoms";
 import { getMyPortfolios } from "../../../../service/portfolioService";
 // import { userAtom } from "../../../../atoms/atoms";
-
-//mock data
-const mockData = [
-  { title: "코드컨벤션 논의", date: "2020-12-10" },
-  { title: "역할 분담", date: "2021-12-10" },
-  { title: "3주차의 기록", date: "2022-12-10" },
-  { title: "3주차의 기록", date: "2022-12-10" },
-  { title: "3주차의 기록", date: "2022-12-10" },
-  { title: "3주차의 기록", date: "2022-12-10" },
-  { title: "3주차의 기록", date: "2022-12-10" },
-  { title: "3주차의 기록", date: "2022-12-10" },
-  { title: "3주차의 기록", date: "2022-12-10" },
-  { title: "3주차의 기록", date: "2022-12-10" },
-  { title: "3주차의 기록", date: "2022-12-10" },
-  { title: "3주차의 기록", date: "2022-12-10" },
-];
 
 const PortfolioBoard = () => {
   const navigate = useNavigate();
@@ -30,7 +12,8 @@ const PortfolioBoard = () => {
     navigate(link);
   };
   // const { prjId } = useParams();
-  const { teamId } = useParams(); //1로 가정/
+  const { teamId } = useParams();
+  console.log(teamId);
 
   //포트폴리오 리스트업
   const [portfolioList, setPortfolioList] = useState([]);
@@ -85,7 +68,7 @@ const PortfolioBoard = () => {
                 {idx + (activePage - 1) * itemsCountPerPage}
               </li>
               <li
-                onClick={() => navigateTo(`detail/${teamId}`)}
+                onClick={() => navigateTo(`detail/${data.prtId}`)}
                 className={styles.PortfolioBoard__cell}
               >
                 {data.prtTitle}
@@ -117,7 +100,7 @@ const PortfolioBoard = () => {
 
       <Paging
         activePage={activePage} //현재 페이지
-        totalItemsCount={mockData.length} //전체 data의 개수
+        totalItemsCount={portfolioList.length} //전체 data의 개수
         itemsPerPage={itemsCountPerPage} //페이지 당 보여줄 아이템 개수
         handlePageChange={handlePageChange}
         pageRangeDisplayed={pageRangeDisplayed}

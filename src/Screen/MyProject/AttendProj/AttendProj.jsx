@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import ProjectBtn from "../../../Components/Project_Button/ProjectBtn";
+import ProjectBtn from "../../../Components/Project_Button/PortfolioBtn";
 import styles from "./AttendProj.module.css";
 import { useEffect, useState } from "react";
 import {
