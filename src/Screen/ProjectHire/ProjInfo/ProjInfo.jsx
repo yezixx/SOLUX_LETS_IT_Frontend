@@ -20,7 +20,7 @@ const ProjInfo = ({ errors }) => {
   //select에 필요한 이벤트 핸들러 (폼 공통)
   const { onChange } = useProjectPost();
   //백엔드에 보낼 data
-  const setPostProj = useSetAtom(postProjectAtom);
+  // const setPostProj = useSetAtom(postProjectAtom);
   // console.log(setPostProj)
 
   return (

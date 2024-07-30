@@ -13,6 +13,7 @@ import { useEffect } from "react";
 const ProjectHire = () => {
   const projectPost = useAtomValue(postProjectAtom);
   const { handleSubmit, onChange, errors } = useProjectPost();
+  console.log(projectPost);
   return (
     <form onSubmit={handleSubmit} className={styles.projectHire}>
       구인글 작성

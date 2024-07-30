@@ -11,9 +11,9 @@ const RecruitInfo = ({ errors }) => {
         <div className={styles.projectHire__detail}>
           <label>모집인원</label>
           <select
-            className={errors["peopleNum"] ? styles.formError : ""}
+            className={errors["totalPersonnel"] ? styles.formError : ""}
             defaultValue=""
-            name="peopleNum"
+            name="totalPersonnel"
             onChange={onChange}
           >
             <option value="">선택</option>
