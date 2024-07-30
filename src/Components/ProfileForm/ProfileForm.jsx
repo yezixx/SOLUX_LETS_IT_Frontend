@@ -224,7 +224,13 @@ const ProfileForm = ({ init }) => {
     <div className={styles.profileForm}>
       <div className={styles.profileForm__infoSection}>
         <div className={styles.profileForm__picture}>
-          <img src={profileImage} alt="프로필 사진" />
+          <img
+            src={profileImage}
+            alt="프로필 사진"
+            onError={() => {
+              setProfileImage(defaultProfilePic);
+            }}
+          />
           <input
             type="file"
             id="input_img"
