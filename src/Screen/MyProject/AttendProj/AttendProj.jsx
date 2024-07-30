@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import ProjectBtn from "../../../Components/Project_Button/ProjectBtn";
 import styles from "./AttendProj.module.css";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../atoms/atoms";
 import { useEffect, useState } from "react";
 import {
   getCompleteProjects,
@@ -53,7 +51,9 @@ const OngoingProj = () => {
           {ongoingProj.map((project) => (
             <div key={project.teamId} className={styles.ongoingProj__cont}>
               <ProjectBtn
-                onClick1={() => naviagateTo("/teamboard")}
+                onClick1={() =>
+                  naviagateTo(`/teamboard/?team=${project.teamId}`)
+                }
                 onClick2={() =>
                   naviagateTo(`/mypage/portfolio/${project.teamId}`)
                 }
