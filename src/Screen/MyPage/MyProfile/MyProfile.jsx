@@ -10,17 +10,16 @@ const MyProfile = () => {
   const user = localStorage.getItem("user");
   const userId = JSON.parse(user).userId;
   console.log(user);
-  console.log(userId);
 
   useEffect(() => {
-    getProfile(userId)
+    getProfile()
       .then((res) => {
-        console.log(res); // 확인 필요
-        setProfileData(res);
+        console.log(res.data); // 확인 필요
+        setProfileData(res.data);
       })
       .catch((error) => console.log(error));
   }, []);
-
+  console.log(profileData);
   return (
     <div className={styles.myProfile__contWrap}>
       {/*프로필 */}

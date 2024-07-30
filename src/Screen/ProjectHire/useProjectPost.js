@@ -2,11 +2,12 @@ import { useAtom, useAtomValue } from "jotai";
 import { postProjectAtom, userIdAtom } from "../../atoms/atoms";
 import { createPosts } from "../../service/postService";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const useProjectPost = () => {
   const [postProj, setPostProj] = useAtom(postProjectAtom);
   const [errors, setErrors] = useState({});
-  const userId = useAtomValue(userIdAtom);
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -66,6 +67,7 @@ const useProjectPost = () => {
           .then((res) => {
             console.log(`반환 : ${res}`);
             alert("제출되었습니다.");
+            navigate("/myproj/hiring-and-applied");
           })
           .catch((error) => {
             console.log(error);

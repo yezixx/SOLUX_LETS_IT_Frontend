@@ -22,37 +22,48 @@ const SearchProjectNav = () => {
   const [sortCriteria, setSortCriteria] = useState("최신순");
   const [noResults, setNoResults] = useState(false); // 조건에 맞는 프로젝트가 없는지 여부를 나타내는 상태
 
-  const { stack: selectedStacks, field: selectedFields } =
-    useAtomValue(postProjectAtom);
-  const resetPostProjectAtom = useSetAtom(postProjectAtom);
+  //postProjectAtom에서 stack, field를 selectedStack selectedFields에 복사
+
+  const resetPostProject = {
+    title: "",
+    content: "",
+    totalPersonnel: "",
+    recruitDueDate: "",
+    preference: "",
+    projectPeriod: "",
+    ageGroup: "",
+    stack: [],
+    difficulty: "",
+    onOff: "",
+    regionId: 17,
+    subRegionId: 1701,
+    categoryId: [],
+  };
+  const { stack: selectedStacks, categoryId: selectedFields } =
+    resetPostProject;
 
   useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        const data = await getPostsList();
-        setProjects(data.data);
-      } catch (error) {
-        console.error("Error fetching projects:", error);
-      }
-    };
-
-    fetchProjects();
-
-    return () => {
-      resetPostProjectAtom({
-        stack: [],
-        field: [],
+    getPostsList()
+      .then((res) => {
+        setProjects(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
       });
+    return () => {
+      resetPostProject.stack = [];
+      resetPostProject.categoryId = [];
       setSelectedDifficulty("전체");
       setSelectedPeriod("전체");
       setSelectedOnOff([]);
       setSelectedAgeGroup("전체");
     };
-  }, [resetPostProjectAtom]);
+  }, []);
+  //projects : 객체 담은 배열
 
   useEffect(() => {
     // 필터링된 프로젝트가 없을 경우 noResults 상태를 true로 설정
-    setNoResults(filteredProjects.length === 0);
+    setNoResults(!filteredProjects);
   }, [
     projects,
     selectedArea,
@@ -89,21 +100,26 @@ const SearchProjectNav = () => {
   const handleSortChange = (criteria) => {
     setSortCriteria(criteria);
   };
-
-  const filteredProjects = projects.filter((project) => {
+  //필터링된 프로젝트
+  //백엔드에서 프로젝트 데이터가 아직 안가져와졌다면 빈 배열로 filter 진행
+  const filteredProjects = (projects ? projects : []).filter((project) => {
+    //지역 필터링 - 선택된 지역이 있을 경우, 프로젝트의 지역이 선택된 지역이름으로 시작
     const areaMatch = selectedArea
       ? project.region.startsWith(selectedArea.name)
       : true;
+
+    //하위 지역 필터링 - 선택된 하위 지역이 없는 경우 or 선택된 하위 지역 중 하나라도 프로젝트 하위 지역에 포함돼야함
     const subAreaMatch =
-      selectedSubAreas.length === 0 ||
+      selectedSubAreas || // 선택된 게 없을 경우 (undefined 포함)
       selectedSubAreas.some((sub) => project.subRegion.includes(sub));
+
+    //난이도 필터링
     const difficultyMatch =
       selectedDifficulty === "전체" ||
       project.difficulty === selectedDifficulty;
     const periodMatch =
       selectedPeriod === "전체" || project.projectPeriod === selectedPeriod;
-    const onOffMatch =
-      selectedOnOff.length === 0 || selectedOnOff.includes(project.onOff);
+    const onOffMatch = selectedOnOff || selectedOnOff.includes(project.onOff); // 선택된 게 없을 경우 (undefined 포함)
     const ageGroupMatch =
       selectedAgeGroup === "전체" || project.ageGroup === selectedAgeGroup;
 
@@ -133,6 +149,7 @@ const SearchProjectNav = () => {
     );
   });
 
+  //최신순, 조회순 ,스크랩순 계산
   const sortedProjects = [...filteredProjects].sort((a, b) => {
     if (sortCriteria === "최신순") {
       return new Date(b.createdAt) - new Date(a.createdAt);

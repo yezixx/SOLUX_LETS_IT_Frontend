@@ -2,7 +2,6 @@
   display: flex;
   margin-bottom: 70px;
 }
-
 .ApplyHireProj__title {
   font-family: "pretendardB";
   font-size: 26px;
@@ -55,4 +54,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+.ApplyProj__ProjectList {
+  display: flex;
+  gap: 40px;
 }

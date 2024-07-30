@@ -68,7 +68,7 @@ export const useApplyHire = () => {
           return getMyProjects();
         })
         .then((res) => {
-          setHireProj(res.projects);
+          setHireProj(res.data);
         })
         .catch((error) => {
           console.log("모집 마감 처리 오류:", error);
@@ -91,7 +91,7 @@ export const useApplyHire = () => {
           return getMyProjects();
         })
         .then((res) => {
-          setHireProj(res.projects);
+          setHireProj(res.data);
         })
         .catch((error) => {
           console.log("구인글 삭제 오류:", error);

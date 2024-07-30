@@ -1,9 +1,9 @@
 import apiClient from "./apiClient";
 
 // 프로필 조회
-export const getProfile = async (userId) => {
+export const getProfile = async () => {
   try {
-    const response = await apiClient.get(`profile/${userId}`);
+    const response = await apiClient.get(`profile/my`);
     return response.data; //성공메세지 반환
   } catch (error) {
     console.error("Error fetching applicant list:", error);
