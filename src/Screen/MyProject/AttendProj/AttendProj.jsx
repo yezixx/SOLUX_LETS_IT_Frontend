@@ -22,7 +22,7 @@ const OngoingProj = () => {
       .then((res) => {
         // console.log(`getMyAttendProjects에서 가져온 data : ${res}`);
         // console.log(JSON.stringify(res, null, 2));
-        setOngoingProj(res.projects);
+        setOngoingProj(res.data);
       })
       .catch((error) => console.log(error));
     //완료한 프로젝트
@@ -30,7 +30,7 @@ const OngoingProj = () => {
       .then((res) => {
         // console.log(`completeProject 가져온 data : ${res}`);
         // console.log(JSON.stringify(res, null, 2));
-        setCompleteProj(res.projects);
+        setCompleteProj(res.data);
       })
       .catch((error) => console.log(error));
   }, []);

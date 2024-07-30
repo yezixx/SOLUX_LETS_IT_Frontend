@@ -47,7 +47,7 @@ const useApplicant = (postId) => {
       } else {
         /*거절 시 */
         rejectApply(postId, applyId)
-          .then((res) => {
+          .then(() => {
             alert("거절되었습니다.");
             //applicantList 리렌더링
             getApplicantList(postId) // 가져오는 프로젝트 data에 따라 매개변수를 바꿔야 함

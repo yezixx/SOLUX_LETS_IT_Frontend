@@ -64,7 +64,7 @@ export const useApplyHire = () => {
           alert("마감되었습니다");
           // 팀게시판 생성 navigate 추가해야 함
           console.log(`모집 마감 성공`);
-          navigate("/teamboard/new");
+          navigate(`/teamboard/new?post=${postId}`);
           // 모집 마감 후 프로젝트 목록을 새로 가져오기
           return getMyProjects();
         })
