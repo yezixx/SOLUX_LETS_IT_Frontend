@@ -1,4 +1,3 @@
-// Area.js
 import React from 'react';
 import styles from './area.module.css';
 import { KoreaArea } from '../../Screen/KoreaArea';
@@ -14,7 +13,7 @@ const Area = () => {
         {KoreaArea.map((state, index) => (
           <button
             key={index}
-            className={styles.stateButton}
+            className={`${styles.stateButton} ${selectedArea === state ? styles.selectedState : ''}`}
             onClick={() => handleAreaClick(state)}
           >
             {state.name}
@@ -37,7 +36,6 @@ const Area = () => {
           </div>
         </div>
       )}
-      
     </div>
   );
 };
