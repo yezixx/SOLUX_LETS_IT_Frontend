@@ -29,15 +29,21 @@ function PopularProject() {
 
   return (
     <div className={styles.popularproj}>
-      <div className={styles.popularproj_content}>
-        <div className={styles.text}>지금 인기있는 프로젝트 🔥 </div>
-        <div className={styles.popularproj__container}>
-        {sortedList.slice(0, 4).map((project, index) => (
+    <div className={styles.popularproj_content}>
+      <div className={styles.text}>지금 인기있는 프로젝트 🔥 </div>
+      <div className={styles.popularproj__container}>
+      {sortedList.length > 0 ? (
+        sortedList.slice(0, 4).map((project, index) => (
           <ProjectList key={index} project={project} />
-        ))}
+        ))
+      ) : (
+        <div className={styles.noProjectsMessage}>
+          현재 게시된 프로젝트가 존재하지 않습니다.
         </div>
+      )}
       </div>
     </div>
+  </div>
   );
 }
 
