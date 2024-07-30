@@ -34,9 +34,15 @@ function RecommendProject() {
     <div className={styles.recommendproj}>
       <div className={styles.text}>이런 프로젝트는 어떠신가요? 💫</div>
       <div className={styles.recommedproj__container}>
-      {sortedList.slice(0, 4).map((project, index) => (
-          <ProjectList key={index} project={project} />
-        ))}
+      {sortedList.length > 0 ? (
+          sortedList.slice(0, 4).map((project, index) => (
+            <ProjectList key={index} project={project} />
+          ))
+        ) : (
+          <div className={styles.noProjectsMessage}>
+            현재 게시된 프로젝트가 존재하지 않습니다.
+          </div>
+        )}
       </div>
     </div>
   );
