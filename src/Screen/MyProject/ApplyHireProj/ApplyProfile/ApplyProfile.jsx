@@ -26,12 +26,11 @@ const mockuser = {
 const ApplyProfile = () => {
   //applyId는 지원자 리스트 매핑 시 갖고 옴, 동적 url 할당
   const { applyId } = useParams();
-  const { applicantView } = useProfileView(applyId);
+  const { applicantView, profileView } = useProfileView(applyId);
   return (
     <div className={styles.ApplyProfile__contWrap}>
       {/*프로필 db 구현되면 주석 처리된 코드 사용 */}
-      {/* <Profile user={profileView} /> */}
-      <Profile user={mockuser} />
+      <Profile user={profileView} />
 
       <div className={styles.ApplyProfile__applyDetail}>
         <div className={styles.ApplyProfile__stackField}>

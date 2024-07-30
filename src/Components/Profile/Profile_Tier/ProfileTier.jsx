@@ -2,10 +2,13 @@ import useHover from "../../../Hooks/useHover";
 import QuestionMarkIcon from "../../../Image/Icons/QuestionMarkIcon";
 import GraphBar from "../../Graph/GraphBar";
 import ProfileToolTip from "../Profile__ToolTip/ProfileTooltip";
+import { tierColor } from "../ProfileTierMap";
 import styles from "./ProfileTier.module.css";
 
 const ProfileTier = ({ tierScore, tooltipShow }) => {
   const { ishovered, handleMouseEnter, handleMouseLeave } = useHover();
+  //tierScore에 따른 색상 매핑
+
   return (
     <div className={styles.myProfile__tier}>
       {/*매너티어 - title */}
@@ -31,13 +34,15 @@ const ProfileTier = ({ tierScore, tooltipShow }) => {
         {/*스킬 그래프 */}
       </div>
       <div className={styles.myProfile__tier__graph}>
-        <GraphBar
-          showNumbers="true"
-          borderRadius="100px"
-          bgc="#1f9a00"
-          color="#1f9a00"
-          value={tierScore}
-        />
+        {tierScore && (
+          <GraphBar
+            showNumbers="true"
+            borderRadius="100px"
+            bgc={tierColor(tierScore)}
+            color={tierColor(tierScore)}
+            value={tierScore}
+          />
+        )}
       </div>
     </div>
   );

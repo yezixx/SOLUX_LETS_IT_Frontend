@@ -6,7 +6,7 @@ import { getProfile } from "../../../../service/profileService";
 const useProfileView = (applyId) => {
   //db받아올 state설정 (해당 페이지에서만 이용, 전역x)
   const [applicantView, setApplicantView] = useState({});
-  // const [profileView, setProfileView] = useState({});
+  const [profileView, setProfileView] = useState({});
   useEffect(() => {
     //지원서 db 호출
     getApply(applyId)
@@ -15,19 +15,19 @@ const useProfileView = (applyId) => {
       })
       .catch((error) => console.log("에러 발생"));
   }, [applyId]);
-  // useEffect(() => {
-  //   //프로필 db 호출,  applicantView가 호출된 이후 가능
-  //   if (applicantView) {
-  //     getProfile(applicantView.userId)
-  //       .then((res) => {
-  //         setProfileView(res);
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  // }, [applicantView]);
-  return { applicantView };
+  useEffect(() => {
+    //프로필 db 호출,  applicantView가 호출된 이후 가능
+    if (applicantView) {
+      getProfile(applicantView.userId)
+        .then((res) => {
+          setProfileView(res);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, [applicantView]);
+  return { applicantView, profileView };
   //profileView 추가로 return
 };
 export default useProfileView;

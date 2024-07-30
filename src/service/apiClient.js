@@ -6,8 +6,9 @@ const token = localStorage.getItem("token");
 const apiClient = axios.create({
   baseURL: "/api",
   headers: {
-    "Content-Type": "application/json; charset=utf-8",
-    "ngrok-skip-browser-warning": "true",
+    "Content-Type": "application/json",
+    "ngrok-skip-browser-warning": "truse",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
   },
 });
 export default apiClient;
