@@ -6,10 +6,16 @@ import Loading from "../../Components/Loading/Loading";
 import styles from "./CreateProfile.module.css";
 
 const CreateProfile = () => {
+  const loginUserInfo = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user"))
+    : null;
+  const loginUserId = loginUserInfo ? loginUserInfo.userId : null;
+  console.log(loginUserId, loginUserInfo.ageRange);
+
   const [userInfo, setUserInfo] = useState({
     nickname: "",
     bio: "",
-    age: "20~29",
+    age: loginUserInfo.ageRange,
     sns: [
       {
         type: "email",
@@ -47,8 +53,9 @@ const CreateProfile = () => {
   /*useEffect(() => {
     setLoading(true);
     try {
-      const response = getProfile();
-      setUserInfo(response);
+      const response = getProfile(loginUserId);
+      setUserInfo(response.data);
+      console.log(response.data);
       setLoading(false);
     } catch (error) {
       console.log(error);
