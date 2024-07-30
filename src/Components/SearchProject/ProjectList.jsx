@@ -1,12 +1,19 @@
+import React, { useState } from "react";
 import styles from "./ProjectList.module.css";
 import Button from "../Button/Button.jsx";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Tech from "./GrayBox.jsx";
 import Paging from "../Paging/Paging.jsx";
 import useProjListPaging from "./useProjListPaging.js";
+import BookmarkIcon from "../../Image/Icons/BookmarkIcon.jsx";
 
 function ProjectList({ projects }) {
-  //프로젝트 리스트 페이지 커스텀 훅
+  const nav = useNavigate();
+  
+  // 스크랩 상태 관리
+  const [savedProjects, setSavedProjects] = useState({});
+
+  // 프로젝트 리스트 페이지 커스텀 훅
   const {
     activePage,
     itemsCountPerPage,
@@ -14,16 +21,28 @@ function ProjectList({ projects }) {
     handlePageChange,
   } = useProjListPaging();
 
-  //실제 렌더링할 데이터 (data를 슬라이스 함 0-9 / 10-19..)
+  // 실제 렌더링할 데이터 (data를 슬라이스 함 0-9 / 10-19..)
   const renderData = projects.slice(
     (activePage - 1) * itemsCountPerPage,
     activePage * itemsCountPerPage
   );
-  //프로젝트 리스트 db에서 postId 갖고올 것
+
+  // 스크랩 상태를 관리하는 함수
+  const handleSaveClick = (postId) => {
+    setSavedProjects((prevSavedProjects) => ({
+      ...prevSavedProjects,
+      [postId]: !prevSavedProjects[postId]
+    }));
+  };
+
   return (
     <div className={styles.projectList}>
-      {renderData.map((project, index) => (
-        <div className={styles.projectItem} key={index}>
+      {renderData.map((project) => (
+        <div
+          className={styles.projectItem}
+          key={project.postId}
+          onClick={() => { nav(`/projects/detail/${project.postId}`) }}
+        >
           {/*제목 + 정보 + 상세내용 + 버튼 */}
 
           {/*프로젝트 제목 */}
@@ -34,17 +53,17 @@ function ProjectList({ projects }) {
           <div className={styles.projectInfo}>
             <div>
               <div className={styles.projectPeriod}>
-                기간 | {project.period}
+                기간 | {project.projectPeriod}
               </div>
             </div>
             <div>
               <div className={styles.projectLocation}>
-                지역 | {project.location}
+                지역 | {project.region} {project.subRegion}
               </div>
             </div>
             <div>
               <div className={styles.projectLocation}>
-                방식 | {project.onoff}
+                방식 | {project.onOff}
               </div>
             </div>
             <div>
@@ -68,11 +87,22 @@ function ProjectList({ projects }) {
             </div>
           </div>
 
-          {/*index -> postId로 변경해야함 */}
-          <Link to={`/apply/${index}`}>
-            <Button text="신청하기" />
-          </Link>
-        </div>
+       
+            <Link to={`/apply/${project.postId}`}>
+              <Button text="신청하기" />
+            </Link>
+            <button
+              className={styles.save}
+              onClick={(e) => {
+                e.stopPropagation(); // 클릭 이벤트가 부모에 전달되지 않도록 함
+                handleSaveClick(project.postId);
+              }}
+            >
+              {savedProjects[project.postId] ?<BookmarkIcon width="30px" height="30px" isBookmark={true} />: <BookmarkIcon width="30px" height="30px" isBookmark={false} />
+              }
+            </button>
+          </div>
+      
       ))}
       <Paging
         activePage={activePage}

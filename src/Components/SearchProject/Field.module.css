@@ -1,23 +1,26 @@
-.title {
-  font-family: "pretendardB";
-  font-size: 20px;
-}
+
 
 .container {
   background-color: var(--dimmed); /* 전체 배경 색상 */
   border-radius: 10px;
   height: 200px;
   display: flex;
-  flex-direction: column;
-  position: relative;
-  padding: 20px;
-  margin-bottom: 20px;
+  
+  justify-content: center;
+  
+  
+  
+  margin-top: 20px;
+  width: 1000px;
+  gap: 70px;
+  
 }
 .searchContainer {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 60px;
+  
 }
 .searchContainer__field {
   display: flex;

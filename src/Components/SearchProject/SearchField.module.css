@@ -1,0 +1,70 @@
+/* 부제목 */
+.projectHire__subTitle {
+  font-family: "pretendardB";
+  font-size: 25px;
+  margin-bottom: 15px;
+  margin-top: 20px;
+}
+
+/* label + input */
+.projectHire__detail {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: relative; /* 연관 검색어 목록의 위치 조정을 위해 추가 */
+}
+
+/* input style 2 - 긴 사이즈 */
+.projectHire__inputStyle2 {
+  width: 300px;
+  padding-left: 10px;
+  border-radius: 10px;
+  
+  height: 40px;
+}
+
+.projectHire__searchIcon {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+/* 연관검색어 창 */
+.projectHire__relatedSearch {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 8px;
+  position: absolute; /* 검색창 아래에 위치하도록 절대 위치 설정 */
+  top: 45px; /* 검색창 높이 + 간격 */
+  left: 0;
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  background-color: white;
+  z-index: 10; /* 다른 요소들보다 위에 표시되도록 설정 */
+}
+
+.projectHire__relatedSearchItem {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+.projectHire__relatedSearchItem:hover {
+  background-color: var(--select-color);
+}
+
+/* 회색 박스 래퍼 */
+.projectHire__techWrap {
+  width: 70%;
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  position: relative; /* 기본 위치 유지 */
+  z-index: 5; /* 연관 검색어보다 아래에 표시되도록 설정 */
+}

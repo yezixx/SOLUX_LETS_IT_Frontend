@@ -17,6 +17,12 @@
   justify-content: left;
 }
 
+.searchProjWrap {
+  margin-right: 70px;
+  margin-top: 50px;
+  width: 1000px;
+}
+
 .nav2__contents:hover .nav2__button {
   color: var(--main-color2);
 }
@@ -25,51 +31,29 @@
   display: inline-block;
   padding: 0px;
   font-family: "pretendardM";
-  transition: border-bottom 0.1s ease;
+  transition: color 0.1s ease;
   height: 48px;
   position: relative;
   width: auto;
   margin-right: 15px;
   color: var(--text-color2);
-  &:hover {
-    border-color: var(--main-color2);
-  }
-  &:focus {
-    border-color: var(--main-color2);
-  }
+}
+
+.nav2__button:hover {
+  color: var(--main-color2);
+}
+
+.nav2__button:focus {
+  color: var(--main-color2);
+}
+
+.selected {
+  color: var(--main-color2);
 }
 
 .divider {
   color: gray;
-  margin-right: 15px; /* 양쪽에 10px 간격 추가 */
-}
-
-.nav2__subnav {
-  width: 120px;
-  box-shadow: 4px 4px 2px rgba(0, 0, 0, 0.2);
-  border: 1px solid var(--select-color);
-  border-radius: 4px;
-  background-color: white;
-  position: absolute;
-  transform: translateY(3.5px);
-  z-index: 1000;
-}
-
-.nav2__subnav_item {
-  width: 120px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  font-size: 14px;
-}
-
-.nav2__subnav_item:hover {
-  color: var(--main-color2);
+  margin-right: 15px;
 }
 
 .onoff__container {
@@ -86,13 +70,10 @@
   align-items: center;
   justify-content: center;
   width: 50px;
-  &:hover {
-    border-color: var(--main-color2);
-  }
 }
 
-.onoff__contents:hover .onoff__button {
-  color: var(--main-color2);
+.onoff__contents:hover {
+  border-color: var(--main-color2);
 }
 
 .onoff__button {
@@ -100,9 +81,11 @@
   border: none;
   font-size: 14px;
   cursor: pointer;
-  &:focus {
-    color: var(--main-color2);
-  }
+  color: var(--text-color2); /* 기본 색상 */
+}
+
+.onoff__button.selected {
+  color: var(--main-color2); /* 선택된 색상 */
 }
 
 .dropdownContainer {
@@ -117,6 +100,9 @@
   margin-bottom: 10px;
   margin-left: 15px;
 }
+
+
+
 .dropdownGroup select {
   cursor: pointer;
   border: 1px solid var(--line-color);
@@ -127,4 +113,59 @@
 .dropdownGroup label {
   font-size: 14px;
   margin: 2px 0;
+}
+.questionmark {
+  cursor: pointer;
+}
+
+/* 아이콘과 드롭다운을 포함할 컨테이너 스타일 */
+.iconAndDropdown {
+  display: flex;
+  align-items: center; /* 수직 정렬 */
+  gap: 10px; /* 아이콘과 드롭다운 사이의 간격 */
+  position: relative; /* 툴팁의 절대 위치 기준 */
+}
+
+/* 툴팁 스타일 */
+.tooltip {
+  position: absolute; /* 절대 위치 지정 */
+  top: -130px; /* 드롭다운 위에 위치 */
+  left: -30px; /* 드롭다운과 같은 좌측에 맞춤 */
+  background-color: #fff; /* 배경색 */
+  border: 1px solid #ccc; /* 테두리 색상 */
+  border-radius: 8px; /* 테두리 모서리 둥글게 */
+  padding: 10px; /* 내부 여백 */
+  font-size: 14px; /* 글자 크기 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+  z-index: 1000; /* z-index를 높여서 다른 요소들 위에 나타나도록 설정 */
+  width: 300px;
+  display: none; /* 기본적으로 숨김 */
+}
+
+.noResultsMessage {
+  font-family: "PretendardM";
+  text-align: center; /* 텍스트 중앙 정렬 */
+  margin: 20px; /* 위와 아래에 여백 추가 (필요에 따라 조정) */
+  font-size: 18px; /* 텍스트 크기 조정 (필요에 따라 조정) */
+  color: #333; /* 텍스트 색상 (필요에 따라 조정) */
+}
+
+
+/* 툴팁이 보여질 때 */
+.iconAndDropdown:hover .tooltip,
+.tooltip:hover {
+  display: block; /* 툴팁 보이게 */
+}
+
+
+/* 드롭다운 스타일 */
+.iconAndDropdown select {
+  padding: 5px 10px;
+}
+
+/* 아이콘 스타일 */
+.questionmark {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 }
