@@ -1,5 +1,5 @@
 .nav {
-  width: 100%;
+  
   display: flex;
   justify-content: center;
   align-items: center;
@@ -13,6 +13,7 @@
 }
 .nav__container {
   align-items: center;
+  width: 1000px;
 }
 
 .nav__contents:hover .nav__button {

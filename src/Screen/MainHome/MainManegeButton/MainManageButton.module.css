@@ -34,10 +34,6 @@
   z-index: 100;
 }
 
-.size-6 {
-  width: 200px;
-  height: 200px;
-}
 
 .box svg {
   display: flex;
