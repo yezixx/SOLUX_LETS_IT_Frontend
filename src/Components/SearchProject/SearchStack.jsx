@@ -4,11 +4,11 @@ import { Stack } from "../../Screen/Stack";
 import styles from "./SearchStack.module.css";
 import GrayBox from "../../Components/SearchProject/GrayBox";
 import { useSearch } from "../../Hooks/useSearch";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { postProjectAtom } from "../../atoms/atoms";
 
 const SearchStack = () => {
-  /*프로젝트 search 훅 */
+  /* 프로젝트 search 훅 */
   const {
     isFocus,
     handleFocus,
@@ -20,10 +20,10 @@ const SearchStack = () => {
     tech,
   } = useSearch(Stack);
 
-  /*백엔드에 보낼 데이터에 push */
+  /* 백엔드에 보낼 데이터에 push */
   const setPostProj = useSetAtom(postProjectAtom);
   useEffect(() => {
-    //tech가 변경될 시 백엔드에 보낼 데이터 재렌더링
+    // tech가 변경될 시 백엔드에 보낼 데이터 재렌더링
     setPostProj((prev) => ({
       ...prev,
       stack: [...tech],
@@ -45,20 +45,20 @@ const SearchStack = () => {
         <div className={styles.projectHire__searchIcon}>
           <SearchIcon />
         </div>
+        {isFocus && (
+          <ul className={styles.projectHire__relatedSearch}>
+            {data.slice(0, 5).map((item, idx) => (
+              <li
+                key={idx}
+                onClick={() => handleCreateBox(item)}
+                className={styles.projectHire__relatedSearchItem}
+              >
+                {item}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-      {isFocus && (
-        <ul className={styles.projectHire__relatedSearch}>
-          {data.slice(0, 5).map((item, idx) => (
-            <li
-              key={idx}
-              onClick={() => handleCreateBox(item)}
-              className={styles.projectHire__relatedSearchItem}
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-      )}
       <div className={styles.projectHire__techWrap}>
         {tech.map((item, idx) => (
           <GrayBox
