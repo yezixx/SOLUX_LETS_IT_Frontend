@@ -3,10 +3,10 @@ import apiClient from "./apiClient";
 // 전체 프로젝트 조회 - 프로젝트 찾기 (전체) 화면
 export const getPostsList = async () => {
   try {
-    const response = await apiClient.get('/posts/list');
+    const response = await apiClient.get("/posts/list");
     return response.data;
   } catch (error) {
-    console.error('Error fetching project list:', error);
+    console.error("Error fetching project list:", error);
     throw error; // 에러를 다시 throw하여 호출자에게 전달
   }
 };
@@ -22,9 +22,9 @@ export const completePosts = async (postId) => {
   }
 };
 // 구인글 등록 - 구인글 작성 화면에서 업로드 버튼
-export const createPosts = async (userId, postData) => {
+export const createPosts = async (postData) => {
   try {
-    const response = await apiClient.post(`/posts/${userId}/upload`, postData);
+    const response = await apiClient.post(`/posts/upload`, postData);
     return response.data;
   } catch (error) {
     console.error("Error fetching create post:", error);
@@ -38,14 +38,12 @@ export const updatePosts = (postId, userId, updatedPostData) => {
 };
 
 // 구인글 삭제 - 내 프로젝트 > 구인/신청 프로젝트 화면에서 글 삭제 버튼
-export const deletePosts = async (userId, postId) => {
+export const deletePosts = async (postId) => {
   try {
-    const response = await apiClient.delete(
-      `/posts/${userId}/delete/${postId}`
-    );
+    const response = await apiClient.delete(`/posts/delete/${postId}`);
     return response.data;
   } catch (error) {
-    console.error("Error fetching create post:", error);
+    console.error("Error fetching delete post:", error);
     throw error;
   }
 };

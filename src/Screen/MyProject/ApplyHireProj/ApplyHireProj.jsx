@@ -14,6 +14,7 @@ const ApplyHireProj = () => {
     completeHire,
     deleteHireProj,
   } = useApplyHire();
+  console.log(`hireProj 리스트 : ${hireProj}`);
   return (
     <div className={styles.ApplyHireProj__content}>
       {/*구인 중인 프로젝트 + 신청한 프로젝트 */}

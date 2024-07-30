@@ -48,8 +48,7 @@
 .sub {
   width: 130px;
   height: 50px;
-  &:hover,
-  &:focus {
+  &:hover {
     color: var(--main-color2);
   }
 }
@@ -68,7 +67,8 @@
 
 .sub.selected {
   background-color: #f0f0f0; /* 선택된 상태의 스타일 예시 */
-  border: 2px solid #007bff; /* 선택된 상태의 스타일 예시 */
+  color: var(--main-color2);
+  
 }
 
 .selectedAreas {
@@ -88,3 +88,12 @@
   background-color: #e0e0e0; /* 선택된 항목의 스타일 예시 */
   margin: 5px 0;
   padding: 5px 10px;}
+
+
+/* 선택된 상태 버튼 스타일 */
+.selectedState {
+  border: 2px solid var(--main-color2);
+    color: var(--main-color2);
+    font-family: "pretendardB";
+}
+
