@@ -1,7 +1,6 @@
 import { useAtomValue } from "jotai";
 import styles from "./TeamNav.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { userIdAtom } from "../../../../atoms/atoms";
 import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 
@@ -11,7 +10,9 @@ const TeamNav = () => {
 
   const { teamData, teamId } = useContext(TeamStateContext);
 
-  const loginUserId = useAtomValue(userIdAtom);
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const nav = useNavigate();
 

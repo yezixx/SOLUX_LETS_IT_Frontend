@@ -1,8 +1,6 @@
 import { createContext, useEffect, useReducer, useRef, useState } from "react";
 import styles from "./Teamboard.module.css";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
-import { useAtomValue } from "jotai";
-import { isLoginAtom, userIdAtom } from "../../atoms/atoms";
 import {
   createSchedule,
   delegateTeamLeader,
@@ -93,7 +91,9 @@ const isMember = (teamData, loginUserId) => {
 
 const Teamboard = () => {
   const [loading, setLoading] = useState(true);
-  const loginUserId = useAtomValue(userIdAtom);
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const [params] = useSearchParams();
   const teamId = params.get("team");

@@ -6,8 +6,6 @@ import BookmarkIcon from "../../Image/Icons/BookmarkIcon";
 import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
 import Loading from "../../Components/Loading/Loading";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../atoms/atoms";
 import { useEffect, useRef, useState } from "react";
 import { getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";
@@ -18,7 +16,10 @@ import {
 } from "../../service/commentService";
 
 const ProjPost_detail = () => {
-  const loginUserId = useAtomValue(userIdAtom);
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
+  console.log(loginUserId);
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState({
     totalPersonnel: 0,

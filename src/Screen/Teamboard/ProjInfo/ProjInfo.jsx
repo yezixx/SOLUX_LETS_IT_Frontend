@@ -6,13 +6,13 @@ import Button from "../../../Components/Button/Button";
 import ToolIcon from "../../../Components/ToolIcon/ToolIcon";
 import { useContext } from "react";
 import { TeamStateContext } from "../Teamboard";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../atoms/atoms";
 import { getLogoImage } from "../../../util/getLogoImage";
 
 const ProjInfo = () => {
   const { teamData, teamId } = useContext(TeamStateContext);
-  const loginUserId = useAtomValue(userIdAtom);
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const notion = teamData.notionLink;
   const github = teamData.githubLink;

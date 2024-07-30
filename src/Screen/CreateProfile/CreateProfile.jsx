@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ProfileForm from "../../Components/ProfileForm/ProfileForm";
 import StepBar from "../../Components/StepBar/StepBar";
-import { getProfile } from "../../service/profileService";
+import { getProfile, saveProfileImage } from "../../service/profileService";
 import Loading from "../../Components/Loading/Loading";
 import styles from "./CreateProfile.module.css";
 
@@ -9,7 +9,7 @@ const CreateProfile = () => {
   const [userInfo, setUserInfo] = useState({
     nickname: "",
     bio: "",
-    age: "20대 초반",
+    age: "20~29",
     sns: [
       {
         type: "email",
@@ -44,7 +44,7 @@ const CreateProfile = () => {
   });
   const [loading, setLoading] = useState(false);
 
-  /* useEffect(() => {
+  /*useEffect(() => {
     setLoading(true);
     try {
       const response = getProfile();
@@ -57,6 +57,14 @@ const CreateProfile = () => {
     }
   });*/
 
+  const onSaveProfileImage = async (imageFile) => {
+    try {
+      await saveProfileImage(imageFile);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className={styles.createProfile}>
       {loading && <Loading />}
@@ -64,7 +72,7 @@ const CreateProfile = () => {
         <StepBar type="COMPLETE" />
       </div>
       <div className={styles.createProfile__profileForm}>
-        <ProfileForm init={userInfo} />
+        <ProfileForm init={userInfo} onSaveProfileImage={onSaveProfileImage} />
       </div>
     </div>
   );

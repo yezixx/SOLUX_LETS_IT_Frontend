@@ -7,8 +7,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import defaultProfilePic from "../../assets/user.svg";
 import { updateProfile } from "../../service/profileService";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../atoms/atoms";
+import { ageMapping } from "../Profile/ProfileTierMap";
 
 /*const sampleData = {
   name: "홍길동",
@@ -43,15 +42,17 @@ import { userIdAtom } from "../../atoms/atoms";
   ],
 };*/
 
-const ProfileForm = ({ init }) => {
-  const loginUserId = useAtomValue(userIdAtom);
+const ProfileForm = ({ init, onSaveProfileImage }) => {
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const [profileImage, setProfileImage] = useState(
     init ? init.profileImage : defaultProfilePic
   );
   const [nickname, setNickname] = useState(init ? init.nickname : "");
   const [bio, setBio] = useState(init ? init.bio : "");
-  const [age] = useState(init ? init.age : "");
+  const [age] = useState(init ? ageMapping(init.age) : "");
   const [introduce, setIntroduce] = useState(init ? init.introduce : "");
   const [links, setLinks] = useState(
     init
@@ -149,25 +150,23 @@ const ProfileForm = ({ init }) => {
     if (confirm("프로필 작성을 완료하시겠습니까?")) {
       //nav("/");
       console.log({
-        mannerTier: "B",
-        mannerGrade: 60,
         nickname: nickname,
         bio: bio,
         age: age,
         sns: links,
-        profileImage: selectPicRef.current.files[0],
         introduce: introduce,
         skills: skills,
+        profileImage: selectPicRef.current.files[0],
       });
-      /*updateProfile(loginUserId, {
-        nickname: nickname,
-        bio: bio,
-        age: age,
-        sns: links,
-        profileImage: selectPicRef.current.files[0],
-        introduce: introduce,
-        skills: skills,
-      });*/
+      // updateProfile(loginUserId, {
+      //   nickname: nickname,
+      //   bio: bio,
+      //   age: age,
+      //   sns: links,
+      //   introduce: introduce,
+      //   skills: skills,
+      // });
+      // onSaveProfileImage(selectPicRef.current.files[0]);
     }
   };
 

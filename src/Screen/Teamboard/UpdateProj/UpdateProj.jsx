@@ -7,8 +7,6 @@ import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
 import { useContext, useEffect, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { completeProject } from "../../../service/teamService";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../atoms/atoms";
 
 const UpdateProj = () => {
   const { onUpdateTeamData } = useContext(TeamDispatchContext);
@@ -25,7 +23,9 @@ const UpdateProj = () => {
   );
 
   const nav = useNavigate();
-  const loginUserId = useAtomValue(userIdAtom);
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const titleRef = useRef();
   const linkRef1 = useRef();

@@ -5,8 +5,6 @@ import CheckCircleIcon from "../../../Image/Icons/CheckCircleIcon";
 import FeedbackFormItem from "./FeedbackFormItem/FeedbackFormItem";
 import styles from "./TeamFeedback.module.css";
 import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../atoms/atoms";
 import { useNavigate } from "react-router-dom";
 import { getEvaluatedList } from "../../../service/teamService";
 import Loading from "../../../Components/Loading/Loading";
@@ -41,8 +39,9 @@ const TeamFeedback = () => {
   const [loading, setLoading] = useState(true);
   const [evaluatedList, setEvaluatedList] = useState([]);
 
-  /*userId 전역 상태에서 불러오기 */
-  const loginUserId = useAtomValue(userIdAtom);
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const nav = useNavigate();
 
