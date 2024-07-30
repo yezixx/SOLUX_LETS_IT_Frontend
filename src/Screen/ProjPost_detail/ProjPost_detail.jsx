@@ -7,9 +7,9 @@ import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
 import Loading from "../../Components/Loading/Loading";
 import { useAtomValue } from "jotai";
-import { userIdAtom, userNameAtom } from "../../atoms/atoms";
+import { userIdAtom } from "../../atoms/atoms";
 import { useEffect, useRef, useState } from "react";
-import { getComments, getPosts } from "../../service/postService";
+import { getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   createComment,
@@ -17,65 +17,40 @@ import {
   updateComment,
 } from "../../service/commentService";
 
-const mock_post = {
-  peopleNum: 5,
-  createdAt: "2024-07-06, 15:30",
-  recruitDueDate: "2024-07-31",
-  preference: "관련 경력 3년 이상, Git 사용 경험",
-  onOff: "대면",
-  region: "서울",
-  subRegion: "강남구",
-  projectPeriod: "3개월",
-  ageGroup: "20대 후반 ~ 30대 초반",
-  difficulty: "입문",
-  stack: ["Java", "React"],
-  content: `    [프로젝트 주제]
-    안녕하세요. 저희는 현재 한국에 거주하거나 방문한 또는 방문할 외국인을 위해 다양한 정보를 제공할 수 있는 커뮤니티 사이트를 만들고 있습니다. 
-    현재 150명 정도 있는 디스코드 채널에서 외국인들에게 필요한 정보들을 수집 및 정리하고 있으며 이러한 정보들을 외국인 친화적인 방법으로 제공하려고 합니다.
-    현재 MVP기능은 단순 게시판 기능으로 생각하고 있으며 운영하면서 다양한 기능들을 추가해보려고 합니다. 
-    현재 생각해 둔 기능을 다음과 같습니다.
-    맛집 및 관광지 지도
-    언어교환 첨삭 기능
-    물품 공구 기능
-    
-    [ 팀 구성 ]
-    현재는 주니어 백엔드 개발자 2명으로 이루어져 있으며, 프론트 개발까지 같이 하다보니 힘이 들어 프론트엔드 개발자님을 모시고 있습니다.
-    
-    [ 저희는 이렇게 협업하고 있어요 ]
-    슬랙을 통해 업무 내용을 주고 받고 있습니다.
-    Jira를 통해 일주일 단위로 작업을 공유하고 스프린트 하고 있습니다.
-    Figma를 통해 간단한 와이어프레임을 그리고 있습니다. 
-    최대한 이상적인 협업을 하기위해 노력하고 있으나 적은 경험으로 부족할 수 있습니다만, 부정적인 피드백에도 항상 열려있습니다 :)
-    
-    [ 기술 스택 ]
-    - 프론트 : Nuxt.js로 되어 있으나 Next.js로 다시 구성하셔도 괜찮습니다.
-    - 백엔드 : Java, Spring
-    `,
-  scrapCount: 20,
-  viewCount: 50,
-  userId: "1",
-  title: "웹 사이드 프로젝트 팀원 모집",
-  comments: [
-    {
-      commentId: 1,
-      userId: "coder",
-      name: "CODER.",
-      comCreateDate: "2024-07-06, 15:30",
-      comUpdateDate: "2024-07-06, 15:30",
-      comContent: `정기적으로 모이는 요일이 있을까요? 스택을 다뤄본 적은 없지만 이론적인 지식만 있는데 참여 가능할까요?`,
-    },
-  ],
-};
-
 const ProjPost_detail = () => {
   const loginUserId = useAtomValue(userIdAtom);
-  const loginUserName = useAtomValue(userNameAtom);
   const [loading, setLoading] = useState(false);
-  const [post, setPost] = useState(mock_post);
+  const [post, setPost] = useState({
+    totalPersonnel: 0,
+    createdAt: "",
+    recruitDueDate: "",
+    preference: "",
+    onOff: "",
+    region: "",
+    subRegion: "",
+    projectPeriod: "",
+    ageGroup: "",
+    difficulty: "",
+    stack: [],
+    content: ``,
+    scrapCount: 0,
+    viewCount: 0,
+    userId: "",
+    title: "",
+    comments: [
+      {
+        commentId: 1,
+        userId: "",
+        name: "",
+        comCreateDate: "",
+        comUpdateDate: "",
+        comContent: ``,
+      },
+    ],
+  });
   const postId = useParams().postId;
 
-  const [comments, setComments] = useState(mock_post.comments);
-  const commentIdRef = useRef(2);
+  const [comments, setComments] = useState(post.comments);
   const commentInputRef = useRef();
 
   const [isBookmark, setIsBookmark] = useState(false);
@@ -97,14 +72,13 @@ const ProjPost_detail = () => {
       })
       .catch((error) => {
         console.log("post detail error(ProjPost_Datil.jsx): ", error);
-        //alert("게시글을 불러오는데 실패했습니다.");
-        setLoading(false);
-        //nav(-1);
+        alert("게시글을 불러오는데 실패했습니다.");
+        nav(-1);
       });
   }, []);
 
   const onCraeteComment = async (content) => {
-    const res = await createComment(Number(postId), Number(loginUserId), {
+    const res = await createComment(Number(postId), {
       comContent: content,
     });
     const commentData = res.data;
@@ -114,7 +88,7 @@ const ProjPost_detail = () => {
       {
         commentId: commentData.commentId,
         userId: loginUserId,
-        name: commentData.nickname,
+        nickname: commentData.nickname,
         comCreateDate: commentData.comCreateDate,
         comUpdateDate: commentData.comUpdateDate,
         comContent: commentData.comContent,
@@ -123,14 +97,9 @@ const ProjPost_detail = () => {
   };
 
   const onUpdateComment = async (writerId, commentId, content) => {
-    const res = await updateComment(
-      Number(postId),
-      Number(commentId),
-      Number(loginUserId),
-      {
-        comContent: content,
-      }
-    );
+    const res = await updateComment(Number(postId), Number(commentId), {
+      comContent: content,
+    });
     const commentData = res.data;
     console.log(res.data);
     setComments(

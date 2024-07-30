@@ -14,120 +14,6 @@ import {
 import { getTeam } from "../../service/teamService";
 import Loading from "../../Components/Loading/Loading";
 
-const mock_teamData = [
-  {
-    teamId: 1,
-    teamName: "팀게시판 메인",
-    notionLink: "https://www.notion.so/project1",
-    githubLink: "https://github.com/project1",
-    teamMemberInfo: [
-      {
-        userId: 1,
-        userName: "Alice",
-        position: "Team_Leader",
-        profile_image_url: "testurl1",
-      },
-      {
-        userId: 2,
-        userName: "Bob",
-        position: "Team_Member",
-        profile_image_url: "testurl2",
-      },
-      {
-        userId: 3,
-        userName: "Charlie",
-        position: "Team_Leader",
-        profile_image_url: "testurl3",
-      },
-    ],
-  },
-  {
-    teamId: 2,
-    teamName: "팀 데이터 2",
-    notionLink: "https://www.notion.so/project2",
-    githubLink: "https://github.com/project2",
-    teamMemberInfo: [
-      {
-        userId: "1",
-        userName: "Charlie",
-        position: "Team_Leader",
-        profile_image_url: "testurl1",
-      },
-      {
-        userId: "2",
-        userName: "Diana",
-        position: "Team_Member",
-        profile_image_url: "testurl2",
-      },
-      {
-        userId: 3,
-        userName: "3",
-        position: "Team_Member",
-        profile_image_url: "testurl3",
-      },
-    ],
-  },
-];
-
-const mock_scheduleData = [
-  /*
-  {
-    id: 0,
-    title: "프엔 회의",
-    start: "2024-07-01",
-    end: "2024-07-01",
-    description: `회의 안건
-      - 라이브러리 선정
-      - 화면 구조 논의`,
-  },
-  {
-    id: 1,
-    title: "정기 회의",
-    start: "2024-07-03",
-    end: "2024-07-03",
-    description: `회의 안건
-    - 프론트&백 스터디 진행 상황 공유
-    - 서비스 네이밍
-    - 다음주 일정 공유`,
-  },
-  {
-    id: 2,
-    title: "스터디 인증 기간",
-    start: "2024-07-22",
-    end: "2024-07-27",
-    description:
-      "각자 수강한 스터디 강의 노션의 스터디 > 인증 보드에 인증해주세요!",
-  },*/
-];
-
-const mock_meetingData = [
-  /*
-  {
-    id: 1,
-    date: "2024-07-03",
-    nonParticipants: ["Alice"],
-    proofImages: "first_week.png",
-  },
-  {
-    id: 2,
-    date: "2024-07-10",
-    nonParticipants: [],
-    proofImages: "second_week.png",
-  },*/
-];
-
-const mock_kickData = [
-  /*{
-    id: 1,
-    userId: "letsit_backend.model.Member@72f9fde6",
-    name: "Alice",
-    reason: "사유2",
-    voteCount: [],
-    agree: 0,
-    disagree: 0,
-  },*/
-];
-
 export const TeamStateContext = createContext();
 export const TeamDispatchContext = createContext();
 
@@ -200,11 +86,6 @@ function feedbackReducer(state, action) {
 }
 
 const isMember = (teamData, loginUserId) => {
-  console.log(
-    teamData.teamMemberInfo.some(
-      (member) => String(member.userId) === String(loginUserId)
-    )
-  );
   return teamData.teamMemberInfo.some(
     (member) => String(member.userId) === String(loginUserId)
   );
@@ -213,8 +94,6 @@ const isMember = (teamData, loginUserId) => {
 const Teamboard = () => {
   const [loading, setLoading] = useState(true);
   const loginUserId = useAtomValue(userIdAtom);
-
-  const islogin = useAtomValue(isLoginAtom);
 
   const [params] = useSearchParams();
   const teamId = params.get("team");
@@ -229,15 +108,9 @@ const Teamboard = () => {
   });
 
   const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
-  const [scheduleData, scheduleDispatch] = useReducer(
-    scheduleReducer,
-    mock_scheduleData
-  );
-  const [kickData, kickDispatch] = useReducer(kickReducer, mock_kickData);
-  const [meetingData, meetingDispatch] = useReducer(
-    meetingReducer,
-    mock_meetingData
-  );
+  const [scheduleData, scheduleDispatch] = useReducer(scheduleReducer, []);
+  const [kickData, kickDispatch] = useReducer(kickReducer, []);
+  const [meetingData, meetingDispatch] = useReducer(meetingReducer, []);
 
   const fetchTeamData = async () => {
     setLoading(true);
@@ -249,20 +122,15 @@ const Teamboard = () => {
       });
       setLoading(false);
 
-      /*if (!isMember(teamData, loginUserId)) {
+      if (!isMember(teamData, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
         nav("/");
         return;
-      }*/
-      if (!loginUserId) {
-        alert("로그인이 필요한 페이지입니다.");
-        nav("/");
       }
     } catch (error) {
       console.log("teamboard error", error);
-      setLoading(false);
       alert("팀 정보를 불러오는 중 오류가 발생했습니다.");
-      nav(`/`);
+      nav(-1);
     }
   };
 
@@ -279,29 +147,12 @@ const Teamboard = () => {
   };
 
   useEffect(() => {
-    /*if (!islogin) { // 로그인 안되어있으면 로그인 페이지로 이동
-      nav("/login");
-    }*/
-    console.log(islogin);
     fetchScheduleData();
     fetchTeamData();
-    /*getTeam(teamId)
-      .then((res) => {
-        teamDispatch({
-          type: "GET",
-          data: res.data,
-        });
-        console.log(res);
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("teamboard error", error);
-      });*/
   }, []);
 
   const kickIdRef = useRef(1);
   const meetingRef = useRef(1);
-  const eventRef = useRef(1);
 
   const onDeleteMember = (userId) => {
     const filteredMember = teamData.teamMemberInfo.filter((item) => {

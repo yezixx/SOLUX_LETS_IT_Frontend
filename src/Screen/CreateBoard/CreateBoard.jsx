@@ -8,8 +8,6 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { createTeam } from "../../service/teamService";
 import { approveApplicants } from "../../service/applyService";
 import Loading from "../../Components/Loading/Loading";
-import { useAtomValue } from "jotai";
-import { isLoginAtom } from "../../atoms/atoms";
 
 const mock_members = [
   {
@@ -45,12 +43,7 @@ const CreateBoard = () => {
   const linkRef1 = useRef();
   const linkRef2 = useRef();
 
-  const isLogin = useAtomValue(isLoginAtom);
-
   useEffect(() => {
-    /*if (!isLogin) {
-      nav("/login");
-    }*/
     approveApplicants(postId)
       .then((res) => {
         setApplicantsList(res.data);
