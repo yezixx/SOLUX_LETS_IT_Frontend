@@ -5,7 +5,6 @@ const updateApiClientToken = (token) => {
 const token = localStorage.getItem("token");
 const apiClient = axios.create({
   baseURL: "/api",
-  baseURL: "/api",
   headers: {
     "Content-Type": "application/json; charset=utf-8",
     "ngrok-skip-browser-warning": "true",
