@@ -18,14 +18,15 @@ export const useApplyHire = () => {
   useEffect(() => {
     getMyProjects()
       .then((res) => {
-        setHireProj(res.projects);
+        console.log(res.data);
+        setHireProj(res.data);
       })
       .catch((error) => {
         console.log("프로젝트 데이터 가져오기 오류:", error);
       });
     getMyApplyProjects()
       .then((res) => {
-        setApplyProj(res.projects);
+        setApplyProj(res.data);
       })
       .catch((error) => {
         console.log(`apply 프로젝트 데이터 가져오는 중 에러 발생 : ${error}`);

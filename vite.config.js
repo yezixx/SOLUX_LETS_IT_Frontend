@@ -12,7 +12,7 @@ export default defineConfig({
       //프론트엔드 상에서 대치할 주소명
       "/api": {
         //백엔드 서버 주소
-        target: "http://172.20.32.148:8080",
+        target: "http://172.20.3.239:8080",
         // 프론트엔드 상에서 다른 주소 (api)로 대치할 것인가? true
         changeOrigin: true,
         // /api로 보낸 요청 api를 제거하고 실제 요청 주소로 대치

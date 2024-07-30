@@ -68,7 +68,7 @@ const ProjPost_detail = () => {
         setPost(data);
         setComments(data.comments);
         setLoading(false);
-        console.log(data);
+        console.log(data.comments);
       })
       .catch((error) => {
         console.log("post detail error(ProjPost_Datil.jsx): ", error);

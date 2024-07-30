@@ -55,7 +55,7 @@ const useProjectPost = () => {
     e.preventDefault();
     if (validateForm()) {
       if (warning()) {
-        createPosts(userId, postProj)
+        createPosts(postProj)
           .then((res) => console.log(`반환 : ${res}`))
           .catch((error) => {
             console.log(error);

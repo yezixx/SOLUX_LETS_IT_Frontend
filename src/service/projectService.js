@@ -3,7 +3,7 @@ import apiClient from "./apiClient";
 // 나의 구인프로젝트 목록 조회 - 내 프로젝트 > 구인/신청 프로젝트 화면 (구인)
 export const getMyProjects = async () => {
   try {
-    const response = await apiClient.get(`/projects/organizinglist`);
+    const response = await apiClient.get("/projects/organizinglist");
     return response.data; // 서버에서 받은 데이터를 반환합니다.
   } catch (error) {
     console.error("Error fetching applicant list:", error);
