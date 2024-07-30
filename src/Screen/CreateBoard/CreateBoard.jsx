@@ -48,15 +48,15 @@ const CreateBoard = () => {
   const isLogin = useAtomValue(isLoginAtom);
 
   useEffect(() => {
-    /*if (!isLogin) {
+    if (!isLogin) {
       nav("/login");
-    }*/
+    }
     approveApplicants(postId)
       .then((res) => {
         setApplicantsList(res.data);
         if (res.data.length === 0) {
           alert("팀원이 없습니다. 팀원을 추가해주세요.");
-          nav("/");
+          nav(-1);
         }
         setLoading(false);
       })
@@ -64,7 +64,7 @@ const CreateBoard = () => {
         console.log("error (in CreateBoard):", error);
         alert("팀원 목록을 불러오는데 실패했습니다. 다시 시도해주세요.");
         setLoading(false);
-        nav("/");
+        nav(-1);
       });
   }, []);
 
