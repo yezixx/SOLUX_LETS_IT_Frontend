@@ -41,14 +41,12 @@ const useApplyPost = () => {
   //'신청하기' 버튼 눌렀을 때 postId 할당
   const { postId } = useParams();
   const setApplicant = useSetAtom(applicant);
-  // 로그인 시 받아둔 유저 아이디값 가져옴
-  const userId = useAtomValue(userIdAtom);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validation()) {
       startTransition(() => {
-        submitApply(postId, userId, applyData)
+        submitApply(postId, applyData)
           .then((response) => {
             // 서버 응답 처리
             setApplicant(response.data);
