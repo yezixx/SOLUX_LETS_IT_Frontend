@@ -21,8 +21,8 @@ const useProfileView = (applyId) => {
     if (applicantView) {
       getApplyProfile(applicantView.userId)
         .then((res) => {
-          setProfileView(res);
-          console.log(res);
+          setProfileView(res.data);
+          console.log(res.data);
         })
         .catch((error) => {
           console.log(error);
