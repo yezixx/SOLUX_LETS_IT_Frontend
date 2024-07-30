@@ -6,8 +6,6 @@ import BookmarkIcon from "../../Image/Icons/BookmarkIcon";
 import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
 import Loading from "../../Components/Loading/Loading";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../atoms/atoms";
 import { useEffect, useRef, useState } from "react";
 import { getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";

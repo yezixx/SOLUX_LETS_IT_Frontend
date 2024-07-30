@@ -20,8 +20,6 @@ const OngoingProj = () => {
     //진행 중인 프로젝트
     getMyOngoingProjects()
       .then((res) => {
-        // console.log(`getMyAttendProjects에서 가져온 data : ${res}`);
-        // console.log(JSON.stringify(res, null, 2));
         setOngoingProj(res.data);
       })
       .catch((error) => console.log(error));
@@ -30,13 +28,11 @@ const OngoingProj = () => {
       .then((res) => {
         // console.log(`completeProject 가져온 data : ${res}`);
         // console.log(JSON.stringify(res, null, 2));
+        console.log(res.data);
         setCompleteProj(res.data);
       })
       .catch((error) => console.log(error));
   }, []);
-
-  console.log(JSON.stringify(ongoingProj, null, 2)); // 받아온 data 확인
-  console.log(JSON.stringify(completeProj, null, 2)); // 받아온 data 확인
 
   return (
     <div className={styles.ongoingProj__contWrap}>
@@ -55,11 +51,11 @@ const OngoingProj = () => {
                   naviagateTo(`/teamboard/?team=${project.teamId}`)
                 }
                 onClick2={() =>
-                  naviagateTo(`/mypage/portfolio/${project.teamId}`)
+                  naviagateTo(`/mypage/portfolio/board/${project.teamId}`)
                 }
                 button1Text="팀 게시판"
                 button2Text="포트폴리오"
-                project={project}
+                prjTitle={project.prjTitle}
               />
             </div>
           ))}
@@ -73,7 +69,7 @@ const OngoingProj = () => {
         <div className={styles.attendProj__container}>
           {completeProj.map((project) => (
             <div key={project.teamId} className={styles.ongoingProj__cont}>
-              <ProjectBtn buttonShow={false} project={project} />
+              <ProjectBtn buttonShow={false} prjTitle={project.prjTitle} />
             </div>
           ))}
         </div>
