@@ -18,7 +18,9 @@ import {
 } from "../../service/commentService";
 
 const ProjPost_detail = () => {
-  const loginUserId = useAtomValue(userIdAtom);
+  // const loginUserId = useAtomValue(userIdAtom);
+  const user = JSON.parse(localStorage.getItem("user"));
+  const loginUserId = user.userId;
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState({
     totalPersonnel: 0,
@@ -72,7 +74,7 @@ const ProjPost_detail = () => {
         console.log(res.data.comments);
       })
       .catch((error) => {
-        console.log("post detail error(ProjPost_Datil.jsx): ", error);
+        console.log("post detail error(ProjPost_Detail.jsx): ", error);
         alert("게시글을 불러오는데 실패했습니다.");
         nav(-1);
       });

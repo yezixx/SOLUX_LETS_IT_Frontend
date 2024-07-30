@@ -83,7 +83,7 @@ export const useApplyHire = () => {
       "구인글을 삭제하시겠습니까? (삭제 후 취소는 불가능합니다.)"
     );
     if (isConfirm) {
-      deletePosts(postId)``
+      deletePosts(postId)
         .then(() => {
           alert("삭제되었습니다");
           // 팀게시판 생성 navigate 추가해야 함

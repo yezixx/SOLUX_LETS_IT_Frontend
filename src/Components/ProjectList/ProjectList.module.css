@@ -6,7 +6,13 @@
   gap: 15px;
   border-radius: 15px;
 }
-
+.projectList span {
+  color: var(--text-color2);
+  font-family: "pretendardB";
+}
+.projectTitle {
+  margin-bottom: 15px;
+}
 .stack {
   display: flex;
   flex-wrap: wrap;
@@ -27,9 +33,9 @@
   align-items: center;
   justify-content: center;
   gap: 20px;
-  cursor:pointer;
-  &:hover{
-    background-color: rgb(156, 201, 253,0.5);
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 }
 
@@ -49,7 +55,17 @@
 .projectLocation,
 .projectOnoff,
 .projectDifficulty {
-  color: gray;
+  color: var(--text-color1);
   font-size: 13px;
+  display: flex;
+  gap: 5px;
 }
 
+.subTitle {
+  color: var(--text-color2);
+}
+.projectlist__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}

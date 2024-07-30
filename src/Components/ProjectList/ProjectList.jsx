@@ -35,23 +35,31 @@ function ProjectList({ project }) {
               </div>
               <div>
                 <div className={styles.projectPeriod}>
-                  기간 | {project.projectPeriod}
+                  <span>기간 </span>
+                  <span>| </span>
+                  {project.projectPeriod}
                 </div>
               </div>
               <div>
                 <div className={styles.projectLocation}>
-                  지역 | {project.regionId}
-                  {project.subRegionId}
+                  {project.regionId === "대면" && (
+                    <>
+                      <span>지역</span>
+                      <span> |</span> {project.regionId} {project.subRegionId}
+                    </>
+                  )}
                 </div>
               </div>
               <div>
                 <div className={styles.projectLocation}>
-                  방식 | {project.onoff}
+                  <span>방식</span> <span>| </span>
+                  {project.onoff}
                 </div>
               </div>
               <div>
                 <div className={styles.projectDifficulty}>
-                  난이도 | {project.difficulty}
+                  <span> 난이도</span>
+                  <span> | </span> {project.difficulty}
                 </div>
               </div>
             </div>
