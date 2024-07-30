@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react'; // useEffect 추가
-import styles from './SearchProjectNav.module.css';
-import ProjectList from './ProjectList';
-import useArea from '../../Hooks/useArea.jsx';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { postProjectAtom } from '../../atoms/atoms';
-import { getPostsList } from '../../service/postService.js';
-import QuestionMarkIcon from '../../Image/Icons/QuestionMarkIcon.jsx';
-import useHover from '../../Hooks/useHover.js';
+import React, { useState, useEffect } from "react"; // useEffect 추가
+import styles from "./SearchProjectNav.module.css";
+import ProjectList from "./ProjectList";
+import useArea from "../../Hooks/useArea.jsx";
+import { useAtomValue, useSetAtom } from "jotai";
+import { postProjectAtom } from "../../atoms/atoms";
+import { getPostsList } from "../../service/postService.js";
+import QuestionMarkIcon from "../../Image/Icons/QuestionMarkIcon.jsx";
+import useHover from "../../Hooks/useHover.js";
 
 const SearchProjectNav = () => {
   const { selectedArea, selectedSubAreas } = useArea();
@@ -22,16 +22,17 @@ const SearchProjectNav = () => {
   const [sortCriteria, setSortCriteria] = useState("최신순");
   const [noResults, setNoResults] = useState(false); // 조건에 맞는 프로젝트가 없는지 여부를 나타내는 상태
 
-  const { stack: selectedStacks, field: selectedFields } = useAtomValue(postProjectAtom);
+  const { stack: selectedStacks, field: selectedFields } =
+    useAtomValue(postProjectAtom);
   const resetPostProjectAtom = useSetAtom(postProjectAtom);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const data = await getPostsList();
-        setProjects(data);
+        setProjects(data.data);
       } catch (error) {
-        console.error('Error fetching projects:', error);
+        console.error("Error fetching projects:", error);
       }
     };
 
@@ -52,7 +53,17 @@ const SearchProjectNav = () => {
   useEffect(() => {
     // 필터링된 프로젝트가 없을 경우 noResults 상태를 true로 설정
     setNoResults(filteredProjects.length === 0);
-  }, [projects, selectedArea, selectedSubAreas, selectedDifficulty, selectedPeriod, selectedOnOff, selectedAgeGroup, selectedFields, selectedStacks]);
+  }, [
+    projects,
+    selectedArea,
+    selectedSubAreas,
+    selectedDifficulty,
+    selectedPeriod,
+    selectedOnOff,
+    selectedAgeGroup,
+    selectedFields,
+    selectedStacks,
+  ]);
 
   const handleDifficultyChange = (e) => {
     setSelectedDifficulty(e.target.value);
@@ -63,8 +74,10 @@ const SearchProjectNav = () => {
   };
 
   const handleOnOffChange = (menu) => {
-    setSelectedOnOff(prev => {
-      const newSelected = prev.includes(menu) ? prev.filter(item => item !== menu) : [...prev, menu];
+    setSelectedOnOff((prev) => {
+      const newSelected = prev.includes(menu)
+        ? prev.filter((item) => item !== menu)
+        : [...prev, menu];
       return newSelected;
     });
   };
@@ -78,22 +91,46 @@ const SearchProjectNav = () => {
   };
 
   const filteredProjects = projects.filter((project) => {
-    const areaMatch = selectedArea ? project.region.startsWith(selectedArea.name) : true;
-    const subAreaMatch = selectedSubAreas.length === 0 || selectedSubAreas.some(sub => project.subRegion.includes(sub));
-    const difficultyMatch = selectedDifficulty === "전체" || project.difficulty === selectedDifficulty;
-    const periodMatch = selectedPeriod === "전체" || project.projectPeriod === selectedPeriod;
-    const onOffMatch = selectedOnOff.length === 0 || selectedOnOff.includes(project.onOff);
-    const ageGroupMatch = selectedAgeGroup === "전체" || project.ageGroup === selectedAgeGroup;
+    const areaMatch = selectedArea
+      ? project.region.startsWith(selectedArea.name)
+      : true;
+    const subAreaMatch =
+      selectedSubAreas.length === 0 ||
+      selectedSubAreas.some((sub) => project.subRegion.includes(sub));
+    const difficultyMatch =
+      selectedDifficulty === "전체" ||
+      project.difficulty === selectedDifficulty;
+    const periodMatch =
+      selectedPeriod === "전체" || project.projectPeriod === selectedPeriod;
+    const onOffMatch =
+      selectedOnOff.length === 0 || selectedOnOff.includes(project.onOff);
+    const ageGroupMatch =
+      selectedAgeGroup === "전체" || project.ageGroup === selectedAgeGroup;
 
-    const fieldMatch = selectedFields.length === 0 || selectedFields.every(field =>
-      project.categoryId.map(f => f.toLowerCase()).includes(field.toLowerCase())
+    const fieldMatch =
+      selectedFields.length === 0 ||
+      selectedFields.every((field) =>
+        project.categoryId
+          .map((f) => f.toLowerCase())
+          .includes(field.toLowerCase())
+      );
+
+    const stackMatch =
+      selectedStacks.length === 0 ||
+      selectedStacks.every((stack) =>
+        project.stack.map((s) => s.toLowerCase()).includes(stack.toLowerCase())
+      );
+
+    return (
+      areaMatch &&
+      subAreaMatch &&
+      difficultyMatch &&
+      periodMatch &&
+      onOffMatch &&
+      ageGroupMatch &&
+      fieldMatch &&
+      stackMatch
     );
-
-    const stackMatch = selectedStacks.length === 0 || selectedStacks.every(stack =>
-      project.stack.map(s => s.toLowerCase()).includes(stack.toLowerCase())
-    );
-
-    return areaMatch && subAreaMatch && difficultyMatch && periodMatch && onOffMatch && ageGroupMatch && fieldMatch && stackMatch;
   });
 
   const sortedProjects = [...filteredProjects].sort((a, b) => {
@@ -112,12 +149,11 @@ const SearchProjectNav = () => {
       <div className={styles.nav2}>
         <div className={styles.nav2__container}>
           {navCont.map((menu, id) => (
-            <div
-              className={styles.nav2__contents}
-              key={id}
-            >
+            <div className={styles.nav2__contents} key={id}>
               <button
-                className={`${styles.nav2__button} ${sortCriteria === menu ? styles.selected : ''}`}
+                className={`${styles.nav2__button} ${
+                  sortCriteria === menu ? styles.selected : ""
+                }`}
                 onClick={() => handleSortChange(menu)}
               >
                 {menu}
@@ -132,11 +168,19 @@ const SearchProjectNav = () => {
         <div className={styles.onoff__container}>
           {OnOff.map((menu, id) => (
             <div
-              className={`${styles.onoff__contents} ${selectedOnOff.includes(menu) ? styles.selected : ''}`}
+              className={`${styles.onoff__contents} ${
+                selectedOnOff.includes(menu) ? styles.selected : ""
+              }`}
               key={id}
               onClick={() => handleOnOffChange(menu)}
             >
-              <button className={`${styles.onoff__button} ${selectedOnOff.includes(menu) ? styles.selected : ''}`}>{menu}</button>
+              <button
+                className={`${styles.onoff__button} ${
+                  selectedOnOff.includes(menu) ? styles.selected : ""
+                }`}
+              >
+                {menu}
+              </button>
             </div>
           ))}
         </div>
@@ -144,20 +188,31 @@ const SearchProjectNav = () => {
         <div className={styles.dropdownContainer}>
           <div className={styles.dropdownGroup}>
             <div className={styles.iconAndDropdown}>
-              <div className={styles.questionmark}
-                   onMouseEnter={handleMouseEnter}
-                   onMouseLeave={handleMouseLeave}>
+              <div
+                className={styles.questionmark}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+              >
                 <QuestionMarkIcon width="15px" height="15px" />
               </div>
               {ishovered && (
                 <div className={styles.tooltip}>
-                  <p>여기에는 난이도에 대한 설명이 표시됩니다.여기에는 난이도에 대한 설명이 표시됩니다.여기에는 난이도에 대한 설명이 표시됩니다.
-                  여기에는 난이도에 대한 설명이 표시됩니다.여기에는 난이도에 대한 설명이 표시됩니다.여기에는 난이도에 대한 설명이 표시됩니다.
+                  <p>
+                    여기에는 난이도에 대한 설명이 표시됩니다.여기에는 난이도에
+                    대한 설명이 표시됩니다.여기에는 난이도에 대한 설명이
+                    표시됩니다. 여기에는 난이도에 대한 설명이
+                    표시됩니다.여기에는 난이도에 대한 설명이 표시됩니다.여기에는
+                    난이도에 대한 설명이 표시됩니다.
                   </p>
                 </div>
               )}
-              <select value={selectedDifficulty} onChange={handleDifficultyChange}>
-                <option value="" disabled>난이도</option>
+              <select
+                value={selectedDifficulty}
+                onChange={handleDifficultyChange}
+              >
+                <option value="" disabled>
+                  난이도
+                </option>
                 <option value="전체">전체</option>
                 <option value="입문">입문</option>
                 <option value="초급">초급</option>
@@ -168,7 +223,9 @@ const SearchProjectNav = () => {
           </div>
           <div className={styles.dropdownGroup}>
             <select value={selectedPeriod} onChange={handlePeriodChange}>
-              <option value="" disabled>예상 기간</option>
+              <option value="" disabled>
+                예상 기간
+              </option>
               <option value="전체">전체</option>
               <option value="1개월">1개월</option>
               <option value="2개월">2개월</option>
@@ -178,7 +235,9 @@ const SearchProjectNav = () => {
           </div>
           <div className={styles.dropdownGroup}>
             <select value={selectedAgeGroup} onChange={handleAgeGroupChange}>
-              <option value="" disabled>연령대</option>
+              <option value="" disabled>
+                연령대
+              </option>
               <option value="전체">전체</option>
               <option value="20대">20대</option>
               <option value="30대">30대</option>

@@ -64,11 +64,12 @@ const ProjPost_detail = () => {
   useEffect(() => {
     setLoading(true);
     getPosts(postId)
-      .then((data) => {
-        setPost(data);
-        setComments(data.comments);
+      .then((res) => {
+        setPost(res.data);
+        setComments(res.data.comments);
         setLoading(false);
-        console.log(data.comments);
+        console.log(res.data);
+        console.log(res.data.comments);
       })
       .catch((error) => {
         console.log("post detail error(ProjPost_Datil.jsx): ", error);
