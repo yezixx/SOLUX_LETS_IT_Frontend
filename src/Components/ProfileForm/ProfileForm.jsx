@@ -51,7 +51,7 @@ const ProfileForm = ({ init }) => {
   );
   const [nickname, setNickname] = useState(init ? init.nickname : "");
   const [bio, setBio] = useState(init ? init.bio : "");
-  const [age] = useState(init ? init.age : "20대 초반");
+  const [age] = useState(init ? init.age : "");
   const [introduce, setIntroduce] = useState(init ? init.introduce : "");
   const [links, setLinks] = useState(
     init
@@ -267,7 +267,7 @@ const ProfileForm = ({ init }) => {
             </div>
             <div className={styles.profileForm__age}>
               <div className={styles.profileForm__formLabel}>연령대</div>
-              <div className={styles.profileForm__ageBox}>20대 초반</div>
+              <div className={styles.profileForm__ageBox}>{age}</div>
             </div>
             <div className={styles.profileForm__sns}>
               <div className={styles.profileForm__formLabel}>SNS</div>
