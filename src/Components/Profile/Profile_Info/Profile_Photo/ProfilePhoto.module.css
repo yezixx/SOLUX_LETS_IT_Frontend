@@ -1,17 +1,27 @@
-.myProfile__photo{
-    /*프로필 사진*/
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 3px solid var(--line-color);
+.myProfile__photo {
+  /*프로필 사진*/
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 3px solid var(--line-color);
 
-    /*구현 화면에서 텍스트 설명을 위한 css - 삭제 예정*/
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  /*구현 화면에서 텍스트 설명을 위한 css - 삭제 예정*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 /*지원서 버전*/
-.myProfile__photo--applicant{
-    width: 80px;
-    height: 80px;
+.myProfile__photo--applicant {
+  width: 80px;
+  height: 80px;
+}
+/*프로필 사진 바깥 원*/
+.myProfile__photo__circle {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 3px solid var(--line-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

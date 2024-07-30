@@ -1,14 +1,23 @@
+import ProfileDefaultPhoto from "../../../../Image/Icons/ProfileDefaultPhoto";
 import styles from "./ProfilePhoto.module.css";
 
 const ProfilePhoto = ({ type, src }) => {
   return (
-    <img
-      src=""
-      alt="프로필 사진"
-      className={`${styles.myProfile__photo} ${
-        styles[`myProfile__photo--${type}`]
-      }`}
-    />
+    <>
+      {src ? (
+        <img
+          src={src}
+          alt="프로필 사진"
+          className={`${styles.myProfile__photo} ${
+            styles[`myProfile__photo--${type}`]
+          }`}
+        />
+      ) : (
+        <div className={styles.myProfile__photo__circle}>
+          <ProfileDefaultPhoto />
+        </div>
+      )}
+    </>
   );
 };
 

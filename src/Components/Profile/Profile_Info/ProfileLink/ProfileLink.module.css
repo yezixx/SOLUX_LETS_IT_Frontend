@@ -1,16 +1,15 @@
-.ProfileLink{
-    display: flex;
-    width: 250px;
-    gap: 15px;
+.ProfileLink {
+  display: flex;
+  width: 250px;
+  gap: 15px;
 }
-.ProfileLink__icon{
-    width: 25px;
-    height: 25px;
-    border: 1px solid var(--text-color2);
-    border-radius: 50%;
+.ProfileLink__icon {
+  width: 25px;
+  height: 25px;
+  border: 1px solid var(--text-color2);
+  border-radius: 50%;
 }
-.ProfileLink__link{
-    width: 230px;
-    flex: 1;
-    background-color: #797979;
+.ProfileLink__link {
+  width: 230px;
+  flex: 1;
 }

@@ -34,8 +34,7 @@ const usePortPost = () => {
 
   //teamId
   const { teamId } = useParams();
-  //userId 변경 필요
-  const userId = useAtomValue(userIdAtom);
+
   //백엔드 전송 함수
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -43,7 +42,7 @@ const usePortPost = () => {
       const confirmSubmit = window.confirm("포트폴리오를 제출하시겠습니까?");
       if (confirmSubmit) {
         startTransition(() => {
-          postPortfolios(teamId, userId, portfolioData);
+          postPortfolios(teamId, portfolioData);
         });
         navigateTo(`/mypage/portfolio/board/${teamId}`); // 우선은 홈 화면으로 이동
       } else {
