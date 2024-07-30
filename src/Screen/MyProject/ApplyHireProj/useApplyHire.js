@@ -3,8 +3,6 @@ import {
   getMyApplyProjects,
   getMyProjects,
 } from "../../../service/projectService";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../atoms/atoms";
 import { completePosts, deletePosts } from "../../../service/postService";
 
 export const useApplyHire = () => {
@@ -14,27 +12,25 @@ export const useApplyHire = () => {
   const [hireProj, setHireProj] = useState([]);
   const [applyProj, setApplyProj] = useState([]);
   // 팀원 data를 담을 state
-  const [memberList, setMemberList] = useState([]);
-  // userId 전역 상태에서 불러오기
-  const userId = useAtomValue(userIdAtom);
+  const [, setMemberList] = useState([]);
 
   // 프로젝트 리스트 db에서 갖고 와서 hireProj 저장
   useEffect(() => {
-    getMyProjects(userId)
+    getMyProjects()
       .then((res) => {
         setHireProj(res.projects);
       })
       .catch((error) => {
         console.log("프로젝트 데이터 가져오기 오류:", error);
       });
-    getMyApplyProjects(userId)
+    getMyApplyProjects()
       .then((res) => {
         setApplyProj(res.projects);
       })
       .catch((error) => {
         console.log(`apply 프로젝트 데이터 가져오는 중 에러 발생 : ${error}`);
       });
-  }, [userId]);
+  }, []);
 
   // 클릭했을 시 멤버 보여주는 함수
   const handleClickMember = (postId) => {
@@ -66,7 +62,7 @@ export const useApplyHire = () => {
           // 팀게시판 생성 navigate 추가해야 함
           console.log(`모집 마감 성공`);
           // 모집 마감 후 프로젝트 목록을 새로 가져오기
-          return getMyProjects(userId);
+          return getMyProjects();
         })
         .then((res) => {
           setHireProj(res.projects);
@@ -83,13 +79,13 @@ export const useApplyHire = () => {
       "구인글을 삭제하시겠습니까? (삭제 후 취소는 불가능합니다.)"
     );
     if (isConfirm) {
-      deletePosts(userId, postId)
+      deletePosts(postId)
         .then(() => {
           alert("삭제되었습니다");
           // 팀게시판 생성 navigate 추가해야 함
           console.log(`구인글 삭제 성공`);
           // 모집 마감 후 프로젝트 목록을 새로 가져오기
-          return getMyProjects(userId);
+          return getMyProjects();
         })
         .then((res) => {
           setHireProj(res.projects);

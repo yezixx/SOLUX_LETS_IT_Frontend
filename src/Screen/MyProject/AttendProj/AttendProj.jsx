@@ -14,15 +14,13 @@ const OngoingProj = () => {
   const naviagateTo = (link) => {
     navigate(link);
   };
-  /*1로 가정, 추후 로그인과 연동 시 로그인한 userId로 변동 */
-  const userId = useAtomValue(userIdAtom);
   /*진행 중인 프로젝트 리스트 */
   const [ongoingProj, setOngoingProj] = useState([]);
   const [completeProj, setCompleteProj] = useState([]);
 
   useEffect(() => {
     //진행 중인 프로젝트
-    getMyOngoingProjects(userId)
+    getMyOngoingProjects()
       .then((res) => {
         // console.log(`getMyAttendProjects에서 가져온 data : ${res}`);
         // console.log(JSON.stringify(res, null, 2));
@@ -30,14 +28,14 @@ const OngoingProj = () => {
       })
       .catch((error) => console.log(error));
     //완료한 프로젝트
-    getCompleteProjects(userId)
+    getCompleteProjects()
       .then((res) => {
         // console.log(`completeProject 가져온 data : ${res}`);
         // console.log(JSON.stringify(res, null, 2));
         setCompleteProj(res.projects);
       })
       .catch((error) => console.log(error));
-  }, [userId]);
+  }, []);
 
   console.log(JSON.stringify(ongoingProj, null, 2)); // 받아온 data 확인
   console.log(JSON.stringify(completeProj, null, 2)); // 받아온 data 확인
