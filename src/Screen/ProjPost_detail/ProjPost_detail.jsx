@@ -78,7 +78,7 @@ const ProjPost_detail = () => {
   }, []);
 
   const onCraeteComment = async (content) => {
-    const res = await createComment(Number(postId), Number(loginUserId), {
+    const res = await createComment(Number(postId), {
       comContent: content,
     });
     const commentData = res.data;
@@ -97,14 +97,9 @@ const ProjPost_detail = () => {
   };
 
   const onUpdateComment = async (writerId, commentId, content) => {
-    const res = await updateComment(
-      Number(postId),
-      Number(commentId),
-      Number(loginUserId),
-      {
-        comContent: content,
-      }
-    );
+    const res = await updateComment(Number(postId), Number(commentId), {
+      comContent: content,
+    });
     const commentData = res.data;
     console.log(res.data);
     setComments(
