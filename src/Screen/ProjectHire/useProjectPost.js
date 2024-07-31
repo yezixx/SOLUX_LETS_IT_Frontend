@@ -20,7 +20,15 @@ const useProjectPost = () => {
   const warning = () => {
     return window.confirm("제출하시겠습니까?");
   };
-
+  //오늘 날짜
+  const getToday = () => {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, "0");
+    const day = String(today.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  };
+  const [minDate] = useState(getToday());
   //form 유효성 검사
   const validateForm = () => {
     const newErrors = {};
@@ -43,6 +51,9 @@ const useProjectPost = () => {
         (postProj[key] === 17 || postProj[key] === 1701)
       ) {
         newErrors[key] = true;
+      } else if (key === "recruitDuedate" && postProj[key] < getToday()) {
+        alert("이전 날짜는 선택할 수 없습니다.");
+        postProj[key] === ""; // 초기화
       } else if (postProj[key] === "" || !postProj[key]) {
         newErrors[key] = true;
       }
@@ -78,7 +89,7 @@ const useProjectPost = () => {
       }
     }
   };
-  return { onChange, handleSubmit, errors };
+  return { onChange, handleSubmit, errors, minDate };
 };
 
 export default useProjectPost;

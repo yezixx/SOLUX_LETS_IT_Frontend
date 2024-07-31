@@ -8,11 +8,10 @@ import Button from "../../Components/Button/Button";
 import { useAtomValue } from "jotai";
 import { postProjectAtom } from "../../atoms/atoms";
 import useProjectPost from "./useProjectPost";
-import { useEffect } from "react";
 
 const ProjectHire = () => {
   const projectPost = useAtomValue(postProjectAtom);
-  const { handleSubmit, onChange, errors } = useProjectPost();
+  const { handleSubmit, onChange, errors, minDate } = useProjectPost();
   console.log(projectPost);
   return (
     <form onSubmit={handleSubmit} className={styles.projectHire}>
@@ -28,7 +27,7 @@ const ProjectHire = () => {
       />
       <div className={styles.projectHire__container}>
         {/*모집 정보 */}
-        <RecruitInfo errors={errors} />
+        <RecruitInfo errors={errors} minDate={minDate} />
         {/*필요 스택 */}
         <RequiredStack errors={errors} />
         {/*프로젝트 정보 */}
