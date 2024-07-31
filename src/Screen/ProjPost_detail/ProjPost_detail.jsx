@@ -127,6 +127,11 @@ const ProjPost_detail = () => {
   };
 
   const onClickCreateComment = () => {
+    if (!loginUserId) {
+      alert("로그인이 필요한 서비스입니다.");
+      nav("/login");
+      return;
+    }
     if (commentInputRef.current.value === "") {
       commentInputRef.current.focus();
       return;
