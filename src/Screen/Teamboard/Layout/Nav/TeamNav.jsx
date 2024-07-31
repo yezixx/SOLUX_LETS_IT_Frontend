@@ -1,7 +1,5 @@
-import { useAtomValue } from "jotai";
 import styles from "./TeamNav.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
-import { userIdAtom } from "../../../../atoms/atoms";
 import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 
@@ -11,21 +9,12 @@ const TeamNav = () => {
 
   const { teamData, teamId } = useContext(TeamStateContext);
 
-  const loginUserId = useAtomValue(userIdAtom);
-
   const nav = useNavigate();
 
   const mainUrl = `/teamboard/?team=${teamId}`;
   const setMemberUrl = `/teamboard/member/?team=${teamId}`;
   const manageUrl = `/teamboard/manage/?team=${teamId}`;
   const editUrl = `/teamboard/manage/edit/?team=${teamId}`;
-
-  const isLeader = () => {
-    const leaderId = teamData.teamMemberInfo.find(
-      (member) => String(member.position) === "Team_Leader"
-    );
-    return leaderId.userId === loginUserId;
-  };
 
   const navigateToTeamboard = () => {
     nav(mainUrl);
@@ -34,10 +23,6 @@ const TeamNav = () => {
     nav(setMemberUrl);
   };
   const navigateToManage = () => {
-    if (!isLeader()) {
-      alert("프로젝트 관리 화면은 팀장만 접근 가능합니다.");
-      return;
-    }
     nav(manageUrl);
   };
 

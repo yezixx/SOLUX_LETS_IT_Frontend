@@ -159,3 +159,14 @@ export const deleteSchedule = async (calendarId) => {
     throw error;
   }
 };
+
+// 팀게시판 마감 여부 확인
+export const checkTeamCompleted = async (teamId) => {
+  try {
+    const response = await apiClient.get(`team/${teamId}/is/complete`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching check team close", error);
+    throw error;
+  }
+};
