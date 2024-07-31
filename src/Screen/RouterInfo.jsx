@@ -141,7 +141,7 @@ export const RouterInfo = [
             label: "포트폴리오 작성창",
           },
           {
-            path: "portfolio/post/summaryAI",
+            path: "portfolio/post/summaryAI/:teamId",
             element: <PrivateRoute element={<CompletePort />} />,
             label: "AI 생성 - 완성된 포트폴리오",
           },
