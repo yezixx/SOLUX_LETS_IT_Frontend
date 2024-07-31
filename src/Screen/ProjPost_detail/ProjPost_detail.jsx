@@ -14,6 +14,7 @@ import {
   deleteComment,
   updateComment,
 } from "../../service/commentService";
+import { getProfile } from "../../service/profileService";
 
 const ProjPost_detail = () => {
   const loginUserId = localStorage.getItem("user")
@@ -141,6 +142,22 @@ const ProjPost_detail = () => {
   };
 
   const onClickApply = () => {
+    if (!loginUserId) {
+      nav("/login");
+    }
+    try {
+      const response = getProfile();
+      const profile = response.data;
+      if (
+        profile.nickname === "" ||
+        profile.bio === "" ||
+        profile.selfIntro === ""
+      ) {
+        nav("/porofile/new", { state: { to: `/apply/${postId}` } });
+      }
+    } catch (error) {
+      console.log("error");
+    }
     nav(`/apply/${postId}`);
   };
 

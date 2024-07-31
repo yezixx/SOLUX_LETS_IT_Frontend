@@ -4,11 +4,24 @@ import StepBar from "../../Components/StepBar/StepBar";
 import { getProfile, saveProfileImage } from "../../service/profileService";
 import Loading from "../../Components/Loading/Loading";
 import styles from "./CreateProfile.module.css";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const CreateProfile = () => {
   const loginUserInfo = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : null;
+
+  const location = useLocation();
+  const nav = useNavigate();
+  const { to } = location.state || {};
+
+  const navToApplt = () => {
+    if (to) {
+      nav(to);
+    } else {
+      nav("/");
+    }
+  };
 
   const [userInfo, setUserInfo] = useState({
     nickname: "",
@@ -61,7 +74,11 @@ const CreateProfile = () => {
         <StepBar type="COMPLETE" />
       </div>
       <div className={styles.createProfile__profileForm}>
-        <ProfileForm init={userInfo} onSaveProfileImage={onSaveProfileImage} />
+        <ProfileForm
+          init={userInfo}
+          onSaveProfileImage={onSaveProfileImage}
+          navTo={navToApplt}
+        />
       </div>
     </div>
   );

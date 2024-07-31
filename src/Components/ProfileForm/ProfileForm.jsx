@@ -42,7 +42,7 @@ import { ageMapping } from "../Profile/ProfileTierMap";
   ],
 };*/
 
-const ProfileForm = ({ init, onSaveProfileImage }) => {
+const ProfileForm = ({ init, onSaveProfileImage, navTo }) => {
   const kakaoId = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).kakaoId
     : null;
@@ -111,8 +111,6 @@ const ProfileForm = ({ init, onSaveProfileImage }) => {
     }
   };
 
-  const nav = useNavigate();
-
   const onClickProfilePic = () => {
     setProfileImage(
       /*imgRef.current.files*/ URL.createObjectURL(
@@ -174,6 +172,7 @@ const ProfileForm = ({ init, onSaveProfileImage }) => {
       });
       if (selectPicRef.current.files[0] !== undefined)
         onSaveProfileImage(kakaoId, selectPicRef.current.files[0]);
+      navTo();
     }
   };
 
