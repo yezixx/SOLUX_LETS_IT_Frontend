@@ -43,8 +43,8 @@ import { ageMapping } from "../Profile/ProfileTierMap";
 };*/
 
 const ProfileForm = ({ init, onSaveProfileImage }) => {
-  const loginUserId = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")).userId
+  const kakaoId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).kakaoId
     : null;
 
   const [profileImage, setProfileImage] = useState(
@@ -152,21 +152,28 @@ const ProfileForm = ({ init, onSaveProfileImage }) => {
       console.log({
         nickname: nickname,
         bio: bio,
-        age: age,
         sns: links,
         introduce: introduce,
         skills: skills,
         profileImage: selectPicRef.current.files[0],
       });
-      // updateProfile(loginUserId, {
-      //   nickname: nickname,
-      //   bio: bio,
-      //   age: age,
-      //   sns: links,
-      //   introduce: introduce,
-      //   skills: skills,
-      // });
-      // onSaveProfileImage(selectPicRef.current.files[0]);
+      updateProfile({
+        nickname: nickname,
+        bio: bio,
+        sns: {
+          [links[0].type]: links[0].link,
+          [links[1].type]: links[1].link,
+        },
+        selfIntro: introduce,
+        skills: {
+          [skills[0].skillName]: skills[0].fluency,
+          [skills[1].skillName]: skills[1].fluency,
+          [skills[2].skillName]: skills[2].fluency,
+          [skills[3].skillName]: skills[3].fluency,
+        },
+      });
+      if (selectPicRef.current.files[0] !== undefined)
+        onSaveProfileImage(kakaoId, selectPicRef.current.files[0]);
     }
   };
 

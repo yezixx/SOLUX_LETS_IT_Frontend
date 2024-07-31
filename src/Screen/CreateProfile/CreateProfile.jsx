@@ -9,8 +9,6 @@ const CreateProfile = () => {
   const loginUserInfo = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user"))
     : null;
-  const loginUserId = loginUserInfo ? loginUserInfo.userId : null;
-  console.log(loginUserId, loginUserInfo.ageRange);
 
   const [userInfo, setUserInfo] = useState({
     nickname: "",
@@ -48,25 +46,10 @@ const CreateProfile = () => {
       },
     ],
   });
-  const [loading, setLoading] = useState(false);
-
-  /*useEffect(() => {
-    setLoading(true);
-    try {
-      const response = getProfile(loginUserId);
-      setUserInfo(response.data);
-      console.log(response.data);
-      setLoading(false);
-    } catch (error) {
-      console.log(error);
-      alert("사용자 정보를 불러오는데 실패했습니다.");
-      setLoading(false);
-    }
-  });*/
 
   const onSaveProfileImage = async (imageFile) => {
     try {
-      await saveProfileImage(imageFile);
+      await saveProfileImage(loginUserInfo.kakaoId, imageFile);
     } catch (error) {
       console.log(error);
     }
@@ -74,7 +57,6 @@ const CreateProfile = () => {
 
   return (
     <div className={styles.createProfile}>
-      {loading && <Loading />}
       <div className={styles.createProfile__stepBar}>
         <StepBar type="COMPLETE" />
       </div>
