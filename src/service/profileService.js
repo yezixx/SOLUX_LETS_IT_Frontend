@@ -11,12 +11,9 @@ export const getProfile = async () => {
   }
 };
 // 프로필 수정 - 프로필 수정 화면에서 저장 버튼
-export const updateProfile = (userId, updatedProfileData) => {
+export const updateProfile = (updatedProfileData) => {
   try {
-    const response = apiClient.patch(
-      `/profile/${userId}/modify`,
-      updatedProfileData
-    );
+    const response = apiClient.patch(`/profile/upload`, updatedProfileData);
     return response.data;
   } catch (error) {
     console.error("Error updating profile:", error);
@@ -25,12 +22,12 @@ export const updateProfile = (userId, updatedProfileData) => {
 };
 
 // 프로필 이미지 저장
-export const saveProfileImage = async (userId, imageFile) => {
+export const saveProfileImage = async (kakaoId, imageFile) => {
   try {
     const formData = new FormData();
-    formData.append("profileImage", imageFile);
+    formData.append("file", imageFile);
     const response = await apiClient.post(
-      `/profile/${userId}/image`,
+      `/profile/upload/${Number(kakaoId)}`,
       formData,
       {
         headers: {
