@@ -75,7 +75,7 @@ const ProjPost_detail = () => {
       .catch((error) => {
         console.log("post detail error(ProjPost_Detail.jsx): ", error);
         alert("게시글을 불러오는데 실패했습니다.");
-        nav(-1);
+        nav(-1, { replace: true });
       });
   }, []);
 
