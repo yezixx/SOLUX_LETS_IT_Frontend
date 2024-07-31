@@ -11,7 +11,7 @@ function RecommendProject() {
     const fetchProjects = async () => {
       try {
         const data = await getPostsList();
-        setProjList(data.data);
+        setProjList(data);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
@@ -20,7 +20,6 @@ function RecommendProject() {
     fetchProjects();
   }, []);
   useEffect(() => {
-    //조회순 기준 정렬, proList를 받아온 후에 처리함
     if (projList.length > 0) {
       const sorted = [...projList].sort((a, b) => b.viewCount - a.viewCount);
       setSortedList(sorted);
@@ -29,17 +28,21 @@ function RecommendProject() {
 
   return (
     <div className={styles.recommendproj}>
-      <div className={styles.text}>이런 프로젝트는 어떠신가요? 💫</div>
-      <div className={styles.recommedproj__container}>
-        {sortedList.length > 0 ? (
-          sortedList
-            .slice(0, 4)
-            .map((project, index) => (
-              <ProjectList key={index} project={project} />
-            ))
-        ) : (
-          <div>loading</div>
-        )}
+      <div className={styles.recommendproj__content}>
+        <div className={styles.text}>이런 프로젝트는 어떠신가요? 💫</div>
+        <div className={styles.recommedproj__container}>
+          {sortedList.length > 0 ? (
+            sortedList
+              .slice(0, 4)
+              .map((project, index) => (
+                <ProjectList key={index} project={project} />
+              ))
+          ) : (
+            <div className={styles.noProjectsMessage}>
+              현재 게시된 프로젝트가 존재하지 않습니다.
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

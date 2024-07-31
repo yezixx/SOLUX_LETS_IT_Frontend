@@ -1,16 +1,28 @@
 .recommendproj {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  margin-top: 10px;
   gap: 20px;
   height: 360px;
   padding-top: 50px;
+  width: 100%;
 }
 .text {
   font-family: "pretendardB";
   font-size: 26px;
 }
+
+.recommendproj__content {
+  display: flex;
+  flex-direction: column;
+}
 .recommedproj__container {
   display: flex;
   gap: 20px;
+  width: 1320px;
+}
+.noProjectsMessage {
+  margin-left: 500px;
+  margin-top: 100px;
+  z-index: 10;
 }

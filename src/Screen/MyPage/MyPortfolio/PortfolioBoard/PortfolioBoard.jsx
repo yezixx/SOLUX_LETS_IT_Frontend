@@ -8,13 +8,19 @@ import { getMyPortfolios } from "../../../../service/portfolioService";
 
 const PortfolioBoard = () => {
   const navigate = useNavigate();
-  const navigateTo = (link) => {
-    navigate(link);
-  };
+
   // const { prjId } = useParams();
   const { teamId } = useParams();
   console.log(teamId);
+  // //클릭 핸들링
+  // const handleClickCount = ()=>{
+  //   incrementClickCount
+  //   .then((res)=>
+  //     {console.log('count 횟수 증가')
 
+  //     })
+  //   .catch((error)=>console.log(`count 증가 시 오류 발생 : ${error}`))
+  // }
   //포트폴리오 리스트업
   const [portfolioList, setPortfolioList] = useState([]);
   useEffect(() => {
@@ -85,14 +91,14 @@ const PortfolioBoard = () => {
       <div className={styles.PortfolioBoard__btnWrap}>
         <Button
           onClick={() => {
-            navigateTo("/mypage/portfolio/post/summaryAI");
+            navigate(`/mypage/portfolio/post/summaryAI/${teamId}`);
           }}
           text="AI포트폴리오"
           type="741EFF_150x40"
         />
         <Button
           onClick={() => {
-            navigateTo(`/mypage/portfolio/post/${teamId}`);
+            navigate(`/mypage/portfolio/post/${teamId}`);
           }}
           text="글쓰기"
         />
