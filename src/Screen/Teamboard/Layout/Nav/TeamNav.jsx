@@ -2,12 +2,17 @@ import styles from "./TeamNav.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
+import { isLeader } from "../../isLeader";
 
 const TeamNav = () => {
   const location = useLocation();
   const currentUrl = location.pathname + location.search;
 
   const { teamData, teamId } = useContext(TeamStateContext);
+
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const nav = useNavigate();
 
@@ -23,6 +28,10 @@ const TeamNav = () => {
     nav(setMemberUrl);
   };
   const navigateToManage = () => {
+    if (isLeader(teamData.teamMemberInfo, loginUserId) === false) {
+      alert("팀장만 접근 가능한 페이지입니다.");
+      return;
+    }
     nav(manageUrl);
   };
 
