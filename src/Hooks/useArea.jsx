@@ -1,4 +1,4 @@
-// useArea.jsx
+// hooks/useArea.jsx
 import { createContext, useContext, useState } from 'react';
 
 const AreaContext = createContext();
@@ -6,10 +6,20 @@ const AreaContext = createContext();
 export const AreaProvider = ({ children }) => {
   const [selectedArea, setSelectedArea] = useState(null);
   const [selectedSubAreas, setSelectedSubAreas] = useState([]);
+  const [isSubAreaVisible, setIsSubAreaVisible] = useState(false);
 
   const handleAreaClick = (area) => {
-    setSelectedArea(area);
-    setSelectedSubAreas([]); // 새로운 지역 선택 시 하위 지역 초기화
+    if (selectedArea === area) {
+      // 같은 상위 지역 클릭 시 전체 지역으로 돌아가기
+      setSelectedArea(null);
+      setSelectedSubAreas([]);
+      setIsSubAreaVisible(false);
+    } else {
+      // 새로운 상위 지역 클릭 시 하위 지역 표시
+      setSelectedArea(area);
+      setSelectedSubAreas([]); // 하위 지역 초기화
+      setIsSubAreaVisible(true); // 하위 지역 표시
+    }
   };
 
   const handleSubAreaClick = (sub) => {
@@ -24,7 +34,7 @@ export const AreaProvider = ({ children }) => {
 
   return (
     <AreaContext.Provider
-      value={{ selectedArea, selectedSubAreas, handleAreaClick, handleSubAreaClick }}
+      value={{ selectedArea, selectedSubAreas, isSubAreaVisible, handleAreaClick, handleSubAreaClick }}
     >
       {children}
     </AreaContext.Provider>

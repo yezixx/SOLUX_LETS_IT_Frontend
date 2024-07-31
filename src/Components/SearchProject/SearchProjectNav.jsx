@@ -1,46 +1,28 @@
-import React, { useState, useEffect } from "react"; // useEffect 추가
-import styles from "./SearchProjectNav.module.css";
-import ProjectList from "./ProjectList";
-import useArea from "../../Hooks/useArea.jsx";
-import { useAtomValue, useSetAtom } from "jotai";
-import { postProjectAtom } from "../../atoms/atoms";
-import { getPostsList } from "../../service/postService.js";
-import QuestionMarkIcon from "../../Image/Icons/QuestionMarkIcon.jsx";
-import useHover from "../../Hooks/useHover.js";
+// components/SearchProjectNav.js
+import React, { useState, useEffect } from 'react';
+import styles from './SearchProjectNav.module.css';
+import ProjectList from './ProjectList';
+import useArea from '../../Hooks/useArea.jsx';
+import { useFilter } from './FilterContext.jsx';
+import { getPostsList } from '../../service/postService.js';
+import QuestionMarkIcon from '../../Image/Icons/QuestionMarkIcon.jsx';
+import useHover from '../../Hooks/useHover.js';
 
 const SearchProjectNav = () => {
   const { selectedArea, selectedSubAreas } = useArea();
-  const navCont = ["최신순", "스크랩순", "조회순"];
-  const OnOff = ["대면", "비대면"];
+  const navCont = ['최신순', '스크랩순', '조회순'];
+  const OnOff = ['대면', '비대면'];
   const { ishovered, handleMouseEnter, handleMouseLeave } = useHover();
 
   const [projects, setProjects] = useState([]);
-  const [selectedDifficulty, setSelectedDifficulty] = useState("전체");
-  const [selectedPeriod, setSelectedPeriod] = useState("전체");
+  const [selectedDifficulty, setSelectedDifficulty] = useState('전체');
+  const [selectedPeriod, setSelectedPeriod] = useState('전체');
   const [selectedOnOff, setSelectedOnOff] = useState([]);
-  const [selectedAgeGroup, setSelectedAgeGroup] = useState("전체");
-  const [sortCriteria, setSortCriteria] = useState("최신순");
-  const [noResults, setNoResults] = useState(false); // 조건에 맞는 프로젝트가 없는지 여부를 나타내는 상태
+  const [selectedAgeGroup, setSelectedAgeGroup] = useState('전체');
+  const [sortCriteria, setSortCriteria] = useState('최신순');
+  const [noResults, setNoResults] = useState(false);
 
-  //postProjectAtom에서 stack, field를 selectedStack selectedFields에 복사
-
-  const resetPostProject = {
-    title: "",
-    content: "",
-    totalPersonnel: "",
-    recruitDueDate: "",
-    preference: "",
-    projectPeriod: "",
-    ageGroup: "",
-    stack: [],
-    difficulty: "",
-    onOff: "",
-    regionId: 17,
-    subRegionId: 1701,
-    categoryId: [],
-  };
-  const { stack: selectedStacks, categoryId: selectedFields } =
-    resetPostProject;
+  const { selectedStacks, selectedCategoryIds } = useFilter();
 
   useEffect(() => {
     getPostsList()
@@ -50,20 +32,57 @@ const SearchProjectNav = () => {
       .catch((error) => {
         console.log(error);
       });
-    return () => {
-      resetPostProject.stack = [];
-      resetPostProject.categoryId = [];
-      setSelectedDifficulty("전체");
-      setSelectedPeriod("전체");
-      setSelectedOnOff([]);
-      setSelectedAgeGroup("전체");
-    };
   }, []);
-  //projects : 객체 담은 배열
 
   useEffect(() => {
-    // 필터링된 프로젝트가 없을 경우 noResults 상태를 true로 설정
-    setNoResults(!filteredProjects);
+    const filteredProjects = (projects ? projects : []).filter((project) => {
+      const areaMatch = selectedArea
+        ? project.region.startsWith(selectedArea.name)
+        : true;
+
+      const subAreaMatch =
+        selectedSubAreas.length === 0 ||
+        selectedSubAreas.some((sub) => project.subRegion.includes(sub));
+
+      const difficultyMatch =
+        selectedDifficulty === '전체' || project.difficulty === selectedDifficulty;
+
+      const periodMatch =
+        selectedPeriod === '전체' || project.projectPeriod === selectedPeriod;
+
+      const onOffMatch =
+        selectedOnOff.length === 0 || selectedOnOff.includes(project.onOff);
+
+      const ageGroupMatch =
+        selectedAgeGroup === '전체' || project.ageGroup === selectedAgeGroup;
+
+      const fieldMatch =
+        selectedCategoryIds.length === 0 ||
+        selectedCategoryIds.every((field) =>
+          project.categoryId
+            .map((f) => f.toLowerCase())
+            .includes(field.toLowerCase())
+        );
+
+      const stackMatch =
+        selectedStacks.length === 0 ||
+        selectedStacks.every((stack) =>
+          project.stack.map((s) => s.toLowerCase()).includes(stack.toLowerCase())
+        );
+
+      return (
+        areaMatch &&
+        subAreaMatch &&
+        difficultyMatch &&
+        periodMatch &&
+        onOffMatch &&
+        ageGroupMatch &&
+        fieldMatch &&
+        stackMatch
+      );
+    });
+
+    setNoResults(filteredProjects.length === 0);
   }, [
     projects,
     selectedArea,
@@ -72,7 +91,7 @@ const SearchProjectNav = () => {
     selectedPeriod,
     selectedOnOff,
     selectedAgeGroup,
-    selectedFields,
+    selectedCategoryIds,
     selectedStacks,
   ]);
 
@@ -100,32 +119,31 @@ const SearchProjectNav = () => {
   const handleSortChange = (criteria) => {
     setSortCriteria(criteria);
   };
-  //필터링된 프로젝트
-  //백엔드에서 프로젝트 데이터가 아직 안가져와졌다면 빈 배열로 filter 진행
-  const filteredProjects = (projects ? projects : []).filter((project) => {
-    //지역 필터링 - 선택된 지역이 있을 경우, 프로젝트의 지역이 선택된 지역이름으로 시작
+
+  const filteredProjects = projects.filter((project) => {
     const areaMatch = selectedArea
       ? project.region.startsWith(selectedArea.name)
       : true;
 
-    //하위 지역 필터링 - 선택된 하위 지역이 없는 경우 or 선택된 하위 지역 중 하나라도 프로젝트 하위 지역에 포함돼야함
     const subAreaMatch =
-      selectedSubAreas || // 선택된 게 없을 경우 (undefined 포함)
+      selectedSubAreas.length === 0 ||
       selectedSubAreas.some((sub) => project.subRegion.includes(sub));
 
-    //난이도 필터링
     const difficultyMatch =
-      selectedDifficulty === "전체" ||
-      project.difficulty === selectedDifficulty;
+      selectedDifficulty === '전체' || project.difficulty === selectedDifficulty;
+
     const periodMatch =
-      selectedPeriod === "전체" || project.projectPeriod === selectedPeriod;
-    const onOffMatch = selectedOnOff || selectedOnOff.includes(project.onOff); // 선택된 게 없을 경우 (undefined 포함)
+      selectedPeriod === '전체' || project.projectPeriod === selectedPeriod;
+
+    const onOffMatch =
+      selectedOnOff.length === 0 || selectedOnOff.includes(project.onOff);
+
     const ageGroupMatch =
-      selectedAgeGroup === "전체" || project.ageGroup === selectedAgeGroup;
+      selectedAgeGroup === '전체' || project.ageGroup === selectedAgeGroup;
 
     const fieldMatch =
-      selectedFields.length === 0 ||
-      selectedFields.every((field) =>
+      selectedCategoryIds.length === 0 ||
+      selectedCategoryIds.every((field) =>
         project.categoryId
           .map((f) => f.toLowerCase())
           .includes(field.toLowerCase())
@@ -149,13 +167,12 @@ const SearchProjectNav = () => {
     );
   });
 
-  //최신순, 조회순 ,스크랩순 계산
   const sortedProjects = [...filteredProjects].sort((a, b) => {
-    if (sortCriteria === "최신순") {
+    if (sortCriteria === '최신순') {
       return new Date(b.createdAt) - new Date(a.createdAt);
-    } else if (sortCriteria === "조회순") {
+    } else if (sortCriteria === '조회순') {
       return b.viewCount - a.viewCount;
-    } else if (sortCriteria === "스크랩순") {
+    } else if (sortCriteria === '스크랩순') {
       return b.scrapCount - a.scrapCount;
     }
     return 0;
@@ -169,7 +186,7 @@ const SearchProjectNav = () => {
             <div className={styles.nav2__contents} key={id}>
               <button
                 className={`${styles.nav2__button} ${
-                  sortCriteria === menu ? styles.selected : ""
+                  sortCriteria === menu ? styles.selected : ''
                 }`}
                 onClick={() => handleSortChange(menu)}
               >
@@ -186,14 +203,14 @@ const SearchProjectNav = () => {
           {OnOff.map((menu, id) => (
             <div
               className={`${styles.onoff__contents} ${
-                selectedOnOff.includes(menu) ? styles.selected : ""
+                selectedOnOff.includes(menu) ? styles.selected : ''
               }`}
               key={id}
               onClick={() => handleOnOffChange(menu)}
             >
               <button
                 className={`${styles.onoff__button} ${
-                  selectedOnOff.includes(menu) ? styles.selected : ""
+                  selectedOnOff.includes(menu) ? styles.selected : ''
                 }`}
               >
                 {menu}
@@ -256,21 +273,21 @@ const SearchProjectNav = () => {
                 연령대
               </option>
               <option value="전체">전체</option>
+              <option value="10대">10대</option>
               <option value="20대">20대</option>
               <option value="30대">30대</option>
-              <option value="40대 이상">40대 이상</option>
+              <option value="40대">40대</option>
+              <option value="50대">50대</option>
+              <option value="60대">60대 이상</option>
             </select>
           </div>
         </div>
       </div>
 
-      {noResults ? (
-        <div className={styles.noResultsMessage}>
-          조건에 맞는 프로젝트가 없습니다.
-        </div>
-      ) : (
+      <div className={styles.list_wrap}>
         <ProjectList projects={sortedProjects} />
-      )}
+        {noResults && <div className={styles.noResults}>검색 결과가 없습니다.</div>}
+      </div>
     </div>
   );
 };
