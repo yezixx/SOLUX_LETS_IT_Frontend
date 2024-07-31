@@ -56,12 +56,12 @@ const CreateBoard = () => {
       console.log(response.data);
       if (response.data.length === 0) {
         alert("팀원이 없습니다. 팀원을 추가해주세요.");
-        nav(-1);
+        nav(-1, { replace: true });
       }
     } catch (error) {
       console.error("Error fetching applicants:", error);
       alert("팀원 목록을 불러오는데 실패했습니다. 다시 시도해주세요.");
-      nav(-1);
+      nav(-1, { replace: true });
     }
   };
 
@@ -72,12 +72,12 @@ const CreateBoard = () => {
       console.log(response.data);
       if (response.data.userId !== loginUserId) {
         alert("게시글 작성자만 팀게시판을 생성할 수 있습니다.");
-        nav(-1);
+        nav(-1, { replace: true });
       }
     } catch (error) {
       console.error("Error fetching post info:", error);
       alert("게시글 정보를 불러오는데 실패했습니다. 다시 시도해주세요.");
-      nav(-1);
+      nav(-1, { replace: true });
     }
   };
 

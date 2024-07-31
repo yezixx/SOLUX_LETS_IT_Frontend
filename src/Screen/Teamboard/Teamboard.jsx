@@ -122,14 +122,14 @@ const Teamboard = () => {
       });
       if (!isMember(data.data, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
-        nav(-1);
+        nav(-1, { replace: true });
         return;
       }
       setLoading(false);
     } catch (error) {
       console.log("teamboard error", error);
       alert("팀 정보를 불러오는 중 오류가 발생했습니다.");
-      nav(-1);
+      nav(-1, { replace: true });
     }
   };
 
