@@ -8,12 +8,13 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { createTeam } from "../../service/teamService";
 import { approveApplicants } from "../../service/applyService";
 import Loading from "../../Components/Loading/Loading";
+import { getPosts } from "../../service/postService";
 
 const mock_members = [
   {
-    applyId: 4,
-    nickname: "목업",
-    profileImage: "grace.jpg",
+    applyId: 0,
+    nickname: "",
+    profileImage: "",
   },
 ];
 const mock_collabLinks = [
@@ -30,6 +31,10 @@ const mock_collabLinks = [
 ];
 
 const CreateBoard = () => {
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
+
   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
@@ -38,28 +43,47 @@ const CreateBoard = () => {
 
   const [params] = useSearchParams();
   const postId = params.get("post");
+  const [postInfo, setPostInfo] = useState({});
 
   const titleRef = useRef();
   const linkRef1 = useRef();
   const linkRef2 = useRef();
 
+  const fetchApplicants = async (postId) => {
+    try {
+      const response = await approveApplicants(postId);
+      await setApplicantsList(response.data);
+      console.log(response.data);
+      if (response.data.length === 0) {
+        alert("팀원이 없습니다. 팀원을 추가해주세요.");
+        nav(-1);
+      }
+    } catch (error) {
+      console.error("Error fetching applicants:", error);
+      alert("팀원 목록을 불러오는데 실패했습니다. 다시 시도해주세요.");
+      nav(-1);
+    }
+  };
+
+  const fetchPostInfo = async (postId) => {
+    try {
+      const response = await getPosts(postId);
+      await setPostInfo(response.data);
+      console.log(response.data);
+      if (response.data.userId !== loginUserId) {
+        alert("게시글 작성자만 팀게시판을 생성할 수 있습니다.");
+        nav(-1);
+      }
+    } catch (error) {
+      console.error("Error fetching post info:", error);
+      alert("게시글 정보를 불러오는데 실패했습니다. 다시 시도해주세요.");
+      nav(-1);
+    }
+  };
+
   useEffect(() => {
-    approveApplicants(postId)
-      .then((res) => {
-        setApplicantsList(res.data);
-        console.log(res);
-        if (res.data.length === 0) {
-          alert("팀원이 없습니다. 팀원을 추가해주세요.");
-          nav("/");
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
-        console.log("error (in CreateBoard):", error);
-        alert("팀원 목록을 불러오는데 실패했습니다. 다시 시도해주세요.");
-        setLoading(false);
-        nav("/");
-      });
+    fetchApplicants(postId);
+    fetchPostInfo(postId);
   }, []);
 
   const onFocusElement = (ref) => {

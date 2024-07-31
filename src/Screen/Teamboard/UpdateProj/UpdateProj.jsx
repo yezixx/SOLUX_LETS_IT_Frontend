@@ -7,20 +7,18 @@ import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
 import { useContext, useEffect, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { completeProject } from "../../../service/teamService";
+import { isLeader } from "../isLeader";
 
 const UpdateProj = () => {
   const { onUpdateTeamData } = useContext(TeamDispatchContext);
-  const { teamData, teamId } = useContext(TeamStateContext);
+  const { teamData, teamId, loading } = useContext(TeamStateContext);
 
   const [title, setTitle] = useState(teamData.teamName);
   const [links, setLinks] = useState([
     { tool: "notion", link: teamData.notionLink },
     { tool: "github", link: teamData.githubLink },
   ]);
-  const [selectedMember, setSelectedMember] = useState(
-    teamData.teamMemberInfo.find((member) => member.position === "Team_Leader")
-      .userId
-  );
+  const [selectedMember, setSelectedMember] = useState();
 
   const nav = useNavigate();
   const loginUserId = localStorage.getItem("user")
@@ -32,15 +30,25 @@ const UpdateProj = () => {
   const linkRef2 = useRef();
 
   useEffect(() => {
-    if (
-      teamData.teamMemberInfo.find(
-        (member) => member.position === "Team_Leader"
-      ).userId !== loginUserId
-    ) {
-      alert("팀장만 접근 가능한 페이지입니다.");
-      nav(`/teamboard/?team=${teamId}`);
+    if (!loading) {
+      if (isLeader(teamData.teamMemberInfo, loginUserId) === false) {
+        alert("팀장만 접근 가능한 페이지입니다.");
+        nav(`/teamboard/?team=${teamId}`, { replace: true });
+        return;
+      }
+      setSelectedMember(
+        teamData.teamMemberInfo.find(
+          (member) => member.position === "Team_Leader"
+        ).userId
+      );
+      setTitle(teamData.teamName);
+      setLinks([
+        { tool: "notion", link: teamData.notionLink },
+        { tool: "github", link: teamData.githubLink },
+      ]);
+      console.log(teamData);
     }
-  });
+  }, [loading]);
 
   const onFocusElement = (ref) => {
     if (ref.current) {

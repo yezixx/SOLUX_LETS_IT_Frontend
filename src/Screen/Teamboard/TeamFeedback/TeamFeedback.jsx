@@ -6,7 +6,10 @@ import FeedbackFormItem from "./FeedbackFormItem/FeedbackFormItem";
 import styles from "./TeamFeedback.module.css";
 import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { useNavigate } from "react-router-dom";
-import { getEvaluatedList } from "../../../service/teamService";
+import {
+  checkTeamCompleted,
+  getEvaluatedList,
+} from "../../../service/teamService";
 import Loading from "../../../Components/Loading/Loading";
 
 const getMembersExcludingSelf = (loginUserId, members) => {
@@ -51,26 +54,43 @@ const TeamFeedback = () => {
 
   console.log(feedbackData);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await getEvaluatedList(teamId, loginUserId);
-        setEvaluatedList(response.data);
-        console.log("evaluatedList", response.data);
-      } catch (error) {
-        console.error("Error fetching evaluated member list", error);
-        alert("평가한 팀원 목록을 불러오는데 실패했습니다.");
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchEvaluatedListData = async () => {
+    try {
+      const response = await getEvaluatedList(teamId, loginUserId);
+      setEvaluatedList(response.data);
+    } catch (error) {
+      console.error("Error fetching evaluated member list", error);
+      alert("평가한 팀원 목록을 불러오는데 실패했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    // 초기 데이터 로드
-    fetchData();
+  const fetchIsTeamCompleted = async () => {
+    try {
+      const response = await checkTeamCompleted(teamId);
+      console.log("isTeamCompleted", response.data);
+      if (!response.data) {
+        alert("팀 프로젝트가 완료되지 않았습니다.");
+        nav(-1, { replace: true });
+      }
+    } catch (error) {
+      console.error("Error fetching team completed", error);
+      alert("팀 완료 여부를 불러오는데 실패했습니다.");
+    }
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      // 백엔드 데이터 처리될 때까지 대기
+      // 초기 데이터 로드
+      fetchIsTeamCompleted();
+      fetchEvaluatedListData();
+    }, 1000);
 
     // 폴링 설정
     if (!pollingInterval) {
-      const interval = setInterval(fetchData, 5000); // 5초마다 데이터 요청
+      const interval = setInterval(fetchEvaluatedListData, 5000); // 5초마다 데이터 요청
       setPollingInterval(interval);
     }
 
@@ -81,7 +101,7 @@ const TeamFeedback = () => {
         setPollingInterval(null);
       }
     };
-  }, [feedbackData, pollingInterval, teamId, loginUserId]);
+  }, [teamId, loginUserId]);
 
   const onChangePromise = (value) => {
     setFeedback({

@@ -10,9 +10,6 @@ import { getLogoImage } from "../../../util/getLogoImage";
 
 const ProjInfo = () => {
   const { teamData, teamId } = useContext(TeamStateContext);
-  const loginUserId = localStorage.getItem("user")
-    ? JSON.parse(localStorage.getItem("user")).userId
-    : null;
 
   const notion = teamData.notionLink;
   const github = teamData.githubLink;
@@ -20,15 +17,6 @@ const ProjInfo = () => {
   const nav = useNavigate();
 
   const navigateToManage = () => {
-    if (
-      loginUserId !==
-      teamData.teamMemberInfo.find(
-        (member) => member.position === "Team_Leader"
-      ).userId
-    ) {
-      alert("팀장만 접근가능합니다.");
-      return;
-    }
     nav(`/teamboard/manage/?team=${teamId}`);
   };
 

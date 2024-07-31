@@ -116,17 +116,16 @@ const Teamboard = () => {
     setLoading(true);
     try {
       const data = await getTeam(teamId);
-      teamDispatch({
+      await teamDispatch({
         type: "GET",
         data: data.data,
       });
-      setLoading(false);
-
-      if (!isMember(teamData, loginUserId)) {
+      if (!isMember(data.data, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
-        nav("/");
+        nav(-1);
         return;
       }
+      setLoading(false);
     } catch (error) {
       console.log("teamboard error", error);
       alert("팀 정보를 불러오는 중 오류가 발생했습니다.");
@@ -137,7 +136,7 @@ const Teamboard = () => {
   const fetchScheduleData = async () => {
     try {
       const data = await getSchedule(teamId);
-      scheduleDispatch({
+      await scheduleDispatch({
         type: "GET_EVENT",
         data: data.data,
       });
@@ -147,8 +146,11 @@ const Teamboard = () => {
   };
 
   useEffect(() => {
-    fetchScheduleData();
-    fetchTeamData();
+    const initializeData = async () => {
+      await fetchTeamData();
+      await fetchScheduleData();
+    };
+    initializeData();
   }, []);
 
   const kickIdRef = useRef(1);
@@ -380,6 +382,7 @@ const Teamboard = () => {
           meetingData,
           kickData,
           teamId,
+          loading,
         }}
       >
         <TeamDispatchContext.Provider
