@@ -1,9 +1,9 @@
 import apiClient from "./apiClient";
 
 // 프로필 조회
-export const getProfile = async (userId) => {
+export const getProfile = async () => {
   try {
-    const response = await apiClient.get(`profile/${userId}`);
+    const response = await apiClient.get(`profile/my`);
     return response.data; //성공메세지 반환
   } catch (error) {
     console.error("Error fetching profile:", error);
@@ -42,5 +42,16 @@ export const saveProfileImage = async (userId, imageFile) => {
   } catch (error) {
     console.error("Error saving profile image:", error);
     throw error;
+  }
+};
+
+//지원자 프로필 조회
+export const getApplyProfile = async (userId) => {
+  try {
+    const response = await apiClient.get(`profile/${userId}`);
+    return response.data; //성공메세지 반환
+  } catch (error) {
+    console.error("Error fetching applicant list:", error);
+    throw error; // 에러를 다시 throw하여 호출자에게 전달합니다.
   }
 };

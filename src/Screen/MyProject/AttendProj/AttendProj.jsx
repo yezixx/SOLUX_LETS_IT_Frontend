@@ -1,8 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import ProjectBtn from "../../../Components/Project_Button/ProjectBtn";
+import ProjectBtn from "../../../Components/Project_Button/PortfolioBtn";
 import styles from "./AttendProj.module.css";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../atoms/atoms";
 import { useEffect, useState } from "react";
 import {
   getCompleteProjects,
@@ -22,9 +20,7 @@ const OngoingProj = () => {
     //진행 중인 프로젝트
     getMyOngoingProjects()
       .then((res) => {
-        // console.log(`getMyAttendProjects에서 가져온 data : ${res}`);
-        // console.log(JSON.stringify(res, null, 2));
-        setOngoingProj(res.projects);
+        setOngoingProj(res.data);
       })
       .catch((error) => console.log(error));
     //완료한 프로젝트
@@ -32,13 +28,11 @@ const OngoingProj = () => {
       .then((res) => {
         // console.log(`completeProject 가져온 data : ${res}`);
         // console.log(JSON.stringify(res, null, 2));
-        setCompleteProj(res.projects);
+        console.log(res.data);
+        setCompleteProj(res.data);
       })
       .catch((error) => console.log(error));
   }, []);
-
-  console.log(JSON.stringify(ongoingProj, null, 2)); // 받아온 data 확인
-  console.log(JSON.stringify(completeProj, null, 2)); // 받아온 data 확인
 
   return (
     <div className={styles.ongoingProj__contWrap}>
@@ -53,13 +47,15 @@ const OngoingProj = () => {
           {ongoingProj.map((project) => (
             <div key={project.teamId} className={styles.ongoingProj__cont}>
               <ProjectBtn
-                onClick1={() => naviagateTo("/teamboard")}
+                onClick1={() =>
+                  naviagateTo(`/teamboard/?team=${project.teamId}`)
+                }
                 onClick2={() =>
-                  naviagateTo(`/mypage/portfolio/${project.teamId}`)
+                  naviagateTo(`/mypage/portfolio/board/${project.teamId}`)
                 }
                 button1Text="팀 게시판"
                 button2Text="포트폴리오"
-                project={project}
+                prjTitle={project.prjTitle}
               />
             </div>
           ))}
@@ -73,7 +69,7 @@ const OngoingProj = () => {
         <div className={styles.attendProj__container}>
           {completeProj.map((project) => (
             <div key={project.teamId} className={styles.ongoingProj__cont}>
-              <ProjectBtn buttonShow={false} project={project} />
+              <ProjectBtn buttonShow={false} prjTitle={project.prjTitle} />
             </div>
           ))}
         </div>

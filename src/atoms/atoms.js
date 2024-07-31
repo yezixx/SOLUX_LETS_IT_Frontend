@@ -19,7 +19,7 @@ export const postProjectAtom = atom({
   stack: [],
   difficulty: "",
   onOff: "",
-  regionId: 0,
-  subRegionId: 0,
+  regionId: 17,
+  subRegionId: 1701,
   categoryId: [],
 });

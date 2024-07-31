@@ -2,11 +2,12 @@ import { useAtom, useAtomValue } from "jotai";
 import { postProjectAtom, userIdAtom } from "../../atoms/atoms";
 import { createPosts } from "../../service/postService";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const useProjectPost = () => {
   const [postProj, setPostProj] = useAtom(postProjectAtom);
   const [errors, setErrors] = useState({});
-  const userId = useAtomValue(userIdAtom);
+  const navigate = useNavigate();
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -25,14 +26,21 @@ const useProjectPost = () => {
     const newErrors = {};
     Object.keys(postProj).forEach((key) => {
       if (
-        //비대면일 경우엔 regionId, subRegionId 검사 패스
         postProj["onOff"] === "비대면" &&
-        (key === "regionId" || key === "subRegionId") &&
-        postProj[key] === 0
+        (key === "regionId" || key === "subRegionId")
       ) {
+        // 비대면일 때는 regionId와 subRegionId의 값을 무시
+        if (postProj[key] === null) {
+          return;
+        }
       } else if (
         (key === "stack" || key === "categoryId") &&
-        postProj[key].length === 0
+        postProj[key]?.length === 0
+      ) {
+        newErrors[key] = true;
+      } else if (
+        (key === "regionId" || key === "subRegionId") &&
+        (postProj[key] === 17 || postProj[key] === 1701)
       ) {
         newErrors[key] = true;
       } else if (postProj[key] === "" || !postProj[key]) {
@@ -56,9 +64,14 @@ const useProjectPost = () => {
     if (validateForm()) {
       if (warning()) {
         createPosts(postProj)
-          .then((res) => console.log(`반환 : ${res}`))
+          .then((res) => {
+            console.log(`반환 : ${res}`);
+            alert("제출되었습니다.");
+            navigate("/myproj/hiring-and-applied");
+          })
           .catch((error) => {
             console.log(error);
+            alert("에러가 발생했습니다. 다시 시도해 주세요,.");
           });
       } else {
         alert("취소되었습니다");

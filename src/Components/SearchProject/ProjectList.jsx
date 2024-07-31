@@ -9,7 +9,7 @@ import BookmarkIcon from "../../Image/Icons/BookmarkIcon.jsx";
 
 function ProjectList({ projects }) {
   const nav = useNavigate();
-  
+
   // 스크랩 상태 관리
   const [savedProjects, setSavedProjects] = useState({});
 
@@ -31,7 +31,7 @@ function ProjectList({ projects }) {
   const handleSaveClick = (postId) => {
     setSavedProjects((prevSavedProjects) => ({
       ...prevSavedProjects,
-      [postId]: !prevSavedProjects[postId]
+      [postId]: !prevSavedProjects[postId],
     }));
   };
 
@@ -41,7 +41,9 @@ function ProjectList({ projects }) {
         <div
           className={styles.projectItem}
           key={project.postId}
-          onClick={() => { nav(`/projects/detail/${project.postId}`) }}
+          onClick={() => {
+            nav(`/projects/detail/${project.postId}`);
+          }}
         >
           {/*제목 + 정보 + 상세내용 + 버튼 */}
 
@@ -53,22 +55,26 @@ function ProjectList({ projects }) {
           <div className={styles.projectInfo}>
             <div>
               <div className={styles.projectPeriod}>
-                기간 | {project.projectPeriod}
+                <span>기간</span> <span> | </span>
+                {project.projectPeriod}
               </div>
             </div>
             <div>
               <div className={styles.projectLocation}>
-                지역 | {project.region} {project.subRegion}
+                <span>지역</span> <span> | </span> {project.region}{" "}
+                {project.subRegion}
               </div>
             </div>
             <div>
               <div className={styles.projectLocation}>
-                방식 | {project.onOff}
+                <span>방식</span> <span> | </span>
+                {project.onOff}
               </div>
             </div>
             <div>
               <div className={styles.projectDifficulty}>
-                난이도 | {project.difficulty}
+                <span>난이도</span> <span> | </span>
+                {project.difficulty}
               </div>
             </div>
           </div>
@@ -87,22 +93,23 @@ function ProjectList({ projects }) {
             </div>
           </div>
 
-       
-            <Link to={`/apply/${project.postId}`}>
-              <Button text="신청하기" />
-            </Link>
-            <button
-              className={styles.save}
-              onClick={(e) => {
-                e.stopPropagation(); // 클릭 이벤트가 부모에 전달되지 않도록 함
-                handleSaveClick(project.postId);
-              }}
-            >
-              {savedProjects[project.postId] ?<BookmarkIcon width="30px" height="30px" isBookmark={true} />: <BookmarkIcon width="30px" height="30px" isBookmark={false} />
-              }
-            </button>
-          </div>
-      
+          <Link to={`/apply/${project.postId}`}>
+            <Button text="신청하기" />
+          </Link>
+          <button
+            className={styles.save}
+            onClick={(e) => {
+              e.stopPropagation(); // 클릭 이벤트가 부모에 전달되지 않도록 함
+              handleSaveClick(project.postId);
+            }}
+          >
+            {savedProjects[project.postId] ? (
+              <BookmarkIcon width="30px" height="30px" isBookmark={true} />
+            ) : (
+              <BookmarkIcon width="30px" height="30px" isBookmark={false} />
+            )}
+          </button>
+        </div>
       ))}
       <Paging
         activePage={activePage}

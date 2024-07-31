@@ -52,7 +52,7 @@ export const useProjInfo = () => {
   useEffect(() => {
     setPostProj((prevData) => ({
       ...prevData,
-      subRegionId: 0, // subRegionId를 0으로 초기화
+      subRegionId: 1701, // subRegionId를 1701로 초기화
     }));
   }, [selectedArea, setPostProj]);
 

@@ -6,11 +6,12 @@ import {
 } from "../../../../service/applyService";
 
 const useApplicant = (postId) => {
-  /*구인/신청 프로젝트 리스트를 담아올 atom 설정 */
+  /*구인/신청 프로젝트 -> 신청자 리스트를 담아올 atom 설정 */
   const [applicantList, setApplicantList] = useState([]);
   useEffect(() => {
     getApplicantList(postId) // 가져오는 프로젝트 data에 따라 매개변수를 바꿔야 함
       .then((data) => {
+        console.log(data);
         setApplicantList(data.data);
       })
       .catch((error) => {
@@ -28,15 +29,36 @@ const useApplicant = (postId) => {
     if (isConfirmed)
       if (isApprove) {
         /*수락 시 */
-        alert("승인되었습니다.");
+
         approveApply(postId, applyId)
-          .then((res) => console.log(res))
+          .then((res) => {
+            alert("승인되었습니다.");
+            //applicantList 리렌더링
+            getApplicantList(postId) // 가져오는 프로젝트 data에 따라 매개변수를 바꿔야 함
+              .then((data) => {
+                console.log(data);
+                setApplicantList(data.data);
+              })
+              .catch((error) => {
+                console.error("Applicant list fetch error:", error);
+              });
+          })
           .catch((error) => console.log(error.response));
       } else {
         /*거절 시 */
-        alert("거절되었습니다.");
         rejectApply(postId, applyId)
-          .then((res) => console.log(res))
+          .then(() => {
+            alert("거절되었습니다.");
+            //applicantList 리렌더링
+            getApplicantList(postId) // 가져오는 프로젝트 data에 따라 매개변수를 바꿔야 함
+              .then((data) => {
+                console.log(data);
+                setApplicantList(data.data);
+              })
+              .catch((error) => {
+                console.error("Applicant list fetch error:", error);
+              });
+          })
           .catch((error) => console.log(error.response));
       }
   };

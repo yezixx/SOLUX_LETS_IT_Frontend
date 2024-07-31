@@ -47,6 +47,7 @@ const CreateBoard = () => {
     approveApplicants(postId)
       .then((res) => {
         setApplicantsList(res.data);
+        console.log(res);
         if (res.data.length === 0) {
           alert("팀원이 없습니다. 팀원을 추가해주세요.");
           nav("/");

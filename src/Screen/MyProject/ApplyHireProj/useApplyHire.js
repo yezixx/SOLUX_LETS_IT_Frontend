@@ -4,6 +4,8 @@ import {
   getMyProjects,
 } from "../../../service/projectService";
 import { completePosts, deletePosts } from "../../../service/postService";
+import { useNavigate } from "react-router-dom";
+import { approveApplicants } from "../../../service/applyService";
 
 export const useApplyHire = () => {
   // 클릭하면 팀원을 보여주도록 state 설정
@@ -13,7 +15,7 @@ export const useApplyHire = () => {
   const [applyProj, setApplyProj] = useState([]);
   // 팀원 data를 담을 state
   const [, setMemberList] = useState([]);
-
+  const navigate = useNavigate();
   // 프로젝트 리스트 db에서 갖고 와서 hireProj 저장
   useEffect(() => {
     getMyProjects()
@@ -62,11 +64,12 @@ export const useApplyHire = () => {
           alert("마감되었습니다");
           // 팀게시판 생성 navigate 추가해야 함
           console.log(`모집 마감 성공`);
+          navigate(`/teamboard/new?post=${postId}`);
           // 모집 마감 후 프로젝트 목록을 새로 가져오기
           return getMyProjects();
         })
         .then((res) => {
-          setHireProj(res.projects);
+          setHireProj(res.data);
         })
         .catch((error) => {
           console.log("모집 마감 처리 오류:", error);
@@ -89,7 +92,7 @@ export const useApplyHire = () => {
           return getMyProjects();
         })
         .then((res) => {
-          setHireProj(res.projects);
+          setHireProj(res.data);
         })
         .catch((error) => {
           console.log("구인글 삭제 오류:", error);

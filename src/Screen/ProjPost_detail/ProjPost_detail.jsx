@@ -73,7 +73,7 @@ const ProjPost_detail = () => {
         console.log(res.data.comments);
       })
       .catch((error) => {
-        console.log("post detail error(ProjPost_Datil.jsx): ", error);
+        console.log("post detail error(ProjPost_Detail.jsx): ", error);
         alert("게시글을 불러오는데 실패했습니다.");
         nav(-1);
       });

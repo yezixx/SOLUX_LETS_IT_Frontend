@@ -4,8 +4,8 @@ const BookmarkIcon = ({ width = "30px", height = "30px", isBookmark }) => {
       xmlns="http://www.w3.org/2000/svg"
       fill={isBookmark ? "#FFD600" : "transparent"}
       viewBox="0 0 24 24"
-      strokeWidth={1.5}
-      stroke={isBookmark ? "#FFD600" : "var(--text-color1)"}
+      strokeWidth={1}
+      stroke={isBookmark ? "#FFD600" : "var(--line-color)"}
       className="size-6"
       width={width}
       height={height}

@@ -13,7 +13,11 @@ const ProfilePhoto = ({ type, src }) => {
           }`}
         />
       ) : (
-        <div className={styles.myProfile__photo__circle}>
+        <div
+          className={`${styles.myProfile__photo__circle} ${
+            styles[`myProfile__photo__circle--${type}`]
+          }`}
+        >
           <ProfileDefaultPhoto />
         </div>
       )}

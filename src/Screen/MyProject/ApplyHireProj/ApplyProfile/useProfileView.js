@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { getApply } from "../../../../service/applyService";
-import { getProfile } from "../../../../service/profileService";
+import { getApplyProfile } from "../../../../service/profileService";
 
 //프로필 + 지원서 db 가져오는 훅
 const useProfileView = (applyId) => {
   //db받아올 state설정 (해당 페이지에서만 이용, 전역x)
   const [applicantView, setApplicantView] = useState({});
   const [profileView, setProfileView] = useState({});
+  console.log(applicantView);
   useEffect(() => {
     //지원서 db 호출
     getApply(applyId)
@@ -18,9 +19,10 @@ const useProfileView = (applyId) => {
   useEffect(() => {
     //프로필 db 호출,  applicantView가 호출된 이후 가능
     if (applicantView) {
-      getProfile(applicantView.userId)
+      getApplyProfile(applicantView.userId)
         .then((res) => {
-          setProfileView(res);
+          setProfileView(res.data);
+          console.log(res.data);
         })
         .catch((error) => {
           console.log(error);
