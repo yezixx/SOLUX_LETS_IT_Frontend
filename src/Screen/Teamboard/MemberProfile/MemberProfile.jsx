@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Profile from "../../../Components/Profile/Profile";
 import styles from "./MemberProfile.module.css";
 import { useEffect, useState } from "react";
@@ -26,7 +26,8 @@ import { getApplyProfile } from "../../../service/profileService";
 // };
 
 const MemberProfile = () => {
-  const userId = useParams().userId;
+  const location = useLocation();
+  const { userId } = location.state;
   const [user, setUser] = useState({});
 
   const fetchUser = async () => {

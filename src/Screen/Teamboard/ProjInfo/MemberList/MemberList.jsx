@@ -12,7 +12,7 @@ const MemberList = () => {
   const nav = useNavigate();
 
   const onClickMemberItem = (userId) => {
-    nav(`/teamboard/member/profile/${userId}/?team=${teamId}`);
+    nav(`/teamboard/member/profile/?team=${teamId}`, { state: { userId } });
   };
 
   return (
@@ -23,9 +23,9 @@ const MemberList = () => {
             key={index}
             memberName={member.userName}
             memberId={member.userId}
-            profilePic={member.profile_image_url}
+            profilePic={member.profileImage}
             onClick={() => {
-              onClickMemberItem(member.userName);
+              onClickMemberItem(member.userId);
             }}
             isLeader={isLeader(members, member.userId) ? "LEADER" : ""}
           />
