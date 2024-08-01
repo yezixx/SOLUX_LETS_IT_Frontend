@@ -124,7 +124,7 @@ const ReportSection = ({ onReport }) => {
             key={index}
             memberName={member.userName}
             memberId={member.userId}
-            profilePic={member.profile_image_url}
+            profilePic={member.profileImageUrl}
             onClick={() => onClickMemberItem(member.userId)}
             type={`${selectedMemberId === member.userId ? "SELECTED" : ""}`}
           />

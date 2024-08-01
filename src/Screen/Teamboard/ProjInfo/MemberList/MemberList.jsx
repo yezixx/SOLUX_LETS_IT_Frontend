@@ -8,6 +8,7 @@ import { isLeader } from "../../isLeader";
 const MemberList = () => {
   const { teamData, teamId } = useContext(TeamStateContext);
   const members = teamData.teamMemberInfo;
+  console.log(members);
 
   const nav = useNavigate();
 
@@ -23,7 +24,7 @@ const MemberList = () => {
             key={index}
             memberName={member.userName}
             memberId={member.userId}
-            profilePic={member.profileImage}
+            profilePic={member.profileImageUrl}
             onClick={() => {
               onClickMemberItem(member.userId);
             }}

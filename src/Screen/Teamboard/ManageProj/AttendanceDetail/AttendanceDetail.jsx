@@ -99,6 +99,7 @@ const AttendanceDetail = () => {
                 <MemberItem
                   key={index}
                   memberName={member.userName}
+                  profilePic={member.profileImageUrl}
                   type="SELECTED"
                   onClick={() => {
                     onClickMember(member.userId);
@@ -108,6 +109,7 @@ const AttendanceDetail = () => {
                 <MemberItem
                   key={index}
                   memberName={member.userName}
+                  profilePic={member.profileImageUrl}
                   onClick={() => {
                     onClickMember(member.userId);
                   }}

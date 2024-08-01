@@ -17,6 +17,7 @@ const VoteSection = () => {
                 key={member.id}
                 userId={member.userId}
                 userName={member.name}
+                profilePic={member.profileImageUrl}
               />
             )
         )}

@@ -119,7 +119,7 @@ const ProfileForm = ({ init, onSaveProfileImage, navTo }) => {
     );
   };
 
-  const onClickSave = () => {
+  const onClickSave = async () => {
     if (nameRef.current.value === "") {
       onFocusElement(nameRef);
       return;
@@ -144,18 +144,10 @@ const ProfileForm = ({ init, onSaveProfileImage, navTo }) => {
         return;
       }
     }
-    try {
-      if (confirm("프로필 작성을 완료하시겠습니까?")) {
-        //nav("/");
-        console.log({
-          nickname: nickname,
-          bio: bio,
-          sns: links,
-          introduce: introduce,
-          skills: skills,
-          profileImage: selectPicRef.current.files[0],
-        });
-        updateProfile({
+
+    if (confirm("프로필 작성을 완료하시겠습니까?")) {
+      try {
+        await updateProfile({
           nickname: nickname,
           bio: bio,
           sns: {
@@ -170,13 +162,14 @@ const ProfileForm = ({ init, onSaveProfileImage, navTo }) => {
             [skills[3].skillName]: skills[3].fluency,
           },
         });
-        if (selectPicRef.current.files[0] !== undefined)
+        if (selectPicRef.current.files[0] !== undefined) {
           onSaveProfileImage(kakaoId, selectPicRef.current.files[0]);
+        }
         navTo();
+      } catch (error) {
+        console.log(error);
+        alert("프로필 작성에 실패했습니다.");
       }
-    } catch (e) {
-      console.log(e);
-      alert("프로필 작성에 실패했습니다.");
     }
   };
 

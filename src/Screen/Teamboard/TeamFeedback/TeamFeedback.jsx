@@ -50,7 +50,7 @@ const TeamFeedback = () => {
 
   const membersExcludingSelf = getMembersExcludingSelf(loginUserId, members);
 
-  const [pollingInterval, setPollingInterval] = useState(null); // 폴링 간격을 관리할 상태
+  let pollingInterval = null; // 폴링 간격을 관리할 로컬 변수
 
   console.log(feedbackData);
 
@@ -90,15 +90,14 @@ const TeamFeedback = () => {
 
     // 폴링 설정
     if (!pollingInterval) {
-      const interval = setInterval(fetchEvaluatedListData, 5000); // 5초마다 데이터 요청
-      setPollingInterval(interval);
+      pollingInterval = setInterval(fetchEvaluatedListData, 5000); // 5초마다 데이터 요청
     }
 
     // 컴포넌트 언마운트 시 폴링 중지
     return () => {
       if (pollingInterval) {
         clearInterval(pollingInterval);
-        setPollingInterval(null);
+        pollingInterval = null;
       }
     };
   }, [teamId, loginUserId]);
@@ -211,6 +210,7 @@ const TeamFeedback = () => {
             <MemberItem
               key={index}
               memberName={member.userName}
+              profilePic={member.profileImageUrl}
               type={
                 isCompletedMember(member.userId, evaluatedList)
                   ? "COMPLETED"

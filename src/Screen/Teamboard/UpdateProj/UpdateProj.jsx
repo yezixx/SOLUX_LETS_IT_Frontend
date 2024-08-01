@@ -151,14 +151,21 @@ const UpdateProj = () => {
                   key={index}
                   onClick={() => setSelectedMember(member.userId)}
                 >
-                  <MemberItem memberName={member.userName} type="SELECTED" />
+                  <MemberItem
+                    memberName={member.userName}
+                    profilePic={member.profileImageUrl}
+                    type="SELECTED"
+                  />
                 </div>
               ) : (
                 <div
                   key={index}
                   onClick={() => setSelectedMember(member.userId)}
                 >
-                  <MemberItem memberName={member.userName} />
+                  <MemberItem
+                    memberName={member.userName}
+                    profilePic={member.profileImageUrl}
+                  />
                 </div>
               )
             )}
