@@ -1,8 +1,6 @@
 import { createContext, useEffect, useReducer, useRef, useState } from "react";
 import styles from "./Teamboard.module.css";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
-import { useAtomValue } from "jotai";
-import { isLoginAtom, userIdAtom } from "../../atoms/atoms";
 import {
   createSchedule,
   delegateTeamLeader,
@@ -93,7 +91,9 @@ const isMember = (teamData, loginUserId) => {
 
 const Teamboard = () => {
   const [loading, setLoading] = useState(true);
-  const loginUserId = useAtomValue(userIdAtom);
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const [params] = useSearchParams();
   const teamId = params.get("team");
@@ -116,28 +116,27 @@ const Teamboard = () => {
     setLoading(true);
     try {
       const data = await getTeam(teamId);
-      teamDispatch({
+      await teamDispatch({
         type: "GET",
         data: data.data,
       });
-      setLoading(false);
-
-      if (!isMember(teamData, loginUserId)) {
+      if (!isMember(data.data, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
-        nav("/");
+        nav(-1, { replace: true });
         return;
       }
+      setLoading(false);
     } catch (error) {
       console.log("teamboard error", error);
       alert("팀 정보를 불러오는 중 오류가 발생했습니다.");
-      nav(-1);
+      nav(-1, { replace: true });
     }
   };
 
   const fetchScheduleData = async () => {
     try {
       const data = await getSchedule(teamId);
-      scheduleDispatch({
+      await scheduleDispatch({
         type: "GET_EVENT",
         data: data.data,
       });
@@ -147,8 +146,11 @@ const Teamboard = () => {
   };
 
   useEffect(() => {
-    fetchScheduleData();
-    fetchTeamData();
+    const initializeData = async () => {
+      await fetchTeamData();
+      await fetchScheduleData();
+    };
+    initializeData();
   }, []);
 
   const kickIdRef = useRef(1);
@@ -380,6 +382,7 @@ const Teamboard = () => {
           meetingData,
           kickData,
           teamId,
+          loading,
         }}
       >
         <TeamDispatchContext.Provider

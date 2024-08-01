@@ -14,11 +14,13 @@ import {
   deleteComment,
   updateComment,
 } from "../../service/commentService";
+import { getProfile } from "../../service/profileService";
 
 const ProjPost_detail = () => {
-  // const loginUserId = useAtomValue(userIdAtom);
-  const user = JSON.parse(localStorage.getItem("user"));
-  const loginUserId = user.userId;
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
+  console.log(loginUserId);
   const [loading, setLoading] = useState(false);
   const [post, setPost] = useState({
     totalPersonnel: 0,
@@ -74,7 +76,7 @@ const ProjPost_detail = () => {
       .catch((error) => {
         console.log("post detail error(ProjPost_Detail.jsx): ", error);
         alert("게시글을 불러오는데 실패했습니다.");
-        nav(-1);
+        nav(-1, { replace: true });
       });
   }, []);
 
@@ -126,6 +128,11 @@ const ProjPost_detail = () => {
   };
 
   const onClickCreateComment = () => {
+    if (!loginUserId) {
+      alert("로그인이 필요한 서비스입니다.");
+      nav("/login");
+      return;
+    }
     if (commentInputRef.current.value === "") {
       commentInputRef.current.focus();
       return;
@@ -135,6 +142,22 @@ const ProjPost_detail = () => {
   };
 
   const onClickApply = () => {
+    if (!loginUserId) {
+      nav("/login");
+    }
+    try {
+      const response = getProfile();
+      const profile = response.data;
+      if (
+        profile.nickname === "" ||
+        profile.bio === "" ||
+        profile.selfIntro === ""
+      ) {
+        nav("/porofile/new", { state: { to: `/apply/${postId}` } });
+      }
+    } catch (error) {
+      console.log("error");
+    }
     nav(`/apply/${postId}`);
   };
 

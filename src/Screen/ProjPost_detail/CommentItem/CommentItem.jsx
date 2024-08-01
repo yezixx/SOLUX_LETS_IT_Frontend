@@ -5,8 +5,6 @@ import HeartIcon from "../../../Image/Icons/HeartIcon";
 import UserCircleIcon from "../../../Image/Icons/UserCircleIcon";
 import styles from "./CommentItem.module.css";
 import Button from "../../../Components/Button/Button";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../atoms/atoms";
 import { getFormattedDate } from "../getFormattedDate";
 
 const CommentItem = ({
@@ -21,7 +19,9 @@ const CommentItem = ({
   onDelete,
   onUpdate,
 }) => {
-  const loginUserId = useAtomValue(userIdAtom);
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const [isOpen, setIsOpen] = useState(false);
   const [isOnChange, setIsOnChange] = useState(false);
