@@ -65,7 +65,6 @@ const CreateBoard = () => {
   };
 
   const fetchPostInfo = async (postId) => {
-    setLoading(true);
     try {
       const response = await getPosts(postId);
       await setPostInfo(response.data);
@@ -82,9 +81,11 @@ const CreateBoard = () => {
   };
 
   useEffect(() => {
-    fetchApplicants(postId);
-    fetchPostInfo(postId);
-    console.log(applicantsList);
+    setLoading(true);
+    setTimeout(() => {
+      fetchApplicants(postId);
+      fetchPostInfo(postId);
+    }, 1000);
   }, []);
 
   const onFocusElement = (ref) => {
@@ -169,13 +170,14 @@ const CreateBoard = () => {
           {/*팀원 리스트 */}
           <div className={styles.createBoard__memberItem}>
             <div className={styles.createBoard__innerLabel}>팀원</div>
-            {applicantsList.map((member, index) => (
-              <MemberItem
-                key={index}
-                memberName={member.nickname}
-                profilePic={member.profileImage}
-              />
-            ))}
+            {!loading &&
+              applicantsList.map((member, index) => (
+                <MemberItem
+                  key={index}
+                  memberName={member.nickname}
+                  profilePic={member.profileImage}
+                />
+              ))}
           </div>
           {/*프로젝트명 */}
           <div className={styles.createBoard__projName}>

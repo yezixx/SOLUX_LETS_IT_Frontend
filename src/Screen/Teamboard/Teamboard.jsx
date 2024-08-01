@@ -373,7 +373,7 @@ const Teamboard = () => {
 
   return (
     <div className={styles.teamboard}>
-      {loading ? <Loading /> : null}
+      {loading && <Loading />}
       <TeamStateContext.Provider
         value={{
           teamData,

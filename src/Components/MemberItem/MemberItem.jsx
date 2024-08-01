@@ -7,7 +7,7 @@ const MemberItem = ({ memberName, profilePic, type, onClick, isLeader }) => {
   const [imgSrc, setImgSrc] = useState(
     profilePic ? profilePic : defaultProfilePic
   );
-  console.log(imgSrc);
+  console.log(profilePic);
   const handleImgError = () => {
     setImgSrc(defaultProfilePic);
   };
