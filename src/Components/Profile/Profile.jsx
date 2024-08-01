@@ -10,11 +10,11 @@ import Tier_B from "../../assets/Tier/tier_B.svg?react";
 import Tier_C from "../../assets/Tier/tier_C.svg?react";
 import Tier_F from "../../assets/Tier/tier_F.svg?react";
 import Tier_S from "../../assets/Tier/tier_S.svg?react";
+import Loading from "../Loading/Loading.jsx";
 
 const Profile = ({ user, type, tooltipShow = false }) => {
-  console.log(user);
   if (!user) {
-    return <div>loading</div>;
+    return <Loading />;
   }
   const tier = user.mannerTier; //B
 

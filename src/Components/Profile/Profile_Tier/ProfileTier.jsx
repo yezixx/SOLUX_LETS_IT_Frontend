@@ -21,7 +21,7 @@ const ProfileTier = ({ tierScore, tooltipShow }) => {
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <QuestionMarkIcon width="15px" height="15px" />
+          {tooltipShow && <QuestionMarkIcon width="15px" height="15px" />}
         </div>
         {/*물음표 표시, hover 시 tooltip 생성 */}
         <div

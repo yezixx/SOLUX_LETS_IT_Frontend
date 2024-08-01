@@ -2,13 +2,28 @@ import React from "react";
 import styles from "./ProjectList.module.css";
 import Stack from "../SearchProject/GrayBox";
 import { useNavigate } from "react-router-dom";
-/*db 배열자체를 projects로 보내줄 것 */
-/*객체의 key 값을 백엔드와 맞출 필요 있음 */
+
 function ProjectList({ project }) {
-  //백엔드 없을 경우 null이 되도록 설정 (오류화면 방지)
   const nav = useNavigate();
 
-  console.log(project);
+  // 시간을 상대적인 표현으로 변환하는 함수
+  const formatTimeAgo = (createdAt) => {
+    const now = new Date();
+    const createdDate = new Date(createdAt);
+    const diffInMs = now - createdDate;
+    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+    const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes}분 전`;
+    } else if (diffInHours < 24) {
+      return `${diffInHours}시간 전`;
+    } else {
+      return `${diffInDays}일 전`;
+    }
+  };
+
   return (
     <div className={styles.projectList}>
       {project && (
@@ -30,9 +45,11 @@ function ProjectList({ project }) {
             </div>
             {/*프로젝트 세부사항 */}
             <div className={styles.projectlist__content}>
+              {/* 프로젝트 제목 */}
               <div className={styles.projectTitle}>
                 <div>{project.title}</div>
               </div>
+              {/* 프로젝트 기간 */}
               <div>
                 <div className={styles.projectPeriod}>
                   <span>기간 </span>
@@ -40,6 +57,7 @@ function ProjectList({ project }) {
                   {project.projectPeriod}
                 </div>
               </div>
+              {/* 프로젝트 지역 */}
               <div>
                 <div className={styles.projectLocation}>
                   {project.regionId === "대면" && (
@@ -50,17 +68,23 @@ function ProjectList({ project }) {
                   )}
                 </div>
               </div>
+              {/* 프로젝트 방식 */}
               <div>
                 <div className={styles.projectLocation}>
                   <span>방식</span> <span>| </span>
                   {project.onoff}
                 </div>
               </div>
+              {/* 프로젝트 난이도 */}
               <div>
                 <div className={styles.projectDifficulty}>
                   <span> 난이도</span>
                   <span> | </span> {project.difficulty}
                 </div>
+              </div>
+              {/* 프로젝트 생성 시간 */}
+              <div className={styles.timeAgo}>
+                <span>{formatTimeAgo(project.createdAt)}</span>
               </div>
             </div>
           </div>

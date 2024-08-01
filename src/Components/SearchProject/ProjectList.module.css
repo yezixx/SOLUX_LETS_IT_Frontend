@@ -72,3 +72,9 @@
   gap: 10px;
   width: 600px;
 }
+
+.timeAgo {
+  font-size: 13px;
+  color: var(--text-color2);
+  align-self: flex-end;
+}

@@ -2,29 +2,37 @@ import React, { useState, useEffect } from "react";
 import ProjectList from "../../../Components/ProjectList/ProjectList";
 import styles from "./RecommendProject.module.css";
 import { getPostsList } from "../../../service/postService";
+import Loading from "../../../Components/Loading/Loading";
 
 function RecommendProject() {
   const [projList, setProjList] = useState([]);
   const [sortedList, setSortedList] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchProjects = async () => {
       try {
         const data = await getPostsList();
-        setProjList(data);
+        setProjList(data.data);
       } catch (error) {
         console.error("Error fetching projects:", error);
       }
     };
-
     fetchProjects();
   }, []);
   useEffect(() => {
     if (projList.length > 0) {
       const sorted = [...projList].sort((a, b) => b.viewCount - a.viewCount);
       setSortedList(sorted);
+      setLoading(false);
+    } else {
+      //프로젝트 리스트가 없을 경우
+      setLoading(false);
     }
   }, [projList]);
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className={styles.recommendproj}>

@@ -3,13 +3,11 @@ import Button from "../../../Components/Button/Button.jsx";
 import Profile from "../../../Components/Profile/Profile.jsx";
 import { useEffect, useState } from "react";
 import { getProfile } from "../../../service/profileService.js";
+import { useNavigate } from "react-router-dom";
 
 const MyProfile = () => {
   const [profileData, setProfileData] = useState(null);
-  //로컬스토리지에서 user, userId 갖고 옴
-  const user = localStorage.getItem("user");
-  const userId = JSON.parse(user).userId;
-  console.log(user);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getProfile()
@@ -25,7 +23,7 @@ const MyProfile = () => {
       {/*프로필 */}
       <Profile user={profileData} tooltipShow={true} />
       {/*수정 버튼 */}
-      <Button text="수정" />
+      <Button text="수정" onClick={() => navigate("/profile/new")} />
     </div>
   );
 };
