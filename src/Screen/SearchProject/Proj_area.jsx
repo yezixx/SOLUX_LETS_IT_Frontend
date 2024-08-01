@@ -4,6 +4,7 @@ import styles from "./Proj_area.module.css";
 import Area from "../../Components/SearchProject/Area";
 import SearchProjectNav from "../../Components/SearchProject/SearchProjectNav.jsx"
 import { AreaProvider } from "../../Hooks/useArea.jsx";
+import { FilterProvider } from "../../Components/SearchProject/FilterContext.jsx";
 
 const sidenavCont = [
   "전체 프로젝트",
@@ -21,7 +22,7 @@ const links = [
 ];
 
 const Proj_area = () => {
-  return (
+  return ( 
     <div>
       <div className={styles.searchp}>
         <RouteName route={route} />
@@ -29,10 +30,10 @@ const Proj_area = () => {
           <div className={styles.sidenav}>
             <SideNav content={sidenavCont} link={links} />
           </div>
-          <AreaProvider><div className={styles.mainContent}>
+          <FilterProvider><AreaProvider><div className={styles.mainContent}>
             <Area />
             <SearchProjectNav/>
-          </div></AreaProvider>
+          </div></AreaProvider></FilterProvider>
         </div>
       </div>
     </div>

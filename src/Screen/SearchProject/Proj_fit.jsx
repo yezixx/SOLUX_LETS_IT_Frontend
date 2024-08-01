@@ -5,6 +5,7 @@ import Area from "../../Components/SearchProject/Area.jsx"
 import Field from "../../Components/SearchProject/Field.jsx"
 import SearchProjectNav from "../../Components/SearchProject/SearchProjectNav.jsx"
 import { AreaProvider } from "../../Hooks/useArea.jsx";
+import { FilterProvider } from "../../Components/SearchProject/FilterContext.jsx";
 
 const sidenavCont = [
   "전체 프로젝트",
@@ -30,9 +31,9 @@ const Proj_fit = () => {
           <div className={styles.sidenav}>
             <SideNav content={sidenavCont} link={links} />
           </div>
-          <AreaProvider><div className={styles.mainContent}><Area/><Field/>
+          <FilterProvider><AreaProvider><div className={styles.mainContent}><Area/><Field/>
 
-          <div className={styles.sp}><SearchProjectNav/></div></div></AreaProvider>
+          <div className={styles.sp}><SearchProjectNav/></div></div></AreaProvider></FilterProvider>
           
         </div>
       </div>

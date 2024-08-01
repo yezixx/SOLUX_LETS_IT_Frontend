@@ -1,14 +1,13 @@
-import { useSetAtom } from "jotai";
-import { useSearch } from "../../Hooks/useSearch";
-import SearchIcon from "../../Image/Icons/SearchIcon";
-import { Field } from "../../Screen/Field";
-import styles from "./SearchField.module.css";
-import { postProjectAtom } from "../../atoms/atoms";
-import { useEffect } from "react";
-import GrayBox from "../../Components/SearchProject/GrayBox";
-
+// components/SearchField.js
+import React, { useEffect } from 'react';
+import { useSetAtom } from 'jotai';
+import { useSearch } from '../../Hooks/useSearch';
+import SearchIcon from '../../Image/Icons/SearchIcon';
+import { Field } from '../../Screen/Field';
+import styles from './SearchField.module.css';
+import GrayBox from '../../Components/SearchProject/GrayBox';
+import { useFilter } from './FilterContext';
 const SearchField = () => {
-  /* 프로젝트 search 훅 */
   const {
     isFocus,
     handleFocus,
@@ -19,17 +18,12 @@ const SearchField = () => {
     data,
     tech,
   } = useSearch(Field);
-  
-  /* 백엔드에 보낼 데이터에 push */
-  const setPostProj = useSetAtom(postProjectAtom);
-  
+
+  const { setSelectedCategoryIds, setSelectedStacks } = useFilter();  // Context 사용
+
   useEffect(() => {
-    // tech가 변경될 시 백엔드에 보낼 데이터 재렌더링
-    setPostProj((prev) => ({
-      ...prev,
-      field: [...tech], // field 상태를 배열 형태로 저장
-    }));
-  }, [tech, setPostProj]);
+    setSelectedCategoryIds([...tech]);  // tech 데이터를 Context에 설정
+  }, [tech, setSelectedCategoryIds]);
 
   return (
     <div className={styles.projectHire__requiredStack}>
@@ -48,7 +42,6 @@ const SearchField = () => {
         </div>
         {isFocus && (
           <ul className={styles.projectHire__relatedSearch}>
-            {/* 미리 필터링된 데이터 중 일부만 연관검색어에 보여줌 */}
             {data.slice(0, 5).map((item, idx) => (
               <li
                 key={idx}
@@ -61,7 +54,6 @@ const SearchField = () => {
           </ul>
         )}
       </div>
-      {/* 만들어진 graybox wrap */}
       <div className={styles.projectHire__techWrap}>
         {tech.map((item) => (
           <GrayBox

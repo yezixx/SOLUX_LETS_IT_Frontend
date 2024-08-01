@@ -1,10 +1,17 @@
+// components/Area.js
 import React from 'react';
 import styles from './area.module.css';
 import { KoreaArea } from '../../Screen/KoreaArea';
 import useArea from '../../Hooks/useArea.jsx';
 
 const Area = () => {
-  const { selectedArea, selectedSubAreas, handleAreaClick, handleSubAreaClick } = useArea();
+  const {
+    selectedArea,
+    selectedSubAreas,
+    isSubAreaVisible,
+    handleAreaClick,
+    handleSubAreaClick,
+  } = useArea();
 
   return (
     <div className={styles.container}>
@@ -20,7 +27,7 @@ const Area = () => {
           </button>
         ))}
       </div>
-      {selectedArea && (
+      {selectedArea && isSubAreaVisible && (
         <div className={styles.subAreaContainer}>
           <h2>{selectedArea.name}</h2>
           <div>

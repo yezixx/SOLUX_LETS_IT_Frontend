@@ -3,6 +3,7 @@ import SideNav from "../../Components/SideNav/SideNav";
 import styles from "./SearchProject.module.css";
 import SearchProjectNav from "../../Components/SearchProject/SearchProjectNav";
 import { AreaProvider } from "../../Hooks/useArea.jsx";
+import { FilterProvider } from "../../Components/SearchProject/FilterContext.jsx";
 
 const sidenavCont = [
   "전체 프로젝트",
@@ -25,14 +26,14 @@ const SearchProject = () => {
     <div>
       <div className={styles.searchp}>
         <RouteName route={route} />
-        <AreaProvider><div className={styles.searchp__content}>
+        <FilterProvider><AreaProvider><div className={styles.searchp__content}>
           <div className={styles.sidenav}>
             <SideNav content={sidenavCont} link={links} />
           </div>
           <div className={styles.mainContent}>
             <SearchProjectNav />
           </div>
-        </div></AreaProvider>
+        </div></AreaProvider></FilterProvider>
       </div>
     </div>
   );

@@ -1,11 +1,11 @@
-import { useEffect } from "react";
-import SearchIcon from "../../Image/Icons/SearchIcon";
-import { Stack } from "../../Screen/Stack";
-import styles from "./SearchStack.module.css";
-import GrayBox from "../../Components/SearchProject/GrayBox";
-import { useSearch } from "../../Hooks/useSearch";
-import { useSetAtom } from "jotai";
-import { postProjectAtom } from "../../atoms/atoms";
+// components/SearchStack.js
+import React, { useEffect } from 'react';
+import { useFilter } from './FilterContext';
+import SearchIcon from '../../Image/Icons/SearchIcon';
+import { Stack } from '../../Screen/Stack';
+import styles from './SearchStack.module.css';
+import GrayBox from '../../Components/SearchProject/GrayBox';
+import { useSearch } from '../../Hooks/useSearch';
 
 const SearchStack = () => {
   /* 프로젝트 search 훅 */
@@ -20,15 +20,13 @@ const SearchStack = () => {
     tech,
   } = useSearch(Stack);
 
-  /* 백엔드에 보낼 데이터에 push */
-  const setPostProj = useSetAtom(postProjectAtom);
+  /* FilterContext에서 상태 관리 */
+  const { selectedStacks, setSelectedStacks } = useFilter();
+
   useEffect(() => {
-    // tech가 변경될 시 백엔드에 보낼 데이터 재렌더링
-    setPostProj((prev) => ({
-      ...prev,
-      stack: [...tech],
-    }));
-  }, [tech, setPostProj]);
+    // tech가 변경될 시 FilterContext의 selectedStacks 업데이트
+    setSelectedStacks([...tech]);
+  }, [tech, setSelectedStacks]);
 
   return (
     <div className={styles.projectHire__requiredStack}>
