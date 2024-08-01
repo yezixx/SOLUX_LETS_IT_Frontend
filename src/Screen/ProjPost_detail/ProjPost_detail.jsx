@@ -145,20 +145,24 @@ const ProjPost_detail = () => {
     if (!loginUserId) {
       nav("/login");
     }
-    try {
-      const response = getProfile();
-      const profile = response.data;
-      if (
-        profile.nickname === "" ||
-        profile.bio === "" ||
-        profile.selfIntro === ""
-      ) {
-        nav("/porofile/new", { state: { to: `/apply/${postId}` } });
-      }
-    } catch (error) {
-      console.log("error");
-    }
-    nav(`/apply/${postId}`);
+    getProfile()
+      .then((response) => {
+        const profile = response.data;
+        if (
+          profile.bio === null ||
+          profile.selfIntro === null ||
+          profile.skills === null
+        ) {
+          nav("/profile/new", {
+            state: { to: `/apply/${postId}` },
+          });
+        } else {
+          nav(`/apply/${postId}`);
+        }
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
   };
 
   const onClickUpdate = () => {

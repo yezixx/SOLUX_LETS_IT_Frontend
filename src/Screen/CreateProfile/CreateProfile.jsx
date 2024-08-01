@@ -24,7 +24,7 @@ const CreateProfile = () => {
   };
 
   const [userInfo, setUserInfo] = useState({
-    nickname: "",
+    nickname: loginUserInfo.name,
     bio: "",
     age: loginUserInfo.ageRange,
     sns: [
@@ -37,7 +37,7 @@ const CreateProfile = () => {
         link: "",
       },
     ],
-    profileImage: "",
+    profileImage: loginUserInfo.profileImageUrl,
     mannerTier: "",
     introduce: "",
     skills: [
