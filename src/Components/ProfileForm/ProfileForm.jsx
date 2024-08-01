@@ -249,7 +249,7 @@ const ProfileForm = ({ init, onSaveProfileImage, navTo }) => {
           <div className={styles.profileForm__label}>기본 정보</div>
           <div className={styles.profileForm__form}>
             <div className={styles.profileForm__name}>
-              <div className={styles.profileForm__formLabel}>이름</div>
+              <div className={styles.profileForm__formLabel}>닉네임</div>
               <input
                 type="text"
                 ref={nameRef}
