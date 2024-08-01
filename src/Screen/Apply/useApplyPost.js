@@ -1,9 +1,10 @@
-import { startTransition, useState } from "react";
+import { startTransition, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { submitApply } from "../../service/applyService";
-import { useAtomValue, useSetAtom } from "jotai";
-import { applicant, userIdAtom } from "../../atoms/atoms";
+import { useSetAtom } from "jotai";
+import { applicant } from "../../atoms/atoms";
 import { useValidate } from "../../Hooks/useValidate";
+import { getProfile } from "../../service/profileService";
 
 const useApplyPost = () => {
   // input data 수집

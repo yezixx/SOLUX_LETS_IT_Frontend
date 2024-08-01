@@ -9,7 +9,6 @@
 .ProfileLink__icon {
   width: 25px;
   height: 25px;
-  border: 1px solid var(--text-color2);
   border-radius: 50%;
 }
 .ProfileLink__link {

@@ -4,6 +4,7 @@ import RouteName from "../../Components/RouteName/RouteName";
 import styles from "./Apply.module.css";
 import BriefProfile from "./BriefProfile/BriefProfile";
 import useApplyPost from "./useApplyPost";
+import useMyProfileGet from "../MyPage/MyProfile/useMyProfileGet";
 
 // profile mock data
 const user = {
@@ -13,6 +14,8 @@ const user = {
 };
 
 const Apply = () => {
+  const { profileData } = useMyProfileGet();
+  console.log(profileData);
   // applyData - onChange를 통해 input으로 받은 값을 모아둔 객체
   const { onChange, handleSubmit, ApplyFormError } = useApplyPost();
   //CSS className 분리 - 오류 시 focus
@@ -30,7 +33,7 @@ const Apply = () => {
           <div className={styles.apply__title}>프로필 미리보기</div>
           {/*프로필을 담을 box */}
           <div className={styles.apply__profile_container}>
-            <BriefProfile user={user} />
+            <BriefProfile user={profileData} />
           </div>
         </div>
 

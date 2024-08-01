@@ -3,6 +3,9 @@
   font-family: "pretendardB";
   margin-bottom: 5px;
 }
-.myPropfile__introduce span {
+.myProfile__content {
+  height: 60px;
+}
+.myProfile__Introduce span {
   white-space: nowrap;
 }
