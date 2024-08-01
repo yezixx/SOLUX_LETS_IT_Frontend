@@ -1,11 +1,16 @@
 import { ageMapping } from "../../ProfileTierMap";
 import styles from "./PersonalDetail.module.css";
 
-const PersonalDetail = ({ name, age }) => {
+const PersonalDetail = ({ name, age, nickname }) => {
+  console.log(name, age, nickname);
   return (
     <div className={styles.myProfile__info__personalDetail}>
       {/*이름*/}
-      {name && <span className={styles.myProfile__info__name}>{name}</span>}
+      {nickname ? (
+        <span className={styles.myProfile__info__name}>{nickname}</span>
+      ) : (
+        <span className={styles.myProfile__info__name}>{name}</span>
+      )}
 
       {/*나이*/}
       {age && (

@@ -16,8 +16,8 @@ const Profile = ({ user, type, tooltipShow = false }) => {
   if (!user) {
     return <Loading />;
   }
-  const tier = user.mannerTier; //B
-
+  //유저의 tier
+  const tier = user.mannerTier;
   const tierIcon = () => {
     switch (tier) {
       case "A":
@@ -42,7 +42,6 @@ const Profile = ({ user, type, tooltipShow = false }) => {
       }`}
     >
       {/*버튼 + 프로필 박스*/}
-
       <div
         className={`${styles.myProfile__box} ${
           styles[`myProfile__box--${type}`]
@@ -55,18 +54,21 @@ const Profile = ({ user, type, tooltipShow = false }) => {
           <ProfilePhoto src={user.profileImageUrl} />
 
           {/*이름, 나이 */}
-          <PersonalDetail name={user.nickname} age={user.age} />
+          <PersonalDetail
+            name={user.name}
+            age={user.age}
+            nickname={user.nickname}
+          />
 
           {/*바이오*/}
           <div className={styles.myProfile__info__bio}>{user.bio}</div>
 
           {/*sns링크*/}
           <div className={styles.myProfile__info__sns}></div>
-          {/* {user.sns.map((url) => {
-            <ProfileLink url={url} />;
-          })} */}
-          <ProfileLink url={user.sns} />
-          {/*객체를 순회하며 props로 값을 전달하도록 수정 예정 2024.06.20 */}
+          {user.sns &&
+            user.sns.map((url) => {
+              <ProfileLink url={url} />;
+            })}
         </div>
 
         {/*매너티어 아이콘 */}

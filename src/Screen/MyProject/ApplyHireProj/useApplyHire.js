@@ -15,6 +15,7 @@ export const useApplyHire = () => {
   const [applyProj, setApplyProj] = useState([]);
   // 팀원 data를 담을 state
   const [, setMemberList] = useState([]);
+
   const navigate = useNavigate();
   // 프로젝트 리스트 db에서 갖고 와서 hireProj 저장
   useEffect(() => {
@@ -58,6 +59,10 @@ export const useApplyHire = () => {
 
   // 모집 마감 버튼
   const completeHire = (postId) => {
+    if (applicantNum === 0) {
+      alert("팀원이 없습니다.");
+      return;
+    }
     if (window.confirm("마감하시겠습니까? (마감 후 취소는 불가능합니다.)")) {
       completePosts(postId)
         .then(() => {

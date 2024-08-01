@@ -8,6 +8,7 @@ import {
 const useApplicant = (postId) => {
   /*구인/신청 프로젝트 -> 신청자 리스트를 담아올 atom 설정 */
   const [applicantList, setApplicantList] = useState([]);
+
   useEffect(() => {
     getApplicantList(postId) // 가져오는 프로젝트 data에 따라 매개변수를 바꿔야 함
       .then((data) => {
