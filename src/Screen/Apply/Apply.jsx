@@ -5,21 +5,9 @@ import styles from "./Apply.module.css";
 import BriefProfile from "./BriefProfile/BriefProfile";
 import useApplyPost from "./useApplyPost";
 import useMyProfileGet from "../MyPage/MyProfile/useMyProfileGet";
-import Loading from "../../Components/Loading/Loading";
-
-// profile mock data
-const user = {
-  name: "김코더",
-  age: "20대 초반",
-  bio: "시각화로 소통하는 주니어 개발자",
-};
 
 const Apply = () => {
   const { profileData } = useMyProfileGet();
-  //화면 렌더링 시 로딩
-  setTimeout(() => {
-    return <Loading />;
-  }, 1000);
   console.log(profileData);
   // applyData - onChange를 통해 input으로 받은 값을 모아둔 객체
   const { onChange, handleSubmit, ApplyFormError } = useApplyPost();

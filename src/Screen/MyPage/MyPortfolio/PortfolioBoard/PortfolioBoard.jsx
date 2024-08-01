@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Paging from "../../../../Components/Paging/Paging";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMyPortfolios } from "../../../../service/portfolioService";
+import Loading from "../../../../Components/Loading/Loading";
 
 const PortfolioBoard = () => {
   const navigate = useNavigate();
-
   const { teamId } = useParams();
   console.log(teamId);
   // //클릭 핸들링
