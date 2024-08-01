@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useAtom, useSetAtom } from "jotai";
 import { isLoginAtom, userAtom } from "../../atoms/atoms";
 import apiClient, { updateApiClientToken } from "../../service/apiClient";
+import Loading from "../../Components/Loading/Loading";
 
 const Redirect = () => {
   const navigate = useNavigate();
@@ -40,15 +41,7 @@ const Redirect = () => {
     }
   }, [code, navigate, setIsLogIn, setUser, user]);
 
-  return (
-    <div className="LoginHandeler">
-      <div className="notice">
-        <p>로그인 중입니다.</p>
-        <p>잠시만 기다려주세요.</p>
-        <div className="spinner"></div>
-      </div>
-    </div>
-  );
+  return <Loading />;
 };
 
 export default Redirect;
