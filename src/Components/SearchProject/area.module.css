@@ -38,8 +38,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  &:hover,
-  &:focus {
+  &:hover{
     border: 2px solid var(--main-color2);
     color: var(--main-color2);
     font-family: "pretendardB";

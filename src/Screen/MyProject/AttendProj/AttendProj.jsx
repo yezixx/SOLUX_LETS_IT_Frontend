@@ -20,6 +20,7 @@ const OngoingProj = () => {
     //진행 중인 프로젝트
     getMyOngoingProjects()
       .then((res) => {
+        console.log(res);
         setOngoingProj(res.data);
       })
       .catch((error) => console.log(error));
@@ -56,6 +57,7 @@ const OngoingProj = () => {
                 button1Text="팀 게시판"
                 button2Text="포트폴리오"
                 prjTitle={project.prjTitle}
+                imgSrc={project.profileImages}
               />
             </div>
           ))}
@@ -69,7 +71,11 @@ const OngoingProj = () => {
         <div className={styles.attendProj__container}>
           {completeProj.map((project) => (
             <div key={project.teamId} className={styles.ongoingProj__cont}>
-              <ProjectBtn buttonShow={false} prjTitle={project.prjTitle} />
+              <ProjectBtn
+                buttonShow={false}
+                prjTitle={project.prjTitle}
+                imgSrc={project.profileImages}
+              />
             </div>
           ))}
         </div>

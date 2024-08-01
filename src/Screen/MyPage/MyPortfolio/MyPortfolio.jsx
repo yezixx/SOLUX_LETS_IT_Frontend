@@ -3,10 +3,13 @@ import PortfolioBtn from "../../../Components/Project_Button/PortfolioBtn";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getPortfolioList } from "../../../service/portfolioService";
+import { getTeam } from "../../../service/teamService";
 
 const MyPortfolio = () => {
   //백엔드에서 포트폴리오 리스트 가져옴
   const [PortfolioList, setPortfolioList] = useState([]);
+  //teamName
+  const [teamName, setTeamName] = useState(null);
   useEffect(() => {
     getPortfolioList()
       .then((res) => {

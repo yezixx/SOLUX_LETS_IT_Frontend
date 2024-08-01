@@ -35,6 +35,24 @@ function ProjectList({ projects }) {
     }));
   };
 
+  // 시간 계산 함수
+  const formatTimeAgo = (createdAt) => {
+    const now = new Date();
+    const createdDate = new Date(createdAt);
+    const diffInMs = now - createdDate;
+    const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
+    const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
+    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+    if (diffInMinutes < 60) {
+      return `${diffInMinutes}분 전`;
+    } else if (diffInHours < 24) {
+      return `${diffInHours}시간 전`;
+    } else {
+      return `${diffInDays}일 전`;
+    }
+  };
+
   return (
     <div className={styles.projectList}>
       {renderData.map((project) => (
@@ -96,6 +114,8 @@ function ProjectList({ projects }) {
           <Link to={`/apply/${project.postId}`}>
             <Button text="신청하기" />
           </Link>
+          <div>
+             
           <button
             className={styles.save}
             onClick={(e) => {
@@ -109,6 +129,10 @@ function ProjectList({ projects }) {
               <BookmarkIcon width="30px" height="30px" isBookmark={false} />
             )}
           </button>
+          {/* 생성 시간 */}
+          <div className={styles.timeAgo}>
+              <span>{formatTimeAgo(project.createdAt)}</span>
+            </div></div>
         </div>
       ))}
       <Paging

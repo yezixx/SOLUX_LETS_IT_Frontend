@@ -4,10 +4,11 @@ import { useEffect, useState } from "react";
 import Paging from "../../../../Components/Paging/Paging";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMyPortfolios } from "../../../../service/portfolioService";
+import Loading from "../../../../Components/Loading/Loading";
+import { getTeam } from "../../../../service/teamService";
 
 const PortfolioBoard = () => {
   const navigate = useNavigate();
-
   const { teamId } = useParams();
   console.log(teamId);
   // //클릭 핸들링
@@ -21,13 +22,21 @@ const PortfolioBoard = () => {
   // }
   //포트폴리오 리스트업
   const [portfolioList, setPortfolioList] = useState([]);
+  //teamName
+  const [teamName, setTeamName] = useState(null);
   useEffect(() => {
+    // Fetch portfolio list
     getMyPortfolios(teamId)
       .then((res) => {
         setPortfolioList(res.data);
       })
       .catch((error) => alert(`에러가 발생했습니다 : ${error}`));
-  }, [setPortfolioList]);
+    getTeam(teamId)
+      .then((res) => {
+        setTeamName(res.data.teamName);
+      })
+      .catch((error) => console.log(error));
+  }, [teamId]);
 
   /*날짜 형태 변경 */
   const formatDate = (dateString) => {
@@ -59,7 +68,7 @@ const PortfolioBoard = () => {
   return (
     <div className={styles.PortfolioBoard__contentWrap}>
       {/*포트폴리오명 */}
-      <div className={styles.PorfolioBoard__portfolioTitle}>프로젝트 명</div>
+      <div className={styles.PorfolioBoard__portfolioTitle}>{teamName}</div>
 
       {/*포트폴리오 리스트 */}
       <ul className={styles.PortfolioBoard__table}>
