@@ -9,7 +9,8 @@ const PortfolioBtn = ({
   onClick2 = undefined,
   button1Text = "add text",
   button2Text = "add text",
-  prjTitle, //부모 요소에서 전달한 project
+  prjTitle, //부모 요소에서 전달한 project title,
+  imgSrc,
 }) => {
   return (
     <div className={styles.PortfolioBtn__box}>
@@ -22,16 +23,16 @@ const PortfolioBtn = ({
       {/*프로젝트 참석자 프로필 사진 - 백엔드 잇고 map으로 수정할 예정*/}
       <div className={styles.PortfolioBtn__photo}>
         <div className={styles.member1}>
-          <PortfolioBtnPhoto />
+          <PortfolioBtnPhoto imgSrc={imgSrc && imgSrc[0]} />
           {/* <PortfolioBtnPhoto photo={project.teamMembers[0].profile_url} /> */}
         </div>
         <div className={styles.member2}>
           {/* <PortfolioBtnPhoto photo={project.teamMembers[1].profile_url} /> */}
-          <PortfolioBtnPhoto />
+          <PortfolioBtnPhoto imgSrc={imgSrc && imgSrc[1]} />
         </div>
         <div className={styles.member3}>
           {/* <PortfolioBtnPhoto photo={project.teamMembers[2].profile_url} /> */}
-          <PortfolioBtnPhoto />
+          <PortfolioBtnPhoto imgSrc={imgSrc && imgSrc[2]} />
         </div>
       </div>
 
