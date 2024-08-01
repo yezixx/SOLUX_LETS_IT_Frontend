@@ -4,12 +4,10 @@ import { useEffect, useState } from "react";
 import Paging from "../../../../Components/Paging/Paging";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMyPortfolios } from "../../../../service/portfolioService";
-// import { userAtom } from "../../../../atoms/atoms";
 
 const PortfolioBoard = () => {
   const navigate = useNavigate();
 
-  // const { prjId } = useParams();
   const { teamId } = useParams();
   console.log(teamId);
   // //클릭 핸들링
@@ -26,13 +24,21 @@ const PortfolioBoard = () => {
   useEffect(() => {
     getMyPortfolios(teamId)
       .then((res) => {
-        console.log(res.data);
         setPortfolioList(res.data);
-        console.log(portfolioList);
       })
       .catch((error) => alert(`에러가 발생했습니다 : ${error}`));
   }, [setPortfolioList]);
 
+  /*날짜 형태 변경 */
+  const formatDate = (dateString) => {
+    //입력 dateString을 Date객체로 변경
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, "0");
+    const day = String(date.getDate()).padStart(2, "0");
+    // 원하는 형식으로 반환
+    return `${year}-${month}-${day}`;
+  };
   /*페이지네이션 */
   //현재 페이지
   const [activePage, setActivePage] = useState(1);
@@ -74,13 +80,13 @@ const PortfolioBoard = () => {
                 {idx + (activePage - 1) * itemsCountPerPage}
               </li>
               <li
-                onClick={() => navigateTo(`detail/${data.prtId}`)}
+                onClick={() => navigate(`detail/${data.prtId}`)}
                 className={styles.PortfolioBoard__cell}
               >
                 {data.prtTitle}
               </li>
               <li className={styles.PortfolioBoard__cell}>
-                {data.prtCreateDate}
+                {formatDate(data.prtCreateDate)}
               </li>
               <Button text="수정" type="NONE__TEXT-MC2-16" />
             </ul>
