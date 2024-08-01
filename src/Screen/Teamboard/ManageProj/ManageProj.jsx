@@ -5,23 +5,22 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../Components/Button/Button";
 import { useContext, useEffect } from "react";
 import { TeamStateContext } from "../Teamboard";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../atoms/atoms";
+import { isLeader } from "../isLeader";
 
 const ManageProj = () => {
-  const { teamData, teamId } = useContext(TeamStateContext);
-  const loginUserId = useAtomValue(userIdAtom);
+  const { teamData, teamId, loading } = useContext(TeamStateContext);
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const nav = useNavigate();
 
   useEffect(() => {
-    if (
-      teamData.teamMemberInfo.find(
-        (member) => member.position === "Team_Leader"
-      ).userId !== loginUserId
-    ) {
-      alert("팀장만 접근 가능한 페이지입니다.");
-      nav(`/teamboard/?team=${teamId}`);
+    if (!loading) {
+      if (isLeader(teamData.teamMemberInfo, loginUserId) === false) {
+        alert("팀장만 접근 가능한 페이지입니다.");
+        nav(`/teamboard/?team=${teamId}`, { replace: true });
+      }
     }
   });
 

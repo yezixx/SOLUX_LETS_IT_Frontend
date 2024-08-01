@@ -5,8 +5,6 @@ import ToolTip from "../../../../Components/ToolTip/ToolTip";
 import Button from "../../../../Components/Button/Button";
 import { useContext, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../../Teamboard";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../../atoms/atoms";
 
 const OPTIONS = [
   { id: 0, value: "잦은 지각 및 결석" },
@@ -32,7 +30,9 @@ const ReportSection = ({ onReport }) => {
   const [selectedMemberId, setSelectedMemberId] = useState();
   const [selectedOption, setSelectedOption] = useState();
 
-  const loginUserId = useAtomValue(userIdAtom);
+  const loginUserId = localStorage.getItem("user")
+    ? JSON.parse(localStorage.getItem("user")).userId
+    : null;
 
   const selectRef = useRef();
 
