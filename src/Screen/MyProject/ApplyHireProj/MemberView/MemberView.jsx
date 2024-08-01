@@ -5,6 +5,7 @@ import { approveApplicants } from "../../../../service/applyService";
 
 const MemberView = ({ postId }) => {
   const [memberList, setMemberList] = useState([]);
+  console.log(memberList);
   useEffect(() => {
     approveApplicants(postId)
       .then((res) => {
@@ -17,7 +18,11 @@ const MemberView = ({ postId }) => {
     <div className={styles.teammateView}>
       <div className={styles.teammateView__MemberItems}>
         {memberList.map((member) => (
-          <MemberItem key={member.applyId} memberName={member.nickname} />
+          <MemberItem
+            key={member.applyId}
+            profilePic={member.profileImage}
+            memberName={member.nickname}
+          />
         ))}
       </div>
     </div>
