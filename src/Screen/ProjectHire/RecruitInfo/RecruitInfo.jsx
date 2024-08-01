@@ -1,7 +1,7 @@
 import useProjectPost from "../useProjectPost";
 import styles from "./RecruitInfo.module.css";
 
-const RecruitInfo = ({ errors }) => {
+const RecruitInfo = ({ errors, minDate }) => {
   const { onChange } = useProjectPost();
   return (
     <div className="모집정보">
@@ -37,6 +37,7 @@ const RecruitInfo = ({ errors }) => {
             onChange={onChange}
             type="date"
             placeholder="1명"
+            min={minDate}
           />
         </div>
       </div>
