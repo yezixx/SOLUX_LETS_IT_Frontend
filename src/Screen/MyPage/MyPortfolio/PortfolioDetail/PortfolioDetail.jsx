@@ -21,9 +21,6 @@ const PortfolioDetail = () => {
   //prtId 기반으로 포트폴리오 리스트 불러올 것
   return (
     <div className={styles.portfolioDetail__wrap}>
-      <div className={styles.portfolioDetail__prjTitle}>
-        오픈 AI 활용 프로젝트
-      </div>
       {/*포트폴리오 컨테이너 */}
       <div className={styles.portfolioDetail__portfolioContainer}>
         <div className={styles.portfolioDetail__prtTitle}>
