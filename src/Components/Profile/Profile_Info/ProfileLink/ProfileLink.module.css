@@ -1,5 +1,6 @@
 .ProfileLink {
   display: flex;
+  gap: 30px;
 }
 .ProfileLink__container {
   display: flex;
@@ -13,6 +14,6 @@
 }
 .ProfileLink__link {
   width: 230px;
-  text-align: center;
+  text-align: left;
   flex: 1;
 }

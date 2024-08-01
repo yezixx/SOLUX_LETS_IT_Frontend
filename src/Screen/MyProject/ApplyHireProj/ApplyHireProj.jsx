@@ -70,7 +70,7 @@ const ApplyHireProj = () => {
         <div className={styles.ApplyProj__content}>
           <div className={styles.ApplyProj__ProjectList}>
             {applyProj.map((project) => (
-              <ProjectList project={project} />
+              <ProjectList key={project.postId} project={project} />
             ))}
           </div>
         </div>

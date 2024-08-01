@@ -20,7 +20,8 @@ const ApplicantBtn = ({ postId }) => {
             <div className={styles.Applicant__Application}>
               {/* 이름 + 지원서 보기 버튼 */}
               <div className={styles.Applicant__ApplicationBtn}>
-                {applyUser.nickname} <span>|</span>
+                {applyUser.nickname ? applyUser.nickname : applyUser.name}{" "}
+                <span>|</span>
                 <Link to={`/myproj/applyprofile/${applyUser.applyId}`}>
                   <Button text="지원서 보기" type="NONE__TEXT-MC2-16" />
                 </Link>
