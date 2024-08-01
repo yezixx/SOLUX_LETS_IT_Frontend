@@ -17,7 +17,7 @@ const mock_members = [
     profileImage: "",
   },
 ];
-const mock_collabLinks = [
+const init_collabLinks = [
   {
     id: 1,
     tool: "notion",
@@ -38,7 +38,7 @@ const CreateBoard = () => {
   const nav = useNavigate();
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
-  const [links, setLinks] = useState(mock_collabLinks);
+  const [links, setLinks] = useState(init_collabLinks);
   const [applicantsList, setApplicantsList] = useState(mock_members);
 
   const [params] = useSearchParams();
@@ -53,7 +53,6 @@ const CreateBoard = () => {
     try {
       const response = await approveApplicants(postId);
       await setApplicantsList(response.data);
-      console.log(response.data);
       if (response.data.length === 0) {
         alert("팀원이 없습니다. 팀원을 추가해주세요.");
         nav(-1, { replace: true });
@@ -66,14 +65,15 @@ const CreateBoard = () => {
   };
 
   const fetchPostInfo = async (postId) => {
+    setLoading(true);
     try {
       const response = await getPosts(postId);
       await setPostInfo(response.data);
-      console.log(response.data);
       if (response.data.userId !== loginUserId) {
         alert("게시글 작성자만 팀게시판을 생성할 수 있습니다.");
         nav(-1, { replace: true });
       }
+      setLoading(false);
     } catch (error) {
       console.error("Error fetching post info:", error);
       alert("게시글 정보를 불러오는데 실패했습니다. 다시 시도해주세요.");
@@ -84,6 +84,7 @@ const CreateBoard = () => {
   useEffect(() => {
     fetchApplicants(postId);
     fetchPostInfo(postId);
+    console.log(applicantsList);
   }, []);
 
   const onFocusElement = (ref) => {
@@ -172,7 +173,7 @@ const CreateBoard = () => {
               <MemberItem
                 key={index}
                 memberName={member.nickname}
-                profilePic={member.profile_image_url}
+                profilePic={member.profileImage}
               />
             ))}
           </div>
