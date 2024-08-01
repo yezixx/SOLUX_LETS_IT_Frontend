@@ -6,7 +6,7 @@ const ProfileSkills = ({ skills }) => {
   if (skills) {
     skillsInform = Object.entries(skills);
   }
-  console.log(skills);
+  console.log(skillsInform);
   //skills 객체 배열로 전환
 
   return (

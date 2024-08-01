@@ -16,6 +16,7 @@ const Profile = ({ user, type, tooltipShow = false }) => {
   if (!user) {
     return <Loading />;
   }
+  console.log(user);
   //유저의 tier
   const tier = user.mannerTier;
   const tierIcon = () => {
@@ -65,10 +66,7 @@ const Profile = ({ user, type, tooltipShow = false }) => {
 
           {/*sns링크*/}
           <div className={styles.myProfile__info__sns}></div>
-          {user.sns &&
-            user.sns.map((url) => {
-              <ProfileLink url={url} />;
-            })}
+          {user.sns && <ProfileLink url={user.sns} />}
         </div>
 
         {/*매너티어 아이콘 */}

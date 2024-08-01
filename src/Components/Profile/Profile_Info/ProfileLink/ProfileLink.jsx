@@ -2,24 +2,30 @@ import styles from "./ProfileLink.module.css";
 import { getLogoImage } from "../../../../util/getLogoImage";
 
 const ProfileLink = ({ url }) => {
-  iconName = Object.keys(url);
-  urlName = Object.values(url);
+  const iconName = Object.keys(url);
+  const urlName = Object.values(url);
+  // const iconName = ["notion"];
+  // const urlName = ["notion.com"];
   console.log(url);
   return (
     <div className={styles.ProfileLink}>
-      {/* <div className={styles.ProfileLink__icon}>icon</div> */}
-      {iconName.map((iconItem, index) => (
-        <div key={index} className={styles.ProfileLink__icon}>
-          {getLogoImage(iconItem)}
-        </div>
-      ))}
-      {/* {url && <div className={styles.ProfileLink__link}>{url}</div>} */}
-      {url &&
-        urlName.map((urlItem, index) => (
-          <a key={index} className={styles.ProfileLink__link}>
-            {urlItem}
-          </a>
+      <div className={styles.ProfileLink__container}>
+        {iconName.map((iconItem, index) => (
+          <img
+            src={getLogoImage(iconItem)}
+            key={index}
+            className={styles.ProfileLink__icon}
+          ></img>
         ))}
+      </div>
+      <div className={styles.ProfileLink__container}>
+        {url &&
+          urlName.map((urlItem, index) => (
+            <a key={index} className={styles.ProfileLink__link}>
+              {urlItem}
+            </a>
+          ))}
+      </div>
     </div>
   );
 };
