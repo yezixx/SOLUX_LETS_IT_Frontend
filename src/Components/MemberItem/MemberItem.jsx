@@ -4,8 +4,10 @@ import { useState } from "react";
 import crown from "../../assets/crown.svg";
 
 const MemberItem = ({ memberName, profilePic, type, onClick, isLeader }) => {
-  const [imgSrc, setImgSrc] = useState(profilePic || defaultProfilePic);
-
+  const [imgSrc, setImgSrc] = useState(
+    profilePic ? profilePic : defaultProfilePic
+  );
+  console.log(imgSrc);
   const handleImgError = () => {
     setImgSrc(defaultProfilePic);
   };
