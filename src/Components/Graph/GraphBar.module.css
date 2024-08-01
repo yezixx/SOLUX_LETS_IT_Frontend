@@ -1,11 +1,13 @@
-.GraphBar__border{
-    background-color: 'white';
+.GraphBar__border {
+  background-color: "white";
+  z-index: 1000;
 }
 
-.GraphBar__colored{
-    position: relative; 
+.GraphBar__colored {
+  position: relative;
+  z-index: 1;
 }
-.GraphBar__number{
-    position: absolute;
-    font-size: 14px;
+.GraphBar__number {
+  position: absolute;
+  font-size: 14px;
 }
