@@ -14,6 +14,11 @@ const ApplyProfile = () => {
       <Profile user={profileView} />
 
       <div className={styles.ApplyProfile__applyDetail}>
+        <div className={styles.ApplyProfile__applyDetail_realName}>
+          실명<span>|</span>
+          <span> {profileView.name}</span>
+        </div>
+
         <div className={styles.ApplyProfile__stackField}>
           {/*선호 스택 */}
           <div className="stack">
@@ -24,7 +29,6 @@ const ApplyProfile = () => {
               {applicantView.preferStack}
             </div>
           </div>
-
           {/*희망 분야 */}
           <div className="field">
             <div className={styles.ApplyProfile__applyDetail_title}>
@@ -35,7 +39,6 @@ const ApplyProfile = () => {
             </div>
           </div>
         </div>
-
         {/*전달 사항 */}
         <div className="message">
           <div className={styles.ApplyProfile__applyDetail_title}>
@@ -45,7 +48,6 @@ const ApplyProfile = () => {
             {applicantView.applyContent}
           </div>
         </div>
-
         {/*연락 수단 */}
         <div className="contact">
           <div className={styles.ApplyProfile__applyDetail_title}>

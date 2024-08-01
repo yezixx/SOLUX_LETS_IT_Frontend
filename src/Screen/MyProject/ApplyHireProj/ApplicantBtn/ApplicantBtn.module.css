@@ -22,8 +22,8 @@
 }
 .Applicant__ApplicationBtn {
   display: flex;
-  gap: 7px;
-  text-align: center;
+  gap: 10px;
+  text-align: left;
 }
 
 .Applicant__buttonWrap {

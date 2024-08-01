@@ -23,6 +23,14 @@
   font-family: "pretendardB";
   margin-bottom: 5px;
 }
+.ApplyProfile__applyDetail_realName,
+.ApplyProfile__applyDetail_realName span {
+  font-size: 24px;
+  font-family: "pretendardB";
+  color: var(--main-color2);
+  display: flex;
+  gap: 10px;
+}
 .ApplyProfile__stackField {
   display: flex;
   gap: 50px;
