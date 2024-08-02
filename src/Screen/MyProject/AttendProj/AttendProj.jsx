@@ -9,9 +9,7 @@ import {
 
 const OngoingProj = () => {
   const navigate = useNavigate();
-  const naviagateTo = (link) => {
-    navigate(link);
-  };
+
   /*진행 중인 프로젝트 리스트 */
   const [ongoingProj, setOngoingProj] = useState([]);
   const [completeProj, setCompleteProj] = useState([]);
@@ -48,12 +46,11 @@ const OngoingProj = () => {
           {ongoingProj.map((project) => (
             <div key={project.teamId} className={styles.ongoingProj__cont}>
               <ProjectBtn
-                onClick1={() =>
-                  naviagateTo(`/teamboard/?team=${project.teamId}`)
-                }
+                onClick1={() => navigate(`/teamboard/?team=${project.teamId}`)}
                 onClick2={() =>
-                  naviagateTo(`/mypage/portfolio/board/${project.teamId}`)
+                  navigate(`/mypage/portfolio/board/${project.teamId}`)
                 }
+                onClick={() => navigate(`/teamboard/?team=${project.teamId}`)}
                 button1Text="팀 게시판"
                 button2Text="포트폴리오"
                 prjTitle={project.prjTitle}
@@ -72,6 +69,9 @@ const OngoingProj = () => {
           {completeProj.map((project) => (
             <div key={project.teamId} className={styles.ongoingProj__cont}>
               <ProjectBtn
+                onClick={() =>
+                  navigate(`/teamboard/feedback/?team=${project.teamId}`)
+                }
                 buttonShow={false}
                 prjTitle={project.prjTitle}
                 imgSrc={project.profileImages}

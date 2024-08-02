@@ -7,13 +7,14 @@ const PortfolioBtn = ({
   buttonShow = true,
   onClick1 = undefined,
   onClick2 = undefined,
+  onClick = undefined,
   button1Text = "add text",
   button2Text = "add text",
   prjTitle, //부모 요소에서 전달한 project title,
   imgSrc,
 }) => {
   return (
-    <div className={styles.PortfolioBtn__box}>
+    <div onClick={onClick} className={styles.PortfolioBtn__box}>
       {/*프로젝트명 */}
       <div className={styles.PortfolioBtn__title}>
         {/*부모 객체로부터 오는 시간 동안 '로딩'을 보여줌 */}
