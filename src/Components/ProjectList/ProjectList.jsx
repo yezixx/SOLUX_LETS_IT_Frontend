@@ -5,11 +5,16 @@ import { useNavigate } from "react-router-dom";
 
 function ProjectList({ project }) {
   const nav = useNavigate();
-
-  // 시간을 상대적인 표현으로 변환하는 함수
-  const formatTimeAgo = (createdAt) => {
+  console.log(project);
+  function formatTimeAgo(createdAt) {
     const now = new Date();
     const createdDate = new Date(createdAt);
+
+    // Validate if createdDate is a valid date
+    if (isNaN(createdDate.getTime())) {
+      return "Invalid date";
+    }
+
     const diffInMs = now - createdDate;
     const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
     const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
@@ -22,8 +27,7 @@ function ProjectList({ project }) {
     } else {
       return `${diffInDays}일 전`;
     }
-  };
-
+  }
   return (
     <div className={styles.projectList}>
       {project && (
@@ -84,7 +88,9 @@ function ProjectList({ project }) {
               </div>
               {/* 프로젝트 생성 시간 */}
               <div className={styles.timeAgo}>
-                <span>{formatTimeAgo(project.createdAt)}</span>
+                {project.createdAt && (
+                  <span>{formatTimeAgo(project.createdAt)}</span>
+                )}
               </div>
             </div>
           </div>

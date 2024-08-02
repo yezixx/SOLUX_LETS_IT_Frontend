@@ -11,7 +11,11 @@ const BriefProfile = ({ user }) => {
       <ProfilePhoto src={user.profileImageUrl} />
       {/*이름, 나이 */}
       <div className={styles.briefProfile__text}>
-        <PersonalDetail name={user.name} age={user.age} />
+        <PersonalDetail
+          nickname={user.nickname}
+          name={user.name}
+          age={user.age}
+        />
         {/*바이오*/}
         <div className={styles.briefProfile__bio}>{user.bio}</div>
       </div>
