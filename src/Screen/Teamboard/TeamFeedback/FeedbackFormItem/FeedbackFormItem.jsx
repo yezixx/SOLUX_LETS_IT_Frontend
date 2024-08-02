@@ -5,23 +5,23 @@ const FeedbackFormItem = ({ question, answer, onChange }) => {
   const OPTIONS = [
     {
       style: "NOT_AT_ALL",
-      value: 5,
+      value: -12.5,
     },
     {
       style: "NO",
-      value: 10,
+      value: -6.25,
     },
     {
       style: "NEUTRAL",
-      value: 15,
+      value: 0,
     },
     {
       style: "YES",
-      value: 20,
+      value: 6.25,
     },
     {
       style: "ABSOLUTELY",
-      value: 25,
+      value: 12.5,
     },
   ];
 
