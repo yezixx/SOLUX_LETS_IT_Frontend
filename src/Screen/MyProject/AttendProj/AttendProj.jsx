@@ -50,7 +50,7 @@ const OngoingProj = () => {
                 onClick2={() =>
                   navigate(`/mypage/portfolio/board/${project.teamId}`)
                 }
-                onClick={() => navigate(`/teamboard/?team=${project.teamId}`)}
+                /*onClick={() => navigate(`/teamboard/?team=${project.teamId}`)}*/
                 button1Text="팀 게시판"
                 button2Text="포트폴리오"
                 prjTitle={project.prjTitle}
