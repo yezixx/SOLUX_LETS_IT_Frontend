@@ -64,10 +64,10 @@ function ProjectList({ project }) {
               {/* 프로젝트 지역 */}
               <div>
                 <div className={styles.projectLocation}>
-                  {project.regionId === "대면" && (
+                  {project.onOff === "대면" && (
                     <>
                       <span>지역</span>
-                      <span> |</span> {project.regionId} {project.subRegionId}
+                      <span> |</span> {project.region} {project.subRegion}
                     </>
                   )}
                 </div>
@@ -76,6 +76,7 @@ function ProjectList({ project }) {
               <div>
                 <div className={styles.projectLocation}>
                   <span>방식</span> <span>| </span>
+                  {project.onOff}
                   {project.onoff}
                 </div>
               </div>

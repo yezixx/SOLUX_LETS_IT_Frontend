@@ -47,10 +47,12 @@ const PostInfo = ({ post, isBookmark, onClickScrap }) => {
                 <div className={styles.PostInfo__subLabel}>진행 방식</div>
                 {post.onOff}
               </div>
-              <div>
-                <div className={styles.PostInfo__subLabel}>지역</div>
-                {`${post.region} ${post.subRegion ? post.subRegion : ""}`}
-              </div>
+              {post.onOff === "대면" && (
+                <div>
+                  <div className={styles.PostInfo__subLabel}>지역</div>
+                  {`${post.region} ${post.subRegion ? post.subRegion : ""}`}
+                </div>
+              )}
               <div>
                 <div className={styles.PostInfo__subLabel}>난이도</div>
                 {post.difficulty}

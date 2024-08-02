@@ -77,12 +77,14 @@ function ProjectList({ projects }) {
                 {project.projectPeriod}
               </div>
             </div>
-            <div>
-              <div className={styles.projectLocation}>
-                <span>지역</span> <span> | </span> {project.region}{" "}
-                {project.subRegion}
+            {project.onOff === "대면" && (
+              <div>
+                <div className={styles.projectLocation}>
+                  <span>지역</span> <span> | </span> {project.region}{" "}
+                  {project.subRegion}
+                </div>
               </div>
-            </div>
+            )}
             <div>
               <div className={styles.projectLocation}>
                 <span>방식</span> <span> | </span>
@@ -115,24 +117,24 @@ function ProjectList({ projects }) {
             <Button text="신청하기" />
           </Link>
           <div>
-             
-          <button
-            className={styles.save}
-            onClick={(e) => {
-              e.stopPropagation(); // 클릭 이벤트가 부모에 전달되지 않도록 함
-              handleSaveClick(project.postId);
-            }}
-          >
-            {savedProjects[project.postId] ? (
-              <BookmarkIcon width="30px" height="30px" isBookmark={true} />
-            ) : (
-              <BookmarkIcon width="30px" height="30px" isBookmark={false} />
-            )}
-          </button>
-          {/* 생성 시간 */}
-          <div className={styles.timeAgo}>
+            <button
+              className={styles.save}
+              onClick={(e) => {
+                e.stopPropagation(); // 클릭 이벤트가 부모에 전달되지 않도록 함
+                handleSaveClick(project.postId);
+              }}
+            >
+              {savedProjects[project.postId] ? (
+                <BookmarkIcon width="30px" height="30px" isBookmark={true} />
+              ) : (
+                <BookmarkIcon width="30px" height="30px" isBookmark={false} />
+              )}
+            </button>
+            {/* 생성 시간 */}
+            <div className={styles.timeAgo}>
               <span>{formatTimeAgo(project.createdAt)}</span>
-            </div></div>
+            </div>
+          </div>
         </div>
       ))}
       <Paging
