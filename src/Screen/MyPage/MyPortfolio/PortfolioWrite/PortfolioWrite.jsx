@@ -13,9 +13,6 @@ const PortfolioWrite = () => {
     <div className={styles.portfolioWrite__contentWrap}>
       {/*프로젝트명 + 포트폴리오 작성 폼 */}
 
-      {/*프로젝트명 */}
-      <h3 className={styles.portfolioWrite__title}>OPEN AI 활용 프로젝트</h3>
-
       {/*포트폴리오 작성 폼 */}
       <form className={styles.portfolioWrite__form} onSubmit={handleSubmit}>
         <input
