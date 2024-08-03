@@ -56,7 +56,7 @@ const RequiredStack = ({ errors }) => {
           {data.slice(0, 5).map((item, idx) => (
             <li
               key={idx}
-              onClick={() => handleCreateBox(item)}
+              onMouseDown={() => handleCreateBox(item)}
               className={styles.projectHire__relatedSearchItem}
             >
               {item}

@@ -10,7 +10,7 @@ export const useSearch = (searchData) => {
   const handleBlur = () => {
     setTimeout(() => {
       setIsFocus(false);
-    }, 100);
+    }, 200);
   };
   /*검색한 value 값 searchValue state에 담음 */
   const [searchValue, setSearchValue] = useState("");
