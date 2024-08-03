@@ -11,7 +11,7 @@ const CompletePort = () => {
     getMyAIPortfolios(teamId)
       .then((res) => {
         console.log(res);
-        setAIportfolio(res.data);
+        setAIportfolio(res.data.content);
       })
       .catch((error) => {
         alert("AI 포트폴리오를 조회하는 도중 에러가 발생했습니다.");
