@@ -41,10 +41,13 @@ const usePortPost = () => {
     if (validation()) {
       const confirmSubmit = window.confirm("포트폴리오를 제출하시겠습니까?");
       if (confirmSubmit) {
-        startTransition(() => {
-          postPortfolios(teamId, portfolioData);
+        startTransition(async () => {
+          //데이터 전송이 완료된 이후 페이지 이동
+          await postPortfolios(teamId, portfolioData);
+          navigateTo(`/mypage/portfolio/board/${teamId}`);
         });
-        navigateTo(`/mypage/portfolio/board/${teamId}`); // 우선은 홈 화면으로 이동
+        // setTimeout(()=>{
+        // },1000)
       } else {
       }
     } else {

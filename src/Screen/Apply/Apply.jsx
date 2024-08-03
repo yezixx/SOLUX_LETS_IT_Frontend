@@ -1,14 +1,25 @@
-import { useAtomValue, useSetAtom } from "jotai";
 import Button from "../../Components/Button/Button";
 import RouteName from "../../Components/RouteName/RouteName";
 import styles from "./Apply.module.css";
 import BriefProfile from "./BriefProfile/BriefProfile";
 import useApplyPost from "./useApplyPost";
 import useMyProfileGet from "../MyPage/MyProfile/useMyProfileGet";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getPosts } from "../../service/postService";
 
 const Apply = () => {
+  //지원자 프로필
   const { profileData } = useMyProfileGet();
-  console.log(profileData);
+  //프로젝트명
+  const { postId } = useParams();
+  const [title, setTitle] = useState();
+
+  useEffect(() => {
+    getPosts(postId)
+      .then((res) => setTitle(res.data.title))
+      .catch((error) => console.error(error));
+  }, []);
   // applyData - onChange를 통해 input으로 받은 값을 모아둔 객체
   const { onChange, handleSubmit, ApplyFormError } = useApplyPost();
   //CSS className 분리 - 오류 시 focus
@@ -35,7 +46,12 @@ const Apply = () => {
           {/*지원 정보 확인 */}
           <div className={styles.apply__container}>
             <div className={styles.apply__title}>지원정보확인</div>
-            <span>프로젝트명 |</span>
+            <span>
+              <div>프로젝트명 </div>
+              <div> | </div>
+              {/*프로젝트 제목 */}
+              {title}
+            </span>
           </div>
           {/*선호 스택 */}
           <div className={styles.apply__container}>

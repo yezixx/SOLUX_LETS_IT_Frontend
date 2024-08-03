@@ -1,16 +1,22 @@
 import Button from "../../../../Components/Button/Button";
 import Profile from "../../../../Components/Profile/Profile";
 import styles from "./ApplyProfile.module.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useProfileView from "./useProfileView";
+import useApplicant from "../ApplicantBtn/useApplicant";
 
 const ApplyProfile = () => {
   //applyId는 지원자 리스트 매핑 시 갖고 옴, 동적 url 할당
-  const { applyId } = useParams();
+  const { applyId, postId } = useParams();
+  console.log(applyId, postId);
   const { applicantView, profileView } = useProfileView(applyId);
+  //승인, 거절 기능
+  const { applicantConfirm } = useApplicant(applyId); //isApprove, applyId
+  //화면 이동
+  const navigate = useNavigate();
+
   return (
     <div className={styles.ApplyProfile__contWrap}>
-      {/*프로필 db 구현되면 주석 처리된 코드 사용 */}
       <Profile user={profileView} />
 
       <div className={styles.ApplyProfile__applyDetail}>
@@ -60,8 +66,21 @@ const ApplyProfile = () => {
       </div>
 
       <div className={styles.ApplyProfile__buttonWrap}>
-        <Button text="거절" type="SEC_150x40"></Button>
-        <Button text="수락"></Button>
+        <Button
+          text="거절"
+          type="SEC_150x40"
+          onClick={() => {
+            applicantConfirm(false, applyId, postId);
+            navigate("/myproj/hiring-and-applied");
+          }}
+        ></Button>
+        <Button
+          text="수락"
+          onClick={() => {
+            applicantConfirm(true, applyId, postId);
+            navigate("/myproj/hiring-and-applied");
+          }}
+        ></Button>
       </div>
     </div>
   );

@@ -3,13 +3,11 @@ import PortfolioBtn from "../../../Components/Project_Button/PortfolioBtn";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getPortfolioList } from "../../../service/portfolioService";
-import { getTeam } from "../../../service/teamService";
 
 const MyPortfolio = () => {
   //백엔드에서 포트폴리오 리스트 가져옴
   const [PortfolioList, setPortfolioList] = useState([]);
-  //teamName
-  const [teamName, setTeamName] = useState(null);
+
   useEffect(() => {
     getPortfolioList()
       .then((res) => {
@@ -31,7 +29,6 @@ const MyPortfolio = () => {
         <div className={styles.myPortfolio__title}>내 포트폴리오</div>
         {/*열람할 수 있는 포트폴리오 나열 */}
         <div className={styles.myPortfolio__cont}>
-          {/*백엔드 연결 후에 teamId 매핑시켜줘야 함 */}
           {PortfolioList.map((item) => (
             //Object.keys(item) -  teamId
             //Object.values(item) - prjTitle
@@ -39,10 +36,9 @@ const MyPortfolio = () => {
               to={`board/${Object.keys(item)[0]}`}
               key={Object.keys(item)[0]}
             >
-              <PortfolioBtn
-                prjTitle={Object.values(item)[0]}
-                buttonShow={false}
-              />
+              <div className={styles.portfolioBox}>
+                {Object.values(item)[0]}
+              </div>
             </Link>
           ))}
         </div>

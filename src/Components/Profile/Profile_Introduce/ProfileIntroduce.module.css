@@ -7,5 +7,5 @@
   height: 60px;
 }
 .myProfile__Introduce span {
-  white-space: nowrap;
+  white-space: wrap;
 }

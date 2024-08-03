@@ -22,7 +22,9 @@ const ApplicantBtn = ({ postId }) => {
               <div className={styles.Applicant__ApplicationBtn}>
                 {applyUser.nickname ? applyUser.nickname : applyUser.name}{" "}
                 <span>|</span>
-                <Link to={`/myproj/applyprofile/${applyUser.applyId}`}>
+                <Link
+                  to={`/myproj/applyprofile/${applyUser.applyId}/${postId}`}
+                >
                   <Button text="지원서 보기" type="NONE__TEXT-MC2-16" />
                 </Link>
               </div>
@@ -31,14 +33,14 @@ const ApplicantBtn = ({ postId }) => {
               <div className={styles.Applicant__buttonWrap}>
                 <Button
                   onClick={() => {
-                    applicantConfirm(true, applyUser.applyId);
+                    applicantConfirm(true, applyUser.applyId, postId);
                   }}
                   text="승인"
                   type="MC2_70x40"
                 />
                 <Button
                   onClick={() => {
-                    applicantConfirm(false, applyUser.applyId);
+                    applicantConfirm(false, applyUser.applyId, postId);
                   }}
                   text="거절"
                   type="SEC_70x40"

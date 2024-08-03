@@ -101,7 +101,7 @@ export const RouterInfo = [
           },
           {
             //백엔드 연결용 동적 주소
-            path: "applyprofile/:applyId",
+            path: "applyprofile/:applyId/:postId",
             // path: "applyprofile",
             element: <PrivateRoute element={<ApplyProfile />} />,
             label: "신청자 프로필",
@@ -215,8 +215,6 @@ export const RouterInfo = [
       },
       //프로젝트 신청창
       {
-        // path: "apply",
-        //백엔드 연결용 동적 주소
         path: "apply/:postId",
         element: <PrivateRoute element={<Apply />} />,
         label: "프로젝트 신청창",

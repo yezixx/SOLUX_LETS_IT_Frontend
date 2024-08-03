@@ -21,7 +21,7 @@ const useApplicant = (postId) => {
   }, [setApplicantList]);
 
   /*수락, 거절을 눌렀을 때 */
-  const applicantConfirm = (isApprove, applyId) => {
+  const applicantConfirm = (isApprove, applyId, postId) => {
     const message = isApprove
       ? "승인하시겠습니까? (승인 후엔 변경이 불가능합니다.)"
       : "거절하시겠습니까? (거절 후엔 변경이 불가능합니다.)";
@@ -30,7 +30,6 @@ const useApplicant = (postId) => {
     if (isConfirmed)
       if (isApprove) {
         /*수락 시 */
-
         approveApply(postId, applyId)
           .then((res) => {
             alert("승인되었습니다.");
