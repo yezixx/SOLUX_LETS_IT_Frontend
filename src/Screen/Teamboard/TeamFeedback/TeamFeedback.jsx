@@ -4,22 +4,25 @@ import MemberItem from "../../../Components/MemberItem/MemberItem";
 import CheckCircleIcon from "../../../Image/Icons/CheckCircleIcon";
 import FeedbackFormItem from "./FeedbackFormItem/FeedbackFormItem";
 import styles from "./TeamFeedback.module.css";
-import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
+import { TeamStateContext } from "../Teamboard";
 import { useNavigate } from "react-router-dom";
 import {
   checkTeamCompleted,
+  evaluateMember,
   getEvaluatedList,
 } from "../../../service/teamService";
 import Loading from "../../../Components/Loading/Loading";
 
+// 본인을 제외한 팀원 목록 반환
 const getMembersExcludingSelf = (loginUserId, members) => {
   return members.filter(
     (member) => String(member.userId) !== String(loginUserId)
   );
 };
 
+// 이미 평가한 팀원인지 확인
 const isCompletedMember = (feedbackTargetId, evaluatedList) => {
-  //if (!evaluatedList) return false;
+  //if (!evaluatedList) return false; // 이거 왜 넣었었는지 기억안남
   const isIncluded = evaluatedList.find(
     (member) => member.userId === feedbackTargetId
   );
@@ -27,33 +30,38 @@ const isCompletedMember = (feedbackTargetId, evaluatedList) => {
 };
 
 const TeamFeedback = () => {
+  // 팀원 정보, 팀 아이디
   const { teamData, teamId } = useContext(TeamStateContext);
   const members = teamData.teamMemberInfo;
 
-  const { feedbackData } = useContext(TeamStateContext);
-  const { onSubmitFeedback } = useContext(TeamDispatchContext);
-
+  // 선택된 팀원 아이디
   const [selectedMemberId, setSelectedMemberId] = useState();
-  const [feedback, setFeedback] = useState();
+
+  // 평가 항목 값
   const [promiseValue, setPromiseValue] = useState();
   const [frequencyValue, setFrequencyValue] = useState();
   const [participateValue, setParticipateValue] = useState();
   const [kindnessValue, setKindnessValue] = useState();
-  const [loading, setLoading] = useState(true);
+
+  // 평가한 팀원 목록
   const [evaluatedList, setEvaluatedList] = useState([]);
 
+  // 로딩 상태
+  const [loading, setLoading] = useState(true);
+
+  // 로그인한 유저 아이디
   const loginUserId = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).userId
     : null;
 
   const nav = useNavigate();
 
+  // 본인을 제외한 팀원 목록 가져옴
   const membersExcludingSelf = getMembersExcludingSelf(loginUserId, members);
 
-  let pollingInterval = null; // 폴링 간격을 관리할 로컬 변수
+  console.log(evaluatedList);
 
-  console.log(feedbackData);
-
+  // 백엔드로부터 평가한 팀원 목록 가져오기
   const fetchEvaluatedListData = async () => {
     try {
       const response = await getEvaluatedList(teamId, loginUserId);
@@ -66,17 +74,18 @@ const TeamFeedback = () => {
     }
   };
 
+  // 백엔드로부터 프로젝트 완료되었는지 확인
   const fetchIsTeamCompleted = async () => {
     try {
       const response = await checkTeamCompleted(teamId);
       console.log("isTeamCompleted", response.data);
       if (!response.data) {
-        alert("팀 프로젝트가 완료되지 않았습니다.");
+        alert("프로젝트가 완료되지 않았습니다.");
         nav(-1, { replace: true });
       }
     } catch (error) {
       console.error("Error fetching team completed", error);
-      alert("팀 완료 여부를 불러오는데 실패했습니다.");
+      alert("프로젝트 여부를 불러오는데 실패했습니다.");
     }
   };
 
@@ -87,61 +96,34 @@ const TeamFeedback = () => {
       fetchIsTeamCompleted();
       fetchEvaluatedListData();
     }, 1000);
+  }, []);
 
-    // 폴링 설정
-    if (!pollingInterval) {
-      pollingInterval = setInterval(fetchEvaluatedListData, 5000); // 5초마다 데이터 요청
-    }
-
-    // 컴포넌트 언마운트 시 폴링 중지
-    return () => {
-      if (pollingInterval) {
-        clearInterval(pollingInterval);
-        pollingInterval = null;
-      }
-    };
-  }, [teamId, loginUserId]);
-
+  // 평가 항목 값 state 변경 관리
   const onChangePromise = (value) => {
-    setFeedback({
-      ...feedback,
-      promise: Number(value),
-    });
     setPromiseValue(value);
   };
   const onChangeFrequency = (value) => {
-    setFeedback({
-      ...feedback,
-      frequency: Number(value),
-    });
     setFrequencyValue(value);
   };
   const onChangeParticipate = (value) => {
-    setFeedback({
-      ...feedback,
-      participate: Number(value),
-    });
     setParticipateValue(value);
   };
   const onChangeKindness = (value) => {
-    setFeedback({
-      ...feedback,
-      kindness: Number(value),
-    });
     setKindnessValue(value);
   };
 
+  // from validation
   const isValidate = () => {
     if (!selectedMemberId) {
       alert("평가할 팀원을 선택해주세요.");
       return false;
     }
 
-    const feedbackValues = feedback ? Object.values(feedback) : null;
     if (
-      feedbackValues === null ||
-      Number(feedbackValues.length) !== 4 ||
-      feedbackValues.every((data) => data === undefined)
+      !promiseValue ||
+      !frequencyValue ||
+      !participateValue ||
+      !kindnessValue
     ) {
       alert("모든 항목에 체크해주세요.");
       return false;
@@ -149,46 +131,48 @@ const TeamFeedback = () => {
     return true;
   };
 
-  const onClickSubimt = () => {
-    if (!isValidate()) return;
-
-    if (!confirm("평가를 제출하시겠습니까?")) return;
+  // 평가 제출
+  const submitFeedback = async () => {
+    if (!confirm("평가를 제출하시겠습니까?\n제출된 평가는 수정할 수 없습니다."))
+      return;
     try {
-      onSubmitFeedback(teamId, String(loginUserId), String(selectedMemberId), {
-        ...feedback,
-      });
+      // 백엔드로 평가 데이터 전송
+      await evaluateMember(
+        teamId,
+        String(loginUserId),
+        String(selectedMemberId),
+        {
+          promise: Number(promiseValue),
+          frequency: Number(frequencyValue),
+          participate: Number(participateValue),
+          kindness: Number(kindnessValue),
+        }
+      );
     } catch (error) {
       console.error("Error fetching evaluate member", error);
       throw error;
     }
-
+    // 평가 제출 후 초기화
     setSelectedMemberId(null);
     setPromiseValue(null);
     setFrequencyValue(null);
     setParticipateValue(null);
     setKindnessValue(null);
-    setFeedback(null);
   };
 
-  const onClickFinish = () => {
+  // 제출하기 버튼 클릭
+  const onClickSubimt = async () => {
     if (!isValidate()) return;
-    try {
-      onSubmitFeedback(teamId, String(loginUserId), String(selectedMemberId), {
-        ...feedback,
-      });
-    } catch (error) {
-      console.error("Error fetching evaluate member", error);
-      throw error;
-    }
+    await submitFeedback();
+    // 평가한 팀원 목록 다시 가져오기
+    await fetchEvaluatedListData();
+  };
+
+  // 평가 종료 버튼 클릭 (마지막 평가일 경우)
+  const onClickFinish = async () => {
+    if (!isValidate()) return;
+    await submitFeedback();
     alert("팀원 평가를 완료합니다.");
-
-    setSelectedMemberId(null);
-    setPromiseValue(null);
-    setFrequencyValue(null);
-    setParticipateValue(null);
-    setKindnessValue(null);
-    setFeedback(null);
-
     nav("/myproj/attendproj", { replace: true });
   };
 
@@ -197,6 +181,7 @@ const TeamFeedback = () => {
       {loading && <Loading />}
       <div className={styles.teamFeedback__label}>팀원 평가</div>
       <div className={styles.teamFeedback__container}>
+        {/*상단 텍스트*/}
         <div className={styles.teamFeedback__innerLabel}>
           <CheckCircleIcon
             width={"26px"}
@@ -205,6 +190,7 @@ const TeamFeedback = () => {
           />
           평가할 팀원을 선택해주세요
         </div>
+        {/*팀원 목록(본인제외)*/}
         <div className={styles.teamFeedback__item}>
           {membersExcludingSelf.map((member, index) => (
             <MemberItem
@@ -224,6 +210,7 @@ const TeamFeedback = () => {
             />
           ))}
         </div>
+        {/*평가 항목*/}
         <div className={styles.teamFeedback__formContainer}>
           <div className={styles.teamFeedback__form}>
             <FeedbackFormItem
@@ -252,8 +239,9 @@ const TeamFeedback = () => {
             />
           </div>
         </div>
+        {/*제출 버튼*/}
         <div className={styles.teamFeedback__submitButton}>
-          {feedbackData.length >= membersExcludingSelf.length - 1 ? (
+          {evaluatedList.length >= membersExcludingSelf.length - 1 ? (
             <Button
               text={"평가종료"}
               type={"RAD-10__FONT-M"}

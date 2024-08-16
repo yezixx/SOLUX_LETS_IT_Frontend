@@ -1,11 +1,7 @@
 import { createContext, useEffect, useReducer, useRef, useState } from "react";
 import styles from "./Teamboard.module.css";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
-import {
-  delegateTeamLeader,
-  evaluateMember,
-  updateTeam,
-} from "../../service/teamService";
+import { delegateTeamLeader, updateTeam } from "../../service/teamService";
 import { getTeam } from "../../service/teamService";
 import Loading from "../../Components/Loading/Loading";
 
@@ -50,15 +46,6 @@ function meetingReducer(state, action) {
       return state;
   }
 }
-
-function feedbackReducer(state, action) {
-  switch (action.type) {
-    case "SUBMIT_FEEDBACK":
-      return [...state, action.data];
-    default:
-      return state;
-  }
-}
 // 팀원 여부 확인
 const isMember = (teamData, loginUserId) => {
   return teamData.teamMemberInfo.some(
@@ -87,8 +74,6 @@ const Teamboard = () => {
     githubLink: "",
     teamMemberInfo: [],
   });
-
-  const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
   const [kickData, kickDispatch] = useReducer(kickReducer, []);
   const [meetingData, meetingDispatch] = useReducer(meetingReducer, []);
 
@@ -303,23 +288,12 @@ const Teamboard = () => {
     });
   };
 
-  const onSubmitFeedback = (teamId, loginUserId, targetId, value) => {
-    feedbackDispatch({
-      type: "SUBMIT_FEEDBACK",
-      data: {
-        userId: targetId,
-      },
-    });
-    evaluateMember(teamId, loginUserId, targetId, value);
-  };
-
   return (
     <div className={styles.teamboard}>
       {loading && <Loading />}
       <TeamStateContext.Provider
         value={{
           teamData,
-          feedbackData,
           meetingData,
           kickData,
           teamId,
@@ -334,7 +308,6 @@ const Teamboard = () => {
             onAgree,
             onDisagree,
             onSaveMeeting,
-            onSubmitFeedback,
           }}
         >
           <Outlet />
