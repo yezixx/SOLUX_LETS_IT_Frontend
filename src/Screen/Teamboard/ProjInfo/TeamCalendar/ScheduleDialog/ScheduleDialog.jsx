@@ -2,10 +2,10 @@ import { useContext, useRef, useState } from "react";
 import Button from "../../../../../Components/Button/Button";
 import XIcon from "../../../../../Image/Icons/XIcon";
 import styles from "./ScheduleDialog.module.css";
-import { TeamDispatchContext } from "../../../Teamboard";
+import { CalendarDispatchContext } from "../TeamCalendar";
 
 const ScheduleDialog = ({ selectedDate, closeDialog }) => {
-  const { onCreateEvent } = useContext(TeamDispatchContext);
+  const { onCreateEvent } = useContext(CalendarDispatchContext);
 
   const [title, setTitle] = useState("");
   const [startDate, setStartDate] = useState(selectedDate);

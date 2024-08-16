@@ -2,46 +2,23 @@ import { createContext, useEffect, useReducer, useRef, useState } from "react";
 import styles from "./Teamboard.module.css";
 import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 import {
-  createSchedule,
   delegateTeamLeader,
-  deleteSchedule,
   evaluateMember,
-  getSchedule,
   updateTeam,
 } from "../../service/teamService";
 import { getTeam } from "../../service/teamService";
 import Loading from "../../Components/Loading/Loading";
 
+// 팀게시판 정보 Context
 export const TeamStateContext = createContext();
 export const TeamDispatchContext = createContext();
 
 function teamReducer(state, action) {
   switch (action.type) {
-    case "GET":
+    case "GET": // 팀 정보 불러오기
       return action.data;
-    case "UPDATE":
+    case "UPDATE": // 팀 정보 수정
       return action.data;
-    default:
-      return state;
-  }
-}
-
-function scheduleReducer(state, action) {
-  switch (action.type) {
-    case "GET_EVENT":
-      return action.data.map((item) => {
-        return {
-          id: String(item.calendarId),
-          title: String(item.title),
-          start: String(item.startDate),
-          end: String(item.endDate),
-          description: String(item.description),
-        };
-      });
-    case "CREATE_EVENT":
-      return [...state, action.data];
-    case "DELETE_EVENT":
-      return state.filter((item) => String(item.id) !== String(action.data));
     default:
       return state;
   }
@@ -82,7 +59,7 @@ function feedbackReducer(state, action) {
       return state;
   }
 }
-
+// 팀원 여부 확인
 const isMember = (teamData, loginUserId) => {
   return teamData.teamMemberInfo.some(
     (member) => String(member.userId) === String(loginUserId)
@@ -90,16 +67,20 @@ const isMember = (teamData, loginUserId) => {
 };
 
 const Teamboard = () => {
+  // 로딩 상태
   const [loading, setLoading] = useState(true);
+  // 로그인한 유저 아이디
   const loginUserId = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).userId
     : null;
 
+  // 팀 아이디
   const [params] = useSearchParams();
   const teamId = params.get("team");
 
   const nav = useNavigate();
 
+  // 팀 정보 state
   const [teamData, teamDispatch] = useReducer(teamReducer, {
     teamName: "",
     notionLink: "",
@@ -108,7 +89,6 @@ const Teamboard = () => {
   });
 
   const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
-  const [scheduleData, scheduleDispatch] = useReducer(scheduleReducer, []);
   const [kickData, kickDispatch] = useReducer(kickReducer, []);
   const [meetingData, meetingDispatch] = useReducer(meetingReducer, []);
 
@@ -133,22 +113,9 @@ const Teamboard = () => {
     }
   };
 
-  const fetchScheduleData = async () => {
-    try {
-      const data = await getSchedule(teamId);
-      await scheduleDispatch({
-        type: "GET_EVENT",
-        data: data.data,
-      });
-    } catch (error) {
-      console.log("schedule error", error);
-    }
-  };
-
   useEffect(() => {
     const initializeData = async () => {
       await fetchTeamData();
-      await fetchScheduleData();
     };
     initializeData();
   }, []);
@@ -236,31 +203,6 @@ const Teamboard = () => {
       } catch (e) {
         console.log("delegateTeamLeader error", e);
       }
-    }
-  };
-
-  const onCreateEvent = async (title, startDate, endDate, description) => {
-    if (startDate !== endDate) {
-      const newDate = new Date(endDate);
-      newDate.setDate(newDate.getDate() + 1);
-      endDate = newDate.toISOString().split("T")[0];
-    }
-    await createSchedule(teamId, {
-      title: title,
-      description: description,
-      startDate: startDate,
-      endDate: endDate,
-    });
-    fetchScheduleData();
-  };
-
-  const onDeleteEvent = (targetId) => {
-    if (confirm("일정을 삭제하시겠습니까?")) {
-      deleteSchedule(targetId);
-      scheduleDispatch({
-        type: "DELETE_EVENT",
-        data: targetId,
-      });
     }
   };
 
@@ -378,7 +320,6 @@ const Teamboard = () => {
         value={{
           teamData,
           feedbackData,
-          scheduleData,
           meetingData,
           kickData,
           teamId,
@@ -389,8 +330,6 @@ const Teamboard = () => {
           value={{
             onUpdateTeamData,
             onDeleteMember,
-            onCreateEvent,
-            onDeleteEvent,
             onVote,
             onAgree,
             onDisagree,

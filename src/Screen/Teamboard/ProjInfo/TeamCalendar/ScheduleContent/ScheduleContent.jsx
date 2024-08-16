@@ -2,10 +2,10 @@ import { useContext } from "react";
 import Button from "../../../../../Components/Button/Button";
 import XIcon from "../../../../../Image/Icons/XIcon";
 import styles from "./ScheduleContent.module.css";
-import { TeamDispatchContext } from "../../../Teamboard";
+import { CalendarDispatchContext } from "../TeamCalendar";
 
 const ScheduleContent = ({ event, closeInfo }) => {
-  const { onDeleteEvent } = useContext(TeamDispatchContext);
+  const { onDeleteEvent } = useContext(CalendarDispatchContext);
 
   const onClickDelete = () => {
     onDeleteEvent(event.id);
