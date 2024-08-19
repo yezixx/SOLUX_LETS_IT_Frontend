@@ -2,7 +2,7 @@ import { startTransition, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { submitApply } from "../../service/applyService";
 import { useSetAtom } from "jotai";
-import { applicant } from "../../atoms/atoms";
+import { applicant } from "../../store/atom.js";
 import { useValidate } from "../../Hooks/useValidate";
 import { getProfile } from "../../service/profileService";
 
@@ -12,7 +12,7 @@ const useApplyPost = () => {
     preferStack: "",
     desiredField: "",
     applyContent: "",
-    contact: "",
+    contact: ""
   });
   const { validation, ApplyFormError } = useValidate(applyData);
 
@@ -34,7 +34,7 @@ const useApplyPost = () => {
     const { name, value } = e.target;
     setApplyData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
   };
   //제출
@@ -71,7 +71,7 @@ const useApplyPost = () => {
     onChange,
     warning,
     handleSubmit,
-    ApplyFormError,
+    ApplyFormError
   };
 };
 

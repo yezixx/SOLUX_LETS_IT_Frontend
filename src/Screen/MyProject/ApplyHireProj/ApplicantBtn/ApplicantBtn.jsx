@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Button from "../../../../components/button/Button";
-import ProfilePhoto from "../../../../components/Profile/Profile_Info/Profile_Photo/ProfilePhoto";
+import ProfilePhoto from "../../../../components/profile/profileInfo/profilePhoto/ProfilePhoto";
 import styles from "./ApplicantBtn.module.css";
 import useApplicant from "./useApplicant";
 

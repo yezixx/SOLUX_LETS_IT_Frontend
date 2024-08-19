@@ -1,11 +1,11 @@
-import RouteName from "../../components/RouteName/RouteName";
+import RouteName from "../../components/routeName/RouteName";
 import styles from "./ProjPost_detail.module.css";
 import PostInfo from "./PostInfo/PostInfo";
 import Button from "../../components/button/Button";
 import BookmarkIcon from "../../Image/Icons/BookmarkIcon";
 import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
-import Loading from "../../components/Loading/Loading";
+import Loading from "../../components/loading/Loading";
 import { useEffect, useRef, useState } from "react";
 import { getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";

@@ -6,7 +6,7 @@ import ProjField from "./ProjField/ProjField";
 import DetailContent from "./DetailContent/DetailContent";
 import Button from "../../components/button/Button";
 import { useAtomValue } from "jotai";
-import { postProjectAtom } from "../../atoms/atoms";
+import { postProjectAtom } from "../../store/atom.js";
 import useProjectPost from "./useProjectPost";
 
 const ProjectHire = () => {

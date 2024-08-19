@@ -1,8 +1,7 @@
 import { useState } from "react";
-import ProfileForm from "../../components/ProfileForm/ProfileForm";
-import StepBar from "../../components/StepBar/StepBar";
+import ProfileForm from "../../components/profileForm/ProfileForm";
+import StepBar from "../../components/stepBar/StepBar";
 import { saveProfileImage } from "../../service/profileService";
-import Loading from "../../components/Loading/Loading";
 import styles from "./CreateProfile.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 

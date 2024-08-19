@@ -1,5 +1,5 @@
-import RouteName from "../../../components/RouteName/RouteName";
-import SideNav from "../../../components/SideNav/SideNav";
+import RouteName from "../../../components/routeName/RouteName";
+import SideNav from "../../../components/sideNav/SideNav";
 import styles from "./MyProfile.module.css";
 
 const sidenavCont = ["프로필 관리", "포트폴리오 관리", "개인정보 수정"];

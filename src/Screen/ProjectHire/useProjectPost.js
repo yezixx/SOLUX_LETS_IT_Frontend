@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue } from "jotai";
-import { postProjectAtom, userIdAtom } from "../../atoms/atoms";
+import { postProjectAtom, userIdAtom } from "../../store/atom.js";
 import { createPosts } from "../../service/postService";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ const useProjectPost = () => {
     const { name, value } = e.target;
     setPostProj((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
   };
 

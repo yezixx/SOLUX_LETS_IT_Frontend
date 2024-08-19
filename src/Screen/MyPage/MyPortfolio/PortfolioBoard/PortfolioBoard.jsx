@@ -1,10 +1,9 @@
 import Button from "../../../../components/button/Button";
 import styles from "./PortfolioBoard.module.css";
 import { useEffect, useState } from "react";
-import Paging from "../../../../components/Paging/Paging";
+import Paging from "../../../../components/paging/Paging";
 import { useNavigate, useParams } from "react-router-dom";
 import { getMyPortfolios } from "../../../../service/portfolioService";
-import Loading from "../../../../components/Loading/Loading";
 import { getTeam } from "../../../../service/teamService";
 
 const PortfolioBoard = () => {

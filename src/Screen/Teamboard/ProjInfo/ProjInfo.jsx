@@ -3,7 +3,7 @@ import MemberList from "./MemberList/MemberList";
 import TeamCalendar from "./TeamCalendar/TeamCalendar";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
-import ToolIcon from "../../../components/ToolIcon/ToolIcon";
+import ToolIcon from "../../../components/toolIcon/ToolIcon";
 import { useContext } from "react";
 import { TeamStateContext } from "../Teamboard";
 import { getLogoImage } from "../../../util/getLogoImage";

@@ -4,7 +4,7 @@ import useProjectPost from "../useProjectPost";
 import styles from "./ProjInfo.module.css";
 import { useProjInfo } from "./useProjInfo";
 import { useSetAtom } from "jotai";
-import { postProjectAtom } from "../../../atoms/atoms";
+import { postProjectAtom } from "../../../store/atom.js";
 
 const ProjInfo = ({ errors }) => {
   //ProjInfo 화면에서만 사용하는 훅
@@ -15,7 +15,7 @@ const ProjInfo = ({ errors }) => {
     startSubRegion,
     isFace,
     handleIsFace,
-    isSubRegSelected,
+    isSubRegSelected
   } = useProjInfo();
   //select에 필요한 이벤트 핸들러 (폼 공통)
   const { onChange } = useProjectPost();

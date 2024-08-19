@@ -3,9 +3,9 @@ import { useSearch } from "../../../Hooks/useSearch";
 import SearchIcon from "../../../Image/Icons/SearchIcon";
 import { Field } from "../../Field";
 import styles from "./ProjField.module.css";
-import { postProjectAtom } from "../../../atoms/atoms";
+import { postProjectAtom } from "../../../store/atom.js";
 import { useEffect } from "react";
-import GrayBox from "../../../components/SearchProject/GrayBox";
+import GrayBox from "../../../components/grayBox/GrayBox.jsx";
 
 const ProjField = ({ errors }) => {
   /*프로젝트 search 훅 */

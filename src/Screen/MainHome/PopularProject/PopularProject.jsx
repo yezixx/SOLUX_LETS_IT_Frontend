@@ -1,8 +1,8 @@
-import ProjectList from "../../../components/ProjectList/ProjectList";
+import ProjectList from "../../../components/prjContentBlock/PrjContentBlock";
 import styles from "./PopularProject.module.css";
 import { getPostsList } from "../../../service/postService";
 import React, { useState, useEffect } from "react";
-import Loading from "../../../components/Loading/Loading";
+import Loading from "../../../components/loading/Loading";
 
 function PopularProject() {
   const [projList, setProjList] = useState([]);

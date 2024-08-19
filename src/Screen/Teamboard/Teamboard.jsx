@@ -10,7 +10,7 @@ import {
   updateTeam
 } from "../../service/teamService";
 import { getTeam } from "../../service/teamService";
-import Loading from "../../components/Loading/Loading";
+import Loading from "../../components/loading/Loading";
 
 export const TeamStateContext = createContext();
 export const TeamDispatchContext = createContext();

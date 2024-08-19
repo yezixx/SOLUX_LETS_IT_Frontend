@@ -1,8 +1,8 @@
-import RouteName from "../../components/RouteName/RouteName.jsx";
-import SideNav from "../../components/SideNav/SideNav.jsx";
+import RouteName from "../../components/routeName/RouteName.jsx";
+import SideNav from "../../components/sideNav/SideNav.jsx";
 import styles from "./MyProfile.module.css";
 import Button from "../../components/button/Button.jsx";
-import Profile from "../../components/Profile/Profile.jsx";
+import Profile from "../../components/profile/Profile.jsx";
 
 const sidenavCont = ["프로필 관리", "포트폴리오 관리", "개인정보 수정"];
 const route = ["마이페이지", "프로필 관리"];

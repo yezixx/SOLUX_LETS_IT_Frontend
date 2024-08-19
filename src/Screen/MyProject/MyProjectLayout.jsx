@@ -1,5 +1,5 @@
-import RouteName from "../../components/RouteName/RouteName";
-import SideNav from "../../components/SideNav/SideNav";
+import RouteName from "../../components/routeName/RouteName";
+import SideNav from "../../components/sideNav/SideNav";
 import styles from "./MyProjectLayout.module.css";
 import { Outlet, useLocation } from "react-router-dom";
 import { getMyProjectRoute } from "./getMyProjectRoute";

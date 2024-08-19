@@ -1,13 +1,13 @@
 import Button from "../../components/button/Button";
-import MemberItem from "../../components/MemberItem/MemberItem";
-import CollabLinkForm from "../../components/CollabLinkForm/CollabLinkForm";
-import ProjNameForm from "../../components/ProjNameForm/ProjNameForm";
+import MemberItem from "../../components/memberItem/MemberItem";
+import CollabLinkForm from "../../components/collabLinkForm/CollabLinkForm";
+import ProjNameForm from "../../components/projNameForm/ProjNameForm";
 import styles from "./CreateBoard.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { createTeam } from "../../service/teamService";
 import { approveApplicants } from "../../service/applyService";
-import Loading from "../../components/Loading/Loading";
+import Loading from "../../components/loading/Loading";
 import { getPosts } from "../../service/postService";
 
 const mock_members = [

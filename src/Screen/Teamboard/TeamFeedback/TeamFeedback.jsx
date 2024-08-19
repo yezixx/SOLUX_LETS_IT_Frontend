@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import Button from "../../../components/button/Button";
-import MemberItem from "../../../components/MemberItem/MemberItem";
+import MemberItem from "../../../components/memberItem/MemberItem";
 import CheckCircleIcon from "../../../Image/Icons/CheckCircleIcon";
 import FeedbackFormItem from "./FeedbackFormItem/FeedbackFormItem";
 import styles from "./TeamFeedback.module.css";
@@ -10,7 +10,7 @@ import {
   checkTeamCompleted,
   getEvaluatedList
 } from "../../../service/teamService";
-import Loading from "../../../components/Loading/Loading";
+import Loading from "../../../components/loading/Loading";
 
 const getMembersExcludingSelf = (loginUserId, members) => {
   return members.filter(

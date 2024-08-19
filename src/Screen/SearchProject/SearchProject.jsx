@@ -1,9 +1,9 @@
-import RouteName from "../../components/RouteName/RouteName";
-import SideNav from "../../components/SideNav/SideNav";
+import RouteName from "../../components/routeName/RouteName";
+import SideNav from "../../components/sideNav/SideNav";
 import styles from "./SearchProject.module.css";
-import SearchProjectNav from "../../components/SearchProject/SearchProjectNav";
+import SearchProjectNav from "../../components/projectFilter/SearchProjectNav.jsx";
 import { AreaProvider } from "../../Hooks/useArea.jsx";
-import { FilterProvider } from "../../components/SearchProject/FilterContext.jsx";
+import { FilterProvider } from "./FilterContext.jsx";
 
 const sidenavCont = [
   "전체 프로젝트",

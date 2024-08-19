@@ -1,9 +1,9 @@
 import styles from "./UpdateProj.module.css";
-import MemberItem from "../../../components/MemberItem/MemberItem";
+import MemberItem from "../../../components/memberItem/MemberItem";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
-import ProjNameForm from "../../../components/ProjNameForm/ProjNameForm";
-import CollabLinkForm from "../../../components/CollabLinkForm/CollabLinkForm";
+import ProjNameForm from "../../../components/projNameForm/ProjNameForm";
+import CollabLinkForm from "../../../components/collabLinkForm/CollabLinkForm";
 import { useContext, useEffect, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { completeProject } from "../../../service/teamService";

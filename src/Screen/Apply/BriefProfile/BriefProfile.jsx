@@ -1,6 +1,6 @@
-import Loading from "../../../components/Loading/Loading";
-import PersonalDetail from "../../../components/Profile/Profile_Info/Profile_PersonalDetail/PersonalDetail";
-import ProfilePhoto from "../../../components/Profile/Profile_Info/Profile_Photo/ProfilePhoto";
+import Loading from "../../../components/loading/Loading";
+import PersonalDetail from "../../../components/profile/profileInfo/profilePersonnal/PersonalDetail";
+import ProfilePhoto from "../../../components/profile/profileInfo/profilePhoto/ProfilePhoto";
 import styles from "./BriefProfile.module.css";
 const BriefProfile = ({ user }) => {
   if (!user) {

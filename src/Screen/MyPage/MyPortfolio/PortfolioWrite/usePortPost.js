@@ -2,7 +2,7 @@ import { startTransition, useState } from "react";
 import { postPortfolios } from "../../../../service/portfolioService";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../../atoms/atoms";
+import { userIdAtom } from "../../../../store/atom.js";
 import { useValidate } from "../../../../Hooks/useValidate";
 
 const usePortPost = () => {
@@ -19,14 +19,14 @@ const usePortPost = () => {
     workDescription: "",
     issues: "",
     solutions: "",
-    feedback: "",
+    feedback: ""
   });
   //백엔드 보낼 데이터 저장
   const onChange = (e) => {
     const { name, value } = e.target;
     setPortfolioData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
   };
   //유효성 검사

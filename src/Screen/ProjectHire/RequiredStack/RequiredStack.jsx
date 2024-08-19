@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import SearchIcon from "../../../Image/Icons/SearchIcon";
 import { Stack } from "../../Stack";
 import styles from "./RequiredStack.module.css";
-import GrayBox from "../../../components/SearchProject/GrayBox";
+import GrayBox from "../../../components/grayBox/GrayBox.jsx";
 import { useSearch } from "../../../Hooks/useSearch";
 import { useAtomValue, useSetAtom } from "jotai";
-import { postProjectAtom } from "../../../atoms/atoms";
+import { postProjectAtom } from "../../../store/atom.js";
 
 const RequiredStack = ({ errors }) => {
   /*프로젝트 search 훅 */

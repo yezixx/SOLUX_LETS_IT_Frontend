@@ -1,4 +1,4 @@
-import ProjectList from "../../../components/ProjectList/ProjectList";
+import ProjectList from "../../../components/prjContentBlock/PrjContentBlock";
 import styles from "./Scrap.module.css";
 
 const projects = [
@@ -8,7 +8,7 @@ const projects = [
     location: "서울",
     onoff: "오프라인",
     difficulty: "초급",
-    stack: ["react", "spring", "R"],
+    stack: ["react", "spring", "R"]
   },
 
   {
@@ -17,8 +17,8 @@ const projects = [
     location: "서울",
     onoff: "오프라인",
     difficulty: "초급",
-    stack: ["react", "spring"],
-  },
+    stack: ["react", "spring"]
+  }
 ];
 const Scrap = () => {
   return (

@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAtom, useSetAtom } from "jotai";
-import { isLoginAtom, userAtom } from "../../atoms/atoms";
+import { isLoginAtom, userAtom } from "../../store/atom.js";
 import apiClient, { updateApiClientToken } from "../../service/apiClient";
-import Loading from "../../components/Loading/Loading";
+import Loading from "../../components/loading/Loading";
 
 const Redirect = () => {
   const navigate = useNavigate();

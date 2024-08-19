@@ -1,5 +1,5 @@
 import Button from "../../components/button/Button";
-import RouteName from "../../components/RouteName/RouteName";
+import RouteName from "../../components/routeName/RouteName";
 import styles from "./Apply.module.css";
 import BriefProfile from "./BriefProfile/BriefProfile";
 import useApplyPost from "./useApplyPost";

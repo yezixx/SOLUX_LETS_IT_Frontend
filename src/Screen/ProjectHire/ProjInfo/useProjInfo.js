@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { KoreaArea } from "../../KoreaArea";
 import { useSetAtom } from "jotai";
-import { postProjectAtom } from "../../../atoms/atoms";
+import { postProjectAtom } from "../../../store/atom.js";
 import { useRegionId } from "./useRegionId";
 
 /*subRegion, region 등 독특한 이벤트 핸들러 처리 */
@@ -16,7 +16,7 @@ export const useProjInfo = () => {
     const { name, value } = e.target;
     setPostProj((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
 
     if (value === "대면") {
@@ -32,7 +32,7 @@ export const useProjInfo = () => {
     setPostProj((prevData) => ({
       //백엔드 포스트
       ...prevData,
-      regionId: useRegionId(value), // Id를 계산해주는 useRegionId 호출
+      regionId: useRegionId(value) // Id를 계산해주는 useRegionId 호출
     }));
   };
 
@@ -41,10 +41,10 @@ export const useProjInfo = () => {
     const { value } = e.target;
     setPostProj((prevData) => ({
       ...prevData,
-      subRegionId: Number(value),
+      subRegionId: Number(value)
     }));
     setIsSubRegSelected(() => ({
-      [value]: true,
+      [value]: true
     }));
   };
   console.log(isSubRegSelected);
@@ -52,7 +52,7 @@ export const useProjInfo = () => {
   useEffect(() => {
     setPostProj((prevData) => ({
       ...prevData,
-      subRegionId: 1701, // subRegionId를 1701로 초기화
+      subRegionId: 1701 // subRegionId를 1701로 초기화
     }));
   }, [selectedArea, setPostProj]);
 
@@ -67,6 +67,6 @@ export const useProjInfo = () => {
     onClick,
     isFace,
     handleIsFace,
-    isSubRegSelected,
+    isSubRegSelected
   };
 };

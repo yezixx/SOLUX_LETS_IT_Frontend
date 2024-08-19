@@ -3,7 +3,7 @@ import styles from "./App.module.css";
 import { RouterInfo } from "./Screen/RouterInfo";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
-import { isLoginAtom } from "./atoms/atoms";
+import { isLoginAtom } from "./store/atom.js";
 
 const RouterObject = createBrowserRouter(RouterInfo);
 
