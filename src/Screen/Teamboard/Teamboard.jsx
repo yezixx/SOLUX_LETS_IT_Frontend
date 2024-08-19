@@ -77,21 +77,25 @@ const Teamboard = () => {
   const [kickData, kickDispatch] = useReducer(kickReducer, []);
   const [meetingData, meetingDispatch] = useReducer(meetingReducer, []);
 
+  // 팀 정보 불러오기
   const fetchTeamData = async () => {
-    setLoading(true);
+    setLoading(true); // 로딩 시작
     try {
+      // 불러오기
       const data = await getTeam(teamId);
       await teamDispatch({
         type: "GET",
         data: data.data,
       });
       if (!isMember(data.data, loginUserId)) {
+        // 팀원이 아닌 경우
         alert("팀원 외에는 접근할 수 없습니다.");
         nav(-1, { replace: true });
         return;
       }
-      setLoading(false);
+      setLoading(false); // 로딩 끝
     } catch (error) {
+      // 에러 발생 시
       console.log("teamboard error", error);
       alert("팀 정보를 불러오는 중 오류가 발생했습니다.");
       nav(-1, { replace: true });
@@ -99,6 +103,7 @@ const Teamboard = () => {
   };
 
   useEffect(() => {
+    // 초기 데이터 불러오기
     const initializeData = async () => {
       await fetchTeamData();
     };
@@ -109,6 +114,7 @@ const Teamboard = () => {
   const meetingRef = useRef(1);
 
   const onDeleteMember = (userId) => {
+    // 팀원 삭제
     const filteredMember = teamData.teamMemberInfo.filter((item) => {
       return String(item.userId) !== String(userId);
     });
@@ -139,8 +145,9 @@ const Teamboard = () => {
     }
   };
 
-  const onUpdateTeamData = (title, notion, github, selectedMember) => {
-    teamDispatch({
+  const onUpdateTeamData = async (title, notion, github, selectedMember) => {
+    // 팀 정보 state 수정 -> 근데 굳이?, 그냥 백엔드에서 다시 불러오면 될듯
+    /*teamDispatch({
       type: "UPDATE",
       data: {
         ...teamData,
@@ -154,7 +161,7 @@ const Teamboard = () => {
           return { ...member, position: "Team_Member" };
         }),
       },
-    });
+    });*/
     if (
       // 수정된 정보가 기존 정보와 다를 경우에만 실행
       !(
@@ -164,11 +171,14 @@ const Teamboard = () => {
       )
     ) {
       try {
-        updateTeam(teamId, {
+        await updateTeam(teamId, {
+          // 백엔드에 수정된 정보 전송
           teamName: title,
           notionLink: notion,
           githubLink: github,
         });
+        // 수정된 정보로 다시 불러오기
+        await fetchTeamData();
       } catch (e) {
         console.log("updateTeam error", e);
       }
@@ -184,7 +194,10 @@ const Teamboard = () => {
     ) {
       try {
         console.log(teamId, selectedMember);
-        delegateTeamLeader(teamId, selectedMember);
+        // 백엔드로 팀장 위임 요청
+        await delegateTeamLeader(teamId, selectedMember);
+        // 수정된 정보로 다시 불러오기
+        await fetchTeamData();
       } catch (e) {
         console.log("delegateTeamLeader error", e);
       }
@@ -192,12 +205,15 @@ const Teamboard = () => {
   };
 
   const onVote = (memberId, reason) => {
-    if (kickData.find((member) => String(member.userId) === String(memberId))) {
+    // 투표 한명만 가능하도록 할거라 필요없을듯
+    /*if (kickData.find((member) => String(member.userId) === String(memberId))) {
       alert("이미 투표 중인 팀원입니다.");
 
       return;
-    }
-    kickDispatch({
+    }*/
+    // 투표중인 팀원 데이터 있는지 확인하고 있을 경우에는 투표 제안 불가능하도록 하는 로직 추가 필요
+    // 백엔드로 투표 정보 요청보내고, 백엔드에서 투표 정보를 다시 받아오는 방식으로 변경 필요
+    /*kickDispatch({
       type: "CREATE_VOTE",
       data: {
         id: kickIdRef.current++,
@@ -210,23 +226,28 @@ const Teamboard = () => {
         agree: 0,
         disagree: 0,
       },
-    });
+    });*/
   };
 
+  // 이거 필요한가?...
   const getTargetMember = (targetUserId) => {
     return kickData.find(
       (member) => String(member.userId) === String(targetUserId)
     );
   };
 
+  // 찬성
   const onAgree = (targetUserId) => {
-    const targetData = getTargetMember(targetUserId);
+    const targetData = getTargetMember(targetUserId); // 투표 대상
 
+    // 1인당 1회만 가능하도록
     if (targetData.voteCount.includes(loginUserId)) {
       alert("투표는 1인당 1회만 가능합니다.");
       return;
     }
 
+    // 백엔드로 투표 정보 요청보내고, 백엔드에서 투표 정보를 다시 받아오는 방식으로 변경 필요
+    /*
     kickDispatch({
       type: "AGREE",
       data: {
@@ -234,25 +255,31 @@ const Teamboard = () => {
         agree: targetData.agree + 1,
         voteCount: [...targetData.voteCount, loginUserId],
       },
-    });
+    });*/
 
+    // 투표가 팀원수 - 1과 같을 경우, 찬성이 다수일 경우 팀원 삭제 -> 근데 이거 백엔드에서 처리해줄듯?
+    /*
     if (
       Number(targetData.agree + 1) ===
       Number(teamData.teamMemberInfo.length - 1)
     ) {
       onDeleteVote(targetUserId);
       onDeleteMember(targetUserId);
-    }
+    }*/
   };
 
+  // 반대
   const onDisagree = (targetUserId) => {
     const targetData = getTargetMember(targetUserId);
 
+    // 1인당 1회만 가능하도록 -> 중복로직... 따로 뺄까?
     if (targetData.voteCount.includes(loginUserId)) {
       alert("투표는 1인당 1회만 가능합니다.");
       return;
     }
 
+    // 백엔드로 투표 정보 요청보내고, 백엔드에서 투표 정보를 다시 받아오는 방식으로 변경 필요
+    /*
     kickDispatch({
       type: "DISAGREE",
       data: {
@@ -260,17 +287,20 @@ const Teamboard = () => {
         disagree: targetData.disagree + 1,
         voteCount: [...targetData.voteCount, loginUserId],
       },
-    });
+    });*/
 
+    // 투표가 팀원수 - 1과 같고 반대가 다수일 경우 투표 종료, 팀원 삭제는 x -> 이거도 아마 백엔드에서?
+    /*
     if (
       Number(targetData.voteCount.length) ===
         Number(teamData.teamMemberInfo.length - 1) &&
       Number(targetData.agree) < Number(teamData.teamMemberInfo.length - 1)
     ) {
       onDeleteVote(targetUserId);
-    }
+    }*/
   };
 
+  // 투표 삭제(투표 종료) -> 백엔드에서 처리해줄듯?
   const onDeleteVote = (targetUserId) => {
     kickDispatch({
       type: "DELETE_VOTE",
@@ -279,13 +309,14 @@ const Teamboard = () => {
   };
 
   const onSaveMeeting = (meetingData) => {
-    meetingDispatch({
+    // 백엔드로 회의 정보 저장 요청보내고, 백엔드에서 회의 정보를 다시 받아오는 방식으로 변경 필요
+    /*meetingDispatch({
       type: "SAVE_MEETING",
       data: {
         id: meetingRef.current++,
         ...meetingData,
       },
-    });
+    });*/
   };
 
   return (
