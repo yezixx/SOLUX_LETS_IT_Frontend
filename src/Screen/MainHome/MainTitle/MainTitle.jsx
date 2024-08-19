@@ -1,5 +1,5 @@
 import styles from "./MainTitle.module.css";
-import Logo from "../../../assets/Logo.svg?react";
+import Logo from "../../../assets/logo.svg?react";
 import SearchIcon from "../../../Image/Icons/SearchIcon";
 
 const MainTitle = () => {

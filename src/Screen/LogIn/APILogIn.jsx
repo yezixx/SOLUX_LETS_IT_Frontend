@@ -1,6 +1,6 @@
 import styles from "./APILogIn.module.css";
 import KakaoLoginImage from "../../assets/kakao_login.png";
-import Logo from "../../assets/Logo.svg?react";
+import Logo from "../../assets/logo.svg?react";
 import { KAKAO_AUTH_URL } from "../../api/kakaoApi";
 
 const APILogIn = () => {

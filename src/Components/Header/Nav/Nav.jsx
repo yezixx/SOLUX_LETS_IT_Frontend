@@ -1,5 +1,5 @@
 import styles from "./Nav.module.css";
-import Logo from "../../../assets/Logo.svg?react";
+import Logo from "../../../assets/logo.svg?react";
 import SearchIcon from "../../../Image/Icons/SearchIcon";
 import BellIcon from "../../../Image/Icons/BellIcon";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +7,6 @@ import useHover from "../../../Hooks/useHover";
 import { useAtom } from "jotai";
 import { isLoginAtom } from "../../../atoms/atoms";
 import { logoutService } from "../../../service/logoutService";
-import { useEffect } from "react";
 
 const Nav = () => {
   //로그인 여부
