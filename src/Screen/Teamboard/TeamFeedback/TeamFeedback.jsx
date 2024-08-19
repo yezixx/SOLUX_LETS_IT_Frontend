@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import Button from "../../../Components/Button/Button";
-import MemberItem from "../../../Components/MemberItem/MemberItem";
+import Button from "../../../components/Button/Button";
+import MemberItem from "../../../components/MemberItem/MemberItem";
 import CheckCircleIcon from "../../../Image/Icons/CheckCircleIcon";
 import FeedbackFormItem from "./FeedbackFormItem/FeedbackFormItem";
 import styles from "./TeamFeedback.module.css";
@@ -8,9 +8,9 @@ import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { useNavigate } from "react-router-dom";
 import {
   checkTeamCompleted,
-  getEvaluatedList,
+  getEvaluatedList
 } from "../../../service/teamService";
-import Loading from "../../../Components/Loading/Loading";
+import Loading from "../../../components/Loading/Loading";
 
 const getMembersExcludingSelf = (loginUserId, members) => {
   return members.filter(
@@ -105,28 +105,28 @@ const TeamFeedback = () => {
   const onChangePromise = (value) => {
     setFeedback({
       ...feedback,
-      promise: Number(value),
+      promise: Number(value)
     });
     setPromiseValue(value);
   };
   const onChangeFrequency = (value) => {
     setFeedback({
       ...feedback,
-      frequency: Number(value),
+      frequency: Number(value)
     });
     setFrequencyValue(value);
   };
   const onChangeParticipate = (value) => {
     setFeedback({
       ...feedback,
-      participate: Number(value),
+      participate: Number(value)
     });
     setParticipateValue(value);
   };
   const onChangeKindness = (value) => {
     setFeedback({
       ...feedback,
-      kindness: Number(value),
+      kindness: Number(value)
     });
     setKindnessValue(value);
   };
@@ -155,7 +155,7 @@ const TeamFeedback = () => {
     if (!confirm("평가를 제출하시겠습니까?")) return;
     try {
       onSubmitFeedback(teamId, String(loginUserId), String(selectedMemberId), {
-        ...feedback,
+        ...feedback
       });
     } catch (error) {
       console.error("Error fetching evaluate member", error);
@@ -174,7 +174,7 @@ const TeamFeedback = () => {
     if (!isValidate()) return;
     try {
       onSubmitFeedback(teamId, String(loginUserId), String(selectedMemberId), {
-        ...feedback,
+        ...feedback
       });
     } catch (error) {
       console.error("Error fetching evaluate member", error);
@@ -215,8 +215,8 @@ const TeamFeedback = () => {
                 isCompletedMember(member.userId, evaluatedList)
                   ? "COMPLETED"
                   : String(selectedMemberId) === String(member.userId)
-                  ? "ONLYBORDER_SELECTED"
-                  : "ONLYBORDER"
+                    ? "ONLYBORDER_SELECTED"
+                    : "ONLYBORDER"
               }
               onClick={() => {
                 setSelectedMemberId(member.userId);

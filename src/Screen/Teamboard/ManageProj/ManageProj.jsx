@@ -2,7 +2,7 @@ import styles from "./ManageProj.module.css";
 import AttendanceList from "./AttendanceList/AttendanceList";
 import AttendanceDetail from "./AttendanceDetail/AttendanceDetail";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../Components/Button/Button";
+import Button from "../../../components/Button/Button";
 import { useContext, useEffect } from "react";
 import { TeamStateContext } from "../Teamboard";
 import { isLeader } from "../isLeader";

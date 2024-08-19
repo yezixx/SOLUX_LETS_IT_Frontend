@@ -1,8 +1,8 @@
-import Button from "../../../Components/Button/Button";
+import Button from "../../../components/Button/Button";
 import ApplicantBtn from "./ApplicantBtn/ApplicantBtn";
 import styles from "./ApplyHireProj.module.css";
 import MemberView from "./MemberView/MemberView";
-import ProjectList from "../../../Components/ProjectList/ProjectList";
+import ProjectList from "../../../components/ProjectList/ProjectList";
 import { useApplyHire } from "./useApplyHire";
 
 const ApplyHireProj = () => {
@@ -12,7 +12,7 @@ const ApplyHireProj = () => {
     showMember,
     handleClickMember,
     completeHire,
-    deleteHireProj,
+    deleteHireProj
   } = useApplyHire();
 
   console.log(`hireProj 리스트 : ${hireProj}`);

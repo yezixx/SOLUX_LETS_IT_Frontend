@@ -4,7 +4,7 @@ import EllipsisHorizontalIcon from "../../../Image/Icons/EllipsisHorizontalIcon"
 import HeartIcon from "../../../Image/Icons/HeartIcon";
 import UserCircleIcon from "../../../Image/Icons/UserCircleIcon";
 import styles from "./CommentItem.module.css";
-import Button from "../../../Components/Button/Button";
+import Button from "../../../components/Button/Button";
 import { getFormattedDate } from "../getFormattedDate";
 
 const CommentItem = ({
@@ -17,7 +17,7 @@ const CommentItem = ({
   postWriter,
   inputRef,
   onDelete,
-  onUpdate,
+  onUpdate
 }) => {
   const loginUserId = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).userId
@@ -113,7 +113,7 @@ const CommentItem = ({
                 isPostWriter
                   ? {
                       backgroundColor: "var(--syb-color1)",
-                      borderColor: "var(--text-color2)",
+                      borderColor: "var(--text-color2)"
                     }
                   : {}
               }

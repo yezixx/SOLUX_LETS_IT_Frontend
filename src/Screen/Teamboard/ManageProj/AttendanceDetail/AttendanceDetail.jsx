@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
-import Button from "../../../../Components/Button/Button";
-import MemberItem from "../../../../Components/MemberItem/MemberItem";
+import Button from "../../../../components/Button/Button";
+import MemberItem from "../../../../components/MemberItem/MemberItem";
 import { TeamDispatchContext, TeamStateContext } from "../../Teamboard";
 import styles from "./AttendanceDetail.module.css";
 
@@ -35,7 +35,7 @@ const AttendanceDetail = () => {
       onSaveMeeting({
         date: new Date().toISOString().split("T")[0],
         nonParticipants: getSelectedMemberName(),
-        proofImages: proofImage,
+        proofImages: proofImage
       });
       setSelectedMember(null);
       setPlaceholder("파일을 선택해주세요.");

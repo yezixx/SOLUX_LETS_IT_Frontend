@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import ProjectBtn from "../../../Components/Project_Button/PortfolioBtn";
+import ProjectBtn from "../../../components/Project_Button/PortfolioBtn";
 import styles from "./AttendProj.module.css";
 import { useEffect, useState } from "react";
 import {
   getCompleteProjects,
-  getMyOngoingProjects,
+  getMyOngoingProjects
 } from "../../../service/projectService";
 
 const OngoingProj = () => {

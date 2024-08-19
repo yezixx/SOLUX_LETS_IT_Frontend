@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import Button from "../../../../../Components/Button/Button";
+import Button from "../../../../../components/Button/Button";
 import XIcon from "../../../../../Image/Icons/XIcon";
 import styles from "./ScheduleContent.module.css";
 import { TeamDispatchContext } from "../../../Teamboard";

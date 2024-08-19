@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import ProjectList from "../../../Components/ProjectList/ProjectList";
+import ProjectList from "../../../components/ProjectList/ProjectList";
 import styles from "./RecommendProject.module.css";
 import { getPostsList } from "../../../service/postService";
-import Loading from "../../../Components/Loading/Loading";
+import Loading from "../../../components/Loading/Loading";
 
 function RecommendProject() {
   const [projList, setProjList] = useState([]);

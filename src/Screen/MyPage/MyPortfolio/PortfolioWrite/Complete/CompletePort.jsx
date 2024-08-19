@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Button from "../../../../../Components/Button/Button";
+import Button from "../../../../../components/Button/Button";
 import styles from "./CompletePort.module.css";
 import { getMyAIPortfolios } from "../../../../../service/portfolioService";
 import { useParams } from "react-router-dom";

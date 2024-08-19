@@ -5,7 +5,7 @@ import { Field } from "../../Field";
 import styles from "./ProjField.module.css";
 import { postProjectAtom } from "../../../atoms/atoms";
 import { useEffect } from "react";
-import GrayBox from "../../../Components/SearchProject/GrayBox";
+import GrayBox from "../../../components/SearchProject/GrayBox";
 
 const ProjField = ({ errors }) => {
   /*프로젝트 search 훅 */
@@ -17,7 +17,7 @@ const ProjField = ({ errors }) => {
     handleCreateBox,
     deleteGrayBox,
     data,
-    tech,
+    tech
   } = useSearch(Field);
   /*백엔드에 보낼 데이터에 push */
   const setPostProj = useSetAtom(postProjectAtom);
@@ -25,7 +25,7 @@ const ProjField = ({ errors }) => {
     //tech가 변경될 시 백엔드에 보낼 데이터 재렌더링
     setPostProj((prev) => ({
       ...prev,
-      categoryId: [...tech],
+      categoryId: [...tech]
     }));
   }, [tech, setPostProj]);
 

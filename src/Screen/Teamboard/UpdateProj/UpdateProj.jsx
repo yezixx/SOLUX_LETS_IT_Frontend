@@ -1,9 +1,9 @@
 import styles from "./UpdateProj.module.css";
-import MemberItem from "../../../Components/MemberItem/MemberItem";
+import MemberItem from "../../../components/MemberItem/MemberItem";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../Components/Button/Button";
-import ProjNameForm from "../../../Components/ProjNameForm/ProjNameForm";
-import CollabLinkForm from "../../../Components/CollabLinkForm/CollabLinkForm";
+import Button from "../../../components/Button/Button";
+import ProjNameForm from "../../../components/ProjNameForm/ProjNameForm";
+import CollabLinkForm from "../../../components/CollabLinkForm/CollabLinkForm";
 import { useContext, useEffect, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { completeProject } from "../../../service/teamService";
@@ -16,7 +16,7 @@ const UpdateProj = () => {
   const [title, setTitle] = useState(teamData.teamName);
   const [links, setLinks] = useState([
     { tool: "notion", link: teamData.notionLink },
-    { tool: "github", link: teamData.githubLink },
+    { tool: "github", link: teamData.githubLink }
   ]);
   const [selectedMember, setSelectedMember] = useState();
 
@@ -44,7 +44,7 @@ const UpdateProj = () => {
       setTitle(teamData.teamName);
       setLinks([
         { tool: "notion", link: teamData.notionLink },
-        { tool: "github", link: teamData.githubLink },
+        { tool: "github", link: teamData.githubLink }
       ]);
       console.log(teamData);
     }
@@ -109,7 +109,7 @@ const UpdateProj = () => {
           item.tool === "notion"
             ? {
                 ...item,
-                link: input,
+                link: input
               }
             : item
         )
@@ -120,7 +120,7 @@ const UpdateProj = () => {
           item.tool === "github"
             ? {
                 ...item,
-                link: input,
+                link: input
               }
             : item
         )

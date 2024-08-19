@@ -1,8 +1,8 @@
-import MemberItem from "../../../../Components/MemberItem/MemberItem";
+import MemberItem from "../../../../components/MemberItem/MemberItem";
 import styles from "./ReportSection.module.css";
 import QuestionMarkIcon from "../../../../Image/Icons/QuestionMarkIcon";
-import ToolTip from "../../../../Components/ToolTip/ToolTip";
-import Button from "../../../../Components/Button/Button";
+import ToolTip from "../../../../components/ToolTip/ToolTip";
+import Button from "../../../../components/Button/Button";
 import { useContext, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../../Teamboard";
 
@@ -12,7 +12,7 @@ const OPTIONS = [
   { id: 2, value: "비협조적인 태도" },
   { id: 3, value: "지속적으로 마김일을 지키지 못함" },
   { id: 4, value: "사적인 만남 및 연락 시도" },
-  { id: 5, value: "부적절한 행동 및 태도, 욕설" },
+  { id: 5, value: "부적절한 행동 및 태도, 욕설" }
 ];
 
 const msg = (

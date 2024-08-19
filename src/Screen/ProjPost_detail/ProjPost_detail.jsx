@@ -1,18 +1,18 @@
-import RouteName from "../../Components/RouteName/RouteName";
+import RouteName from "../../components/RouteName/RouteName";
 import styles from "./ProjPost_detail.module.css";
 import PostInfo from "./PostInfo/PostInfo";
-import Button from "../../Components/Button/Button";
+import Button from "../../components/Button/Button";
 import BookmarkIcon from "../../Image/Icons/BookmarkIcon";
 import CommentItem from "./CommentItem/CommentItem";
 import UserCircleIcon from "../../Image/Icons/UserCircleIcon";
-import Loading from "../../Components/Loading/Loading";
+import Loading from "../../components/Loading/Loading";
 import { useEffect, useRef, useState } from "react";
 import { getPosts } from "../../service/postService";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   createComment,
   deleteComment,
-  updateComment,
+  updateComment
 } from "../../service/commentService";
 import { getProfile } from "../../service/profileService";
 
@@ -46,9 +46,9 @@ const ProjPost_detail = () => {
         name: "",
         comCreateDate: "",
         comUpdateDate: "",
-        comContent: ``,
-      },
-    ],
+        comContent: ``
+      }
+    ]
   });
   const postId = useParams().postId;
 
@@ -82,7 +82,7 @@ const ProjPost_detail = () => {
 
   const onCraeteComment = async (content) => {
     const res = await createComment(Number(postId), {
-      comContent: content,
+      comContent: content
     });
     const commentData = res.data;
     console.log(res.data);
@@ -94,14 +94,14 @@ const ProjPost_detail = () => {
         nickname: commentData.nickname,
         comCreateDate: commentData.comCreateDate,
         comUpdateDate: commentData.comUpdateDate,
-        comContent: commentData.comContent,
-      },
+        comContent: commentData.comContent
+      }
     ]);
   };
 
   const onUpdateComment = async (writerId, commentId, content) => {
     const res = await updateComment(Number(postId), Number(commentId), {
-      comContent: content,
+      comContent: content
     });
     const commentData = res.data;
     console.log(res.data);
@@ -111,7 +111,7 @@ const ProjPost_detail = () => {
           ? {
               ...comment,
               comUpdateDate: commentData.comUpdateDate,
-              comContent: content,
+              comContent: content
             }
           : comment
       )
@@ -154,7 +154,7 @@ const ProjPost_detail = () => {
           profile.skills === null
         ) {
           nav("/profile/new", {
-            state: { to: `/apply/${postId}` },
+            state: { to: `/apply/${postId}` }
           });
         } else {
           nav(`/apply/${postId}`);

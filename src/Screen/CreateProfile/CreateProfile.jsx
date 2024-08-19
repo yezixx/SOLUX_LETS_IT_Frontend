@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import ProfileForm from "../../Components/ProfileForm/ProfileForm";
-import StepBar from "../../Components/StepBar/StepBar";
-import { getProfile, saveProfileImage } from "../../service/profileService";
-import Loading from "../../Components/Loading/Loading";
+import { useState } from "react";
+import ProfileForm from "../../components/ProfileForm/ProfileForm";
+import StepBar from "../../components/StepBar/StepBar";
+import { saveProfileImage } from "../../service/profileService";
+import Loading from "../../components/Loading/Loading";
 import styles from "./CreateProfile.module.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -30,12 +30,12 @@ const CreateProfile = () => {
     sns: [
       {
         type: "email",
-        link: "",
+        link: ""
       },
       {
         type: "github",
-        link: "",
-      },
+        link: ""
+      }
     ],
     profileImage: loginUserInfo.profileImageUrl,
     mannerTier: "",
@@ -43,21 +43,21 @@ const CreateProfile = () => {
     skills: [
       {
         skillName: "",
-        fluency: 50,
+        fluency: 50
       },
       {
         skillName: "",
-        fluency: 50,
+        fluency: 50
       },
       {
         skillName: "",
-        fluency: 50,
+        fluency: 50
       },
       {
         skillName: "",
-        fluency: 50,
-      },
-    ],
+        fluency: 50
+      }
+    ]
   });
 
   const onSaveProfileImage = async (imageFile) => {

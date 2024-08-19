@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useAtom, useSetAtom } from "jotai";
 import { isLoginAtom, userAtom } from "../../atoms/atoms";
 import apiClient, { updateApiClientToken } from "../../service/apiClient";
-import Loading from "../../Components/Loading/Loading";
+import Loading from "../../components/Loading/Loading";
 
 const Redirect = () => {
   const navigate = useNavigate();

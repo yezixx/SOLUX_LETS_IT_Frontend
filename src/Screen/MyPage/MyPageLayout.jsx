@@ -1,5 +1,5 @@
-import RouteName from "../../Components/RouteName/RouteName";
-import SideNav from "../../Components/SideNav/SideNav";
+import RouteName from "../../components/RouteName/RouteName";
+import SideNav from "../../components/SideNav/SideNav";
 import styles from "./MyPageLayout.module.css";
 import { Outlet, useLocation } from "react-router-dom";
 import { getRouteNames } from "./getMyPageRoute";

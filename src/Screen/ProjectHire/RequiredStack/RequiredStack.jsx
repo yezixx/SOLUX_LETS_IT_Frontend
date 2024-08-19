@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import SearchIcon from "../../../Image/Icons/SearchIcon";
 import { Stack } from "../../Stack";
 import styles from "./RequiredStack.module.css";
-import GrayBox from "../../../Components/SearchProject/GrayBox";
+import GrayBox from "../../../components/SearchProject/GrayBox";
 import { useSearch } from "../../../Hooks/useSearch";
 import { useAtomValue, useSetAtom } from "jotai";
 import { postProjectAtom } from "../../../atoms/atoms";
@@ -17,7 +17,7 @@ const RequiredStack = ({ errors }) => {
     handleCreateBox,
     deleteGrayBox,
     data,
-    tech,
+    tech
   } = useSearch(Stack);
   /*x누를 시 데이터 없애기 */
 
@@ -28,7 +28,7 @@ const RequiredStack = ({ errors }) => {
     //tech가 변경될 시 백엔드에 보낼 데이터 재렌더링
     setPostProj((prev) => ({
       ...prev,
-      stack: [...tech],
+      stack: [...tech]
     }));
   }, [tech, setPostProj]);
 

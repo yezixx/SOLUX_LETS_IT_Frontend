@@ -1,6 +1,6 @@
 import styles from "./MyProfile.module.css";
-import Button from "../../../Components/Button/Button.jsx";
-import Profile from "../../../Components/Profile/Profile.jsx";
+import Button from "../../../components/Button/Button.jsx";
+import Profile from "../../../components/Profile/Profile.jsx";
 import { useNavigate } from "react-router-dom";
 import useMyProfileGet from "./useMyProfileGet.js";
 

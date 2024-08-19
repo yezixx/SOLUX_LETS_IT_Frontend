@@ -1,5 +1,5 @@
-import RouteName from "../../Components/RouteName/RouteName";
-import SideNav from "../../Components/SideNav/SideNav";
+import RouteName from "../../components/RouteName/RouteName";
+import SideNav from "../../components/SideNav/SideNav";
 import styles from "./MyProjectLayout.module.css";
 import { Outlet, useLocation } from "react-router-dom";
 import { getMyProjectRoute } from "./getMyProjectRoute";
@@ -17,7 +17,7 @@ const MyPageLayout = () => {
   const link = [
     "/myproj/hiring-and-applied",
     "/myproj/attendproj",
-    "/myproj/scrap",
+    "/myproj/scrap"
   ];
 
   return (

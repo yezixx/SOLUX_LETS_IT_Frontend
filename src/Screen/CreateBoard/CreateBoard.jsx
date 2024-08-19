@@ -1,33 +1,33 @@
-import Button from "../../Components/Button/Button";
-import MemberItem from "../../Components/MemberItem/MemberItem";
-import CollabLinkForm from "../../Components/CollabLinkForm/CollabLinkForm";
-import ProjNameForm from "../../Components/ProjNameForm/ProjNameForm";
+import Button from "../../components/Button/Button";
+import MemberItem from "../../components/MemberItem/MemberItem";
+import CollabLinkForm from "../../components/CollabLinkForm/CollabLinkForm";
+import ProjNameForm from "../../components/ProjNameForm/ProjNameForm";
 import styles from "./CreateBoard.module.css";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { createTeam } from "../../service/teamService";
 import { approveApplicants } from "../../service/applyService";
-import Loading from "../../Components/Loading/Loading";
+import Loading from "../../components/Loading/Loading";
 import { getPosts } from "../../service/postService";
 
 const mock_members = [
   {
     applyId: 0,
     nickname: "",
-    profileImage: "",
-  },
+    profileImage: ""
+  }
 ];
 const init_collabLinks = [
   {
     id: 1,
     tool: "notion",
-    link: "",
+    link: ""
   },
   {
     id: 2,
     tool: "github",
-    link: "",
-  },
+    link: ""
+  }
 ];
 
 const CreateBoard = () => {
@@ -120,7 +120,7 @@ const CreateBoard = () => {
     const newTeamData = {
       teamName: title,
       notionLink: links[0].link,
-      githubLink: links[1].link,
+      githubLink: links[1].link
     };
     if (confirm("팀게시판을 생성하시겠습니까?")) {
       const teamID = await handleCreate(postId, newTeamData);

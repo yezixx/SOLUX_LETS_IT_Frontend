@@ -7,10 +7,10 @@ import {
   deleteSchedule,
   evaluateMember,
   getSchedule,
-  updateTeam,
+  updateTeam
 } from "../../service/teamService";
 import { getTeam } from "../../service/teamService";
-import Loading from "../../Components/Loading/Loading";
+import Loading from "../../components/Loading/Loading";
 
 export const TeamStateContext = createContext();
 export const TeamDispatchContext = createContext();
@@ -35,7 +35,7 @@ function scheduleReducer(state, action) {
           title: String(item.title),
           start: String(item.startDate),
           end: String(item.endDate),
-          description: String(item.description),
+          description: String(item.description)
         };
       });
     case "CREATE_EVENT":
@@ -104,7 +104,7 @@ const Teamboard = () => {
     teamName: "",
     notionLink: "",
     githubLink: "",
-    teamMemberInfo: [],
+    teamMemberInfo: []
   });
 
   const [feedbackData, feedbackDispatch] = useReducer(feedbackReducer, []);
@@ -118,7 +118,7 @@ const Teamboard = () => {
       const data = await getTeam(teamId);
       await teamDispatch({
         type: "GET",
-        data: data.data,
+        data: data.data
       });
       if (!isMember(data.data, loginUserId)) {
         alert("팀원 외에는 접근할 수 없습니다.");
@@ -138,7 +138,7 @@ const Teamboard = () => {
       const data = await getSchedule(teamId);
       await scheduleDispatch({
         type: "GET_EVENT",
-        data: data.data,
+        data: data.data
       });
     } catch (error) {
       console.log("schedule error", error);
@@ -173,16 +173,16 @@ const Teamboard = () => {
             index === 0
               ? { ...item, position: "Team_Leader" }
               : { ...item, position: "Team_Member" }
-          ),
-        },
+          )
+        }
       });
     } else {
       teamDispatch({
         type: "UPDATE",
         data: {
           ...teamData,
-          teamMemberInfo: [...filteredMember],
-        },
+          teamMemberInfo: [...filteredMember]
+        }
       });
     }
   };
@@ -200,8 +200,8 @@ const Teamboard = () => {
             return { ...member, position: "Team_Leader" };
           }
           return { ...member, position: "Team_Member" };
-        }),
-      },
+        })
+      }
     });
     if (
       // 수정된 정보가 기존 정보와 다를 경우에만 실행
@@ -215,7 +215,7 @@ const Teamboard = () => {
         updateTeam(teamId, {
           teamName: title,
           notionLink: notion,
-          githubLink: github,
+          githubLink: github
         });
       } catch (e) {
         console.log("updateTeam error", e);
@@ -249,7 +249,7 @@ const Teamboard = () => {
       title: title,
       description: description,
       startDate: startDate,
-      endDate: endDate,
+      endDate: endDate
     });
     fetchScheduleData();
   };
@@ -259,7 +259,7 @@ const Teamboard = () => {
       deleteSchedule(targetId);
       scheduleDispatch({
         type: "DELETE_EVENT",
-        data: targetId,
+        data: targetId
       });
     }
   };
@@ -281,8 +281,8 @@ const Teamboard = () => {
         reason: reason,
         voteCount: [],
         agree: 0,
-        disagree: 0,
-      },
+        disagree: 0
+      }
     });
   };
 
@@ -305,8 +305,8 @@ const Teamboard = () => {
       data: {
         ...targetData,
         agree: targetData.agree + 1,
-        voteCount: [...targetData.voteCount, loginUserId],
-      },
+        voteCount: [...targetData.voteCount, loginUserId]
+      }
     });
 
     if (
@@ -331,8 +331,8 @@ const Teamboard = () => {
       data: {
         ...targetData,
         disagree: targetData.disagree + 1,
-        voteCount: [...targetData.voteCount, loginUserId],
-      },
+        voteCount: [...targetData.voteCount, loginUserId]
+      }
     });
 
     if (
@@ -347,7 +347,7 @@ const Teamboard = () => {
   const onDeleteVote = (targetUserId) => {
     kickDispatch({
       type: "DELETE_VOTE",
-      data: targetUserId,
+      data: targetUserId
     });
   };
 
@@ -356,8 +356,8 @@ const Teamboard = () => {
       type: "SAVE_MEETING",
       data: {
         id: meetingRef.current++,
-        ...meetingData,
-      },
+        ...meetingData
+      }
     });
   };
 
@@ -365,8 +365,8 @@ const Teamboard = () => {
     feedbackDispatch({
       type: "SUBMIT_FEEDBACK",
       data: {
-        userId: targetId,
-      },
+        userId: targetId
+      }
     });
     evaluateMember(teamId, loginUserId, targetId, value);
   };
@@ -382,7 +382,7 @@ const Teamboard = () => {
           meetingData,
           kickData,
           teamId,
-          loading,
+          loading
         }}
       >
         <TeamDispatchContext.Provider
@@ -395,7 +395,7 @@ const Teamboard = () => {
             onAgree,
             onDisagree,
             onSaveMeeting,
-            onSubmitFeedback,
+            onSubmitFeedback
           }}
         >
           <Outlet />

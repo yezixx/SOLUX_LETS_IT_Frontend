@@ -1,14 +1,12 @@
-// components/SearchStack.js
-import React, { useEffect } from 'react';
-import { useFilter } from './FilterContext';
-import SearchIcon from '../../Image/Icons/SearchIcon';
-import { Stack } from '../../Screen/Stack';
-import styles from './SearchStack.module.css';
-import GrayBox from '../../Components/SearchProject/GrayBox';
-import { useSearch } from '../../Hooks/useSearch';
-
-const SearchStack = () => {
-  /* 프로젝트 search 훅 */
+// components/SearchField.js
+import React, { useEffect } from "react";
+import { useSearch } from "../../Hooks/useSearch";
+import SearchIcon from "../../Image/Icons/SearchIcon";
+import { Field } from "../../Screen/Field";
+import styles from "./SearchField.module.css";
+import GrayBox from "../../components/SearchProject/GrayBox";
+import { useFilter } from "./FilterContext";
+const SearchField = () => {
   const {
     isFocus,
     handleFocus,
@@ -17,26 +15,24 @@ const SearchStack = () => {
     handleCreateBox,
     deleteGrayBox,
     data,
-    tech,
-  } = useSearch(Stack);
+    tech
+  } = useSearch(Field);
 
-  /* FilterContext에서 상태 관리 */
-  const { selectedStacks, setSelectedStacks } = useFilter();
+  const { setSelectedCategoryIds, setSelectedStacks } = useFilter(); // Context 사용
 
   useEffect(() => {
-    // tech가 변경될 시 FilterContext의 selectedStacks 업데이트
-    setSelectedStacks([...tech]);
-  }, [tech, setSelectedStacks]);
+    setSelectedCategoryIds([...tech]); // tech 데이터를 Context에 설정
+  }, [tech, setSelectedCategoryIds]);
 
   return (
     <div className={styles.projectHire__requiredStack}>
-      <div className={styles.projectHire__subTitle}>필요스택</div>
+      <div className={styles.projectHire__subTitle}>개발 분야</div>
       <div className={styles.projectHire__detail}>
         <input
-          name="stack"
+          name="field"
           onChange={handleSearch}
           className={styles.projectHire__inputStyle2}
-          placeholder="JavaScript"
+          placeholder="프론트엔드"
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
@@ -58,11 +54,11 @@ const SearchStack = () => {
         )}
       </div>
       <div className={styles.projectHire__techWrap}>
-        {tech.map((item, idx) => (
+        {tech.map((item) => (
           <GrayBox
-            key={idx}
             showX={true}
             onClick={() => deleteGrayBox(item)}
+            key={item}
             tech={item}
           />
         ))}
@@ -71,4 +67,4 @@ const SearchStack = () => {
   );
 };
 
-export default SearchStack;
+export default SearchField;

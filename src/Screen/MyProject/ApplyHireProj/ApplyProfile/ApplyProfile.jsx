@@ -1,5 +1,5 @@
-import Button from "../../../../Components/Button/Button";
-import Profile from "../../../../Components/Profile/Profile";
+import Button from "../../../../components/Button/Button";
+import Profile from "../../../../components/Profile/Profile";
 import styles from "./ApplyProfile.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import useProfileView from "./useProfileView";

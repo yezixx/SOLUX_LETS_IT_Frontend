@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import MemberItem from "../../../../Components/MemberItem/MemberItem";
+import MemberItem from "../../../../components/MemberItem/MemberItem";
 import styles from "./MemberView.module.css";
 import { approveApplicants } from "../../../../service/applyService";
 

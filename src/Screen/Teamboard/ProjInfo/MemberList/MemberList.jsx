@@ -1,5 +1,5 @@
 import styles from "./MemberList.module.css";
-import MemberItem from "../../../../Components/MemberItem/MemberItem";
+import MemberItem from "../../../../components/MemberItem/MemberItem";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
