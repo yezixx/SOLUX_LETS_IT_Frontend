@@ -1,4 +1,4 @@
-import Button from "../../components/Button/Button";
+import Button from "../../components/button/Button";
 import RouteName from "../../components/RouteName/RouteName";
 import styles from "./Apply.module.css";
 import BriefProfile from "./BriefProfile/BriefProfile";

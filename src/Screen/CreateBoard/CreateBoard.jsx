@@ -1,4 +1,4 @@
-import Button from "../../components/Button/Button";
+import Button from "../../components/button/Button";
 import MemberItem from "../../components/MemberItem/MemberItem";
 import CollabLinkForm from "../../components/CollabLinkForm/CollabLinkForm";
 import ProjNameForm from "../../components/ProjNameForm/ProjNameForm";

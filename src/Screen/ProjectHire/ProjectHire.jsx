@@ -4,7 +4,7 @@ import RequiredStack from "./RequiredStack/RequiredStack";
 import ProjInfo from "./ProjInfo/ProjInfo";
 import ProjField from "./ProjField/ProjField";
 import DetailContent from "./DetailContent/DetailContent";
-import Button from "../../components/Button/Button";
+import Button from "../../components/button/Button";
 import { useAtomValue } from "jotai";
 import { postProjectAtom } from "../../atoms/atoms";
 import useProjectPost from "./useProjectPost";

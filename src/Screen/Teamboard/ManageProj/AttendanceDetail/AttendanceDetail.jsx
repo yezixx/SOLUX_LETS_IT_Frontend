@@ -1,5 +1,5 @@
 import { useContext, useRef, useState } from "react";
-import Button from "../../../../components/Button/Button";
+import Button from "../../../../components/button/Button";
 import MemberItem from "../../../../components/MemberItem/MemberItem";
 import { TeamDispatchContext, TeamStateContext } from "../../Teamboard";
 import styles from "./AttendanceDetail.module.css";

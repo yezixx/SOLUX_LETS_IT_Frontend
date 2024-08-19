@@ -1,4 +1,4 @@
-import Button from "../../../components/Button/Button";
+import Button from "../../../components/button/Button";
 import ApplicantBtn from "./ApplicantBtn/ApplicantBtn";
 import styles from "./ApplyHireProj.module.css";
 import MemberView from "./MemberView/MemberView";

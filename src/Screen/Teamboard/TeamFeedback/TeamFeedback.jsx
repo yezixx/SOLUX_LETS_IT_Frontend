@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import Button from "../../../components/Button/Button";
+import Button from "../../../components/button/Button";
 import MemberItem from "../../../components/MemberItem/MemberItem";
 import CheckCircleIcon from "../../../Image/Icons/CheckCircleIcon";
 import FeedbackFormItem from "./FeedbackFormItem/FeedbackFormItem";

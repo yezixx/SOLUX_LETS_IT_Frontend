@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Button from "../../../../components/Button/Button";
+import Button from "../../../../components/button/Button";
 import ProfilePhoto from "../../../../components/Profile/Profile_Info/Profile_Photo/ProfilePhoto";
 import styles from "./ApplicantBtn.module.css";
 import useApplicant from "./useApplicant";

@@ -1,7 +1,7 @@
 import styles from "./UpdateProj.module.css";
 import MemberItem from "../../../components/MemberItem/MemberItem";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../components/Button/Button";
+import Button from "../../../components/button/Button";
 import ProjNameForm from "../../../components/ProjNameForm/ProjNameForm";
 import CollabLinkForm from "../../../components/CollabLinkForm/CollabLinkForm";
 import { useContext, useEffect, useRef, useState } from "react";

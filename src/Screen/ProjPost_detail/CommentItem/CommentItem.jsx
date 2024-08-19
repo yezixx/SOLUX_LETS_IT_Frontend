@@ -4,7 +4,7 @@ import EllipsisHorizontalIcon from "../../../Image/Icons/EllipsisHorizontalIcon"
 import HeartIcon from "../../../Image/Icons/HeartIcon";
 import UserCircleIcon from "../../../Image/Icons/UserCircleIcon";
 import styles from "./CommentItem.module.css";
-import Button from "../../../components/Button/Button";
+import Button from "../../../components/button/Button";
 import { getFormattedDate } from "../getFormattedDate";
 
 const CommentItem = ({

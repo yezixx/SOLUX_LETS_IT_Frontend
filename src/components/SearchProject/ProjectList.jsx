@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ProjectList.module.css";
-import Button from "../Button/Button.jsx";
+import Button from "../button/Button.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import Tech from "./GrayBox.jsx";
 import Paging from "../Paging/Paging.jsx";
@@ -18,7 +18,7 @@ function ProjectList({ projects }) {
     activePage,
     itemsCountPerPage,
     pageRangeDisplayed,
-    handlePageChange,
+    handlePageChange
   } = useProjListPaging();
 
   // 실제 렌더링할 데이터 (data를 슬라이스 함 0-9 / 10-19..)
@@ -31,7 +31,7 @@ function ProjectList({ projects }) {
   const handleSaveClick = (postId) => {
     setSavedProjects((prevSavedProjects) => ({
       ...prevSavedProjects,
-      [postId]: !prevSavedProjects[postId],
+      [postId]: !prevSavedProjects[postId]
     }));
   };
 

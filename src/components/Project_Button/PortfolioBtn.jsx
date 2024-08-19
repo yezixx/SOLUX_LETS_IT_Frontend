@@ -1,4 +1,4 @@
-import Button from "../Button/Button";
+import Button from "../button/Button";
 import styles from "./PortfolioBtn.module.css";
 import PortfolioBtnPhoto from "./ProjectBtnPhoto";
 
@@ -11,7 +11,7 @@ const PortfolioBtn = ({
   button1Text = "add text",
   button2Text = "add text",
   prjTitle, //부모 요소에서 전달한 project title,
-  imgSrc,
+  imgSrc
 }) => {
   return (
     <div onClick={onClick} className={styles.PortfolioBtn__box}>

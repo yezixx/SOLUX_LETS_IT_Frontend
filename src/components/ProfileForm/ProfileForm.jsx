@@ -1,10 +1,9 @@
-import Button from "../Button/Button";
+import Button from "../button/Button";
 //import SearchIcon from "../../Image/Icons/SearchIcon";
 import styles from "./ProfileForm.module.css";
 import SkillRange from "../SkillRange/SkillRange";
 import CollabLink from "../CollabLink/CollabLink";
 import { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import defaultProfilePic from "../../assets/user.svg";
 import { updateProfile } from "../../service/profileService";
 import { ageMapping } from "../Profile/ProfileTierMap";
@@ -60,12 +59,12 @@ const ProfileForm = ({ init, onSaveProfileImage, navTo }) => {
       : [
           {
             type: "email",
-            link: "",
+            link: ""
           },
           {
             type: "github",
-            link: "",
-          },
+            link: ""
+          }
         ]
   );
   const [skills, setSkills] = useState(
@@ -74,20 +73,20 @@ const ProfileForm = ({ init, onSaveProfileImage, navTo }) => {
       : [
           {
             skillName: "",
-            fluency: 50,
+            fluency: 50
           },
           {
             skillName: "",
-            fluency: 50,
+            fluency: 50
           },
           {
             skillName: "",
-            fluency: 50,
+            fluency: 50
           },
           {
             skillName: "",
-            fluency: 50,
-          },
+            fluency: 50
+          }
         ]
   );
 
@@ -152,15 +151,15 @@ const ProfileForm = ({ init, onSaveProfileImage, navTo }) => {
           bio: bio,
           sns: {
             [links[0].type]: links[0].link,
-            [links[1].type]: links[1].link,
+            [links[1].type]: links[1].link
           },
           selfIntro: introduce,
           skills: {
             [skills[0].skillName]: skills[0].fluency,
             [skills[1].skillName]: skills[1].fluency,
             [skills[2].skillName]: skills[2].fluency,
-            [skills[3].skillName]: skills[3].fluency,
-          },
+            [skills[3].skillName]: skills[3].fluency
+          }
         });
         if (selectPicRef.current.files[0] !== undefined) {
           onSaveProfileImage(kakaoId, selectPicRef.current.files[0]);

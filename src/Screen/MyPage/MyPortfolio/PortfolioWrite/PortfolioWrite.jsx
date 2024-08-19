@@ -1,4 +1,4 @@
-import Button from "../../../../components/Button/Button";
+import Button from "../../../../components/button/Button";
 import FormInput from "./FormInput";
 import styles from "./PortfolioWrite.module.css";
 import usePortPost from "./usePortPost";

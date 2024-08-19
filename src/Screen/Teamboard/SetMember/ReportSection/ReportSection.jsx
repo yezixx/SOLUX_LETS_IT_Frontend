@@ -2,7 +2,7 @@ import MemberItem from "../../../../components/MemberItem/MemberItem";
 import styles from "./ReportSection.module.css";
 import QuestionMarkIcon from "../../../../Image/Icons/QuestionMarkIcon";
 import ToolTip from "../../../../components/ToolTip/ToolTip";
-import Button from "../../../../components/Button/Button";
+import Button from "../../../../components/button/Button";
 import { useContext, useRef, useState } from "react";
 import { TeamDispatchContext, TeamStateContext } from "../../Teamboard";
 
