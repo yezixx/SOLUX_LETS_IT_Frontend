@@ -5,11 +5,11 @@ import PersonalDetail from "./Profile_Info/Profile_PersonalDetail/PersonalDetail
 import ProfileTier from "./Profile_Tier/ProfileTier.jsx";
 import ProfileIntroduce from "./Profile_Introduce/ProfileIntroduce.jsx";
 import ProfileSkills from "./Profile_Skills/ProfileSkills.jsx";
-import Tier_A from "../../assets/Tier/tier_A.svg?react";
-import Tier_B from "../../assets/Tier/tier_B.svg?react";
-import Tier_C from "../../assets/Tier/tier_C.svg?react";
-import Tier_F from "../../assets/Tier/tier_F.svg?react";
-import Tier_S from "../../assets/Tier/tier_S.svg?react";
+import Tier_A from "../../assets/tier/tier_A.svg?react";
+import Tier_B from "../../assets/tier/tier_B.svg?react";
+import Tier_C from "../../assets/tier/tier_C.svg?react";
+import Tier_F from "../../assets/tier/tier_F.svg?react";
+import Tier_S from "../../assets/tier/tier_S.svg?react";
 import Loading from "../Loading/Loading.jsx";
 
 const Profile = ({ user, type, tooltipShow = false }) => {

@@ -1,9 +1,9 @@
 import styles from "./ProfileToolTip.module.css";
-import TierA from "../../../assets/Tier/tier_A.svg?react";
-import TierB from "../../../assets/Tier/tier_B.svg?react";
-import TierC from "../../../assets/Tier/tier_C.svg?react";
-import TierS from "../../../assets/Tier/tier_S.svg?react";
-import TierF from "../../../assets/Tier/tier_F.svg?react";
+import TierA from "../../../assets/tier/tier_A.svg?react";
+import TierB from "../../../assets/tier/tier_B.svg?react";
+import TierC from "../../../assets/tier/tier_C.svg?react";
+import TierS from "../../../assets/tier/tier_S.svg?react";
+import TierF from "../../../assets/tier/tier_F.svg?react";
 
 const ProfileToolTip = () => {
   return (
