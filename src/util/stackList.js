@@ -41,5 +41,5 @@ export const Stack = [
   "Kubernetes",
   "AWS",
   "Google Cloud Platform (GCP)",
-  "GitHub",
+  "GitHub"
 ];

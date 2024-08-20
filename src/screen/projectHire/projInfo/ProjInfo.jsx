@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { KoreaArea } from "../../KoreaArea";
+import { KoreaArea } from "../../../util/koreaAreaList.js";
 import useProjectPost from "../useProjectPost";
 import styles from "./ProjInfo.module.css";
 import { useProjInfo } from "./useProjInfo";

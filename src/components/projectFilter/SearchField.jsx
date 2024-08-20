@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useSearch } from "../../hooks/useSearch";
 import SearchIcon from "../../image/icons/SearchIcon";
-import { Field } from "../../screen/Field";
+import { category } from "../../util/categoryList";
 import styles from "./SearchField.module.css";
 import GrayBox from "../grayBox/GrayBox";
 import { useFilter } from "../../screen/searchProject/FilterContext";

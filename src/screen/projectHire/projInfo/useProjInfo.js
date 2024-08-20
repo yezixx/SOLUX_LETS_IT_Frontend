@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { KoreaArea } from "../../KoreaArea";
+import { KoreaArea } from "../../../util/koreaAreaList.js";
 import { useSetAtom } from "jotai";
 import { postProjectAtom } from "../../../store/atom.js";
 import { useRegionId } from "./useRegionId";

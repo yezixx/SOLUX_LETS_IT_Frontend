@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import SearchIcon from "../../../image/icons/SearchIcon";
-import { Stack } from "../../Stack";
+import { Stack } from "../../../util/stackList.js";
 import styles from "./RequiredStack.module.css";
 import GrayBox from "../../../components/grayBox/GrayBox.jsx";
 import { useSearch } from "../../../hooks/useSearch";

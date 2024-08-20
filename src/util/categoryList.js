@@ -1,9 +1,9 @@
-export const Field = [
+export const category = [
   "웹 프론트",
   "앱 프론트",
   "웹 백",
   "앱 백",
   "게임",
   "머신러닝",
-  "데이터 분석",
+  "데이터 분석"
 ];
