@@ -1,0 +1,41 @@
+.ProjectBtn__box {
+  /*포트폴리오 버튼 박스 전체*/
+  width: 308px;
+  height: 160px;
+  padding: 18px;
+  border: 1px solid var(--line-color);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  cursor: pointer;
+}
+.ProjectBtn__title {
+  font-size: 18px;
+  font-family: "pretendardB";
+}
+.ProjectBtn__photo {
+  /*프로필사진 모음 박스*/
+  display: flex;
+  position: relative;
+}
+/*프로필 사진 3명 (중앙,왼쪽,오른쪽)*/
+.member1 {
+  z-index: 100;
+}
+.member2 {
+  position: absolute;
+  transform: translateX(-70%);
+}
+.member3 {
+  position: absolute;
+  transform: translateX(70%);
+}
+
+.ProjectBtn__button {
+  /*포트폴리오 작성하기, 삭제 버튼*/
+  display: flex;
+  gap: 10px;
+}
