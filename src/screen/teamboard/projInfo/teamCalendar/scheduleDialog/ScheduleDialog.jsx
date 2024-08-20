@@ -26,6 +26,11 @@ const ScheduleDialog = ({ selectedDate, closeDialog }) => {
       return;
     }
 
+    if (startDate === "" || endDate === "") {
+      alert("날짜를 입력해주세요.");
+      return;
+    }
+
     onCreateEvent(title, startDate, endDate, description);
     closeDialog();
   };
