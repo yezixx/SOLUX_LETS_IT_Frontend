@@ -1,8 +1,8 @@
 // components/Area.js
 import React from "react";
 import styles from "./area.module.css";
-import { KoreaArea } from "../../util/koreaAreaList.js";
-import useArea from "../../hooks/useArea.jsx";
+import { KoreaArea } from "../../../util/koreaAreaList.js";
+import useArea from "../../../hooks/useArea.jsx";
 
 const Area = () => {
   const {

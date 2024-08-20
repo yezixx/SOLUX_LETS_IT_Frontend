@@ -1,8 +1,8 @@
 import RouteName from "../../components/routeName/RouteName";
 import SideNav from "../../components/sideNav/SideNav";
 import styles from "./Proj_area.module.css";
-import Area from "../../components/projectFilter/Area.jsx";
-import SearchProjectNav from "../../components/projectFilter/SearchProjectNav.jsx";
+import Area from "./projectFilter/Area.jsx";
+import SearchProjectNav from "./projectFilter/SearchProjectNav.jsx";
 import { AreaProvider } from "../../hooks/useArea.jsx";
 import { FilterProvider } from "./FilterContext.jsx";
 

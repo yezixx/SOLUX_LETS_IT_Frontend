@@ -1,4 +1,4 @@
-import GraphBar from "../../graph/GraphBar";
+import GraphBar from "../graph/GraphBar";
 import styles from "./ProfileSkills.module.css";
 
 const ProfileSkills = ({ skills }) => {

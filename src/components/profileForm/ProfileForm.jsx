@@ -1,7 +1,7 @@
 import Button from "../button/Button";
 import styles from "./ProfileForm.module.css";
-import SkillRange from "../skillRange/SkillRange";
-import CollabLink from "../collabLink/CollabLink";
+import SkillRange from "./skillRange/SkillRange";
+import CollabLink from "../../components/collabLink/CollabLink";
 import { useRef, useState } from "react";
 import defaultProfilePic from "../../assets/user.svg";
 import { updateProfile } from "../../service/profileService";

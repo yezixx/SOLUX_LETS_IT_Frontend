@@ -1,11 +1,12 @@
 // components/SearchField.js
 import React, { useEffect } from "react";
-import { useSearch } from "../../hooks/useSearch";
-import SearchIcon from "../../image/icons/SearchIcon";
-import { category } from "../../util/categoryList";
+import { useSearch } from "../../../hooks/useSearch";
+import SearchIcon from "../../../image/icons/SearchIcon";
+import { category } from "../../../util/categoryList";
 import styles from "./SearchField.module.css";
-import GrayBox from "../grayBox/GrayBox";
-import { useFilter } from "../../screen/searchProject/FilterContext";
+import GrayBox from "../../../components/grayBox/GrayBox";
+import { useFilter } from "../FilterContext";
+
 const SearchField = () => {
   const {
     isFocus,

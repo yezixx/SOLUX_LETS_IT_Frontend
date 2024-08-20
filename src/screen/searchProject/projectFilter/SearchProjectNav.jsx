@@ -1,12 +1,12 @@
 // components/SearchProjectNav.js
 import React, { useState, useEffect } from "react";
 import styles from "./SearchProjectNav.module.css";
-import ProjectList from "../projectList/ProjectList.jsx";
-import useArea from "../../hooks/useArea.jsx";
-import { useFilter } from "../../screen/searchProject/FilterContext.jsx";
-import { getPostsList } from "../../service/postService.js";
-import QuestionMarkIcon from "../../image/icons/QuestionMarkIcon.jsx";
-import useHover from "../../hooks/useHover.js";
+import ProjectList from "../../../components/projectList/ProjectList.jsx";
+import useArea from "../../../hooks/useArea.jsx";
+import { useFilter } from "../FilterContext.jsx";
+import { getPostsList } from "../../../service/postService.js";
+import QuestionMarkIcon from "../../../image/icons/QuestionMarkIcon.jsx";
+import useHover from "../../../hooks/useHover.js";
 
 const SearchProjectNav = () => {
   const { selectedArea, selectedSubAreas } = useArea();

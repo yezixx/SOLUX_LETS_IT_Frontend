@@ -12,7 +12,7 @@ const SkillRange = forwardRef(
     useImperativeHandle(ref, () => ({
       focus: () => {
         inputRef.current.focus();
-      },
+      }
     }));
 
     const onChangeSkillName = (e) => {
@@ -43,8 +43,7 @@ const SkillRange = forwardRef(
                 currentValue <= 5
                   ? `calc(${currentValue}% + 5px)`
                   : `${currentValue}%`,
-              borderRadius:
-                currentValue <= 35 ? "5.5px 0px 0px 5.5px" : "5.5px",
+              borderRadius: currentValue <= 35 ? "5.5px 0px 0px 5.5px" : "5.5px"
             }}
           ></div>
           <input
