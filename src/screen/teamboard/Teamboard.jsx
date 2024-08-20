@@ -72,7 +72,7 @@ const Teamboard = () => {
     teamName: "",
     notionLink: "",
     githubLink: "",
-    teamMemberInfo: []
+    teamMemberInfo: [],
   });
   const [kickData, kickDispatch] = useReducer(kickReducer, []);
   const [meetingData, meetingDispatch] = useReducer(meetingReducer, []);
@@ -85,14 +85,14 @@ const Teamboard = () => {
       const data = await getTeam(teamId);
       await teamDispatch({
         type: "GET",
-        data: data.data
+        data: data.data,
       });
-      if (!isMember(data.data, loginUserId)) {
-        // 팀원이 아닌 경우
-        alert("팀원 외에는 접근할 수 없습니다.");
-        nav(-1, { replace: true });
-        return;
-      }
+      // if (!isMember(data.data, loginUserId)) {
+      //   // 팀원이 아닌 경우
+      //   alert("팀원 외에는 접근할 수 없습니다.");
+      //   nav(-1, { replace: true });
+      //   return;
+      // }
       setLoading(false); // 로딩 끝
     } catch (error) {
       // 에러 발생 시
@@ -109,9 +109,6 @@ const Teamboard = () => {
     };
     initializeData();
   }, []);
-
-  const kickIdRef = useRef(1);
-  const meetingRef = useRef(1);
 
   const onDeleteMember = (userId) => {
     // 팀원 삭제
@@ -131,16 +128,16 @@ const Teamboard = () => {
             index === 0
               ? { ...item, position: "Team_Leader" }
               : { ...item, position: "Team_Member" }
-          )
-        }
+          ),
+        },
       });
     } else {
       teamDispatch({
         type: "UPDATE",
         data: {
           ...teamData,
-          teamMemberInfo: [...filteredMember]
-        }
+          teamMemberInfo: [...filteredMember],
+        },
       });
     }
   };
@@ -175,7 +172,7 @@ const Teamboard = () => {
           // 백엔드에 수정된 정보 전송
           teamName: title,
           notionLink: notion,
-          githubLink: github
+          githubLink: github,
         });
         // 수정된 정보로 다시 불러오기
         await fetchTeamData();
@@ -304,7 +301,7 @@ const Teamboard = () => {
   const onDeleteVote = (targetUserId) => {
     kickDispatch({
       type: "DELETE_VOTE",
-      data: targetUserId
+      data: targetUserId,
     });
   };
 
@@ -328,7 +325,7 @@ const Teamboard = () => {
           meetingData,
           kickData,
           teamId,
-          loading
+          loading,
         }}
       >
         <TeamDispatchContext.Provider
