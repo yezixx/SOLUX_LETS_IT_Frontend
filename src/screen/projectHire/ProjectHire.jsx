@@ -1,9 +1,9 @@
 import styles from "./ProjectHire.module.css";
-import RecruitInfo from "./RecruitInfo/RecruitInfo";
-import RequiredStack from "./RequiredStack/RequiredStack";
-import ProjInfo from "./ProjInfo/ProjInfo";
-import ProjField from "./ProjField/ProjField";
-import DetailContent from "./DetailContent/DetailContent";
+import RecruitInfo from "./recruitInfo/RecruitInfo";
+import RequiredStack from "./requiredStack/RequiredStack";
+import ProjInfo from "./projInfo/ProjInfo";
+import ProjField from "./projField/ProjField";
+import DetailContent from "./detailContent/DetailContent";
 import Button from "../../components/button/Button";
 import { useAtomValue } from "jotai";
 import { postProjectAtom } from "../../store/atom.js";

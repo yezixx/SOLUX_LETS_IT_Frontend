@@ -5,7 +5,7 @@ import HeartIcon from "../../../image/icons/HeartIcon";
 import UserCircleIcon from "../../../image/icons/UserCircleIcon";
 import styles from "./CommentItem.module.css";
 import Button from "../../../components/button/Button";
-import { getFormattedDate } from "../getFormattedDate";
+import { getFormattedDate } from "../../../util/getFormattedDate";
 
 const CommentItem = ({
   commentId,

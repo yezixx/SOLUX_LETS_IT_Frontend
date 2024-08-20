@@ -3,7 +3,7 @@ import RouteName from "../../components/routeName/RouteName";
 import styles from "./Apply.module.css";
 import BriefProfile from "./briefProfile/BriefProfile";
 import useApplyPost from "./useApplyPost";
-import useMyProfileGet from "../MyPage/MyProfile/useMyProfileGet";
+import useMyProfileGet from "../myPage/myProfile/useMyProfileGet";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getPosts } from "../../service/postService";

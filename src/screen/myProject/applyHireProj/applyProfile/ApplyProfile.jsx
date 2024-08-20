@@ -3,7 +3,7 @@ import Profile from "../../../../components/profile/Profile";
 import styles from "./ApplyProfile.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import useProfileView from "./useProfileView";
-import useApplicant from "../ApplicantBtn/useApplicant";
+import useApplicant from "../applicantBtn/useApplicant";
 
 const ApplyProfile = () => {
   //applyId는 지원자 리스트 매핑 시 갖고 옴, 동적 url 할당

@@ -3,7 +3,7 @@ import UserIcon from "../../../image/icons/UserIcon";
 import styles from "./PostInfo.module.css";
 import PlusCircleIcon from "../../../image/icons/PlusCircleIcon";
 import BookmarkIcon from "../../../image/icons/BookmarkIcon";
-import { getFormattedDate } from "../getFormattedDate";
+import { getFormattedDate } from "../../../util/getFormattedDate";
 
 const PostInfo = ({ post, isBookmark, onClickScrap }) => {
   return (

@@ -1,7 +1,7 @@
 import Button from "../../../components/button/Button";
-import ApplicantBtn from "./ApplicantBtn/ApplicantBtn";
+import ApplicantBtn from "./applicantBtn/ApplicantBtn";
 import styles from "./ApplyHireProj.module.css";
-import MemberView from "./MemberView/MemberView";
+import MemberView from "./memberView/MemberView";
 import ProjectList from "../../../components/prjContentBlock/PrjContentBlock";
 import { useApplyHire } from "./useApplyHire";
 

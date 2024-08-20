@@ -1,5 +1,5 @@
 import styles from "./AttendanceList.module.css";
-import AttendanceItem from "./AttendanceItem/AttendanceItem";
+import AttendanceItem from "./attendanceItem/AttendanceItem";
 import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 

@@ -1,6 +1,6 @@
 import styles from "./ManageProj.module.css";
 import AttendanceList from "./AttendanceList/AttendanceList";
-import AttendanceDetail from "./AttendanceDetail/AttendanceDetail";
+import AttendanceDetail from "./attendanceDetail/AttendanceDetail";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
 import { useContext, useEffect } from "react";

@@ -1,9 +1,9 @@
 import RouteName from "../../components/routeName/RouteName";
-import styles from "./ProjPost_detail.module.css";
-import PostInfo from "./PostInfo/PostInfo";
+import styles from "./ProjPostDetail.module.css";
+import PostInfo from "./postInfo/PostInfo";
 import Button from "../../components/button/Button";
 import BookmarkIcon from "../../image/icons/BookmarkIcon";
-import CommentItem from "./CommentItem/CommentItem";
+import CommentItem from "./commentItem/CommentItem";
 import UserCircleIcon from "../../image/icons/UserCircleIcon";
 import Loading from "../../components/loading/Loading";
 import { useEffect, useRef, useState } from "react";
@@ -16,7 +16,7 @@ import {
 } from "../../service/commentService";
 import { getProfile } from "../../service/profileService";
 
-const ProjPost_detail = () => {
+const ProjPostDetail = () => {
   const loginUserId = localStorage.getItem("user")
     ? JSON.parse(localStorage.getItem("user")).userId
     : null;
@@ -250,4 +250,4 @@ const ProjPost_detail = () => {
   );
 };
 
-export default ProjPost_detail;
+export default ProjPostDetail;
