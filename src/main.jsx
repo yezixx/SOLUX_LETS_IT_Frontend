@@ -5,8 +5,22 @@ import "./index.css";
 import "./reset.css";
 import { Provider as JotaiProvider } from "jotai";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <JotaiProvider>
-    <App />
-  </JotaiProvider>
-);
+async function enableMocking() {
+  if (process.env.NODE_ENV !== "development") {
+    return;
+  }
+
+  const { worker } = await import("./mocks/browser");
+
+  // `worker.start()` returns a Promise that resolves
+  // once the Service Worker is up and ready to intercept requests.
+  return worker.start();
+}
+
+enableMocking().then(() => {
+  ReactDOM.createRoot(document.getElementById("root")).render(
+    <JotaiProvider>
+      <App />
+    </JotaiProvider>
+  );
+});
