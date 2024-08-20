@@ -1,11 +1,11 @@
 import styles from "./MainHome.module.css";
 
 import MainTitle from "./MainTitle/MainTitle";
-import MainManageButton from "./MainManegeButton/MainManageButton";
+import MainManageButton from "./QuickButton/QuickButton";
 import RecommendProject from "./RecommendProject/RecommendProject";
 import PopularProject from "./PopularProject/PopularProject";
 
-import Contest from "./Contest/Contest";
+import Contest from "./contest/Contest";
 import News from "./News/News";
 
 function MainHome() {

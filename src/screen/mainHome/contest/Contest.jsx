@@ -1,5 +1,5 @@
 import React from "react";
-import ContestList from "../Contest/ContestList";
+import ContestList from "../contest/ContestList";
 import styles from "./Contest.module.css";
 
 function Contest() {
@@ -8,15 +8,15 @@ function Contest() {
       title: "웹 사이드 프로젝트 팀원 모집",
       period: "4월 10일 - 5월 10일",
       location: "서울",
-      price: "30,000원",
+      price: "30,000원"
     },
 
     {
       title: "웹 사이드 프로젝트 팀원 모집",
       period: "4월 10일 - 5월 10일",
       location: "서울",
-      price: "30,000원",
-    },
+      price: "30,000원"
+    }
   ];
 
   return (

@@ -1,6 +1,6 @@
 import styles from "./MainTitle.module.css";
 import Logo from "../../../assets/logo.svg?react";
-import SearchIcon from "../../../Image/Icons/SearchIcon";
+import SearchIcon from "../../../image/icons/SearchIcon";
 
 const MainTitle = () => {
   return (
