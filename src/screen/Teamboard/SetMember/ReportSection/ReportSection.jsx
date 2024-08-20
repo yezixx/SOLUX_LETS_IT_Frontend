@@ -1,6 +1,6 @@
 import MemberItem from "../../../../components/memberItem/MemberItem";
 import styles from "./ReportSection.module.css";
-import QuestionMarkIcon from "../../../../Image/Icons/QuestionMarkIcon";
+import QuestionMarkIcon from "../../../../image/icons/QuestionMarkIcon";
 import ToolTip from "../../../../components/toolTip/ToolTip";
 import Button from "../../../../components/button/Button";
 import { useContext, useRef, useState } from "react";

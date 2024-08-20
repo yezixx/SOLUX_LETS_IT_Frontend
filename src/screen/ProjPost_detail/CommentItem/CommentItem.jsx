@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import ArrowTurnDownRight from "../../../Image/Icons/ArrowTurnDownRight";
-import EllipsisHorizontalIcon from "../../../Image/Icons/EllipsisHorizontalIcon";
-import HeartIcon from "../../../Image/Icons/HeartIcon";
-import UserCircleIcon from "../../../Image/Icons/UserCircleIcon";
+import ArrowTurnDownRight from "../../../image/icons/ArrowTurnDownRight";
+import EllipsisHorizontalIcon from "../../../image/icons/EllipsisHorizontalIcon";
+import HeartIcon from "../../../image/icons/HeartIcon";
+import UserCircleIcon from "../../../image/icons/UserCircleIcon";
 import styles from "./CommentItem.module.css";
 import Button from "../../../components/button/Button";
 import { getFormattedDate } from "../getFormattedDate";

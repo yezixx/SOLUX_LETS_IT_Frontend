@@ -1,21 +1,20 @@
 import React from "react";
 import NewsList from "./NewsList";
-import styles from "./News.module.css";
-import ReactDOM from "react-dom";
+import styles from "./NewsLetter.module.css";
 
-function News() {
+function NewsLetter() {
   const news = [
     {
       title: "웹 사이드 프로젝트 팀원 모집",
       content:
-        "뉴스 세부내용 입니다.뉴스 세부내용 입니다.뉴스 세부내용 입니다.뉴스 세부내용 입니다.",
+        "뉴스 세부내용 입니다.뉴스 세부내용 입니다.뉴스 세부내용 입니다.뉴스 세부내용 입니다."
     },
 
     {
       title: "웹 사이드 프로젝트 팀원 모집",
       content:
-        "뉴스 세부내용 입니다.뉴스 세부내용 입니다.뉴스 세부내용 입니다.뉴스 세부내용 입니다.",
-    },
+        "뉴스 세부내용 입니다.뉴스 세부내용 입니다.뉴스 세부내용 입니다.뉴스 세부내용 입니다."
+    }
   ];
 
   return (
@@ -28,4 +27,4 @@ function News() {
   );
 }
 
-export default News;
+export default NewsLetter;

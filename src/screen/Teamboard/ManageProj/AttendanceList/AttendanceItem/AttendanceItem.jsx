@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import CheckIcon from "../../../../../Image/Icons/CheckIcon";
+import CheckIcon from "../../../../../image/icons/CheckIcon";
 import styles from "./AttendanceItem.module.css";
 import { TeamStateContext } from "../../../Teamboard";
 

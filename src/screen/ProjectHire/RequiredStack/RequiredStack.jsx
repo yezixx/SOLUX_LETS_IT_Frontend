@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import SearchIcon from "../../../Image/Icons/SearchIcon";
+import SearchIcon from "../../../image/icons/SearchIcon";
 import { Stack } from "../../Stack";
 import styles from "./RequiredStack.module.css";
 import GrayBox from "../../../components/grayBox/GrayBox.jsx";
-import { useSearch } from "../../../Hooks/useSearch";
+import { useSearch } from "../../../hooks/useSearch";
 import { useAtomValue, useSetAtom } from "jotai";
 import { postProjectAtom } from "../../../store/atom.js";
 

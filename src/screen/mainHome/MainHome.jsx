@@ -1,18 +1,18 @@
 import styles from "./MainHome.module.css";
 
-import MainTitle from "./MainTitle/MainTitle";
-import MainManageButton from "./QuickButton/QuickButton";
-import RecommendProject from "./RecommendProject/RecommendProject";
-import PopularProject from "./PopularProject/PopularProject";
+import MainTitle from "./mainTitle/MainTitle";
+import QuickButton from "./quickButton/QuickButton";
+import RecommendProject from "./recommendProject/RecommendProject";
+import PopularProject from "./popularProject/PopularProject";
 
 import Contest from "./contest/Contest";
-import News from "./News/News";
+import News from "./newsLetter/NewsLetter";
 
 function MainHome() {
   return (
     <div className={styles.wrap}>
       <MainTitle />
-      <MainManageButton />
+      <QuickButton />
       <RecommendProject />
       <PopularProject />
       <div className={styles.contestnews}>

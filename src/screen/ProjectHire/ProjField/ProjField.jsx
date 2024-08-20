@@ -1,6 +1,6 @@
 import { useSetAtom } from "jotai";
-import { useSearch } from "../../../Hooks/useSearch";
-import SearchIcon from "../../../Image/Icons/SearchIcon";
+import { useSearch } from "../../../hooks/useSearch";
+import SearchIcon from "../../../image/icons/SearchIcon";
 import { Field } from "../../Field";
 import styles from "./ProjField.module.css";
 import { postProjectAtom } from "../../../store/atom.js";

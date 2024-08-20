@@ -1,28 +1,28 @@
-import CheckIcon from "../../../../Image/Icons/CheckIcon";
+import CheckIcon from "../../../../image/icons/CheckIcon";
 import styles from "./FeedbackFormItem.module.css";
 
 const FeedbackFormItem = ({ question, answer, onChange }) => {
   const OPTIONS = [
     {
       style: "NOT_AT_ALL",
-      value: -12.5,
+      value: -12.5
     },
     {
       style: "NO",
-      value: -6.25,
+      value: -6.25
     },
     {
       style: "NEUTRAL",
-      value: 0,
+      value: 0
     },
     {
       style: "YES",
-      value: 6.25,
+      value: 6.25
     },
     {
       style: "ABSOLUTELY",
-      value: 12.5,
-    },
+      value: 12.5
+    }
   ];
 
   const onChangeInput = (value) => {

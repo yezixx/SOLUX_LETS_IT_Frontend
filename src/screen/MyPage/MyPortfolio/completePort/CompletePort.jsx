@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import Button from "../../../../../components/button/Button";
+import Button from "../../../../components/button/Button";
 import styles from "./CompletePort.module.css";
-import { getMyAIPortfolios } from "../../../../../service/portfolioService";
+import { getMyAIPortfolios } from "../../../../service/portfolioService";
 import { useParams } from "react-router-dom";
 
 const CompletePort = () => {

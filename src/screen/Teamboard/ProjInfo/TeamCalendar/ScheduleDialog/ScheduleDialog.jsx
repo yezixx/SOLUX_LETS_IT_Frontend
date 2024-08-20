@@ -1,6 +1,6 @@
 import { useContext, useRef, useState } from "react";
 import Button from "../../../../../components/button/Button";
-import XIcon from "../../../../../Image/Icons/XIcon";
+import XIcon from "../../../../../image/icons/XIcon";
 import styles from "./ScheduleDialog.module.css";
 import { TeamDispatchContext } from "../../../Teamboard";
 

@@ -1,9 +1,8 @@
-import CalendarIcon from "../../../Image/Icons/CalendarIcon";
-import UserIcon from "../../../Image/Icons/UserIcon";
+import CalendarIcon from "../../../image/icons/CalendarIcon";
+import UserIcon from "../../../image/icons/UserIcon";
 import styles from "./PostInfo.module.css";
-import PlusCircleIcon from "../../../Image/Icons/PlusCircleIcon";
-import BookmarkIcon from "../../../Image/Icons/BookmarkIcon";
-//import CheckIcon from "../../../Image/Icons/CheckIcon";
+import PlusCircleIcon from "../../../image/icons/PlusCircleIcon";
+import BookmarkIcon from "../../../image/icons/BookmarkIcon";
 import { getFormattedDate } from "../getFormattedDate";
 
 const PostInfo = ({ post, isBookmark, onClickScrap }) => {

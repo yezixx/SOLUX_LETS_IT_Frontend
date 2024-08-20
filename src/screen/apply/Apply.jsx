@@ -1,7 +1,7 @@
 import Button from "../../components/button/Button";
 import RouteName from "../../components/routeName/RouteName";
 import styles from "./Apply.module.css";
-import BriefProfile from "./BriefProfile/BriefProfile";
+import BriefProfile from "./briefProfile/BriefProfile";
 import useApplyPost from "./useApplyPost";
 import useMyProfileGet from "../MyPage/MyProfile/useMyProfileGet";
 import { useParams } from "react-router-dom";

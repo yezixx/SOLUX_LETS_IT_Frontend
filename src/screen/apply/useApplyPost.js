@@ -3,8 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { submitApply } from "../../service/applyService";
 import { useSetAtom } from "jotai";
 import { applicant } from "../../store/atom.js";
-import { useValidate } from "../../Hooks/useValidate";
-import { getProfile } from "../../service/profileService";
+import { useValidate } from "../../hooks/useValidate";
 
 const useApplyPost = () => {
   // input data 수집

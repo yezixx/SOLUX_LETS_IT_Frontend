@@ -1,9 +1,7 @@
 import { startTransition, useState } from "react";
 import { postPortfolios } from "../../../../service/portfolioService";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAtomValue } from "jotai";
-import { userIdAtom } from "../../../../store/atom.js";
-import { useValidate } from "../../../../Hooks/useValidate";
+import { useValidate } from "../../../../hooks/useValidate";
 
 const usePortPost = () => {
   //화면 이동

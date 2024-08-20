@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import Button from "../../../components/button/Button";
 import MemberItem from "../../../components/memberItem/MemberItem";
-import CheckCircleIcon from "../../../Image/Icons/CheckCircleIcon";
+import CheckCircleIcon from "../../../image/icons/CheckCircleIcon";
 import FeedbackFormItem from "./FeedbackFormItem/FeedbackFormItem";
 import styles from "./TeamFeedback.module.css";
 import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
