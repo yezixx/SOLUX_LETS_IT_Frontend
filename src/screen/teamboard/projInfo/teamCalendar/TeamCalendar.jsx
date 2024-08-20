@@ -2,59 +2,49 @@ import "./TeamCalendar.css";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction";
-import { useContext, useState } from "react";
-import ScheduleDialog from "./ScheduleDialog/ScheduleDialog";
-import ScheduleContent from "./ScheduleContent/ScheduleContent";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
+import ScheduleDialog from "./scheduleDialog/ScheduleDialog";
+import ScheduleContent from "./scheduleContent/ScheduleContent";
+import {
+  createSchedule,
+  deleteSchedule,
+  getSchedule,
+} from "../../../../service/teamService";
 import { TeamStateContext } from "../../Teamboard";
 
-//export const CalendarStateContext = createContext();
-//export const CalendarDispatchContext = createContext();
+export const CalendarStateContext = createContext();
+export const CalendarDispatchContext = createContext();
 
-/*function scheduleReducer(state, action) {
+function scheduleReducer(state, action) {
   switch (action.type) {
-    case "GET_EVENT":
-      return action.data;
-    case "CREATE_EVENT":
-      return [...state, action.data];
-    case "DELETE_EVENT":
-      return state.filter((item) => String(item.id) !== String(action.data));
+    case "GET":
+      return action.data.map((item) => {
+        return {
+          id: String(item.calendarId),
+          title: String(item.title),
+          start: String(item.startDate),
+          end: String(item.endDate),
+          description: String(item.description),
+        };
+      });
+    // case "CREATE_EVENT":
+    //   return [...state, action.data];
+    // case "DELETE_EVENT":
+    //   return state.filter((item) => String(item.id) !== String(action.data));
     default:
       return state;
   }
-}*/
+}
 
 const TeamCalendar = () => {
-  const { scheduleData } = useContext(TeamStateContext);
-  /*const scheduleData = [
-    {
-      id: "3",
-      title: "전체회의",
-      start: "2024-08-29",
-      end: "2024-09-05",
-      description: "저녁 9시에 회의합니다.",
-    },
-    {
-      id: "5",
-      title: "부스팅데이",
-      start: "2024-07-29",
-      end: "2024-08-05",
-      description: "완성할때까지 숨참기.",
-    },
-    {
-      id: "6",
-      title: "12312313",
-      start: "2024-07-10",
-      end: "2024-07-10",
-      description: "2151451",
-    },
-    {
-      id: "7",
-      title: "123",
-      start: "2024-09-17",
-      end: "2024-09-21",
-      description: "123",
-    },
-  ];*/
+  const [scheduleData, scheduleDispatch] = useReducer(scheduleReducer, []);
+  const { teamId } = useContext(TeamStateContext);
   console.log(scheduleData);
 
   const [isOpenDialog, setIsOpenDialog] = useState(false);
@@ -62,7 +52,46 @@ const TeamCalendar = () => {
   const [selectedDate, setSelectedDate] = useState();
   const [selectedEvent, setSelectedEvent] = useState();
 
+  const fetchScheduleData = async () => {
+    try {
+      const data = await getSchedule(teamId);
+      await scheduleDispatch({
+        type: "GET",
+        data: data.data,
+      });
+    } catch (error) {
+      console.log("schedule error", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchScheduleData();
+  }, []);
+
+  const onCreateEvent = async (title, startDate, endDate, description) => {
+    if (startDate !== endDate) {
+      const newDate = new Date(endDate);
+      newDate.setDate(newDate.getDate() + 1);
+      endDate = newDate.toISOString().split("T")[0];
+    }
+    await createSchedule(teamId, {
+      title: title,
+      description: description,
+      startDate: startDate,
+      endDate: endDate,
+    });
+    await fetchScheduleData();
+  };
+
+  const onDeleteEvent = async (targetId) => {
+    if (confirm("일정을 삭제하시겠습니까?")) {
+      await deleteSchedule(targetId);
+      fetchScheduleData();
+    }
+  };
+
   const onDateClick = (date) => {
+    if (isOpenInfo) setIsOpenInfo(false);
     setSelectedDate(date.dateStr);
     openDialog();
   };
@@ -76,6 +105,7 @@ const TeamCalendar = () => {
   };
 
   const onEventClick = (e) => {
+    if (isOpenDialog) setIsOpenDialog(false);
     openInfo();
     setSelectedEvent(e.event);
   };
@@ -90,26 +120,31 @@ const TeamCalendar = () => {
 
   return (
     <div className="calendar">
-      {isOpenDialog && (
-        <ScheduleDialog selectedDate={selectedDate} closeDialog={closeDialog} />
-      )}
-      {isOpenInfo && (
-        <ScheduleContent
-          event={selectedEvent}
-          closeDialog={closeDialog}
-          closeInfo={closeInfo}
-        />
-      )}
-      <FullCalendar
-        plugins={[dayGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        events={scheduleData}
-        timeZone="local"
-        locale="kr"
-        selectable="true"
-        dateClick={onDateClick}
-        eventClick={onEventClick}
-      />
+      <CalendarStateContext.Provider value={scheduleData}>
+        <CalendarDispatchContext.Provider
+          value={{ scheduleDispatch, onCreateEvent, onDeleteEvent }}
+        >
+          {isOpenDialog && (
+            <ScheduleDialog
+              selectedDate={selectedDate}
+              closeDialog={closeDialog}
+            />
+          )}
+          {isOpenInfo && (
+            <ScheduleContent event={selectedEvent} closeInfo={closeInfo} />
+          )}
+          <FullCalendar
+            plugins={[dayGridPlugin, interactionPlugin]}
+            initialView="dayGridMonth"
+            events={scheduleData}
+            timeZone="local"
+            locale="kr"
+            selectable="true"
+            dateClick={onDateClick}
+            eventClick={onEventClick}
+          />
+        </CalendarDispatchContext.Provider>
+      </CalendarStateContext.Provider>
     </div>
   );
 };
