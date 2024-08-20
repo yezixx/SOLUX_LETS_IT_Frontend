@@ -1,5 +1,4 @@
 import Button from "../button/Button";
-//import SearchIcon from "../../Image/Icons/SearchIcon";
 import styles from "./ProfileForm.module.css";
 import SkillRange from "../skillRange/SkillRange";
 import CollabLink from "../collabLink/CollabLink";
@@ -7,39 +6,6 @@ import { useRef, useState } from "react";
 import defaultProfilePic from "../../assets/user.svg";
 import { updateProfile } from "../../service/profileService";
 import { ageMapping } from "../../util/ProfileTierMap";
-
-/*const sampleData = {
-  name: "홍길동",
-  bio: "시각화로 소통하는 프론트엔드 개발자",
-  age: "20대 초반",
-  sns: [
-    {
-      type: "email",
-      link: "111111@gamil.com",
-    },
-    {
-      type: "github",
-      link: "https:https://github.com",
-    },
-  ],
-  profile_picture: "https://avatars.githubusercontent.com/u/77464076?v=4",
-  manner_tire:"B",
-  introduce: "안녕하세요. 홍길동입니다.",
-  skills: [
-    {
-      name: "React",
-      level: 50,
-    },
-    {
-      name: "JavaScript",
-      level: 80,
-    },
-    {
-      name: "SpringBoot",
-      level: 10,
-    },
-  ],
-};*/
 
 const ProfileForm = ({ init, onSaveProfileImage, navTo }) => {
   const kakaoId = localStorage.getItem("user")

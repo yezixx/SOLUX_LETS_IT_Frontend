@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import styles from "./App.module.css";
-import { RouterInfo } from "./Screen/RouterInfo";
+import { RouterInfo } from "./screen/RouterInfo";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
 import { isLoginAtom } from "./store/atom.js";

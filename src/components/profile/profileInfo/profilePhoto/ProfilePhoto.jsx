@@ -1,4 +1,4 @@
-import ProfileDefaultPhoto from "../../../../Image/Icons/ProfileDefaultPhoto";
+import ProfileDefaultPhoto from "../../../../image/icons/ProfileDefaultPhoto";
 import styles from "./ProfilePhoto.module.css";
 
 const ProfilePhoto = ({ type, src }) => {

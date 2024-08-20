@@ -1,5 +1,5 @@
-import useHover from "../../../Hooks/useHover";
-import QuestionMarkIcon from "../../../Image/Icons/QuestionMarkIcon";
+import useHover from "../../../hooks/useHover";
+import QuestionMarkIcon from "../../../image/icons/QuestionMarkIcon";
 import GraphBar from "../../graph/GraphBar";
 import ProfileToolTip from "../profileTooltip/ProfileTooltip";
 import { tierColor } from "../../../util/ProfileTierMap";

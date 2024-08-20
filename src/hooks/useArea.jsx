@@ -1,5 +1,5 @@
 // hooks/useArea.jsx
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useState } from "react";
 
 const AreaContext = createContext();
 
@@ -34,7 +34,13 @@ export const AreaProvider = ({ children }) => {
 
   return (
     <AreaContext.Provider
-      value={{ selectedArea, selectedSubAreas, isSubAreaVisible, handleAreaClick, handleSubAreaClick }}
+      value={{
+        selectedArea,
+        selectedSubAreas,
+        isSubAreaVisible,
+        handleAreaClick,
+        handleSubAreaClick
+      }}
     >
       {children}
     </AreaContext.Provider>
@@ -44,7 +50,7 @@ export const AreaProvider = ({ children }) => {
 const useArea = () => {
   const context = useContext(AreaContext);
   if (context === undefined) {
-    throw new Error('useArea must be used within an AreaProvider');
+    throw new Error("useArea must be used within an AreaProvider");
   }
   return context;
 };

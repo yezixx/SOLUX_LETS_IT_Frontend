@@ -1,4 +1,4 @@
-import ArrowIcon from "../../Image/Icons/ArrowIcon";
+import ArrowIcon from "../../image/icons/ArrowIcon";
 import styles from "./RouteName.module.css";
 
 const RouteName = ({ route }) => {

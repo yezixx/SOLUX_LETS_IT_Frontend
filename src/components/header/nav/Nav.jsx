@@ -1,9 +1,9 @@
 import styles from "./Nav.module.css";
 import Logo from "../../../assets/logo.svg?react";
-import SearchIcon from "../../../Image/Icons/SearchIcon";
-import BellIcon from "../../../Image/Icons/BellIcon";
+import SearchIcon from "../../../image/icons/SearchIcon";
+import BellIcon from "../../../image/icons/BellIcon";
 import { Link, useNavigate } from "react-router-dom";
-import useHover from "../../../Hooks/useHover";
+import useHover from "../../../hooks/useHover";
 import { useAtom } from "jotai";
 import { isLoginAtom } from "../../../store/atom.js";
 import { logoutService } from "../../../service/logoutService";

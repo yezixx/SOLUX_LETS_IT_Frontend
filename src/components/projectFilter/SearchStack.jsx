@@ -1,11 +1,11 @@
 // components/SearchStack.js
 import React, { useEffect } from "react";
-import { useFilter } from "../../Screen/SearchProject/FilterContext";
-import SearchIcon from "../../Image/Icons/SearchIcon";
-import { Stack } from "../../Screen/Stack";
+import { useFilter } from "../../screen/searchProject/FilterContext";
+import SearchIcon from "../../image/icons/SearchIcon";
+import { Stack } from "../../screen/Stack";
 import styles from "./SearchStack.module.css";
 import GrayBox from "../grayBox/GrayBox";
-import { useSearch } from "../../Hooks/useSearch";
+import { useSearch } from "../../hooks/useSearch";
 
 const SearchStack = () => {
   /* 프로젝트 search 훅 */

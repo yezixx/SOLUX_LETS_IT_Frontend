@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Tech from "../grayBox/GrayBox.jsx";
 import Paging from "../paging/Paging.jsx";
 import useProjListPaging from "./useProjListPaging.js";
-import BookmarkIcon from "../../Image/Icons/BookmarkIcon.jsx";
+import BookmarkIcon from "../../image/icons/BookmarkIcon.jsx";
 
 function ProjectList({ projects }) {
   const nav = useNavigate();
