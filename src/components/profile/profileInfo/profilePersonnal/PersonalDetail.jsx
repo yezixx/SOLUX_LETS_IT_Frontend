@@ -1,4 +1,4 @@
-import { ageMapping } from "../../../../util/ProfileTierMap";
+import { ageMapping } from "../../../../util/getProfileTier";
 import styles from "./PersonalDetail.module.css";
 
 const PersonalDetail = ({ name, age, nickname }) => {

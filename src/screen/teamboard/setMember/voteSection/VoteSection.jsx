@@ -1,5 +1,5 @@
 import styles from "./VoteSection.module.css";
-import VoteItem from "./VoteItem/VoteItem";
+import VoteItem from "./voteItem/VoteItem";
 import { useContext } from "react";
 import { TeamStateContext } from "../../Teamboard";
 

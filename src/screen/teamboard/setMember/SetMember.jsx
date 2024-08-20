@@ -1,6 +1,6 @@
 import styles from "./SetMember.module.css";
-import VoteSection from "./VoteSection/VoteSection";
-import ReportSection from "./ReportSection/ReportSection";
+import VoteSection from "./voteSection/VoteSection";
+import ReportSection from "./reportSection/ReportSection";
 import { useContext } from "react";
 import { TeamStateContext } from "../Teamboard";
 

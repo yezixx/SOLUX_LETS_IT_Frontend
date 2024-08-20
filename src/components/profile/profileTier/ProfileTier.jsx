@@ -2,7 +2,7 @@ import useHover from "../../../hooks/useHover";
 import QuestionMarkIcon from "../../../image/icons/QuestionMarkIcon";
 import GraphBar from "../../graph/GraphBar";
 import ProfileToolTip from "../profileTooltip/ProfileTooltip";
-import { tierColor } from "../../../util/ProfileTierMap";
+import { tierColor } from "../../../util/getProfileTier";
 import styles from "./ProfileTier.module.css";
 
 const ProfileTier = ({ tierScore, tooltipShow }) => {

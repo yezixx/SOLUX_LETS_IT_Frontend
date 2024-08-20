@@ -3,8 +3,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import FullCalendar from "@fullcalendar/react";
 import interactionPlugin from "@fullcalendar/interaction";
 import { createContext, useContext, useState } from "react";
-import ScheduleDialog from "./ScheduleDialog/ScheduleDialog";
-import ScheduleContent from "./ScheduleContent/ScheduleContent";
+import ScheduleDialog from "./scheduleDialog/ScheduleDialog";
+import ScheduleContent from "./scheduleContent/ScheduleContent";
 import { TeamStateContext } from "../../Teamboard";
 
 //export const CalendarStateContext = createContext();

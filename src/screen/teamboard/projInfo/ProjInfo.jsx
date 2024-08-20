@@ -1,6 +1,6 @@
 import styles from "./ProjInfo.module.css";
-import MemberList from "./MemberList/MemberList";
-import TeamCalendar from "./TeamCalendar/TeamCalendar";
+import MemberList from "./memberList/MemberList";
+import TeamCalendar from "./teamCalendar/TeamCalendar";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
 import ToolIcon from "../../../components/toolIcon/ToolIcon";

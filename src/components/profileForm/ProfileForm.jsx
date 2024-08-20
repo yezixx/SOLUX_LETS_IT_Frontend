@@ -5,7 +5,7 @@ import CollabLink from "../collabLink/CollabLink";
 import { useRef, useState } from "react";
 import defaultProfilePic from "../../assets/user.svg";
 import { updateProfile } from "../../service/profileService";
-import { ageMapping } from "../../util/ProfileTierMap";
+import { ageMapping } from "../../util/getProfileTier";
 
 const ProfileForm = ({ init, onSaveProfileImage, navTo }) => {
   const kakaoId = localStorage.getItem("user")

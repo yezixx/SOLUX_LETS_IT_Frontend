@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Button from "../../../components/button/Button";
 import MemberItem from "../../../components/memberItem/MemberItem";
 import CheckCircleIcon from "../../../image/icons/CheckCircleIcon";
-import FeedbackFormItem from "./FeedbackFormItem/FeedbackFormItem";
+import FeedbackFormItem from "./feedbackFormItem/FeedbackFormItem";
 import styles from "./TeamFeedback.module.css";
 import { TeamDispatchContext, TeamStateContext } from "../Teamboard";
 import { useNavigate } from "react-router-dom";
