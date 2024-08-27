@@ -9,6 +9,17 @@ export const teamboardHandlers = [
       data: teamData,
     });
   }),
+  // 팀 정보 수정
+  http.patch("/api/team/1/update", async ({ request }) => {
+    const res = await request.json();
+    teamData.teamName = res.teamName;
+    teamData.notionLink = res.notionLink;
+    teamData.githubLink = res.githubLink;
+    return HttpResponse.json({
+      data: teamData,
+    });
+  }),
+
   // 일정 불러오기
   http.get("/api/team/calendar/1/info", () => {
     return HttpResponse.json({
