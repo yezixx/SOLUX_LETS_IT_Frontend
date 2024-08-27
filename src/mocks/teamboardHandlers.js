@@ -1,6 +1,7 @@
 import { http, HttpResponse } from "msw";
 import { teamData } from "./teamData/teamData";
 import { scheduleData } from "./teamData/scheduleData";
+import { evaluateData } from "./teamData/evaluateData";
 
 export const teamboardHandlers = [
   // 팀 정보
@@ -65,6 +66,28 @@ export const teamboardHandlers = [
     scheduleData.push(...updatedData); // 새로운 데이터를 삽입
     return HttpResponse.json({
       data: scheduleData,
+    });
+  }),
+  // 프로젝트 종료
+  http.patch("/api/team/1/complete", () => {
+    return HttpResponse.json({
+      status: 200,
+      message: "프로젝트가 종료되었습니다.",
+    });
+  }),
+  // 프로젝트 종료 여부 확인
+  http.get("/api/team/1/is/complete", () => {
+    return HttpResponse.json({
+      data: {
+        isComplete: true,
+      },
+    });
+  }),
+  // 팀원 평가 정보
+  http.get("/api/team/evaluation/info/1/:userId", ({ params }) => {
+    const { userId } = params;
+    return HttpResponse.json({
+      data: evaluateData,
     });
   }),
 ];
