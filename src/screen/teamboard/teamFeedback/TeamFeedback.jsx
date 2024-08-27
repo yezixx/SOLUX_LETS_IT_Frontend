@@ -22,9 +22,9 @@ const getMembersExcludingSelf = (loginUserId, members) => {
 
 // 이미 평가한 팀원인지 확인
 const isCompletedMember = (feedbackTargetId, evaluatedList) => {
-  //if (!evaluatedList) return false; // 이거 왜 넣었었는지 기억안남
+  if (!evaluatedList) return false; // 평가한 팀원 목록이 없을 경우
   const isIncluded = evaluatedList.find(
-    (member) => member.userId === feedbackTargetId
+    (member) => String(member.userId) === String(feedbackTargetId)
   );
   return isIncluded;
 };
