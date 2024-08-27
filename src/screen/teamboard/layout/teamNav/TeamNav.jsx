@@ -28,10 +28,10 @@ const TeamNav = () => {
     nav(setMemberUrl);
   };
   const navigateToManage = () => {
-    if (isLeader(teamData.teamMemberInfo, loginUserId) === false) {
-      alert("팀장만 접근 가능한 페이지입니다.");
-      return;
-    }
+    // if (isLeader(teamData.teamMemberInfo, loginUserId) === false) {
+    //   alert("팀장만 접근 가능한 페이지입니다.");
+    //   return;
+    // }
     nav(manageUrl);
   };
 

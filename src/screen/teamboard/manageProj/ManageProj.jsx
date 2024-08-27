@@ -16,12 +16,12 @@ const ManageProj = () => {
   const nav = useNavigate();
 
   useEffect(() => {
-    if (!loading) {
-      if (isLeader(teamData.teamMemberInfo, loginUserId) === false) {
-        alert("팀장만 접근 가능한 페이지입니다.");
-        nav(`/teamboard/?team=${teamId}`, { replace: true });
-      }
-    }
+    // if (!loading) {
+    //   if (isLeader(teamData.teamMemberInfo, loginUserId) === false) {
+    //     alert("팀장만 접근 가능한 페이지입니다.");
+    //     nav(`/teamboard/?team=${teamId}`, { replace: true });
+    //   }
+    // }
   });
 
   const navigateToEdit = () => {
