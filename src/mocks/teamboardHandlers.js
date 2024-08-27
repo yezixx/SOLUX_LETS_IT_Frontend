@@ -19,7 +19,20 @@ export const teamboardHandlers = [
       data: teamData,
     });
   }),
-
+  // 팀장 위임
+  http.patch("/api/team/1/:userId", async ({ params }) => {
+    const { userId } = params;
+    teamData.teamMemberInfo.forEach((member) => {
+      if (member.userId === userId) {
+        member.position = "Team_Leader";
+      } else {
+        member.position = "Team_Member";
+      }
+    });
+    return HttpResponse.json({
+      data: teamData,
+    });
+  }),
   // 일정 불러오기
   http.get("/api/team/calendar/1/info", () => {
     return HttpResponse.json({
