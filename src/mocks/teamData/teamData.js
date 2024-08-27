@@ -6,19 +6,19 @@ export const teamData = {
     {
       position: "Team_Member",
       userName: "ee",
-      userId: "letsit_backend.model.Member@63bc2163",
+      userId: "1",
       profileImageUrl: "",
     },
     {
       position: "Team_Member",
       userName: "bb",
-      userId: "letsit_backend.model.Member@6af9c174",
+      userId: "2",
       profileImageUrl: "",
     },
     {
       position: "Team_Leader",
       userName: "한은서",
-      userId: "letsit_backend.model.Member@27249b85",
+      userId: "3",
       profileImageUrl: "",
     },
   ],
