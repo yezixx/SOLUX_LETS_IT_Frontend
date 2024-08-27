@@ -29,7 +29,18 @@ export const teamboardHandlers = [
     });
   }),
   // 일정 삭제
-  http.delete("/api/team/calendar/1/delete", async () => {
-    scheduleData.pop(); // 에러 나는 중 -> 이후에 수정
+  http.delete("/api/team/calendar/:calendarId/delete", async ({ params }) => {
+    const { calendarId } = params; // 동적으로 받은 calendarId
+    // 일정 삭제: 필터링된 결과를 다시 scheduleData에 반영
+    const updatedData = scheduleData.filter(
+      (item) => item.calendarId !== calendarId
+    );
+
+    // 업데이트된 데이터로 기존 배열을 대체
+    scheduleData.length = 0; // 원래 배열 비우기
+    scheduleData.push(...updatedData); // 새로운 데이터를 삽입
+    return HttpResponse.json({
+      data: scheduleData,
+    });
   }),
 ];

@@ -86,7 +86,7 @@ const TeamCalendar = () => {
   const onDeleteEvent = async (targetId) => {
     if (confirm("일정을 삭제하시겠습니까?")) {
       await deleteSchedule(targetId);
-      fetchScheduleData();
+      await fetchScheduleData();
     }
   };
 
