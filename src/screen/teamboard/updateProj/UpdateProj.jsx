@@ -13,11 +13,8 @@ const UpdateProj = () => {
   const { onUpdateTeamData } = useContext(TeamDispatchContext);
   const { teamData, teamId, loading } = useContext(TeamStateContext);
 
-  const [title, setTitle] = useState(teamData.teamName);
-  const [links, setLinks] = useState([
-    { tool: "notion", link: teamData.notionLink },
-    { tool: "github", link: teamData.githubLink },
-  ]);
+  const [title, setTitle] = useState("");
+  const [links, setLinks] = useState([]);
   const [selectedMember, setSelectedMember] = useState();
 
   const nav = useNavigate();
@@ -30,24 +27,24 @@ const UpdateProj = () => {
   const linkRef2 = useRef();
 
   useEffect(() => {
-    // if (!loading) {
-    //   if (isLeader(teamData.teamMemberInfo, loginUserId) === false) {
-    //     alert("팀장만 접근 가능한 페이지입니다.");
-    //     nav(`/teamboard/?team=${teamId}`, { replace: true });
-    //     return;
-    //   }
-    //   setSelectedMember(
-    //     teamData.teamMemberInfo.find(
-    //       (member) => member.position === "Team_Leader"
-    //     ).userId
-    //   );
-    //   setTitle(teamData.teamName);
-    //   setLinks([
-    //     { tool: "notion", link: teamData.notionLink },
-    //     { tool: "github", link: teamData.githubLink }
-    //   ]);
-    //   console.log(teamData);
-    // }
+    if (!loading) {
+      //   if (isLeader(teamData.teamMemberInfo, loginUserId) === false) {
+      //     alert("팀장만 접근 가능한 페이지입니다.");
+      //     nav(`/teamboard/?team=${teamId}`, { replace: true });
+      //     return;
+      //   }
+      setSelectedMember(
+        teamData.teamMemberInfo.find(
+          (member) => member.position === "Team_Leader"
+        ).userId
+      );
+      setTitle(teamData.teamName);
+      setLinks([
+        { tool: "notion", link: teamData.notionLink },
+        { tool: "github", link: teamData.githubLink },
+      ]);
+      console.log(teamData);
+    }
   }, [loading]);
 
   const onFocusElement = (ref) => {
